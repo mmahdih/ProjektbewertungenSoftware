@@ -12,6 +12,16 @@
 
 
 
+## Rest API Framework Auswahl
+- [x] [Spring Boot](https://medium.com/@ronaka2328/choosing-the-right-java-framework-for-rest-apis-a-comprehensive-guide-0816f2bfc89a)
+    - Is Muture
+    - Has more Docu
+    
+- [ ] Quarkus
+- [ ] Vert.x
+
+
+
 # App Components:
 
 ## Users:
