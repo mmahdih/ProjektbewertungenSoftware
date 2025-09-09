@@ -2,7 +2,6 @@ package de.assessify.app.assessifyapi.api.controller;
 
 import de.assessify.app.assessifyapi.api.UserRepository.UserRepository;
 import de.assessify.app.assessifyapi.api.model.User;
-import de.assessify.app.assessifyapi.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +16,7 @@ public class UserRestController {
     private final UserRepository userRepository;
 
     @Autowired
-    public UserController(UserRepository userRepository) {
+    public UserRestController(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
