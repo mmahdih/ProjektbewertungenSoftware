@@ -13,20 +13,28 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/users")
-public class UserController {
-    private UserRepository userRepository;
+public class UserRestController {
+
+    private final UserRepository userRepository;
+
+    @Autowired
     public UserController(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
-    @Autowired
-    public UserService userService;
-    @Autowired
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
     @GetMapping
     public List<User> getAllUsers() {
         return userRepository.findAll();
-    }    
+    }
+
+    @PostMapping
+    public ResponseEntity<User> createUser(@RequestBody User user) {
+        try {
+            User _user = userRepository.save(user);
+            return new ResponseEntity<>(_user, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 }
