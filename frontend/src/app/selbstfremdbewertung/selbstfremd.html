@@ -1,0 +1,46 @@
+<mat-card class="rating-card">
+  <mat-card-header>
+    <mat-card-title>Projektbewertung</mat-card-title>
+    <mat-card-subtitle>Bitte wähle eine Bewertung</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <div class="rating">
+      <button mat-icon-button (click)="setRating(1)">
+        <mat-icon [ngClass]="{'active': rating >= 1}">
+          {{ rating >= 1 ? 'star' : 'star_border' }}
+        </mat-icon>
+      </button>
+
+      <button mat-icon-button (click)="setRating(2)">
+        <mat-icon [ngClass]="{'active': rating >= 2}">
+          {{ rating >= 2 ? 'star' : 'star_border' }}
+        </mat-icon>
+      </button>
+
+      <button mat-icon-button (click)="setRating(3)">
+        <mat-icon [ngClass]="{'active': rating >= 3}">
+          {{ rating >= 3 ? 'star' : 'star_border' }}
+        </mat-icon>
+      </button>
+
+      <button mat-icon-button (click)="setRating(4)">
+        <mat-icon [ngClass]="{'active': rating >= 4}">
+          {{ rating >= 4 ? 'star' : 'star_border' }}
+        </mat-icon>
+      </button>
+
+      <button mat-icon-button (click)="setRating(5)">
+        <mat-icon [ngClass]="{'active': rating >= 5}">
+          {{ rating >= 5 ? 'star' : 'star_border' }}
+        </mat-icon>
+      </button>
+    </div>
+  </mat-card-content>
+
+  <mat-card-actions>
+    <button mat-raised-button color="primary" (click)="submitRating()">
+      Bewertung speichern
+    </button>
+  </mat-card-actions>
+</mat-card>
