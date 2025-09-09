@@ -8,16 +8,29 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class UserController {
-    public UserService userService;
+@RequestMapping("/api/users")
+public class UserRestController {
+
+    private final UserRepository userRepository;
+
     @Autowired
-    public UserController(UserService userService) {
+    public UserRestController(UserService userService) {
         this.userService = userService;
     }
+
     @GetMapping()
     public User getUser(@RequestParam Integer id) {
         return userService.getUser(id);
     }
 
-    
+    @PostMapping
+    public ResponseEntity<User> createUser(@RequestBody User user) {
+        try {
+            User _user = userRepository.save(user);
+            return new ResponseEntity<>(_user, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 }
