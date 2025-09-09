@@ -18,13 +18,17 @@ import { CommonModule } from '@angular/common';
 })
 export class selbstfremd {
   rating = 0;
+  rating2 = 0;
 
   setRating(value: number) {
     this.rating = value;
   }
+  setRating2(value: number) {
+    this.rating2 = value;
+  }
 
   submitRating() {
-    console.log('Bewertung gespeichert:', this.rating);
+    console.log('Bewertung gespeichert:', this.rating, this.rating2);
     // hier kannst du die Bewertung ans Backend schicken
   }
 }

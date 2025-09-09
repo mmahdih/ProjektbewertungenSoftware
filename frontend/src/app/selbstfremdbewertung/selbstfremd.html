@@ -1,38 +1,83 @@
 <mat-card class="rating-card">
   <mat-card-header>
-    <mat-card-title>Projektbewertung</mat-card-title>
+    <mat-card-title>Selbst und Fremdberwertung</mat-card-title>
     <mat-card-subtitle>Bitte wähle eine Bewertung</mat-card-subtitle>
   </mat-card-header>
 
   <mat-card-content>
-    <div class="rating">
+    <h2>ich</h2>
+    <div class="rating1">
       <button mat-icon-button (click)="setRating(1)">
-        <mat-icon [ngClass]="{'active': rating >= 1}">
-          {{ rating >= 1 ? 'star' : 'star_border' }}
+        <mat-icon [ngClass]="{'active1': rating == 1}">
+            {{ rating >= 1 ? 'looks_one' : 'looks_one' }}
         </mat-icon>
       </button>
 
       <button mat-icon-button (click)="setRating(2)">
-        <mat-icon [ngClass]="{'active': rating >= 2}">
-          {{ rating >= 2 ? 'star' : 'star_border' }}
+        <mat-icon [ngClass]="{'active2': rating == 2}">
+          {{ rating >= 2 ? 'looks_two' : 'looks_two' }}
         </mat-icon>
       </button>
 
       <button mat-icon-button (click)="setRating(3)">
-        <mat-icon [ngClass]="{'active': rating >= 3}">
-          {{ rating >= 3 ? 'star' : 'star_border' }}
+        <mat-icon [ngClass]="{'active3': rating == 3}">
+          {{ rating >= 3 ? 'looks_3' : 'looks_3' }}
         </mat-icon>
       </button>
 
       <button mat-icon-button (click)="setRating(4)">
-        <mat-icon [ngClass]="{'active': rating >= 4}">
-          {{ rating >= 4 ? 'star' : 'star_border' }}
+        <mat-icon [ngClass]="{'active4': rating == 4}">
+          {{ rating >= 4 ? 'looks_4' : 'looks_4' }}
         </mat-icon>
       </button>
 
       <button mat-icon-button (click)="setRating(5)">
-        <mat-icon [ngClass]="{'active': rating >= 5}">
-          {{ rating >= 5 ? 'star' : 'star_border' }}
+        <mat-icon [ngClass]="{'active5': rating == 5}">
+          {{ rating >= 5 ? 'looks_5' : 'looks_5' }}
+        </mat-icon>
+      </button>
+
+      <button mat-icon-button (click)="setRating(6)">
+        <mat-icon [ngClass]="{'active6': rating == 6}">
+          {{ rating >= 6 ? 'looks_6' : 'looks_6' }}
+        </mat-icon>
+      </button>
+    </div>
+    <h2>du</h2>
+    <div class="rating2">
+      <button mat-icon-button (click)="setRating2(1)">
+        <mat-icon [ngClass]="{'active1': rating2 == 1}">
+            {{ rating2 >= 1 ? 'looks_one' : 'looks_one' }}
+        </mat-icon>
+      </button>
+
+      <button mat-icon-button (click)="setRating2(2)">
+        <mat-icon [ngClass]="{'active2': rating2 == 2}">
+          {{ rating2 >= 2 ? 'looks_two' : 'looks_two' }}
+        </mat-icon>
+      </button>
+
+      <button mat-icon-button (click)="setRating2(3)">
+        <mat-icon [ngClass]="{'active3': rating2 == 3}">
+          {{ rating2 >= 3 ? 'looks_3' : 'looks_3' }}
+        </mat-icon>
+      </button>
+
+      <button mat-icon-button (click)="setRating2(4)">
+        <mat-icon [ngClass]="{'active4': rating2 == 4}">
+          {{ rating2 >= 4 ? 'looks_4' : 'looks_4' }}
+        </mat-icon>
+      </button>
+
+      <button mat-icon-button (click)="setRating2(5)">
+        <mat-icon [ngClass]="{'active5': rating2 == 5}">
+          {{ rating2 >= 5 ? 'looks_5' : 'looks_5' }}
+        </mat-icon>
+      </button>
+
+      <button mat-icon-button (click)="setRating2(6)">
+        <mat-icon [ngClass]="{'active6': rating2 == 6}">
+          {{ rating2 >= 6 ? 'looks_6' : 'looks_6' }}
         </mat-icon>
       </button>
     </div>
