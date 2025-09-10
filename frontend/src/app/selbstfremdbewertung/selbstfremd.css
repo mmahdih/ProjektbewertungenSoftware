@@ -2,12 +2,13 @@
   max-width: 500px;
   margin: auto;
   text-align: center;
+  display: flex;
 }
 
 .rating {
   display: flex;
   align-items: center;
-  gap: 20px;
+  justify-content: space-around;
 }
 
 mat-icon {
@@ -15,7 +16,8 @@ mat-icon {
   color: gray;
   cursor: pointer;
   transition: color 0.2s;
-  align-items: center;
+  align-items:center;
+  justify-content: space-between;
 }
 
 mat-icon.active1 {
