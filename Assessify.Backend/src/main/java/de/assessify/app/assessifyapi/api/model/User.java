@@ -1,18 +1,20 @@
 package de.assessify.app.assessifyapi.api.model;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.UuidGenerator;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Entity
 @Table(name = "users")
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-
+    @GeneratedValue
+    @UuidGenerator // Annotation zur automatischen UUID-Generierung
     @Column(name = "user_id", nullable = false, unique = true)
-    private Long id;
+    private UUID id;
 
     @Column(name = "first_name", nullable = false)
     private String firstName;
@@ -41,11 +43,11 @@ public class User {
     }
 
     // Getters und Setters
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
