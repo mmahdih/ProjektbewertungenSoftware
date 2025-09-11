@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
-import { Login } from './login/login';
-import { adminDashboard } from './Admin Dashboard/AdminDashboard';
+import { Login } from './Features/Auth/login/login';
+import { adminDashboard } from './Features/Admin/admin-dashboard/AdminDashboard';
 
 export const routes: Routes = [
   { path: 'login', component: Login },

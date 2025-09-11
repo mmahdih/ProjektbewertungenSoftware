@@ -1,0 +1,161 @@
+{
+  "students": [
+    {
+      "id": "std_001",
+      "name": "Alex Martinez",
+      "username": "alex.martinez",
+      "email": "alex.martinez@student.lincolnhigh.edu",
+      "password": "$2b$10$hashedPassword111",
+      "role": "student",
+      "age": 16,
+      "gender": "male",
+      "phoneNumber": "+1-555-0501",
+      "address": {
+        "street": "555 Student St",
+        "city": "Chicago",
+        "state": "IL",
+        "zipCode": "60603",
+        "country": "USA"
+      },
+      "profileImage": "https://example.com/profiles/alex_martinez.jpg",
+      "studentId": "STU2022001",
+      "dateOfBirth": "2007-04-12",
+      "schoolId": "school_001",
+      "schoolName": "Lincoln High School",
+      "grade": "10",
+      "class": "10A",
+      "academicYear": "2023-2024",
+      "learningYear": "2nd Year",
+      "section": "A",
+      "rollNumber": "10A001",
+      "admissionDate": "2022-08-20",
+      "primaryTeacher": {
+        "id": "tch_001",
+        "name": "Emily Rodriguez",
+        "subject": "Mathematics"
+      },
+      "teachers": [
+        {
+          "id": "tch_001",
+          "name": "Emily Rodriguez",
+          "subject": "Mathematics"
+        },
+        {
+          "id": "tch_003",
+          "name": "Jennifer Wilson",
+          "subject": "English"
+        },
+        {
+          "id": "tch_004",
+          "name": "Michael Brown",
+          "subject": "History"
+        }
+      ],
+      "subjects": [
+        {
+          "subjectId": "math_algebra",
+          "subjectName": "Algebra II",
+          "teacherId": "tch_001",
+          "teacherName": "Emily Rodriguez"
+        },
+        {
+          "subjectId": "english_10",
+          "subjectName": "English Literature",
+          "teacherId": "tch_003",
+          "teacherName": "Jennifer Wilson"
+        },
+        {
+          "subjectId": "history_world",
+          "subjectName": "World History",
+          "teacherId": "tch_004",
+          "teacherName": "Michael Brown"
+        },
+        {
+          "subjectId": "science_bio",
+          "subjectName": "Biology",
+          "teacherId": "tch_005",
+          "teacherName": "Dr. Lisa Chang"
+        }
+      ],
+      "parent": {
+        "fatherName": "Carlos Martinez",
+        "motherName": "Maria Martinez",
+        "guardianName": "Carlos Martinez",
+        "relationship": "Father",
+        "email": "carlos.martinez@email.com",
+        "phoneNumber": "+1-555-0502",
+        "occupation": "Engineer",
+        "address": {
+          "street": "555 Student St",
+          "city": "Chicago",
+          "state": "IL",
+          "zipCode": "60603",
+          "country": "USA"
+        }
+      },
+      "emergencyContact": {
+        "name": "Maria Martinez",
+        "relationship": "Mother",
+        "phoneNumber": "+1-555-0503"
+      },
+      "medicalInfo": {
+        "bloodGroup": "O+",
+        "allergies": ["Peanuts"],
+        "medications": [],
+        "medicalConditions": []
+      },
+      "academicInfo": {
+        "gpa": 3.75,
+        "totalCredits": 24,
+        "attendancePercentage": 94.5,
+        "behaviorRating": "Excellent",
+        "specialNeeds": false,
+        "extracurriculars": ["Math Club", "Soccer Team"]
+      },
+      "scores": [
+        {
+          "scoreId": "scr_001",
+          "subjectId": "math_algebra",
+          "subjectName": "Algebra II",
+          "testType": "Midterm",
+          "score": 87,
+          "maxScore": 100,
+          "date": "2024-01-10",
+          "teacherId": "tch_001"
+        },
+        {
+          "scoreId": "scr_002",
+          "subjectId": "english_10",
+          "subjectName": "English Literature",
+          "testType": "Essay",
+          "score": 92,
+          "maxScore": 100,
+          "date": "2024-01-08",
+          "teacherId": "tch_003"
+        }
+      ],
+      "attendance": {
+        "totalDays": 120,
+        "presentDays": 113,
+        "absentDays": 7,
+        "lateArrivals": 3
+      },
+      "schedule": {
+        "monday": [
+          {"time": "08:00-09:00", "subject": "Mathematics", "teacher": "Emily Rodriguez", "room": "101"},
+          {"time": "09:00-10:00", "subject": "English", "teacher": "Jennifer Wilson", "room": "205"},
+          {"time": "10:00-11:00", "subject": "History", "teacher": "Michael Brown", "room": "303"}
+        ],
+        "tuesday": [
+          {"time": "08:00-09:00", "subject": "Biology", "teacher": "Dr. Lisa Chang", "room": "Lab-2"},
+          {"time": "09:00-10:00", "subject": "Physical Education", "teacher": "Coach Johnson", "room": "Gym"}
+        ]
+      },
+      "isActive": true,
+      "lastLogin": "2024-01-15T16:30:00Z",
+      "createdAt": "2022-08-20T00:00:00Z",
+      "updatedAt": "2024-01-15T16:30:00Z"
+    },
+    {
+      "id": "std_002",
+      "name": "
