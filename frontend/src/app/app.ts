@@ -1,8 +1,8 @@
 import { Component, input } from '@angular/core';
 import {User} from './user'
-import { Login } from './login/login';
+import { Login } from './Features/Auth/login/login';
 import { ReactiveFormsModule } from '@angular/forms'; // Make sure this is imported
-import { adminDashboard } from './Admin Dashboard/AdminDashboard';
+import { adminDashboard } from './Features/Admin/admin-dashboard/AdminDashboard';
 import { RouterOutlet } from '@angular/router';
 
 
