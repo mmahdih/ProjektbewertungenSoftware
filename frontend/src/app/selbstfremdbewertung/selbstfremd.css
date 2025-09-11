@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 .rating-card {
   max-width: 500px;
   margin: auto;
@@ -8,7 +10,7 @@
 .rating {
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 
 mat-icon {
@@ -43,3 +45,18 @@ mat-icon.active5 {
 mat-icon.active6 {
   color: black;
 }   
+
+.mat-card-actions{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2%;
+}
+
+.mat-flat-button{
+  color: #00FFFF;
+
+}
+
+.mat-stroked-button{
+  color: #008080;
+}

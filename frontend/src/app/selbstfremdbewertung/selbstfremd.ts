@@ -20,7 +20,20 @@ export class selbstfremd {
 
   form: FormGroup;
 
-  test: string[] = ['Frage1', 'Frage2', 'Frage3', 'Frage4', 'Frage5'];
+  test: string[] = [
+    '1: Wie schätzen sie das Engagment im Projekt ein?',
+    '2: Wie zielgerichtet wurde an der Aufgabenstellung gearbeitet?',
+    '3: Wie beurteilen Sie die Zusammenarbeit mit den anderen Gruppenmitgliedern?',
+    '4: Wie beurteilen Sie das Arbeitsverhalten?',
+    '5: Wie beurteilen Sie das Engagment hinsichtlich der Aufgabenbearbeitung am Arduino mit Sensoren/Aktoren?',
+    '6: Beurteilen Sie das Engagment bei der Realisierung der Netzwerk-Funktionalität (MQTT/Vernetzung)?',
+    '7: Wie war das Engagment bie dir Umsetzung der Datenbank?',
+    '8: Wie war das Engagment bei der Gestalltung und Entwicklung der Benutzerschnittstellen?',
+    '9: Beurteilen Sie das Engagment bei der Realisierung der Funktionalität (Java-Backend/Vernetzung)?',
+    '10: Beurteilen Sie die Mitarbeit bei der Erstellung des Werbeflyers?',
+    '11: Welche Gesamtnote würen Sie der jeweiligen Person für Ihren beitrag zum Gelingen des Projektes geben?'
+
+  ];
   frage =  0; 
   rating = 0;
   rating2 = 0;
@@ -51,11 +64,15 @@ constructor(private fb: FormBuilder) {
     });
   }
 
-setRating99(memberId: number, value: number) {
+setRating(memberId: number, value: number) {
   this.ratings[memberId] = value;
 }
 
-submitRating2() {
+deleteAll(){
+
+}
+
+submitRating() {
     const missing: string[] = [];
 
     this.members.forEach(m => {
@@ -69,10 +86,7 @@ submitRating2() {
   if (missing.length > 0) {
     alert(`❌ Folgende Mitglieder fehlen noch: ${missing.join(', ')}`);
     this.form.markAllAsTouched();
-  } else {
-    alert('✅ Alle Bewertungen gespeichert!');
-    console.log(this.form.value);
-    console.log('Bewertung gespeichert:', this.ratings); 
+  } else { 
     this.ratings = [0, 0, 0, 0, 0]; 
     this.frage++;
   }

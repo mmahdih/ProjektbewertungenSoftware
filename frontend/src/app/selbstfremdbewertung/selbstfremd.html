@@ -1,4 +1,4 @@
-<mat-card class="rating-card">
+<mat-card class="rating-card max-w-[500px] mx-auto text-center flex ">
   <mat-card-header>
     <mat-card-title>{{test[frage]}}</mat-card-title>
     <mat-card-subtitle>Bitte wähle eine Bewertung</mat-card-subtitle>
@@ -9,7 +9,7 @@
       <h2>{{ member.name }}</h2>
       <div class="rating">
         @for (val of [1,2,3,4,5,6]; track $index) {
-          <button mat-icon-button (click)="setRating99(member.id, val)">
+          <button mat-icon-button (click)="setRating(member.id, val)">
             <mat-icon 
             [class.active1]="ratings[member.id] === 1 && val === 1"
             [class.active2]="ratings[member.id] === 2 && val === 2"
@@ -25,8 +25,11 @@
     }
   </mat-card-content>
 
-  <mat-card-actions>
-    <button mat-raised-button color="primary" (click)="submitRating2()">
+  <mat-card-actions class="mat-card-actions">
+    <button mat-stroked-button color="tertiary" (click)="deleteAll()">
+      Zurücksetzen
+    </button>
+    <button class="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" (click)="submitRating()">
       Bewertung speichern
     </button>
   </mat-card-actions>
