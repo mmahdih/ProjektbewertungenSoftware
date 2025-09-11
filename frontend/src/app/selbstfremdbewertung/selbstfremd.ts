@@ -19,8 +19,10 @@ import { CommonModule } from '@angular/common';
 export class selbstfremd {
 
   form: FormGroup;
+  
+  bewertung = new Map<string,number[]>();
 
-  test: string[] = [
+  questions: string[] = [
     '1: Wie schätzen sie das Engagment im Projekt ein?',
     '2: Wie zielgerichtet wurde an der Aufgabenstellung gearbeitet?',
     '3: Wie beurteilen Sie die Zusammenarbeit mit den anderen Gruppenmitgliedern?',
@@ -34,14 +36,8 @@ export class selbstfremd {
     '11: Welche Gesamtnote würen Sie der jeweiligen Person für Ihren beitrag zum Gelingen des Projektes geben?'
 
   ];
-  frage =  0; 
-  rating = 0;
-  rating2 = 0;
-  rating3 = 0;
-  rating4 = 0;
-  rating5 = 0;
-  grades: number[] = [];
-  grades2: number[] = [];
+
+  frage =  0;
 
  members = [
   { id: 0, name: 'Teammitglied 1' },
@@ -69,7 +65,9 @@ setRating(memberId: number, value: number) {
 }
 
 deleteAll(){
-
+  this.bewertung.clear;
+  this.ratings = [];
+  this.frage = 0;
 }
 
 submitRating() {
@@ -77,7 +75,6 @@ submitRating() {
 
     this.members.forEach(m => {
     const ctrl = this.ratings[m.id];
-    console.log("ctrl: " + ctrl);
     if (ctrl === 0) {
       missing.push(m.name);
     }
@@ -87,8 +84,13 @@ submitRating() {
     alert(`❌ Folgende Mitglieder fehlen noch: ${missing.join(', ')}`);
     this.form.markAllAsTouched();
   } else { 
+    this.bewertung.set(this.questions[this.frage],this.ratings);
+    console.log(this.bewertung);
     this.ratings = [0, 0, 0, 0, 0]; 
     this.frage++;
+    /**
+     * TODO: bewertung zu JSON umwandeln
+     */
   }
   }
 }
