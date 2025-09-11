@@ -13,7 +13,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/users")
 public class UserRestController {
-
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder passwordEncoder;
 
@@ -38,5 +37,4 @@ public class UserRestController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
 }
