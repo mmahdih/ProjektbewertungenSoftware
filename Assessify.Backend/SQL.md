@@ -6,4 +6,9 @@ CREATE TABLE users (
     email TEXT UNIQUE,
     created_at DATETIME NOT NULL DEFAULT (CURRENT_TIMESTAMP)
 );
+
+CREATE TABLE school_class (
+    class_id UUID PRIMARY KEY NOT NULL,
+    class_name TEXT NOT NULL
+);
 ```
