@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/api/auth")
 public class AuthController {
 
     private final AuthService authService;
@@ -17,7 +18,7 @@ public class AuthController {
         this.authService = authService;
     }
 
-    @PostMapping("/api/auth/login")
+    @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody LoginDto loginDto) {
         if (authService.authenticateUser(loginDto.getUsername(), loginDto.getPassword())) {
             return new ResponseEntity<>("Login successful!", HttpStatus.OK);
