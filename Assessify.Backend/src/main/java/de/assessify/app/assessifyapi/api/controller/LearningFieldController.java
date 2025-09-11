@@ -1,7 +1,7 @@
 package de.assessify.app.assessifyapi.api.controller;
 
-import de.assessify.app.assessifyapi.api.UserRepository.RoleRepository;
-import de.assessify.app.assessifyapi.api.model.Role;
+import de.assessify.app.assessifyapi.api.UserRepository.LearningFieldRepository;
+import de.assessify.app.assessifyapi.api.model.LearningField;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,14 +10,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/role")
-public class RoleRestController {
+@RequestMapping("/api/learning_field")
+public class LearningFieldController {
     @Autowired
-    private RoleRepository roleRepository;
+    private LearningFieldRepository learningFieldRepository;
 
     @PostMapping
-    public ResponseEntity<Role> createClass(@RequestBody Role role) {
-        Role response = roleRepository.save(role);
+    public ResponseEntity<LearningField> createClass(@RequestBody LearningField learningField) {
+        LearningField response = learningFieldRepository.save(learningField);
         return ResponseEntity.ok(response);
     }
 }
