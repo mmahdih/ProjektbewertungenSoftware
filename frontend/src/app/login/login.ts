@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 
 @Component({
   selector: 'app-login',
+  standalone: true,    
   templateUrl: 'login.html',
   styleUrls: ['login.css'], // Use styleUrls instead of styleUrl for multiple files
   imports: [ReactiveFormsModule]
