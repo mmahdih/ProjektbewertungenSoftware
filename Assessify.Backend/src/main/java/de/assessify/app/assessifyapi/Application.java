@@ -1,13 +1,13 @@
-package de.projectevaluation.app;
+package de.assessify.app.assessifyapi;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ProjectEvaluationApplication {
+public class Application {
 
     public static void main(String[] args) {
-        SpringApplication.run(ProjectEvaluationApplication.class, args);
+        SpringApplication.run(Application.class, args);
     }
 
 }

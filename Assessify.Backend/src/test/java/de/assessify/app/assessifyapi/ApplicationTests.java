@@ -1,10 +1,10 @@
-package de.projectevaluation.app;
+package de.assessify.app.assessifyapi;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ProjectEvaluationApplicationTests {
+class ApplicationTests {
 
     @Test
     void contextLoads() {
