@@ -92,21 +92,6 @@
             class="p-2 hover:bg-gray-700 cursor-pointer transition-colors rounded-lg"
             (click)="darkmode_toggle()"
           >
-            <!-- Sun Icon - shown when dark mode is active -->
-            <!-- <svg 
-            xmlns="http://www.w3.org/2000/svg" 
-            fill="none" 
-            viewBox="0 0 24 24" 
-            stroke-width="1.5" 
-            stroke="currentColor" 
-            class="size-6"
-            [hidden]="darkMode ? false : true">
-            <path 
-              stroke-linecap="round" 
-              stroke-linejoin="round" 
-              d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" />
-          </svg> -->
-
             <!-- Moon Icon - shown when light mode is active -->
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -149,7 +134,6 @@
       </div>
     </nav>
   </div>
-
   <!-- Main Content -->
   <div class="flex flex-1 overflow-hidden">
     <!-- Sidebar (hidden on small screens) -->
@@ -169,7 +153,7 @@
             <path
               stroke-linecap="round"
               stroke-linejoin="round"
-              d="M3.75 6A2.25 2.25 0 0 1 6 3.75h2.25A2.25 2.25 0 0 1 10.5 6v2.25a2.25 2.25 0 0 1-2.25 2.25H6a2.25 2.25 0 0 1-2.25-2.25V6ZM3.75 15.75A2.25 2.25 0 0 1 6 13.5h2.25a2.25 2.25 0 0 1 2.25 2.25V18a2.25 2.25 0 0 1-2.25 2.25H6A2.25 2.25 0 0 1 3.75 18v-2.25ZM13.5 6a2.25 2.25 0 0 1 2.25-2.25H18A2.25 2.25 0 0 1 20.25 6v2.25A2.25 2.25 0 0 1 18 10.5h-2.25a2.25 2.25 0 0 1-2.25-2.25V6ZM13.5 15.75a2.25 2.25 0 0 1 2.25-2.25H18a2.25 2.25 0 0 1 2.25 2.25V18A2.25 2.25 0 0 1 18 20.25h-2.25A2.25 2.25 0 0 1 13.5 18v-2.25Z"
+              d="M3.75 6A2.25 2.25 0 0 1 6 3.75h2.25A2.25 2.25 0 0 1 10.5 6v2.25a2.25 2.25 0 0 1-2.25 2.25H6a2.25 2.25 0 0 1-2.25-2.25V6ZM3.75 15.75A2.25 2.25 0 0 1 6 13.5h2.25a2.25 2.25 0 0 1 2.25 2.25V18a2.25 2.25 0 0 1-2.25 2.25H6A2.25 2.25 0 0 1 3.75 18v-2.25ZM13.5 6a2.25 2.25 0 1 1-6 0 2.25 2.25 0 0 1 6 0ZM13.5 15.75a2.25 2.25 0 0 1 2.25-2.25H18a2.25 2.25 0 0 1 2.25 2.25V18A2.25 2.25 0 0 1 18 20.25h-2.25A2.25 2.25 0 0 1 13.5 18v-2.25Z"
             />
           </svg>
           <p>Dashboard</p>
@@ -290,248 +274,250 @@
             <path
               stroke-linecap="round"
               stroke-linejoin="round"
-              d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75"
+              d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75"
             />
           </svg>
           <p>Settings</p>
         </div>
       </div>
     </div>
-
     <!-- Main Content Area -->
-    <div class="flex-1 bg-gray-900 overflow-auto p-4 sm:p-6">
-<<<<<<< HEAD
-      <div class="control mb-6">
-        <button
-          class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors"
-        >
-          Test Button
-        </button>
+    <div class="flex-col gap-2 ml-auto mx-auto">
+      <div class="flex-1 bg-gray-900 overflow-auto p-4 sm:p-6">
+        <div class="control mb-6 flex">
+          <button
+            class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors"
+          >
+            Test Button
+          </button>
+          <!-- Export Button -->
+          <button
+            class="ml-auto bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors"
+            (click)="openModal()"
+          >
+            Export
+          </button>
+          <!-- ------------- -->
+        </div>
+        <div class="buttons grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div class="bg-gray-800 p-4 rounded-lg shadow">
+            <h3 class="text-lg font-semibold mb-2">Card 1</h3>
+            <p>Content for card 1</p>
+          </div>
+          <div class="bg-gray-800 p-4 rounded-lg shadow">
+            <h3 class="text-lg font-semibold mb-2">Card 2</h3>
+            <p>Content for card 2</p>
+          </div>
+          <div class="bg-gray-800 p-4 rounded-lg shadow">
+            <h3 class="text-lg font-semibold mb-2">Card 3</h3>
+            <p>Content for card 3</p>
+          </div>
+        </div>
       </div>
-=======
-  <div class="control mb-6 flex">
-    <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors">
-      Test Button
-    </button>
-    <!-- Export Button -->
-    <button
-      class="ml-auto bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors"
-      (click)="openModal()">
-      Export
-    </button>
-    <!-- ------------- -->
-  </div>
->>>>>>> 4a5575ba9294d3231542ec88b3f3e420de96697e
-      <div class="buttons grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        <div class="bg-gray-800 p-4 rounded-lg shadow">
-          <h3 class="text-lg font-semibold mb-2">Card 1</h3>
-          <p>Content for card 1</p>
-        </div>
-        <div class="bg-gray-800 p-4 rounded-lg shadow">
-          <h3 class="text-lg font-semibold mb-2">Card 2</h3>
-          <p>Content for card 2</p>
-        </div>
-        <div class="bg-gray-800 p-4 rounded-lg shadow">
-          <h3 class="text-lg font-semibold mb-2">Card 3</h3>
-          <p>Content for card 3</p>
+      <div class="flex-1 bg-gray-900 overflow-auto p-4 sm:p-6">
+        <!-- Users Table -->
+        <div class="rounded rounded-xl">
+          <table class="table w-3xl text-lg text-left border-collapse rounded-lg overflow-hidden">
+            <thead class="bg-gray-800 text-white">
+              <tr>
+                <th class="border border-gray-700 p-3 text-center font-medium">Id</th>
+                <th class="border border-gray-700 p-3 font-medium">Name</th>
+                <th class="border border-gray-700 p-3 font-medium">Username</th>
+                <th class="border border-gray-700 p-3 font-medium">Role</th>
+                <th class="border border-gray-700 p-3 font-medium">Settings</th>
+              </tr>
+            </thead>
+            <tbody class="bg-gray-900 text-gray-200">
+              <tr class="border-b border-gray-800 hover:bg-gray-800 transition-colors duration-150">
+                <td class="border border-gray-800 p-3 text-center">1</td>
+                <td class="border border-gray-800 p-3">Max Mustermann</td>
+                <td class="border border-gray-800 p-3">mmuster</td>
+                <td class="border border-gray-800 p-3">Admin</td>
+                <td class="border border-gray-800 p-3 flex gap-2">
+                  <button
+                    class="px-3 py-1.5 hover:bg-blue-700 text-white rounded transition-colors duration-150 text-sm"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+                    </svg>
+                  </button>
+                  <button
+                    class="px-3 py-1.5 hover:bg-red-700 text-white rounded transition-colors duration-150 text-sm"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+                    </svg>
+                  </button>
+                </td>
+              </tr>
+              <tr class="border-b border-gray-800 hover:bg-gray-800 transition-colors duration-150">
+                <td class="border border-gray-800 p-3 text-center">2</td>
+                <td class="border border-gray-800 p-3">Anna Schmidt</td>
+                <td class="border border-gray-800 p-3">aschmidt</td>
+                <td class="border border-gray-800 p-3">Lehrer</td>
+                <td class="border border-gray-800 p-3 flex gap-2">
+                  <button
+                    class="px-3 py-1.5 hover:bg-blue-700 text-white rounded transition-colors duration-150 text-sm"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+                    </svg>
+                  </button>
+                  <button
+                    class="px-3 py-1.5 hover:bg-red-700 text-white rounded transition-colors duration-150 text-sm"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+                    </svg>
+                  </button>
+                </td>
+              </tr>
+              <tr class="border-b border-gray-800 hover:bg-gray-800 transition-colors duration-150">
+                <td class="border border-gray-800 p-3 text-center">3</td>
+                <td class="border border-gray-800 p-3">Lukas Weber</td>
+                <td class="border border-gray-800 p-3">lweber</td>
+                <td class="border border-gray-800 p-3">Schüler</td>
+                <td class="border border-gray-800 p-3 flex gap-2">
+                  <button
+                    class="px-3 py-1.5 hover:bg-blue-700 text-white rounded transition-colors duration-150 text-sm"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+                    </svg>
+                  </button>
+                  <button
+                    class="px-3 py-1.5 hover:bg-red-700 text-white rounded transition-colors duration-150 text-sm"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+                    </svg>
+                  </button>
+                </td>
+              </tr>
+              <tr class="border-b border-gray-800 hover:bg-gray-800 transition-colors duration-150">
+                <td class="border border-gray-800 p-3 text-center">4</td>
+                <td class="border border-gray-800 p-3">Sofia Klein</td>
+                <td class="border border-gray-800 p-3">sklein</td>
+                <td class="border border-gray-800 p-3">Schüler</td>
+                <td class="border border-gray-800 p-3 flex gap-2">
+                  <button
+                    class="px-3 py-1.5 hover:bg-blue-700 text-white rounded transition-colors duration-150 text-sm"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+                    </svg>
+                  </button>
+                  <button
+                    class="px-3 py-1.5 hover:bg-red-700 text-white rounded transition-colors duration-150 text-sm"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+                    </svg>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
-
-    <div class="flex-1 bg-gray-900 overflow-auto p-4 sm:p-6">
-      <!-- Users Table -->
-      <div class="rounded rounded-xl">
-        <table class="table-fixed w-200 text-left border-collapse rounded border border-gray-400">
-          <thead class="bg-gray-800 text-white rounded-lg">
-            <tr>
-              <th class="border border-gray-400 p-2 w-14 text-center">Id</th>
-              <th class="border border-gray-400 p-2">Name</th>
-              <th class="border border-gray-400 p-2">Username</th>
-              <th class="border border-gray-400 p-2">Role</th>
-              <th class="border border-gray-400 p-2">Settings</th>
-            </tr>
-          </thead>
-          <tbody class="border border-gray-400 bg-gray-100 text-gray-800">
-            <tr class="border border-gray-400 hover:bg-gray-200 rounded-xl">
-              <td class="border border-gray-400 p-2 w-14 text-center">1</td>
-              <td class="border border-gray-400 p-2">Max Mustermann</td>
-              <td class="border border-gray-400 p-2">mmuster</td>
-              <td class="border border-gray-400 p-2">Admin</td>
-              <td class="border border-gray-400 p-2 flex gap-2">
-                <button class="px-2 py-1 bg-blue-500 text-white rounded">Edit</button>
-                <button class="px-2 py-1 bg-red-500 text-white rounded">Delete</button>
-              </td>
-            </tr>
-            <tr class="border border-gray-400 hover:bg-gray-200 rounded-xl">
-              <td class="border border-gray-400 p-2 w-14 text-center">2</td>
-              <td class="border border-gray-400 p-2">Anna Schmidt</td>
-              <td class="border border-gray-400 p-2">aschmidt</td>
-              <td class="border border-gray-400 p-2">Lehrer</td>
-              <td class="border border-gray-400 p-2 flex gap-2">
-                <button class="px-2 py-1 bg-blue-500 text-white rounded">Edit</button>
-                <button class="px-2 py-1 bg-red-500 text-white rounded">Delete</button>
-              </td>
-            </tr>
-            <tr class="border border-gray-400 hover:bg-gray-200 rounded-xl">
-              <td class="border border-gray-400 p-2 w-14 text-center">3</td>
-              <td class="border border-gray-400 p-2">Lukas Weber</td>
-              <td class="border border-gray-400 p-2">lweber</td>
-              <td class="border border-gray-400 p-2">Schüler</td>
-              <td class="border border-gray-400 p-2 flex gap-2">
-                <button class="px-2 py-1 bg-blue-500 text-white rounded">Edit</button>
-                <button class="px-2 py-1 bg-red-500 text-white rounded">Delete</button>
-              </td>
-            </tr>
-            <tr class="border border-gray-400 hover:bg-gray-200 rounded-xl">
-              <td class="border border-gray-400 p-2 w-14 text-center">4</td>
-              <td class="border border-gray-400 p-2">Sofia Klein</td>
-              <td class="border border-gray-400 p-2">sklein</td>
-              <td class="border border-gray-400 p-2">Schüler</td>
-              <td class="border border-gray-400 p-2 flex gap-2">
-                <button class="px-2 py-1 bg-blue-500 text-white rounded">Edit</button>
-                <button class="px-2 py-1 bg-red-500 text-white rounded">Delete</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
   </div>
-<<<<<<< HEAD
-  <table class="table-fixed w-200 text-left border-collapse rounded border border-gray-400">
-    <thead class="bg-gray-800 text-white rounded-lg">
-      <tr>
-        <th class="border border-gray-400 p-2 w-14 text-center">Id</th>
-        <th class="border border-gray-400 p-2">Name</th>
-        <th class="border border-gray-400 p-2">Username</th>
-        <th class="border border-gray-400 p-2">Role</th>
-        <th class="border border-gray-400 p-2">Settings</th>
-      </tr>
-    </thead>
-    <tbody class="border border-gray-400 bg-gray-100 text-gray-800">
-      <tr class="border border-gray-400 hover:bg-gray-200 rounded-xl">
-        <td class="border border-gray-400 p-2 w-14 text-center">1</td>
-        <td class="border border-gray-400 p-2">Max Mustermann</td>
-        <td class="border border-gray-400 p-2">mmuster</td>
-        <td class="border border-gray-400 p-2">Admin</td>
-        <td class="border border-gray-400 p-2 flex gap-2">
-          <button class="px-2 py-1 bg-blue-500 text-white rounded">Edit</button>
-          <button class="px-2 py-1 bg-red-500 text-white rounded">Delete</button>
-        </td>
-      </tr>
-      <tr class="border border-gray-400 hover:bg-gray-200 rounded-xl">
-        <td class="border border-gray-400 p-2 w-14 text-center">2</td>
-        <td class="border border-gray-400 p-2">Anna Schmidt</td>
-        <td class="border border-gray-400 p-2">aschmidt</td>
-        <td class="border border-gray-400 p-2">Lehrer</td>
-        <td class="border border-gray-400 p-2 flex gap-2">
-          <button class="px-2 py-1 bg-blue-500 text-white rounded">Edit</button>
-          <button class="px-2 py-1 bg-red-500 text-white rounded">Delete</button>
-        </td>
-      </tr>
-      <tr class="border border-gray-400 hover:bg-gray-200 rounded-xl">
-        <td class="border border-gray-400 p-2 w-14 text-center">3</td>
-        <td class="border border-gray-400 p-2">Lukas Weber</td>
-        <td class="border border-gray-400 p-2">lweber</td>
-        <td class="border border-gray-400 p-2">Schüler</td>
-        <td class="border border-gray-400 p-2 flex gap-2">
-          <button class="px-2 py-1 bg-blue-500 text-white rounded">Edit</button>
-          <button class="px-2 py-1 bg-red-500 text-white rounded">Delete</button>
-        </td>
-      </tr>
-      <tr class="border border-gray-400 hover:bg-gray-200 rounded-xl">
-        <td class="border border-gray-400 p-2 w-14 text-center">4</td>
-        <td class="border border-gray-400 p-2">Sofia Klein</td>
-        <td class="border border-gray-400 p-2">sklein</td>
-        <td class="border border-gray-400 p-2">Schüler</td>
-        <td class="border border-gray-400 p-2 flex gap-2">
-          <button class="px-2 py-1 bg-blue-500 text-white rounded">Edit</button>
-          <button class="px-2 py-1 bg-red-500 text-white rounded">Delete</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-=======
 </div>
-
 <!-- Modal -->
 <div
   *ngIf="showModal"
   class="fixed inset-0 z-50 flex items-center justify-center"
-  aria-modal="true" role="dialog"
+  aria-modal="true"
+  role="dialog"
 >
   <div class="absolute inset-0 bg-black/60" (click)="closeModal()"></div>
-
   <div class="relative w-full max-w-xl bg-gray-800 text-white rounded-2xl shadow-xl p-6">
     <h2 class="text-xl font-semibold mb-4">Export konfigurieren</h2>
-
     <div class="space-y-4">
       <!-- Klasse -->
       <div>
         <label class="block text-sm mb-1">Klasse/Dateiname</label>
-        <input type="text"
-               class="w-full bg-gray-700 rounded-lg p-2"
-               [(ngModel)]="selection.class">
+        <input
+          type="text"
+          class="w-full bg-gray-700 rounded-lg p-2"
+          [(ngModel)]="selection.class"
+        />
       </div>
-
       <!-- Scope -->
       <div>
         <label class="block text-sm mb-1">Was exportieren?</label>
         <div class="flex gap-6">
           <label class="inline-flex items-center gap-2">
-            <input type="radio" class="accent-blue-600"
-              name="scope" value="class" [(ngModel)]="selection.scope">
+            <input
+              type="radio"
+              class="accent-blue-600"
+              name="scope"
+              value="class"
+              [(ngModel)]="selection.scope"
+            />
             <span>Ganze Klasse</span>
           </label>
           <label class="inline-flex items-center gap-2">
-            <input type="radio" class="accent-blue-600"
-              name="scope" value="students" [(ngModel)]="selection.scope">
+            <input
+              type="radio"
+              class="accent-blue-600"
+              name="scope"
+              value="students"
+              [(ngModel)]="selection.scope"
+            />
             <span>Bestimmte Schüler</span>
           </label>
         </div>
       </div>
-
       <!-- Schülerauswahl -->
       <div *ngIf="selection.scope === 'students'">
         <label class="block text-sm mb-2">Schüler auswählen</label>
         <div class="grid grid-cols-2 gap-2">
           <label class="inline-flex items-center gap-2" *ngFor="let s of students">
-            <input type="checkbox" class="accent-blue-600"
+            <input
+              type="checkbox"
+              class="accent-blue-600"
               [ngModel]="selection.selectedStudents.includes(s)"
-              (ngModelChange)="onToggleStudent(s, $event)">
+              (ngModelChange)="onToggleStudent(s, $event)"
+            />
             <span>{{ s }}</span>
           </label>
         </div>
       </div>
-
       <!-- Fächer -->
       <div>
         <label class="block text-sm mb-2">Fächer</label>
         <div class="mb-2">
           <label class="inline-flex items-center gap-2">
-            <input type="checkbox" class="accent-blue-600"
+            <input
+              type="checkbox"
+              class="accent-blue-600"
               [(ngModel)]="allSubjectsSelected"
-              (ngModelChange)="onToggleAllSubjects($event)">
+              (ngModelChange)="onToggleAllSubjects($event)"
+            />
             <span>Alle Fächer auswählen</span>
           </label>
         </div>
         <div class="grid grid-cols-2 gap-2">
           <label class="inline-flex items-center gap-2" *ngFor="let f of subjects">
-            <input type="checkbox" class="accent-blue-600"
+            <input
+              type="checkbox"
+              class="accent-blue-600"
               [ngModel]="selection.selectedSubjects.includes(f)"
-              (ngModelChange)="onToggleSubject(f, $event)">
+              (ngModelChange)="onToggleSubject(f, $event)"
+            />
             <span>{{ f }}</span>
           </label>
         </div>
       </div>
     </div>
-
     <div class="mt-6 flex justify-end gap-3">
-      <button class="px-4 py-2 rounded-lg bg-gray-700 hover:bg-gray-600"
-              (click)="closeModal()">Abbrechen</button>
-      <button class="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700"
-              (click)="exportData()">Export</button>
+      <button class="px-4 py-2 rounded-lg bg-gray-700 hover:bg-gray-600" (click)="closeModal()">
+        Abbrechen
+      </button>
+      <button class="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700" (click)="exportData()">
+        Export
+      </button>
     </div>
   </div>
->>>>>>> 4a5575ba9294d3231542ec88b3f3e420de96697e
 </div>
