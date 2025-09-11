@@ -20,12 +20,23 @@ public class AuthService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public boolean authenticateUser(String email, String password) {
-        Optional<User> userOptional = userRepository.findByEmail(email);
+    public boolean authenticateUser(String username, String password) {
+        String[] names = username.split("\\."); // Trennt den Benutzernamen am Punkt
+        if (names.length != 2) {
+            return false; // Ungültiges Format
+        }
+        String firstName = names[0];
+        String lastName = names[1];
+
+        // Sucht den Benutzer anhand der aufgeteilten Namen
+        Optional<User> userOptional = userRepository.findByFirstNameIgnoreCaseAndLastNameIgnoreCase(firstName, lastName);
 
         if (userOptional.isPresent()) {
             User user = userOptional.get();
-            return passwordEncoder.matches(password, user.getPassword());
+            // Überprüft das Passwort
+            if (passwordEncoder.matches(password, user.getPassword())) {
+                return true;
+            }
         }
         return false;
     }
