@@ -1,9 +1,7 @@
 package de.assessify.app.assessifyapi.api.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.UuidGenerator;
 
@@ -20,11 +18,16 @@ public class Grade {
     private UUID id;
 
     @Column(name = "value", nullable = false)
-    private float Value;
+    private float value;
 
     @Column(name = "grade_weighting", nullable = false)
-    private float GradeWeighting;
+    private float gradeWeighting;
 
     @Column(name = "date", nullable = false)
-    private Date Date;
+    private Date date;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "learning_field_id", nullable = false)
+    @JsonBackReference
+    private LearningField learningField;
 }

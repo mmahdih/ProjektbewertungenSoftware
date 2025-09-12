@@ -1,13 +1,12 @@
 package de.assessify.app.assessifyapi.api.model;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.UuidGenerator;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -27,4 +26,7 @@ public class LearningField {
 
     @Column(name = "learning_field_Weighting", nullable = false)
     private float LearningFieldWeighting;
+
+    @OneToMany(mappedBy = "learningField", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Grade> grades = new ArrayList<>();
 }
