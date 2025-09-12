@@ -1,4 +1,4 @@
-/* You can add global styles to this file, and also import other style files */
+
 /* Fix white corners */
 html, body {
   height: 100%;
@@ -11,3 +11,4 @@ app-root {
   height: 100%;
   width: 100%;
 }
+

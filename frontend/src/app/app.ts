@@ -1,6 +1,5 @@
 import { Component, input } from '@angular/core';
 import {User} from './user'
-import { Login } from './Features/Auth/login/login';
 import { ReactiveFormsModule } from '@angular/forms'; // Make sure this is imported
 import { adminDashboard } from './Features/Admin/admin-dashboard/AdminDashboard';
 import { RouterOutlet } from '@angular/router';
@@ -11,12 +10,14 @@ import { RouterOutlet } from '@angular/router';
   standalone: true,
   template: `
     <!-- <app-login/> -->
+
     <router-outlet></router-outlet>
   `,
   styles: [
     `
     `,
   ],
+
   imports: [RouterOutlet],
 })
 export class App {
