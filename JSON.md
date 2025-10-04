@@ -50,3 +50,10 @@ http://localhost:4200/api/user/{userId}/connect/role/{roleId}
 -- nothing
 ```
 
+http://localhost:4200/api/add/class
+
+```http
+{
+    "schoolClassName": "10BE13"
+}
+```
