@@ -64,3 +64,11 @@ http://localhost:4200/api/user/{userId}/connect/class/{classId}
 -- nothing
 ```
 
+http://localhost:4200/api/add/project
+
+```http
+{
+    "projectName": "IoT",
+    "projectDescription": "Arduino"
+}
+```
