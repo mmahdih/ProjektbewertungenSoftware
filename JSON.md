@@ -57,3 +57,10 @@ http://localhost:4200/api/add/class
     "schoolClassName": "10BE13"
 }
 ```
+
+http://localhost:4200/api/user/{userId}/connect/class/{classId}
+
+```http
+-- nothing
+```
+
