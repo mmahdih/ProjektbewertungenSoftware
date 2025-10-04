@@ -1,0 +1,37 @@
+localhost:4200/api/users
+
+```http
+{
+    "firstName": "Max",
+    "lastName": "Mustermann",
+    "email": "max@wdwd",
+    "password": "dwdw",
+    "createdAt": "2025-10-04T15:30:00"
+}
+```
+
+localhost:4200/api/add/learning_field
+
+```http
+{
+  "learningFieldName": "Mathematik",
+  "learningFieldDescription": "Grundlagen Algebra",
+  "learningFieldWeighting": 1.0
+}
+```
+
+http://localhost:4200/api/user/{userId}/connect/learningfield/{leariningfieldId}
+
+```http
+-- nothing
+````
+
+http://localhost:4200/api/user/{userId}/learningfield/{leariningfieldId}/new/grade
+
+```http
+{
+    "value": 2.0,
+    "gradeWeighting": 2.0,
+    "date": "2025-10-04T15:30:00"
+}
+```
