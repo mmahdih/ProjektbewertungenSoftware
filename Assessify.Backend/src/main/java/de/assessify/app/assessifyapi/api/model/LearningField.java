@@ -1,6 +1,6 @@
 package de.assessify.app.assessifyapi.api.model;
 
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.UuidGenerator;
@@ -26,6 +26,10 @@ public class LearningField {
 
     @Column(name = "learning_field_Weighting", nullable = false)
     private float LearningFieldWeighting;
+
+    @ManyToMany(mappedBy = "learningFields")
+    @JsonIgnore
+    private List<User> users = new ArrayList<>();
 
     @OneToMany(mappedBy = "learningField", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Grade> grades = new ArrayList<>();

@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/learning_field")
-public class LearningFieldController {
+@RequestMapping("/api/add/learning_field")
+public class AddLearningFieldController {
     @Autowired
     private LearningFieldRepository learningFieldRepository;
 
