@@ -13,11 +13,14 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/user")
 public class ConnectLearningFieldWithUser {
-    @Autowired
-    private LearningFieldRepository learningFieldRepository;
+    private final LearningFieldRepository learningFieldRepository;
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+
+    public ConnectLearningFieldWithUser(LearningFieldRepository learningFieldRepository, UserRepository userRepository) {
+        this.learningFieldRepository = learningFieldRepository;
+        this.userRepository = userRepository;
+    }
 
     @PostMapping("/{userId}/connect/learningfield/{learningfieldId}")
     public ResponseEntity<User> addGradeToLearningField(

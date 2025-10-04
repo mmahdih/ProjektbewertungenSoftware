@@ -12,8 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/add/role")
 public class AddRoleController {
-    @Autowired
-    private RoleRepository roleRepository;
+    private final RoleRepository roleRepository;
+
+    public AddRoleController(RoleRepository roleRepository) {
+        this.roleRepository = roleRepository;
+    }
 
     @PostMapping
     public ResponseEntity<Role> createClass(@RequestBody Role role) {

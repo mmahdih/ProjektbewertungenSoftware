@@ -15,11 +15,14 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/user")
 public class ConnectRoleWithUser {
-    @Autowired
-    private RoleRepository roleRepository;
+    private final RoleRepository roleRepository;
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+
+    public ConnectRoleWithUser(RoleRepository roleRepository, UserRepository userRepository) {
+        this.roleRepository = roleRepository;
+        this.userRepository = userRepository;
+    }
 
     @PostMapping("/{userId}/connect/role/{roleId}")
     public ResponseEntity<User> addGradeToLearningField(

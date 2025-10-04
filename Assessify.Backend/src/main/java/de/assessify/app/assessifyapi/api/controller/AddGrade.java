@@ -16,14 +16,17 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/user/{userId}/learningfield/{learningfieldId}/new/grade")
 public class AddGrade {
-    @Autowired
-    private GradeRepository gradeRepository;
+    private final GradeRepository gradeRepository;
 
-    @Autowired
-    private LearningFieldRepository learningFieldRepository;
+    private final LearningFieldRepository learningFieldRepository;
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+
+    public AddGrade(GradeRepository gradeRepository, LearningFieldRepository learningFieldRepository, UserRepository userRepository) {
+        this.gradeRepository = gradeRepository;
+        this.learningFieldRepository = learningFieldRepository;
+        this.userRepository = userRepository;
+    }
 
     @PostMapping
     public ResponseEntity<Grade> addGradeToLearningField(

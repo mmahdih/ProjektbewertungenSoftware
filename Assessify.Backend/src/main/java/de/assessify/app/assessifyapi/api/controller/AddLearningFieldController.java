@@ -12,8 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/add/learning_field")
 public class AddLearningFieldController {
-    @Autowired
-    private LearningFieldRepository learningFieldRepository;
+    private final LearningFieldRepository learningFieldRepository;
+
+    public AddLearningFieldController(LearningFieldRepository learningFieldRepository) {
+        this.learningFieldRepository = learningFieldRepository;
+    }
 
     @PostMapping
     public ResponseEntity<LearningField> createClass(@RequestBody LearningField learningField) {
