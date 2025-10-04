@@ -1,12 +1,11 @@
 package de.assessify.app.assessifyapi.api.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.UuidGenerator;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -23,4 +22,12 @@ public class Project {
 
     @Column(name = "project_description", nullable = false)
     private String ProjectDescription;
+
+    @ManyToMany
+    @JoinTable(
+            name = "project_learnfield",
+            joinColumns = @JoinColumn(name = "project_id"),
+            inverseJoinColumns = @JoinColumn(name = "learning_field_id")
+    )
+    private List<LearningField> learningFields = new ArrayList<>();
 }
