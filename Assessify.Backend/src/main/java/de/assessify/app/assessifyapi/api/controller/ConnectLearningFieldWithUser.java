@@ -4,7 +4,6 @@ import de.assessify.app.assessifyapi.api.UserRepository.LearningFieldRepository;
 import de.assessify.app.assessifyapi.api.UserRepository.UserRepository;
 import de.assessify.app.assessifyapi.api.model.LearningField;
 import de.assessify.app.assessifyapi.api.model.User;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
