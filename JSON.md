@@ -35,3 +35,18 @@ http://localhost:4200/api/user/{userId}/learningfield/{leariningfieldId}/new/gra
     "date": "2025-10-04T15:30:00"
 }
 ```
+
+http://localhost:4200/api/add/role
+
+```http
+{
+    "roleName": "Student"
+}
+```
+
+http://localhost:4200/api/user/{userId}/connect/role/{roleId}
+
+```http
+-- nothing
+```
+

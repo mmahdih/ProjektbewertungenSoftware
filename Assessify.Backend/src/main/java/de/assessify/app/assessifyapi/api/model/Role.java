@@ -1,13 +1,13 @@
 package de.assessify.app.assessifyapi.api.model;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.UuidGenerator;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -21,4 +21,8 @@ public class Role {
 
     @Column(name = "role_name", nullable = false)
     private String RoleName;
+
+    @ManyToMany(mappedBy = "roles")
+    @JsonIgnore
+    private List<User> users = new ArrayList<>();
 }
