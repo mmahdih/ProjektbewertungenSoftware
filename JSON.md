@@ -72,3 +72,9 @@ http://localhost:4200/api/add/project
     "projectDescription": "Arduino"
 }
 ```
+
+http://localhost:4200/api/project/{projectId}/connect/learningfield/{learningfieldId}
+
+```http
+-- nothing
+```
