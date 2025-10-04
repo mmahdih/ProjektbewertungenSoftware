@@ -1,12 +1,9 @@
 package de.assessify.app.assessifyapi.api.controller;
 
-import de.assessify.app.assessifyapi.api.UserRepository.LearningFieldRepository;
 import de.assessify.app.assessifyapi.api.UserRepository.RoleRepository;
 import de.assessify.app.assessifyapi.api.UserRepository.UserRepository;
-import de.assessify.app.assessifyapi.api.model.LearningField;
 import de.assessify.app.assessifyapi.api.model.Role;
 import de.assessify.app.assessifyapi.api.model.User;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,11 +12,14 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/user")
 public class ConnectRoleWithUser {
-    @Autowired
-    private RoleRepository roleRepository;
+    private final RoleRepository roleRepository;
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+
+    public ConnectRoleWithUser(RoleRepository roleRepository, UserRepository userRepository) {
+        this.roleRepository = roleRepository;
+        this.userRepository = userRepository;
+    }
 
     @PostMapping("/{userId}/connect/role/{roleId}")
     public ResponseEntity<User> addGradeToLearningField(

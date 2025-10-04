@@ -4,7 +4,6 @@ import de.assessify.app.assessifyapi.api.UserRepository.LearningFieldRepository;
 import de.assessify.app.assessifyapi.api.UserRepository.UserRepository;
 import de.assessify.app.assessifyapi.api.model.LearningField;
 import de.assessify.app.assessifyapi.api.model.User;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,11 +12,14 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/user")
 public class ConnectLearningFieldWithUser {
-    @Autowired
-    private LearningFieldRepository learningFieldRepository;
+    private final LearningFieldRepository learningFieldRepository;
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+
+    public ConnectLearningFieldWithUser(LearningFieldRepository learningFieldRepository, UserRepository userRepository) {
+        this.learningFieldRepository = learningFieldRepository;
+        this.userRepository = userRepository;
+    }
 
     @PostMapping("/{userId}/connect/learningfield/{learningfieldId}")
     public ResponseEntity<User> addGradeToLearningField(
