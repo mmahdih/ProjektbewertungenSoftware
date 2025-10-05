@@ -96,3 +96,9 @@ http://localhost:4200/api/show/all/roles
 ```http
 -- nothing
 ```
+
+http://localhost:4200//api/user/{userId}/learningfield/{learningfieldId}/grades
+
+```http
+-- nothing
+```
