@@ -78,3 +78,39 @@ http://localhost:4200/api/project/{projectId}/connect/learningfield/{learningfie
 ```http
 -- nothing
 ```
+
+http://localhost:4200/api/show/all/users
+
+```http
+-- nothing
+```
+
+http://localhost:4200/api/show/all/classes
+
+```http
+-- nothing
+```
+
+http://localhost:4200/api/show/all/roles
+
+```http
+-- nothing
+```
+
+http://localhost:4200/api/user/{userId}/learningfield/{learningfieldId}/grades
+
+```http
+-- nothing
+```
+
+http://localhost:4200/api/user/{userId}/grades
+
+```http
+-- nothing
+```
+
+http://localhost:4200/api/show/all/projects
+
+```http
+-- nothing
+```
