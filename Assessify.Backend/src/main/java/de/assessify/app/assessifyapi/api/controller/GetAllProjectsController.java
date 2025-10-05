@@ -1,6 +1,6 @@
 package de.assessify.app.assessifyapi.api.controller;
 
-import de.assessify.app.assessifyapi.api.DTOs.ProjectDto;
+import de.assessify.app.assessifyapi.api.DTOs.Response.ProjectDto;
 import de.assessify.app.assessifyapi.api.UserRepository.ProjectRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
