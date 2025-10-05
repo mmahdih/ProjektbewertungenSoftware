@@ -2,7 +2,7 @@ package de.assessify.app.assessifyapi.api.controller;
 
 import de.assessify.app.assessifyapi.api.UserRepository.LearningFieldRepository;
 import de.assessify.app.assessifyapi.api.UserRepository.ProjectRepository;
-import de.assessify.app.assessifyapi.api.model.LearningField;
+import de.assessify.app.assessifyapi.api.model.TrainingModule;
 import de.assessify.app.assessifyapi.api.model.Project;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +29,7 @@ public class ConnectLearnFieldWithProject {
         Project project = projectRepository.findById(projectId)
                 .orElseThrow(() -> new RuntimeException("project not found"));
 
-        LearningField learningField = learningFieldRepository.findById(learningfieldId)
+        TrainingModule learningField = learningFieldRepository.findById(learningfieldId)
                 .orElseThrow(() -> new RuntimeException("learn field not found"));
 
         if (!project.getLearningFields().contains(learningField)) {

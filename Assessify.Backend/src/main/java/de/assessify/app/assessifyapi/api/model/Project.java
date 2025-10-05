@@ -27,7 +27,7 @@ public class Project {
     @JoinTable(
             name = "project_learnfield",
             joinColumns = @JoinColumn(name = "project_id"),
-            inverseJoinColumns = @JoinColumn(name = "learning_field_id")
+            inverseJoinColumns = @JoinColumn(name = "training-module_id")
     )
-    private List<LearningField> learningFields = new ArrayList<>();
+    private List<TrainingModule> learningFields = new ArrayList<>();
 }

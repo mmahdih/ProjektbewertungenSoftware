@@ -11,21 +11,21 @@ import java.util.UUID;
 
 @Entity
 @Data
-@Table(name = "learning_field")
-public class LearningField {
+@Table(name = "training-module")
+public class TrainingModule {
     @Id
     @UuidGenerator
-    @Column(name = "learning_field_id", nullable = false, unique = true)
+    @Column(name = "training-module_id", nullable = false, unique = true)
     private UUID id;
 
-    @Column(name = "learning_field_name", nullable = false)
-    private String LearningFieldName;
+    @Column(name = "training-module_name", nullable = false)
+    private String name;
 
-    @Column(name = "learning_field_description", nullable = false)
-    private String LearningFieldDescription;
+    @Column(name = "training-module_description", nullable = false)
+    private String description;
 
-    @Column(name = "learning_field_Weighting", nullable = false)
-    private float LearningFieldWeighting;
+    @Column(name = "training-module_Weighting", nullable = false)
+    private float weighting;
 
     @ManyToMany(mappedBy = "learningFields")
     @JsonIgnore

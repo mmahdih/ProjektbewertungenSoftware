@@ -27,7 +27,7 @@ public class Grade {
     private Date date;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "learning_field_id", nullable = false)
+    @JoinColumn(name = "training-module_id", nullable = false)
     @JsonBackReference
-    private LearningField learningField;
+    private TrainingModule learningField;
 }

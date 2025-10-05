@@ -35,11 +35,11 @@ public class User {
 
     @ManyToMany
     @JoinTable(
-            name = "user_learning_field",
+            name = "user_training-module",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "laerning_field_id")
     )
-    private List<LearningField> learningFields = new ArrayList<>();
+    private List<TrainingModule> learningFields = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(
