@@ -84,3 +84,9 @@ http://localhost:4200/api/show/all/users
 ```http
 -- nothing
 ```
+
+http://localhost:4200/api/show/all/classes
+
+```http
+-- nothing
+```
