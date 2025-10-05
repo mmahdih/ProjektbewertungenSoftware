@@ -102,3 +102,9 @@ http://localhost:4200//api/user/{userId}/learningfield/{learningfieldId}/grades
 ```http
 -- nothing
 ```
+
+http://localhost:4200//api/user/{userId}/grades
+
+```http
+-- nothing
+```
