@@ -79,7 +79,7 @@ http://localhost:4200/api/project/{projectId}/connect/learningfield/{learningfie
 -- nothing
 ```
 
-http://localhost:4200/api/users
+http://localhost:4200/api/show/all/users
 
 ```http
 -- nothing
