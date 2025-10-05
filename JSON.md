@@ -78,3 +78,9 @@ http://localhost:4200/api/project/{projectId}/connect/learningfield/{learningfie
 ```http
 -- nothing
 ```
+
+http://localhost:4200/api/users
+
+```http
+-- nothing
+```
