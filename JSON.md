@@ -97,13 +97,19 @@ http://localhost:4200/api/show/all/roles
 -- nothing
 ```
 
-http://localhost:4200//api/user/{userId}/learningfield/{learningfieldId}/grades
+http://localhost:4200/api/user/{userId}/learningfield/{learningfieldId}/grades
 
 ```http
 -- nothing
 ```
 
-http://localhost:4200//api/user/{userId}/grades
+http://localhost:4200/api/user/{userId}/grades
+
+```http
+-- nothing
+```
+
+http://localhost:4200/api/show/all/projects
 
 ```http
 -- nothing
