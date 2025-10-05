@@ -90,3 +90,9 @@ http://localhost:4200/api/show/all/classes
 ```http
 -- nothing
 ```
+
+http://localhost:4200/api/show/all/roles
+
+```http
+-- nothing
+```
