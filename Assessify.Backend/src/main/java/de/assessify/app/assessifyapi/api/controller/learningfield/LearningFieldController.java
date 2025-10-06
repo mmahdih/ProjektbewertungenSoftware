@@ -48,7 +48,7 @@ public class LearningFieldController {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("user not found"));
 
-        var modules = user.getLearningFields()
+        var modules = user.getTrainingModules()
                 .stream()
                 .map(field -> new LearningFieldWithGradesDto(
                         field.getId(),
@@ -77,7 +77,7 @@ public class LearningFieldController {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("user not found"));
 
-        var module = user.getLearningFields()
+        var module = user.getTrainingModules()
                 .stream()
                 .filter(field -> field.getId().equals(trainingModulesId))
                 .findFirst()
@@ -133,13 +133,13 @@ public class LearningFieldController {
         TrainingModule trainingModule = learningFieldRepository.findById(trainingModulesId)
                 .orElseThrow(() -> new RuntimeException("Training Module not found"));
 
-        if (!user.getLearningFields().contains(trainingModule)) {
-            user.getLearningFields().add(trainingModule);
+        if (!user.getTrainingModules().contains(trainingModule)) {
+            user.getTrainingModules().add(trainingModule);
         }
 
         User updatedUser = userRepository.save(user);
 
-        List<TrainingModuleSummaryDto> modules = user.getLearningFields().stream()
+        List<TrainingModuleSummaryDto> modules = user.getTrainingModules().stream()
                 .map(field -> new TrainingModuleSummaryDto(
                         field.getId(),
                         field.getName(),

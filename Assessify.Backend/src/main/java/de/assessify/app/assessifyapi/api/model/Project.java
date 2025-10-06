@@ -29,5 +29,5 @@ public class Project {
             joinColumns = @JoinColumn(name = "project_id"),
             inverseJoinColumns = @JoinColumn(name = "training-module_id")
     )
-    private List<TrainingModule> learningFields = new ArrayList<>();
+    private List<TrainingModule> trainingModules = new ArrayList<>();
 }

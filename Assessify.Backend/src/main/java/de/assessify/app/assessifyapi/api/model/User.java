@@ -37,9 +37,9 @@ public class User {
     @JoinTable(
             name = "user_training-module",
             joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "laerning_field_id")
+            inverseJoinColumns = @JoinColumn(name = "training-module_id")
     )
-    private List<TrainingModule> learningFields = new ArrayList<>();
+    private List<TrainingModule> trainingModules = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(

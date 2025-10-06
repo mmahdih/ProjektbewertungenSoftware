@@ -27,14 +27,14 @@ public class TrainingModule {
     @Column(name = "training-module_Weighting", nullable = false)
     private float weighting;
 
-    @ManyToMany(mappedBy = "learningFields")
+    @ManyToMany(mappedBy = "trainingModules")
     @JsonIgnore
     private List<User> users = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "learningFields")
+    @ManyToMany(mappedBy = "trainingModules")
     @JsonIgnore
     private List<Project> projects = new ArrayList<>();
 
-    @OneToMany(mappedBy = "learningField", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "trainingModules", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Grade> grades = new ArrayList<>();
 }

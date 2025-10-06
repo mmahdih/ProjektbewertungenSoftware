@@ -32,8 +32,8 @@ public class ConnectLearnFieldWithProject {
         TrainingModule learningField = learningFieldRepository.findById(learningfieldId)
                 .orElseThrow(() -> new RuntimeException("learn field not found"));
 
-        if (!project.getLearningFields().contains(learningField)) {
-            project.getLearningFields().add(learningField);
+        if (!project.getTrainingModules().contains(learningField)) {
+            project.getTrainingModules().add(learningField);
         }
 
         Project updatedProject = projectRepository.save(project);
