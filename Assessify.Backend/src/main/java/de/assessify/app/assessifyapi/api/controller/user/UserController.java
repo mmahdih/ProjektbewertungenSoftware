@@ -1,11 +1,11 @@
 package de.assessify.app.assessifyapi.api.controller.user;
 
-import de.assessify.app.assessifyapi.api.DTOs.Request.AddUserDto;
-import de.assessify.app.assessifyapi.api.DTOs.Response.UserDto;
+import de.assessify.app.assessifyapi.api.dtos.request.AddUserDto;
+import de.assessify.app.assessifyapi.api.dtos.response.UserDto;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import de.assessify.app.assessifyapi.api.UserRepository.UserRepository;
-import de.assessify.app.assessifyapi.api.model.User;
+import de.assessify.app.assessifyapi.api.userrepository.UserRepository;
+import de.assessify.app.assessifyapi.api.entity.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

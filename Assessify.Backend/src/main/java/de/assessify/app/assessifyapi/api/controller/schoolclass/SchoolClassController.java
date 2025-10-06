@@ -1,12 +1,12 @@
 package de.assessify.app.assessifyapi.api.controller.schoolclass;
 
-import de.assessify.app.assessifyapi.api.DTOs.Request.AddSchoolClassDto;
-import de.assessify.app.assessifyapi.api.DTOs.Response.SchoolClassDto;
-import de.assessify.app.assessifyapi.api.DTOs.Response.UserWithSchoolClassDto;
-import de.assessify.app.assessifyapi.api.UserRepository.ClassRepository;
-import de.assessify.app.assessifyapi.api.UserRepository.UserRepository;
-import de.assessify.app.assessifyapi.api.model.SchoolClass;
-import de.assessify.app.assessifyapi.api.model.User;
+import de.assessify.app.assessifyapi.api.dtos.request.AddSchoolClassDto;
+import de.assessify.app.assessifyapi.api.dtos.response.SchoolClassDto;
+import de.assessify.app.assessifyapi.api.dtos.response.UserWithSchoolClassDto;
+import de.assessify.app.assessifyapi.api.userrepository.ClassRepository;
+import de.assessify.app.assessifyapi.api.userrepository.UserRepository;
+import de.assessify.app.assessifyapi.api.entity.SchoolClass;
+import de.assessify.app.assessifyapi.api.entity.User;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

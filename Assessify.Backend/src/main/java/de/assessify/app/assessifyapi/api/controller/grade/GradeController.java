@@ -1,13 +1,13 @@
 package de.assessify.app.assessifyapi.api.controller.grade;
 
-import de.assessify.app.assessifyapi.api.DTOs.Request.AddGradeDto;
-import de.assessify.app.assessifyapi.api.DTOs.Response.GradeDto;
-import de.assessify.app.assessifyapi.api.UserRepository.GradeRepository;
-import de.assessify.app.assessifyapi.api.UserRepository.LearningFieldRepository;
-import de.assessify.app.assessifyapi.api.UserRepository.UserRepository;
-import de.assessify.app.assessifyapi.api.model.Grade;
-import de.assessify.app.assessifyapi.api.model.TrainingModule;
-import de.assessify.app.assessifyapi.api.model.User;
+import de.assessify.app.assessifyapi.api.dtos.request.AddGradeDto;
+import de.assessify.app.assessifyapi.api.dtos.response.GradeDto;
+import de.assessify.app.assessifyapi.api.userrepository.GradeRepository;
+import de.assessify.app.assessifyapi.api.userrepository.LearningFieldRepository;
+import de.assessify.app.assessifyapi.api.userrepository.UserRepository;
+import de.assessify.app.assessifyapi.api.entity.Grade;
+import de.assessify.app.assessifyapi.api.entity.TrainingModule;
+import de.assessify.app.assessifyapi.api.entity.User;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

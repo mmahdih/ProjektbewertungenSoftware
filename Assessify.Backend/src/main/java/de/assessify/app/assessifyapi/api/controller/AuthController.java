@@ -1,6 +1,6 @@
 package de.assessify.app.assessifyapi.api.controller;
 
-import de.assessify.app.assessifyapi.api.model.LoginDto;
+import de.assessify.app.assessifyapi.api.entity.LoginDto;
 import de.assessify.app.assessifyapi.api.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

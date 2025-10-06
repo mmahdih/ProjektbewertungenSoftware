@@ -1,13 +1,13 @@
 package de.assessify.app.assessifyapi.api.controller.project;
 
-import de.assessify.app.assessifyapi.api.DTOs.Request.AddProjectDto;
-import de.assessify.app.assessifyapi.api.DTOs.Response.ProjectDto;
-import de.assessify.app.assessifyapi.api.DTOs.Response.ProjectWithTrainingModulesDto;
-import de.assessify.app.assessifyapi.api.DTOs.Response.TrainingModuleSummaryDto;
-import de.assessify.app.assessifyapi.api.UserRepository.LearningFieldRepository;
-import de.assessify.app.assessifyapi.api.UserRepository.ProjectRepository;
-import de.assessify.app.assessifyapi.api.model.Project;
-import de.assessify.app.assessifyapi.api.model.TrainingModule;
+import de.assessify.app.assessifyapi.api.dtos.request.AddProjectDto;
+import de.assessify.app.assessifyapi.api.dtos.response.ProjectDto;
+import de.assessify.app.assessifyapi.api.dtos.response.ProjectWithTrainingModulesDto;
+import de.assessify.app.assessifyapi.api.dtos.response.TrainingModuleSummaryDto;
+import de.assessify.app.assessifyapi.api.userrepository.LearningFieldRepository;
+import de.assessify.app.assessifyapi.api.userrepository.ProjectRepository;
+import de.assessify.app.assessifyapi.api.entity.Project;
+import de.assessify.app.assessifyapi.api.entity.TrainingModule;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
