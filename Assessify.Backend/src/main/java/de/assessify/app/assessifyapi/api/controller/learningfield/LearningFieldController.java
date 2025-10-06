@@ -4,7 +4,7 @@ import de.assessify.app.assessifyapi.api.DTOs.Request.AddTrainingModuleDto;
 import de.assessify.app.assessifyapi.api.DTOs.Response.GradeDto;
 import de.assessify.app.assessifyapi.api.DTOs.Response.LearningFieldWithGradesDto;
 import de.assessify.app.assessifyapi.api.DTOs.Response.UserWithModulesDto;
-import de.assessify.app.assessifyapi.api.DTOs.Response.summary.TrainingModuleSummaryDto;
+import de.assessify.app.assessifyapi.api.DTOs.Response.TrainingModuleSummaryDto;
 import de.assessify.app.assessifyapi.api.UserRepository.LearningFieldRepository;
 import de.assessify.app.assessifyapi.api.UserRepository.UserRepository;
 import de.assessify.app.assessifyapi.api.model.TrainingModule;

@@ -1,12 +1,12 @@
 package de.assessify.app.assessifyapi.api.DTOs.Response;
 
-import java.util.List;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
-public record UserWithModulesDto(
+public record UserDto(
         UUID id,
         String firstName,
         String lastName,
         String email,
-        List<TrainingModuleSummaryDto> trainingModules
+        LocalDateTime date
 ) {}

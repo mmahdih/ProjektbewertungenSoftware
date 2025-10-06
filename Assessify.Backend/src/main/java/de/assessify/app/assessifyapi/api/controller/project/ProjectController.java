@@ -3,7 +3,7 @@ package de.assessify.app.assessifyapi.api.controller.project;
 import de.assessify.app.assessifyapi.api.DTOs.Request.AddProjectDto;
 import de.assessify.app.assessifyapi.api.DTOs.Response.ProjectDto;
 import de.assessify.app.assessifyapi.api.DTOs.Response.ProjectWithTrainingModulesDto;
-import de.assessify.app.assessifyapi.api.DTOs.Response.summary.TrainingModuleSummaryDto;
+import de.assessify.app.assessifyapi.api.DTOs.Response.TrainingModuleSummaryDto;
 import de.assessify.app.assessifyapi.api.UserRepository.LearningFieldRepository;
 import de.assessify.app.assessifyapi.api.UserRepository.ProjectRepository;
 import de.assessify.app.assessifyapi.api.model.Project;
