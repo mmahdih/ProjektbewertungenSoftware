@@ -1,12 +1,12 @@
 package de.assessify.app.assessifyapi.api.controller.role;
 
-import de.assessify.app.assessifyapi.api.DTOs.Request.AddRoleDto;
-import de.assessify.app.assessifyapi.api.DTOs.Response.RoleDto;
-import de.assessify.app.assessifyapi.api.DTOs.Response.UserWithRolesDto;
-import de.assessify.app.assessifyapi.api.UserRepository.RoleRepository;
-import de.assessify.app.assessifyapi.api.UserRepository.UserRepository;
-import de.assessify.app.assessifyapi.api.model.Role;
-import de.assessify.app.assessifyapi.api.model.User;
+import de.assessify.app.assessifyapi.api.dtos.request.AddRoleDto;
+import de.assessify.app.assessifyapi.api.dtos.response.RoleDto;
+import de.assessify.app.assessifyapi.api.dtos.response.UserWithRolesDto;
+import de.assessify.app.assessifyapi.api.userrepository.RoleRepository;
+import de.assessify.app.assessifyapi.api.userrepository.UserRepository;
+import de.assessify.app.assessifyapi.api.entity.Role;
+import de.assessify.app.assessifyapi.api.entity.User;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
