@@ -1,8 +1,8 @@
-package de.assessify.app.assessifyapi.api.DTOs.Response;
+package de.assessify.app.assessifyapi.api.DTOs.Request;
 
 import java.util.UUID;
 
-public record ProjectDto(
+public record AddProjectDto(
         UUID id,
         String name,
         String description
