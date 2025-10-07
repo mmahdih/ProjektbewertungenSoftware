@@ -1,9 +1,7 @@
 package de.assessify.app.assessifyapi.api.controller;
 
-import de.assessify.app.assessifyapi.api.UserRepository.ReviewRepository;
-import de.assessify.app.assessifyapi.api.UserRepository.RoleRepository;
-import de.assessify.app.assessifyapi.api.model.Review;
-import de.assessify.app.assessifyapi.api.model.Role;
+import de.assessify.app.assessifyapi.api.userrepository.ReviewRepository;
+import de.assessify.app.assessifyapi.api.entity.Review;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

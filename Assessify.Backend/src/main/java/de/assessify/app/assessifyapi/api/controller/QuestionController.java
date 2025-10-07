@@ -1,9 +1,7 @@
 package de.assessify.app.assessifyapi.api.controller;
 
-import de.assessify.app.assessifyapi.api.UserRepository.GradeRepository;
-import de.assessify.app.assessifyapi.api.UserRepository.QuestionRepository;
-import de.assessify.app.assessifyapi.api.model.Grade;
-import de.assessify.app.assessifyapi.api.model.Question;
+import de.assessify.app.assessifyapi.api.userrepository.QuestionRepository;
+import de.assessify.app.assessifyapi.api.entity.Question;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

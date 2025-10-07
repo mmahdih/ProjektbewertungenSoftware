@@ -40,7 +40,7 @@ http://localhost:4200/api/add/role
 
 ```http
 {
-    "roleName": "Student"
+    "name": "Student"
 }
 ```
 
