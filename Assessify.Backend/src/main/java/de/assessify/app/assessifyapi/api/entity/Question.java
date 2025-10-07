@@ -1,9 +1,6 @@
 package de.assessify.app.assessifyapi.api.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.UuidGenerator;
 
@@ -19,5 +16,5 @@ public class Question {
     private UUID id;
 
     @Column(name = "question_text", nullable = false)
-    private String QuestionText;
+    private String questionText;
 }
