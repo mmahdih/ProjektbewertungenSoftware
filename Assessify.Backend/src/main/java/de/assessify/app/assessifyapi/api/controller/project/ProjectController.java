@@ -4,7 +4,7 @@ import de.assessify.app.assessifyapi.api.dtos.request.AddProjectDto;
 import de.assessify.app.assessifyapi.api.dtos.response.ProjectDto;
 import de.assessify.app.assessifyapi.api.dtos.response.ProjectWithTrainingModulesDto;
 import de.assessify.app.assessifyapi.api.dtos.response.TrainingModuleSummaryDto;
-import de.assessify.app.assessifyapi.api.userrepository.LearningFieldRepository;
+import de.assessify.app.assessifyapi.api.userrepository.TrainingModuleRepository;
 import de.assessify.app.assessifyapi.api.userrepository.ProjectRepository;
 import de.assessify.app.assessifyapi.api.entity.Project;
 import de.assessify.app.assessifyapi.api.entity.TrainingModule;
@@ -18,9 +18,9 @@ import java.util.UUID;
 @RequestMapping("/api")
 public class ProjectController {
     private final ProjectRepository projectRepository;
-    private final LearningFieldRepository trainingModuleRepository;
+    private final TrainingModuleRepository trainingModuleRepository;
 
-    public ProjectController(ProjectRepository projectRepository, LearningFieldRepository trainingModuleRepository) {
+    public ProjectController(ProjectRepository projectRepository, TrainingModuleRepository trainingModuleRepository) {
         this.projectRepository = projectRepository;
         this.trainingModuleRepository = trainingModuleRepository;
     }

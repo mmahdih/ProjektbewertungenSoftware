@@ -3,7 +3,7 @@ package de.assessify.app.assessifyapi.api.controller.grade;
 import de.assessify.app.assessifyapi.api.dtos.request.AddGradeDto;
 import de.assessify.app.assessifyapi.api.dtos.response.GradeDto;
 import de.assessify.app.assessifyapi.api.userrepository.GradeRepository;
-import de.assessify.app.assessifyapi.api.userrepository.LearningFieldRepository;
+import de.assessify.app.assessifyapi.api.userrepository.TrainingModuleRepository;
 import de.assessify.app.assessifyapi.api.userrepository.UserRepository;
 import de.assessify.app.assessifyapi.api.entity.Grade;
 import de.assessify.app.assessifyapi.api.entity.TrainingModule;
@@ -18,11 +18,11 @@ import java.util.UUID;
 public class GradeController {
     private final GradeRepository gradeRepository;
 
-    private final LearningFieldRepository learningFieldRepository;
+    private final TrainingModuleRepository learningFieldRepository;
 
     private final UserRepository userRepository;
 
-    public GradeController(GradeRepository gradeRepository, LearningFieldRepository learningFieldRepository, UserRepository userRepository) {
+    public GradeController(GradeRepository gradeRepository, TrainingModuleRepository learningFieldRepository, UserRepository userRepository) {
         this.gradeRepository = gradeRepository;
         this.learningFieldRepository = learningFieldRepository;
         this.userRepository = userRepository;

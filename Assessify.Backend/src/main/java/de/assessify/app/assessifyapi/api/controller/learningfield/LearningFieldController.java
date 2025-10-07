@@ -5,7 +5,7 @@ import de.assessify.app.assessifyapi.api.dtos.response.GradeDto;
 import de.assessify.app.assessifyapi.api.dtos.response.LearningFieldWithGradesDto;
 import de.assessify.app.assessifyapi.api.dtos.response.UserWithModulesDto;
 import de.assessify.app.assessifyapi.api.dtos.response.TrainingModuleSummaryDto;
-import de.assessify.app.assessifyapi.api.userrepository.LearningFieldRepository;
+import de.assessify.app.assessifyapi.api.userrepository.TrainingModuleRepository;
 import de.assessify.app.assessifyapi.api.userrepository.UserRepository;
 import de.assessify.app.assessifyapi.api.entity.TrainingModule;
 import de.assessify.app.assessifyapi.api.entity.User;
@@ -18,10 +18,10 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api")
 public class LearningFieldController {
-    private final LearningFieldRepository learningFieldRepository;
+    private final TrainingModuleRepository learningFieldRepository;
     private final UserRepository userRepository;
 
-    public LearningFieldController(LearningFieldRepository learningFieldRepository, UserRepository userRepository) {
+    public LearningFieldController(TrainingModuleRepository learningFieldRepository, UserRepository userRepository) {
         this.learningFieldRepository = learningFieldRepository;
         this.userRepository = userRepository;
     }
