@@ -114,3 +114,20 @@ http://localhost:4200/api/show/all/projects
 ```http
 -- nothing
 ```
+
+http://localhost:4200/api/user/{userId}/project/{projectId}/add/review
+
+```http
+[
+  {
+    "questionId": "959a274d-90f2-490d-91ba-b27ac3f06ca9",
+    "reviewedUserId": "448a21b8-7e7c-430f-8887-c099a96a34f1",
+    "rating": 4.5
+  },
+  {
+    "questionId": "d2bb2c52-b102-460e-a359-41e0aee08ad6",
+    "reviewedUserId": "c63b57a9-94dd-4db4-9ad1-b2c245c4fa0d",
+    "rating": 3.8
+  }
+]
+```

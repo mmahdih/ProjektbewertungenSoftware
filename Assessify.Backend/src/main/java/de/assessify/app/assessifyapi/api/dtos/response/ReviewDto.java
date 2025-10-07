@@ -1,12 +1,15 @@
 package de.assessify.app.assessifyapi.api.dtos.response;
 
+import de.assessify.app.assessifyapi.api.entity.ReviewAnswer;
+
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 public record ReviewDto(
         UUID id,
-        float grade,
-        LocalDate date,
+        UUID projectId,
         UUID userId,
-        UUID projectId
+        LocalDate date,
+        List<ReviewAnswerDto> answers
 ) {}
