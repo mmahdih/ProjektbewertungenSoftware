@@ -35,7 +35,7 @@ public class ReviewController {
 
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("user not found"));
-        
+
         List<ReviewDto> reviews = user.getReviews().stream()
                 .map(field -> new ReviewDto(
                         field.getId(),
