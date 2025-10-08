@@ -105,14 +105,25 @@ public class ReviewController {
         return ResponseEntity.ok(response);
     }
 
-    @DeleteMapping("/review/{reviewAnswerId}/delete")
-    public ResponseEntity<Void> deleteReview(
+    @DeleteMapping("/review/answer/{reviewAnswerId}/delete")
+    public ResponseEntity<Void> deleteReviewAnswer(
             @PathVariable UUID reviewAnswerId) {
 
         ReviewAnswer reviewAnswer = reviewAnswerRepository.findById(reviewAnswerId)
-                .orElseThrow(() -> new RuntimeException("Review not found"));
+                .orElseThrow(() -> new RuntimeException("Review Answer not found"));
 
         reviewAnswerRepository.delete(reviewAnswer);
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping("/review/{reviewId}/delete")
+    public ResponseEntity<Void> deleteReview(
+            @PathVariable UUID reviewId) {
+
+        Review review = reviewRepository.findById(reviewId)
+                .orElseThrow(() -> new RuntimeException("Review not found"));
+
+        reviewRepository.delete(review);
         return ResponseEntity.noContent().build();
     }
 }
