@@ -104,4 +104,15 @@ public class ReviewController {
 
         return ResponseEntity.ok(response);
     }
+
+    @DeleteMapping("/review/{reviewAnswerId}/delete")
+    public ResponseEntity<Void> deleteReview(
+            @PathVariable UUID reviewAnswerId) {
+
+        ReviewAnswer reviewAnswer = reviewAnswerRepository.findById(reviewAnswerId)
+                .orElseThrow(() -> new RuntimeException("Review not found"));
+
+        reviewAnswerRepository.delete(reviewAnswer);
+        return ResponseEntity.noContent().build();
+    }
 }
