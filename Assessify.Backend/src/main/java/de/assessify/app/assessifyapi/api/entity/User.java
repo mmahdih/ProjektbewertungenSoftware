@@ -57,6 +57,9 @@ public class User {
     )
     private List<SchoolClass> schoolClasses = new ArrayList<>();
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Review> reviews = new ArrayList<>();
+
     public String getPassword() { return password; }
 
     public void setPassword(String password) { this.password = password; }

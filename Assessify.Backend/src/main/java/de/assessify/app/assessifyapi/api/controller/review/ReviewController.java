@@ -29,6 +29,33 @@ public class ReviewController {
         this.reviewAnswerRepository = reviewAnswerRepository;
     }
 
+    @GetMapping("/user/{userId}/show/all/reviews")
+    public ResponseEntity<List<ReviewDto>> getAllReviews(
+            @PathVariable UUID userId) {
+
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("user not found"));
+        
+        List<ReviewDto> reviews = user.getReviews().stream()
+                .map(field -> new ReviewDto(
+                        field.getId(),
+                        field.getProject().getId(),
+                        field.getUser().getId(),
+                        field.getDate(),
+                        field.getAnswers().stream()
+                                .map(a -> new ReviewAnswerDto(
+                                        a.getId(),
+                                        a.getQuestion().getId(),
+                                        a.getQuestion().getQuestionText(),
+                                        a.getReviewedUser().getId(),
+                                        a.getReviewedUser().getFirstName() + " " + a.getReviewedUser().getLastName(),
+                                        a.getRating()
+                                )).toList()
+                )).toList();
+
+        return ResponseEntity.ok(reviews);
+    }
+
     @PostMapping("/user/{userId}/project/{projectId}/add/review")
     public ResponseEntity<ReviewDto> createReview(
             @PathVariable UUID userId,
