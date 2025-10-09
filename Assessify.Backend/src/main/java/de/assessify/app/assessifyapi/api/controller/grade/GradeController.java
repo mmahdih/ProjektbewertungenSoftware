@@ -1,6 +1,7 @@
 package de.assessify.app.assessifyapi.api.controller.grade;
 
 import de.assessify.app.assessifyapi.api.dtos.request.AddGradeDto;
+import de.assessify.app.assessifyapi.api.dtos.request.UpdateGradeDto;
 import de.assessify.app.assessifyapi.api.dtos.response.GradeDto;
 import de.assessify.app.assessifyapi.api.dtos.response.LearningFieldWithGradesDto;
 import de.assessify.app.assessifyapi.api.userrepository.GradeRepository;
@@ -123,4 +124,43 @@ public class GradeController {
 
         return ResponseEntity.ok(response);
     }
+
+    @PutMapping("/user/{userId}/training-modules/{trainingModulesId}/grade/{gradeId}/update")
+    public ResponseEntity<GradeDto> updateGrade(
+            @PathVariable UUID userId,
+            @PathVariable UUID trainingModulesId,
+            @PathVariable UUID gradeId,
+            @RequestBody UpdateGradeDto dto) {
+
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        TrainingModule trainingModule = learningFieldRepository.findById(trainingModulesId)
+                .orElseThrow(() -> new RuntimeException("Training Module not found"));
+
+        Grade grade = gradeRepository.findById(gradeId)
+                .orElseThrow(() -> new RuntimeException("Grade not found"));
+
+        if (!grade.getTrainingModules().equals(trainingModule)) {
+            throw new RuntimeException("Grade does not belong to this Training Module");
+        }
+
+        if (dto.value() != null) grade.setValue(dto.value());
+        if (dto.weighting() != null) grade.setGradeWeighting(dto.weighting());
+        if (dto.date() != null) grade.setDate(dto.date());
+
+        System.out.println(dto.weighting());
+
+        Grade updated = gradeRepository.save(grade);
+
+        GradeDto response = new GradeDto(
+                updated.getId(),
+                updated.getValue(),
+                updated.getGradeWeighting(),
+                updated.getDate()
+        );
+
+        return ResponseEntity.ok(response);
+    }
+
 }
