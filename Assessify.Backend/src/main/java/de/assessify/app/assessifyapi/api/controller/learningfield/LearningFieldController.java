@@ -4,6 +4,8 @@ import de.assessify.app.assessifyapi.api.dtos.request.AddTrainingModuleDto;
 import de.assessify.app.assessifyapi.api.dtos.request.UpdateTrainingModuleDto;
 import de.assessify.app.assessifyapi.api.dtos.response.UserWithModulesDto;
 import de.assessify.app.assessifyapi.api.dtos.response.TrainingModuleSummaryDto;
+import de.assessify.app.assessifyapi.api.entity.Project;
+import de.assessify.app.assessifyapi.api.userrepository.ProjectRepository;
 import de.assessify.app.assessifyapi.api.userrepository.TrainingModuleRepository;
 import de.assessify.app.assessifyapi.api.userrepository.UserRepository;
 import de.assessify.app.assessifyapi.api.entity.TrainingModule;
@@ -19,10 +21,12 @@ import java.util.UUID;
 public class LearningFieldController {
     private final TrainingModuleRepository trainingModuleRepository;
     private final UserRepository userRepository;
+    private final ProjectRepository projectRepository;
 
-    public LearningFieldController(TrainingModuleRepository learningFieldRepository, UserRepository userRepository) {
+    public LearningFieldController(TrainingModuleRepository learningFieldRepository, UserRepository userRepository, ProjectRepository projectRepository) {
         this.trainingModuleRepository = learningFieldRepository;
         this.userRepository = userRepository;
+        this.projectRepository = projectRepository;
     }
 
     @GetMapping("/show/all/training-modules")
@@ -119,5 +123,34 @@ public class LearningFieldController {
         );
 
         return ResponseEntity.ok(response);
+    }
+    @DeleteMapping("/training-modules/{trainingModulesId}")
+    public ResponseEntity<Void> deleteTrainingModule(
+            @PathVariable UUID trainingModulesId) {
+
+        TrainingModule trainingModule = trainingModuleRepository.findById(trainingModulesId)
+                .orElseThrow(() -> new RuntimeException("Training Module not found"));
+
+        List<User> usersWithModule = userRepository.findAll().stream()
+                .filter(u -> u.getTrainingModules().contains(trainingModule))
+                .toList();
+
+        for (User user : usersWithModule) {
+            user.getTrainingModules().remove(trainingModule);
+            userRepository.save(user);
+        }
+
+        List<Project> projectsWithModule = projectRepository.findAll().stream()
+                .filter(p -> p.getTrainingModules().contains(trainingModule))
+                .toList();
+
+        for (Project project : projectsWithModule) {
+            project.getTrainingModules().remove(trainingModule);
+            projectRepository.save(project);
+        }
+
+
+        trainingModuleRepository.delete(trainingModule);
+        return ResponseEntity.noContent().build();
     }
 }
