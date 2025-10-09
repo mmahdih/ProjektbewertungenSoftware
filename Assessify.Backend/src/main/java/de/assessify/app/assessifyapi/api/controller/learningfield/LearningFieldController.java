@@ -1,8 +1,6 @@
 package de.assessify.app.assessifyapi.api.controller.learningfield;
 
 import de.assessify.app.assessifyapi.api.dtos.request.AddTrainingModuleDto;
-import de.assessify.app.assessifyapi.api.dtos.response.GradeDto;
-import de.assessify.app.assessifyapi.api.dtos.response.LearningFieldWithGradesDto;
 import de.assessify.app.assessifyapi.api.dtos.response.UserWithModulesDto;
 import de.assessify.app.assessifyapi.api.dtos.response.TrainingModuleSummaryDto;
 import de.assessify.app.assessifyapi.api.userrepository.TrainingModuleRepository;
@@ -39,66 +37,6 @@ public class LearningFieldController {
                 .toList();
 
         return ResponseEntity.ok(modules);
-    }
-
-    @GetMapping("/user/{userId}/show/all/grades")
-    public ResponseEntity<List<LearningFieldWithGradesDto>> getGradesForTrainingModule(
-            @PathVariable UUID userId) {
-
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("user not found"));
-
-        var modules = user.getTrainingModules()
-                .stream()
-                .map(field -> new LearningFieldWithGradesDto(
-                        field.getId(),
-                        field.getName(),
-                        field.getDescription(),
-                        field.getWeighting(),
-                        field.getGrades().stream()
-                                .map(g -> new GradeDto(
-                                        g.getId(),
-                                        g.getValue(),
-                                        g.getGradeWeighting(),
-                                        g.getDate()
-                                ))
-                                .toList()
-                ))
-                .toList();
-
-        return ResponseEntity.ok(modules);
-    }
-
-    @GetMapping("/user/{userId}/training-modules/{trainingModulesId}/grades")
-    public ResponseEntity<LearningFieldWithGradesDto> getGradesForLearningField(
-            @PathVariable UUID userId,
-            @PathVariable UUID trainingModulesId) {
-
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("user not found"));
-
-        var module = user.getTrainingModules()
-                .stream()
-                .filter(field -> field.getId().equals(trainingModulesId))
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException("Training module not found or not assigned to user"));
-
-        var dto = new LearningFieldWithGradesDto(
-                module.getId(),
-                module.getName(),
-                module.getDescription(),
-                module.getWeighting(),
-        module.getGrades().stream()
-                .map(g -> new GradeDto(
-                        g.getId(),
-                        g.getValue(),
-                        g.getGradeWeighting(),
-                        g.getDate()
-                ))
-                .toList()
-        );
-
-        return ResponseEntity.ok(dto);
     }
 
     @PostMapping("/add/training-modules")
