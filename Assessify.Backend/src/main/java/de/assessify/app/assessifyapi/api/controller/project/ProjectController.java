@@ -1,6 +1,7 @@
 package de.assessify.app.assessifyapi.api.controller.project;
 
 import de.assessify.app.assessifyapi.api.dtos.request.AddProjectDto;
+import de.assessify.app.assessifyapi.api.dtos.request.UpdateProjectDto;
 import de.assessify.app.assessifyapi.api.dtos.response.ProjectDto;
 import de.assessify.app.assessifyapi.api.dtos.response.ProjectWithTrainingModulesDto;
 import de.assessify.app.assessifyapi.api.dtos.response.TrainingModuleSummaryDto;
@@ -87,6 +88,27 @@ public class ProjectController {
                                 r.getWeighting()
                         ))
                         .toList()
+        );
+
+        return ResponseEntity.ok(response);
+    }
+    @PutMapping("/project/{projectId}")
+    public ResponseEntity<ProjectDto> updateProject(
+            @PathVariable UUID projectId,
+            @RequestBody UpdateProjectDto dto) {
+
+        Project project = projectRepository.findById(projectId)
+                .orElseThrow(() -> new RuntimeException("Project not found"));
+
+        if (dto.name() != null) project.setProjectName(dto.name());
+        if (dto.description() != null) project.setProjectDescription(dto.description());
+
+        Project updated = projectRepository.save(project);
+
+        ProjectDto response = new ProjectDto(
+                updated.getId(),
+                updated.getProjectName(),
+                updated.getProjectDescription()
         );
 
         return ResponseEntity.ok(response);
