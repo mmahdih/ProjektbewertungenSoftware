@@ -149,8 +149,6 @@ public class GradeController {
         if (dto.weighting() != null) grade.setGradeWeighting(dto.weighting());
         if (dto.date() != null) grade.setDate(dto.date());
 
-        System.out.println(dto.weighting());
-
         Grade updated = gradeRepository.save(grade);
 
         GradeDto response = new GradeDto(
