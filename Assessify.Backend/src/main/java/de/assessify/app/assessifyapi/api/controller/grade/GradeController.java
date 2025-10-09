@@ -163,4 +163,27 @@ public class GradeController {
         return ResponseEntity.ok(response);
     }
 
+    @DeleteMapping("/user/{userId}/training-modules/{trainingModulesId}/grade/{gradeId}")
+    public ResponseEntity<Void> deleteGrade(
+            @PathVariable UUID userId,
+            @PathVariable UUID trainingModulesId,
+            @PathVariable UUID gradeId) {
+
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        TrainingModule trainingModule = learningFieldRepository.findById(trainingModulesId)
+                .orElseThrow(() -> new RuntimeException("Training Module not found"));
+
+        Grade grade = gradeRepository.findById(gradeId)
+                .orElseThrow(() -> new RuntimeException("Grade not found"));
+
+        if (!grade.getTrainingModules().equals(trainingModule)) {
+            throw new RuntimeException("Grade does not belong to this Training Module");
+        }
+
+        gradeRepository.delete(grade);
+        return ResponseEntity.noContent().build();
+    }
+
 }
