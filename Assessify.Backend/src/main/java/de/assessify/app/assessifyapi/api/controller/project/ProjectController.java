@@ -5,6 +5,8 @@ import de.assessify.app.assessifyapi.api.dtos.request.UpdateProjectDto;
 import de.assessify.app.assessifyapi.api.dtos.response.ProjectDto;
 import de.assessify.app.assessifyapi.api.dtos.response.ProjectWithTrainingModulesDto;
 import de.assessify.app.assessifyapi.api.dtos.response.TrainingModuleSummaryDto;
+import de.assessify.app.assessifyapi.api.entity.Review;
+import de.assessify.app.assessifyapi.api.userrepository.ReviewRepository;
 import de.assessify.app.assessifyapi.api.userrepository.TrainingModuleRepository;
 import de.assessify.app.assessifyapi.api.userrepository.ProjectRepository;
 import de.assessify.app.assessifyapi.api.entity.Project;
@@ -20,10 +22,12 @@ import java.util.UUID;
 public class ProjectController {
     private final ProjectRepository projectRepository;
     private final TrainingModuleRepository trainingModuleRepository;
+    private final ReviewRepository reviewRepository;
 
-    public ProjectController(ProjectRepository projectRepository, TrainingModuleRepository trainingModuleRepository) {
+    public ProjectController(ProjectRepository projectRepository, TrainingModuleRepository trainingModuleRepository, ReviewRepository reviewRepository) {
         this.projectRepository = projectRepository;
         this.trainingModuleRepository = trainingModuleRepository;
+        this.reviewRepository = reviewRepository;
     }
 
     @GetMapping("/show/all/projects")
@@ -112,5 +116,24 @@ public class ProjectController {
         );
 
         return ResponseEntity.ok(response);
+    }
+    @DeleteMapping("/project/{projectId}")
+    public ResponseEntity<Void> deleteProject(
+            @PathVariable UUID projectId) {
+
+        Project project = projectRepository.findById(projectId)
+                .orElseThrow(() -> new RuntimeException("Project not found"));
+
+        List<TrainingModule> trainingModulesWithProjects = trainingModuleRepository.findAll().stream()
+                .filter(p -> p.getProjects().contains(project))
+                .toList();
+
+        for (TrainingModule trainingModule : trainingModulesWithProjects) {
+            trainingModule.getProjects().remove(project);
+            trainingModuleRepository.save(trainingModule);
+        }
+
+        projectRepository.delete(project);
+        return ResponseEntity.noContent().build();
     }
 }

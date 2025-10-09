@@ -30,4 +30,7 @@ public class Project {
             inverseJoinColumns = @JoinColumn(name = "training-module_id")
     )
     private List<TrainingModule> trainingModules = new ArrayList<>();
+
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Review> reviews = new ArrayList<>();
 }
