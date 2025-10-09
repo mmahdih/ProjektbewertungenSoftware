@@ -1,6 +1,7 @@
 package de.assessify.app.assessifyapi.api.controller.learningfield;
 
 import de.assessify.app.assessifyapi.api.dtos.request.AddTrainingModuleDto;
+import de.assessify.app.assessifyapi.api.dtos.request.UpdateTrainingModuleDto;
 import de.assessify.app.assessifyapi.api.dtos.response.UserWithModulesDto;
 import de.assessify.app.assessifyapi.api.dtos.response.TrainingModuleSummaryDto;
 import de.assessify.app.assessifyapi.api.userrepository.TrainingModuleRepository;
@@ -16,17 +17,17 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api")
 public class LearningFieldController {
-    private final TrainingModuleRepository learningFieldRepository;
+    private final TrainingModuleRepository trainingModuleRepository;
     private final UserRepository userRepository;
 
     public LearningFieldController(TrainingModuleRepository learningFieldRepository, UserRepository userRepository) {
-        this.learningFieldRepository = learningFieldRepository;
+        this.trainingModuleRepository = learningFieldRepository;
         this.userRepository = userRepository;
     }
 
     @GetMapping("/show/all/training-modules")
     public ResponseEntity<List<TrainingModuleSummaryDto>> getAllTrainingModules() {
-        var modules = learningFieldRepository.findAll()
+        var modules = trainingModuleRepository.findAll()
                 .stream()
                 .map(field -> new TrainingModuleSummaryDto(
                         field.getId(),
@@ -48,7 +49,7 @@ public class LearningFieldController {
         entity.setDescription(dto.description());
         entity.setWeighting(dto.weighting());
 
-        TrainingModule saved = learningFieldRepository.save(entity);
+        TrainingModule saved = trainingModuleRepository.save(entity);
 
         TrainingModuleSummaryDto response = new TrainingModuleSummaryDto(
                 saved.getId(),
@@ -68,7 +69,7 @@ public class LearningFieldController {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("user not found"));
 
-        TrainingModule trainingModule = learningFieldRepository.findById(trainingModulesId)
+        TrainingModule trainingModule = trainingModuleRepository.findById(trainingModulesId)
                 .orElseThrow(() -> new RuntimeException("Training Module not found"));
 
         if (!user.getTrainingModules().contains(trainingModule)) {
@@ -93,6 +94,30 @@ public class LearningFieldController {
                 updatedUser.getEmail(),
                 modules
         );
+        return ResponseEntity.ok(response);
+    }
+
+    @PutMapping("/training-modules/{trainingModulesId}")
+    public ResponseEntity<TrainingModuleSummaryDto> updateTrainingModule(
+            @PathVariable UUID trainingModulesId,
+            @RequestBody UpdateTrainingModuleDto dto) {
+        
+        TrainingModule trainingModule = trainingModuleRepository.findById(trainingModulesId)
+                .orElseThrow(() -> new RuntimeException("Training Module not found"));
+
+        if (dto.description() != null) trainingModule.setDescription(dto.description());
+        if (dto.name() != null) trainingModule.setName(dto.name());
+        trainingModule.setWeighting(dto.weighting());
+        
+        TrainingModule updated = trainingModuleRepository.save(trainingModule);
+
+        TrainingModuleSummaryDto response = new TrainingModuleSummaryDto(
+                updated.getId(),
+                updated.getName(),
+                updated.getDescription(),
+                updated.getWeighting()
+        );
+
         return ResponseEntity.ok(response);
     }
 }
