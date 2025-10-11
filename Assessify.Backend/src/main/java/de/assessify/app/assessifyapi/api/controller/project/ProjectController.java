@@ -6,7 +6,6 @@ import de.assessify.app.assessifyapi.api.dtos.response.ProjectDto;
 import de.assessify.app.assessifyapi.api.dtos.response.ProjectWithTrainingModulesDto;
 import de.assessify.app.assessifyapi.api.dtos.response.TrainingModuleSummaryDto;
 import de.assessify.app.assessifyapi.api.service.EntityFinderService;
-import de.assessify.app.assessifyapi.api.repository.ReviewRepository;
 import de.assessify.app.assessifyapi.api.repository.TrainingModuleRepository;
 import de.assessify.app.assessifyapi.api.repository.ProjectRepository;
 import de.assessify.app.assessifyapi.api.entity.Project;
@@ -22,13 +21,11 @@ import java.util.UUID;
 public class ProjectController {
     private final ProjectRepository projectRepository;
     private final TrainingModuleRepository trainingModuleRepository;
-    private final ReviewRepository reviewRepository;
     private final EntityFinderService entityFinderService;
 
-    public ProjectController(ProjectRepository projectRepository, TrainingModuleRepository trainingModuleRepository, ReviewRepository reviewRepository, EntityFinderService entityFinderService) {
+    public ProjectController(ProjectRepository projectRepository, TrainingModuleRepository trainingModuleRepository, EntityFinderService entityFinderService) {
         this.projectRepository = projectRepository;
         this.trainingModuleRepository = trainingModuleRepository;
-        this.reviewRepository = reviewRepository;
         this.entityFinderService = entityFinderService;
     }
 
