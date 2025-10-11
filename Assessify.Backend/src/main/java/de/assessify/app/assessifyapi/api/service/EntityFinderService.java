@@ -4,6 +4,7 @@ import de.assessify.app.assessifyapi.api.entity.*;
 import de.assessify.app.assessifyapi.api.repository.*;
 import org.springframework.stereotype.Service;
 
+import javax.management.relation.InvalidRelationIdException;
 import java.util.UUID;
 
 @Service
@@ -38,49 +39,55 @@ public class EntityFinderService {
         this.roleRepository = roleRepository;
         this.schoolClassRepository = schoolClassRepository;
     }
-
     public User findUser(UUID userId) {
         return userRepository.findById(userId)
                 .orElseThrow(() -> new EntityNotFoundException("User with not found"));
     }
-
     public TrainingModule findTrainingModule(UUID trainingModuleId) {
         return trainingModuleRepository.findById(trainingModuleId)
                 .orElseThrow(() -> new EntityNotFoundException("Training Module not found"));
     }
-
     public Grade findGrade(UUID grade) {
         return gradeRepository.findById(grade)
                 .orElseThrow(() -> new EntityNotFoundException("Grade not found"));
     }
-
     public Project findProject(UUID projectId) {
         return projectRepository.findById(projectId)
                 .orElseThrow(() -> new EntityNotFoundException("Project not found"));
     }
-
     public Question findQuestion(UUID questionId) {
         return questionRepository.findById(questionId)
                 .orElseThrow(() -> new EntityNotFoundException("Question not found"));
     }
-
     public ReviewAnswer findReviewAnswer(UUID answerId) {
         return reviewAnswerRepository.findById(answerId)
                 .orElseThrow(() -> new EntityNotFoundException("Review Answer not found"));
     }
-
     public Review findReview(UUID reviewId) {
         return reviewRepository.findById(reviewId)
                 .orElseThrow(() -> new EntityNotFoundException("Review not found"));
     }
-
     public Role findRole(UUID roleId) {
         return roleRepository.findById(roleId)
                 .orElseThrow(() -> new EntityNotFoundException("Role not found"));
     }
-
     public SchoolClass findSchoolClass(UUID id) {
         return schoolClassRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("School Class not found"));
+    }
+    public Grade validateUserTrainingModuleAndGrade(UUID userId, UUID trainingModuleId, UUID gradeId) {
+        User user = findUser(userId);
+        TrainingModule trainingModule = findTrainingModule(trainingModuleId);
+        Grade grade = findGrade(gradeId);
+
+        if (!grade.getTrainingModules().equals(trainingModule)) {
+            throw new InvalidRelationException("Grade does not belong to this Training Module");
+        }
+
+        if (!user.getTrainingModules().contains(trainingModule)) {
+            throw new InvalidRelationException("User is not enrolled in this Training Module");
+        }
+
+        return grade;
     }
 }
