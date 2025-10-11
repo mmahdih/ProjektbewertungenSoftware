@@ -4,8 +4,9 @@ import de.assessify.app.assessifyapi.api.dtos.request.AddSchoolClassDto;
 import de.assessify.app.assessifyapi.api.dtos.request.UpdateSchoolClassDto;
 import de.assessify.app.assessifyapi.api.dtos.response.SchoolClassDto;
 import de.assessify.app.assessifyapi.api.dtos.response.UserWithSchoolClassDto;
-import de.assessify.app.assessifyapi.api.userrepository.SchoolClassRepository;
-import de.assessify.app.assessifyapi.api.userrepository.UserRepository;
+import de.assessify.app.assessifyapi.api.service.EntityFinderService;
+import de.assessify.app.assessifyapi.api.repository.SchoolClassRepository;
+import de.assessify.app.assessifyapi.api.repository.UserRepository;
 import de.assessify.app.assessifyapi.api.entity.SchoolClass;
 import de.assessify.app.assessifyapi.api.entity.User;
 import org.springframework.http.ResponseEntity;
@@ -19,13 +20,15 @@ import java.util.UUID;
 public class SchoolClassController {
     private final SchoolClassRepository schoolClassRepository;
     private final UserRepository userRepository;
+    private final EntityFinderService entityFinderService;
 
-    public SchoolClassController(SchoolClassRepository schoolClassRepository, UserRepository userRepository) {
+    public SchoolClassController(SchoolClassRepository schoolClassRepository, UserRepository userRepository, EntityFinderService entityFinderService) {
         this.schoolClassRepository = schoolClassRepository;
         this.userRepository = userRepository;
+        this.entityFinderService = entityFinderService;
     }
 
-    @GetMapping("/show/all/school-class")
+    @GetMapping("/school-class")
     public ResponseEntity<List<SchoolClassDto>> getAllSchoolClasses() {
         var modules = schoolClassRepository.findAll()
                 .stream()
@@ -38,7 +41,7 @@ public class SchoolClassController {
         return ResponseEntity.ok(modules);
     }
 
-    @PostMapping("/add/school-class")
+    @PostMapping("/school-class")
     public ResponseEntity<SchoolClassDto> addSchoolClass(@RequestBody AddSchoolClassDto dto) {
        SchoolClass entity = new SchoolClass();
        entity.setSchoolClassName(dto.name());
@@ -58,11 +61,8 @@ public class SchoolClassController {
             @PathVariable UUID userId,
             @PathVariable UUID schoolClassId){
 
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("user not found"));
-
-        SchoolClass schoolClass = schoolClassRepository.findById(schoolClassId)
-                .orElseThrow(() -> new RuntimeException("Training Module not found"));
+        User user = entityFinderService.findUser(userId);
+        SchoolClass schoolClass = entityFinderService.findSchoolClass(schoolClassId);
 
         if (!user.getSchoolClasses().contains(schoolClass)) {
             user.getSchoolClasses().add(schoolClass);
@@ -88,8 +88,7 @@ public class SchoolClassController {
             @PathVariable UUID schoolClassId,
             @RequestBody UpdateSchoolClassDto dto) {
 
-        SchoolClass schoolClass = schoolClassRepository.findById(schoolClassId)
-                .orElseThrow(() -> new RuntimeException("School Class not found"));
+        SchoolClass schoolClass = entityFinderService.findSchoolClass(schoolClassId);
 
         schoolClass.setSchoolClassName(dto.name());
 
@@ -107,8 +106,7 @@ public class SchoolClassController {
     public ResponseEntity<Void> deleteSchoolClass(
             @PathVariable UUID schoolClassId) {
 
-        SchoolClass schoolClass = schoolClassRepository.findById(schoolClassId)
-                .orElseThrow(() -> new RuntimeException("School Class not found"));
+        SchoolClass schoolClass = entityFinderService.findSchoolClass(schoolClassId);
 
         List<User> userWithRole = userRepository.findAll().stream()
                 .filter(p -> p.getSchoolClasses().contains(schoolClass))

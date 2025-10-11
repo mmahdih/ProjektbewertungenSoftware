@@ -1,4 +1,3 @@
 package de.assessify.app.assessifyapi.api.dtos.request;
 
-public record UpdateRatingDto(Float rating) {
-}
+public record UpdateRatingDto(Float rating) { }

@@ -4,7 +4,8 @@ import de.assessify.app.assessifyapi.api.dtos.request.AddQuestionDto;
 import de.assessify.app.assessifyapi.api.dtos.request.UpdateQuestionDto;
 import de.assessify.app.assessifyapi.api.dtos.response.QuestionDto;
 import de.assessify.app.assessifyapi.api.entity.Question;
-import de.assessify.app.assessifyapi.api.userrepository.QuestionRepository;
+import de.assessify.app.assessifyapi.api.service.EntityFinderService;
+import de.assessify.app.assessifyapi.api.repository.QuestionRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,12 +16,14 @@ import java.util.UUID;
 @RequestMapping("/api")
 public class QuestionController {
     private final QuestionRepository questionRepository;
+    private final EntityFinderService entityFinderService;
 
-    public QuestionController(QuestionRepository questionRepository) {
+    public QuestionController(QuestionRepository questionRepository, EntityFinderService entityFinderService) {
         this.questionRepository = questionRepository;
+        this.entityFinderService = entityFinderService;
     }
 
-    @GetMapping("/show/all/questions")
+    @GetMapping("/questions")
     public ResponseEntity<List<QuestionDto>> getAllQuestions() {
         var modules = questionRepository.findAll()
                 .stream()
@@ -33,7 +36,7 @@ public class QuestionController {
         return ResponseEntity.ok(modules);
     }
 
-    @PostMapping("/add/question")
+    @PostMapping("/question")
     public ResponseEntity<QuestionDto> createQuestion(
             @RequestBody AddQuestionDto dto) {
 
@@ -50,13 +53,12 @@ public class QuestionController {
         return ResponseEntity.ok(response);
     }
 
-    @PutMapping("/update/question/{questionId}")
+    @PutMapping("/question/{questionId}")
     public ResponseEntity<QuestionDto> updateQuestion(
             @PathVariable UUID questionId,
             @RequestBody UpdateQuestionDto dto) {
 
-        Question question = questionRepository.findById(questionId)
-                .orElseThrow(() -> new RuntimeException("Question not found"));
+        Question question = entityFinderService.findQuestion(questionId);
 
         question.setQuestionText(dto.questionText());
 
@@ -70,12 +72,11 @@ public class QuestionController {
         return ResponseEntity.ok(response);
     }
 
-    @DeleteMapping("/delete/question/{questionId}")
+    @DeleteMapping("/question/{questionId}")
     public ResponseEntity<Void> deleteQuestion(
             @PathVariable UUID questionId) {
 
-        Question question = questionRepository.findById(questionId)
-                .orElseThrow(() -> new RuntimeException("Question not found"));
+        Question question = entityFinderService.findQuestion(questionId);
 
         questionRepository.delete(question);
         return ResponseEntity.noContent().build();

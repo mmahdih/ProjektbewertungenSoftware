@@ -1,5 +1,3 @@
 package de.assessify.app.assessifyapi.api.dtos.request;
 
-import java.util.UUID;
-
-public record UpdateProjectDto (UUID id, String name, String description) {}
+public record UpdateProjectDto (String name, String description) {}

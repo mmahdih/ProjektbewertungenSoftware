@@ -3,10 +3,9 @@ package de.assessify.app.assessifyapi.api.controller.grade;
 import de.assessify.app.assessifyapi.api.dtos.request.AddGradeDto;
 import de.assessify.app.assessifyapi.api.dtos.request.UpdateGradeDto;
 import de.assessify.app.assessifyapi.api.dtos.response.GradeDto;
-import de.assessify.app.assessifyapi.api.dtos.response.LearningFieldWithGradesDto;
-import de.assessify.app.assessifyapi.api.userrepository.GradeRepository;
-import de.assessify.app.assessifyapi.api.userrepository.TrainingModuleRepository;
-import de.assessify.app.assessifyapi.api.userrepository.UserRepository;
+import de.assessify.app.assessifyapi.api.dtos.response.TrainingModuleWithGradesDto;
+import de.assessify.app.assessifyapi.api.service.EntityFinderService;
+import de.assessify.app.assessifyapi.api.repository.GradeRepository;
 import de.assessify.app.assessifyapi.api.entity.Grade;
 import de.assessify.app.assessifyapi.api.entity.TrainingModule;
 import de.assessify.app.assessifyapi.api.entity.User;
@@ -20,24 +19,19 @@ import java.util.UUID;
 @RequestMapping("/api")
 public class GradeController {
     private final GradeRepository gradeRepository;
+    private final EntityFinderService entityFinderService;
 
-    private final TrainingModuleRepository learningFieldRepository;
-
-    private final UserRepository userRepository;
-
-    public GradeController(GradeRepository gradeRepository, TrainingModuleRepository learningFieldRepository, UserRepository userRepository) {
+    public GradeController(GradeRepository gradeRepository, EntityFinderService entityFinderService) {
         this.gradeRepository = gradeRepository;
-        this.learningFieldRepository = learningFieldRepository;
-        this.userRepository = userRepository;
+        this.entityFinderService = entityFinderService;
     }
 
     @GetMapping("/user/{userId}/training-modules/{trainingModulesId}/grades")
-    public ResponseEntity<LearningFieldWithGradesDto> getGradesForLearningField(
+    public ResponseEntity<TrainingModuleWithGradesDto> getGradesForLearningField(
             @PathVariable UUID userId,
             @PathVariable UUID trainingModulesId) {
 
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("user not found"));
+        User user = entityFinderService.findUser(userId);
 
         var module = user.getTrainingModules()
                 .stream()
@@ -45,7 +39,7 @@ public class GradeController {
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("Training module not found or not assigned to user"));
 
-        var dto = new LearningFieldWithGradesDto(
+        var dto = new TrainingModuleWithGradesDto(
                 module.getId(),
                 module.getName(),
                 module.getDescription(),
@@ -63,16 +57,15 @@ public class GradeController {
         return ResponseEntity.ok(dto);
     }
 
-    @GetMapping("/user/{userId}/show/all/grades")
-    public ResponseEntity<List<LearningFieldWithGradesDto>> getGradesForTrainingModule(
+    @GetMapping("/user/{userId}/grades")
+    public ResponseEntity<List<TrainingModuleWithGradesDto>> getGradesForUser(
             @PathVariable UUID userId) {
 
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("user not found"));
+        User user = entityFinderService.findUser(userId);
 
         var modules = user.getTrainingModules()
                 .stream()
-                .map(field -> new LearningFieldWithGradesDto(
+                .map(field -> new TrainingModuleWithGradesDto(
                         field.getId(),
                         field.getName(),
                         field.getDescription(),
@@ -91,17 +84,14 @@ public class GradeController {
         return ResponseEntity.ok(modules);
     }
 
-    @PostMapping("/user/{userId}/training-modules/{trainingModulesId}/new/grade")
+    @PostMapping("/user/{userId}/training-modules/{trainingModulesId}/grade")
     public ResponseEntity<GradeDto> addGradeToTrainingModule(
             @PathVariable UUID userId,
             @PathVariable UUID trainingModulesId,
             @RequestBody AddGradeDto dto){
 
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("user not found"));
-
-        TrainingModule trainingModule = learningFieldRepository.findById(trainingModulesId)
-                .orElseThrow(() -> new RuntimeException("Training Module not found"));
+        User user = entityFinderService.findUser(userId);
+        TrainingModule trainingModule = entityFinderService.findTrainingModule(trainingModulesId);
 
         if (!user.getTrainingModules().contains(trainingModule)) {
             throw new RuntimeException("User is not enrolled in this Training Module");
@@ -125,25 +115,18 @@ public class GradeController {
         return ResponseEntity.ok(response);
     }
 
-    @PutMapping("/user/{userId}/training-modules/{trainingModulesId}/grade/{gradeId}/update")
+    @PutMapping("/user/{userId}/training-modules/{trainingModulesId}/grade/{gradeId}")
     public ResponseEntity<GradeDto> updateGrade(
             @PathVariable UUID userId,
             @PathVariable UUID trainingModulesId,
             @PathVariable UUID gradeId,
             @RequestBody UpdateGradeDto dto) {
 
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+        entityFinderService.findUser(userId);
+        entityFinderService.findTrainingModule(trainingModulesId);
+        Grade grade = entityFinderService.findGrade(gradeId);
 
-        TrainingModule trainingModule = learningFieldRepository.findById(trainingModulesId)
-                .orElseThrow(() -> new RuntimeException("Training Module not found"));
-
-        Grade grade = gradeRepository.findById(gradeId)
-                .orElseThrow(() -> new RuntimeException("Grade not found"));
-
-        if (!grade.getTrainingModules().equals(trainingModule)) {
-            throw new RuntimeException("Grade does not belong to this Training Module");
-        }
+        entityFinderService.validateUserTrainingModuleAndGrade(userId, trainingModulesId, gradeId);
 
         if (dto.value() != null) grade.setValue(dto.value());
         if (dto.weighting() != null) grade.setGradeWeighting(dto.weighting());
@@ -167,21 +150,13 @@ public class GradeController {
             @PathVariable UUID trainingModulesId,
             @PathVariable UUID gradeId) {
 
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+        entityFinderService.findUser(userId);
+        entityFinderService.findTrainingModule(trainingModulesId);
+        Grade grade = entityFinderService.findGrade(gradeId);
 
-        TrainingModule trainingModule = learningFieldRepository.findById(trainingModulesId)
-                .orElseThrow(() -> new RuntimeException("Training Module not found"));
-
-        Grade grade = gradeRepository.findById(gradeId)
-                .orElseThrow(() -> new RuntimeException("Grade not found"));
-
-        if (!grade.getTrainingModules().equals(trainingModule)) {
-            throw new RuntimeException("Grade does not belong to this Training Module");
-        }
+        entityFinderService.validateUserTrainingModuleAndGrade(userId, trainingModulesId, gradeId);
 
         gradeRepository.delete(grade);
         return ResponseEntity.noContent().build();
     }
-
 }

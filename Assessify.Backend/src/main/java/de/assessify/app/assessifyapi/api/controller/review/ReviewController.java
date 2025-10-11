@@ -5,7 +5,8 @@ import de.assessify.app.assessifyapi.api.dtos.request.UpdateRatingDto;
 import de.assessify.app.assessifyapi.api.dtos.response.ReviewAnswerDto;
 import de.assessify.app.assessifyapi.api.dtos.response.ReviewDto;
 import de.assessify.app.assessifyapi.api.entity.*;
-import de.assessify.app.assessifyapi.api.userrepository.*;
+import de.assessify.app.assessifyapi.api.service.EntityFinderService;
+import de.assessify.app.assessifyapi.api.repository.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,25 +17,20 @@ import java.util.UUID;
 @RequestMapping("/api")
 public class ReviewController {
     private final ReviewRepository reviewRepository;
-    private final UserRepository userRepository;
-    private final ProjectRepository projectRepository;
-    private final QuestionRepository questionRepository;
     private final ReviewAnswerRepository reviewAnswerRepository;
+    private final EntityFinderService entityFinderService;
 
-    public ReviewController(ReviewRepository reviewRepository, UserRepository userRepository, ProjectRepository projectRepository, QuestionRepository questionRepository, ReviewAnswerRepository reviewAnswerRepository) {
+    public ReviewController(ReviewRepository reviewRepository, ReviewAnswerRepository reviewAnswerRepository, EntityFinderService entityFinderService) {
         this.reviewRepository = reviewRepository;
-        this.userRepository = userRepository;
-        this.projectRepository = projectRepository;
-        this.questionRepository = questionRepository;
         this.reviewAnswerRepository = reviewAnswerRepository;
+        this.entityFinderService = entityFinderService;
     }
 
-    @GetMapping("/user/{userId}/show/all/reviews")
+    @GetMapping("/user/{userId}/reviews")
     public ResponseEntity<List<ReviewDto>> getAllReviews(
             @PathVariable UUID userId) {
 
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("user not found"));
+        User user = entityFinderService.findUser(userId);
 
         List<ReviewDto> reviews = user.getReviews().stream()
                 .map(field -> new ReviewDto(
@@ -56,27 +52,22 @@ public class ReviewController {
         return ResponseEntity.ok(reviews);
     }
 
-    @PostMapping("/user/{userId}/project/{projectId}/add/review")
+    @PostMapping("/user/{userId}/project/{projectId}/review")
     public ResponseEntity<ReviewDto> createReview(
             @PathVariable UUID userId,
             @PathVariable UUID projectId,
             @RequestBody List<AddReviewAnswerDto> answerDto) {
 
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("User not found"));
-
-        Project project = projectRepository.findById(projectId)
-                .orElseThrow(() -> new RuntimeException("Project not found"));
+        User user = entityFinderService.findUser(userId);
+        Project project = entityFinderService.findProject(projectId);
 
         Review review = new Review();
         review.setUser(user);
         review.setProject(project);
 
         List<ReviewAnswer> answers = answerDto.stream().map(dto -> {
-            Question q = questionRepository.findById(dto.questionId())
-                    .orElseThrow(() -> new RuntimeException("Question not found"));
-            User reviewed = userRepository.findById(dto.reviewedUserId())
-                    .orElseThrow(() -> new RuntimeException("Reviewed user not found"));
+            Question q = entityFinderService.findQuestion(dto.id());
+            User reviewed = entityFinderService.findUser(dto.id());
 
             ReviewAnswer a = new ReviewAnswer();
             a.setQuestion(q);
@@ -108,13 +99,12 @@ public class ReviewController {
         return ResponseEntity.ok(response);
     }
 
-    @PutMapping("/review/{reviewAnswerId}/update")
+    @PutMapping("/review/{reviewAnswerId}")
     public ResponseEntity<ReviewAnswerDto> updateRating(
             @PathVariable UUID reviewAnswerId,
             @RequestBody UpdateRatingDto dto) {
 
-        ReviewAnswer reviewAnswer = reviewAnswerRepository.findById(reviewAnswerId)
-                .orElseThrow(() -> new RuntimeException("ReviewAnswer not found"));
+        ReviewAnswer reviewAnswer = entityFinderService.findReviewAnswer(reviewAnswerId);
 
         reviewAnswer.setRating(dto.rating());
 
@@ -132,23 +122,21 @@ public class ReviewController {
         return ResponseEntity.ok(response);
     }
 
-    @DeleteMapping("/review/answer/{reviewAnswerId}/delete")
+    @DeleteMapping("/review/answer/{reviewAnswerId}")
     public ResponseEntity<Void> deleteReviewAnswer(
             @PathVariable UUID reviewAnswerId) {
 
-        ReviewAnswer reviewAnswer = reviewAnswerRepository.findById(reviewAnswerId)
-                .orElseThrow(() -> new RuntimeException("Review Answer not found"));
+        ReviewAnswer reviewAnswer = entityFinderService.findReviewAnswer(reviewAnswerId);
 
         reviewAnswerRepository.delete(reviewAnswer);
         return ResponseEntity.noContent().build();
     }
 
-    @DeleteMapping("/review/{reviewId}/delete")
+    @DeleteMapping("/review/{reviewId}")
     public ResponseEntity<Void> deleteReview(
             @PathVariable UUID reviewId) {
 
-        Review review = reviewRepository.findById(reviewId)
-                .orElseThrow(() -> new RuntimeException("Review not found"));
+        Review review = entityFinderService.findReview(reviewId);
 
         reviewRepository.delete(review);
         return ResponseEntity.noContent().build();
