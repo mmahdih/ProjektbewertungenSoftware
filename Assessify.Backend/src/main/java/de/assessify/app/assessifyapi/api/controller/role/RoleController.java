@@ -1,6 +1,7 @@
 package de.assessify.app.assessifyapi.api.controller.role;
 
 import de.assessify.app.assessifyapi.api.dtos.request.AddRoleDto;
+import de.assessify.app.assessifyapi.api.dtos.request.UpdateRoleDto;
 import de.assessify.app.assessifyapi.api.dtos.response.RoleDto;
 import de.assessify.app.assessifyapi.api.dtos.response.UserWithRolesDto;
 import de.assessify.app.assessifyapi.api.userrepository.RoleRepository;
@@ -81,5 +82,44 @@ public class RoleController {
         );
 
         return ResponseEntity.ok(response);
+    }
+    @PutMapping("/role/{roleId}")
+    public ResponseEntity<RoleDto> updateRole(
+            @PathVariable UUID roleId,
+            @RequestBody UpdateRoleDto dto) {
+
+        Role role = roleRepository.findById(roleId)
+                .orElseThrow(() -> new RuntimeException("Role not found"));
+
+        role.setRoleName(dto.name());
+
+        Role updated = roleRepository.save(role);
+
+        RoleDto response = new RoleDto(
+                updated.getId(),
+                updated.getRoleName()
+        );
+
+        return ResponseEntity.ok(response);
+    }
+
+    @DeleteMapping("/role/{roleId}")
+    public ResponseEntity<Void> deleteRole(
+            @PathVariable UUID roleId) {
+
+        Role role = roleRepository.findById(roleId)
+                .orElseThrow(() -> new RuntimeException("Role not found"));
+
+        List<User> userWithRole = userRepository.findAll().stream()
+                .filter(p -> p.getRoles().contains(role))
+                .toList();
+
+        for (User user : userWithRole) {
+            user.getRoles().remove(role);
+            userRepository.save(user);
+        }
+
+        roleRepository.delete(role);
+        return ResponseEntity.noContent().build();
     }
 }
