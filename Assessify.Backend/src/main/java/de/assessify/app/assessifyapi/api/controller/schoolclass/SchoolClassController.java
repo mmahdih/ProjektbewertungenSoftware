@@ -102,4 +102,24 @@ public class SchoolClassController {
 
         return ResponseEntity.ok(response);
     }
+
+    @DeleteMapping("/school-class/{schoolClassId}")
+    public ResponseEntity<Void> deleteSchoolClass(
+            @PathVariable UUID schoolClassId) {
+
+        SchoolClass schoolClass = schoolClassRepository.findById(schoolClassId)
+                .orElseThrow(() -> new RuntimeException("School Class not found"));
+
+        List<User> userWithRole = userRepository.findAll().stream()
+                .filter(p -> p.getSchoolClasses().contains(schoolClass))
+                .toList();
+
+        for (User user : userWithRole) {
+            user.getSchoolClasses().remove(schoolClass);
+            userRepository.save(user);
+        }
+
+        schoolClassRepository.delete(schoolClass);
+        return ResponseEntity.noContent().build();
+    }
 }
