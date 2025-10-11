@@ -102,4 +102,24 @@ public class RoleController {
 
         return ResponseEntity.ok(response);
     }
+
+    @DeleteMapping("/role/{roleId}")
+    public ResponseEntity<Void> deleteRole(
+            @PathVariable UUID roleId) {
+
+        Role role = roleRepository.findById(roleId)
+                .orElseThrow(() -> new RuntimeException("Role not found"));
+
+        List<User> userWithRole = userRepository.findAll().stream()
+                .filter(p -> p.getRoles().contains(role))
+                .toList();
+
+        for (User user : userWithRole) {
+            user.getRoles().remove(role);
+            userRepository.save(user);
+        }
+
+        roleRepository.delete(role);
+        return ResponseEntity.noContent().build();
+    }
 }
