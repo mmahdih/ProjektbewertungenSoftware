@@ -4,7 +4,7 @@ import de.assessify.app.assessifyapi.api.dtos.request.AddUserDto;
 import de.assessify.app.assessifyapi.api.dtos.response.UserDto;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import de.assessify.app.assessifyapi.api.userrepository.UserRepository;
+import de.assessify.app.assessifyapi.api.repository.UserRepository;
 import de.assessify.app.assessifyapi.api.entity.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +24,7 @@ public class UserController {
         this.passwordEncoder = passwordEncoder;
     }
 
-    @GetMapping("/show/all/users")
+    @GetMapping("/users")
     public ResponseEntity<List<UserDto>> getAllUsers() {
         var modules = userRepository.findAll()
                 .stream()
@@ -40,7 +40,7 @@ public class UserController {
         return ResponseEntity.ok(modules);
     }
 
-    @PostMapping("/add/user")
+    @PostMapping("/user")
     public ResponseEntity<UserDto> createUser(@RequestBody AddUserDto dto) {
         User user = new User();
         user.setFirstName(dto.firstName());

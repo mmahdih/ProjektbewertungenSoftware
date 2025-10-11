@@ -5,10 +5,10 @@ import de.assessify.app.assessifyapi.api.dtos.request.UpdateProjectDto;
 import de.assessify.app.assessifyapi.api.dtos.response.ProjectDto;
 import de.assessify.app.assessifyapi.api.dtos.response.ProjectWithTrainingModulesDto;
 import de.assessify.app.assessifyapi.api.dtos.response.TrainingModuleSummaryDto;
-import de.assessify.app.assessifyapi.api.entity.Review;
-import de.assessify.app.assessifyapi.api.userrepository.ReviewRepository;
-import de.assessify.app.assessifyapi.api.userrepository.TrainingModuleRepository;
-import de.assessify.app.assessifyapi.api.userrepository.ProjectRepository;
+import de.assessify.app.assessifyapi.api.service.EntityFinderService;
+import de.assessify.app.assessifyapi.api.repository.ReviewRepository;
+import de.assessify.app.assessifyapi.api.repository.TrainingModuleRepository;
+import de.assessify.app.assessifyapi.api.repository.ProjectRepository;
 import de.assessify.app.assessifyapi.api.entity.Project;
 import de.assessify.app.assessifyapi.api.entity.TrainingModule;
 import org.springframework.http.ResponseEntity;
@@ -23,14 +23,16 @@ public class ProjectController {
     private final ProjectRepository projectRepository;
     private final TrainingModuleRepository trainingModuleRepository;
     private final ReviewRepository reviewRepository;
+    private final EntityFinderService entityFinderService;
 
-    public ProjectController(ProjectRepository projectRepository, TrainingModuleRepository trainingModuleRepository, ReviewRepository reviewRepository) {
+    public ProjectController(ProjectRepository projectRepository, TrainingModuleRepository trainingModuleRepository, ReviewRepository reviewRepository, EntityFinderService entityFinderService) {
         this.projectRepository = projectRepository;
         this.trainingModuleRepository = trainingModuleRepository;
         this.reviewRepository = reviewRepository;
+        this.entityFinderService = entityFinderService;
     }
 
-    @GetMapping("/show/all/projects")
+    @GetMapping("/projects")
     public ResponseEntity<List<ProjectDto>> getAllProjects() {
         var modules = projectRepository.findAll()
                 .stream()
@@ -44,7 +46,7 @@ public class ProjectController {
         return ResponseEntity.ok(modules);
     }
 
-    @PostMapping("/add/project")
+    @PostMapping("/project")
     public ResponseEntity<ProjectDto> addProject(@RequestBody AddProjectDto dto) {
 
         Project entity = new Project();
@@ -67,11 +69,8 @@ public class ProjectController {
             @PathVariable UUID projectId,
             @PathVariable UUID trainingModulesId){
 
-        TrainingModule trainingModule = trainingModuleRepository.findById(trainingModulesId)
-                .orElseThrow(() -> new RuntimeException("user not found"));
-
-        Project project = projectRepository.findById(projectId)
-                .orElseThrow(() -> new RuntimeException("Training Module not found"));
+        TrainingModule trainingModule = entityFinderService.findTrainingModule(trainingModulesId);
+        Project project = entityFinderService.findProject(projectId);
 
         if (!trainingModule.getProjects().contains(project)) {
             trainingModule.getProjects().add(project);
@@ -96,13 +95,13 @@ public class ProjectController {
 
         return ResponseEntity.ok(response);
     }
+
     @PutMapping("/project/{projectId}")
     public ResponseEntity<ProjectDto> updateProject(
             @PathVariable UUID projectId,
             @RequestBody UpdateProjectDto dto) {
 
-        Project project = projectRepository.findById(projectId)
-                .orElseThrow(() -> new RuntimeException("Project not found"));
+        Project project = entityFinderService.findProject(projectId);
 
         if (dto.name() != null) project.setProjectName(dto.name());
         if (dto.description() != null) project.setProjectDescription(dto.description());
@@ -117,12 +116,12 @@ public class ProjectController {
 
         return ResponseEntity.ok(response);
     }
+
     @DeleteMapping("/project/{projectId}")
     public ResponseEntity<Void> deleteProject(
             @PathVariable UUID projectId) {
 
-        Project project = projectRepository.findById(projectId)
-                .orElseThrow(() -> new RuntimeException("Project not found"));
+        Project project = entityFinderService.findProject(projectId);
 
         List<TrainingModule> trainingModulesWithProjects = trainingModuleRepository.findAll().stream()
                 .filter(p -> p.getProjects().contains(project))

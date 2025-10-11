@@ -4,8 +4,9 @@ import de.assessify.app.assessifyapi.api.dtos.request.AddRoleDto;
 import de.assessify.app.assessifyapi.api.dtos.request.UpdateRoleDto;
 import de.assessify.app.assessifyapi.api.dtos.response.RoleDto;
 import de.assessify.app.assessifyapi.api.dtos.response.UserWithRolesDto;
-import de.assessify.app.assessifyapi.api.userrepository.RoleRepository;
-import de.assessify.app.assessifyapi.api.userrepository.UserRepository;
+import de.assessify.app.assessifyapi.api.service.EntityFinderService;
+import de.assessify.app.assessifyapi.api.repository.RoleRepository;
+import de.assessify.app.assessifyapi.api.repository.UserRepository;
 import de.assessify.app.assessifyapi.api.entity.Role;
 import de.assessify.app.assessifyapi.api.entity.User;
 import org.springframework.http.ResponseEntity;
@@ -19,13 +20,15 @@ import java.util.UUID;
 public class RoleController {
     private final RoleRepository roleRepository;
     private final UserRepository userRepository;
+    private final EntityFinderService entityFinderService;
 
-    public RoleController(RoleRepository roleRepository, UserRepository userRepository) {
+    public RoleController(RoleRepository roleRepository, UserRepository userRepository, EntityFinderService entityFinderService) {
         this.roleRepository = roleRepository;
         this.userRepository = userRepository;
+        this.entityFinderService = entityFinderService;
     }
 
-    @GetMapping("/show/all/roles")
+    @GetMapping("/roles")
     public ResponseEntity<List<RoleDto>> getAllRoles() {
         var modules = roleRepository.findAll()
                 .stream()
@@ -38,7 +41,7 @@ public class RoleController {
         return ResponseEntity.ok(modules);
     }
 
-    @PostMapping("/add/role")
+    @PostMapping("/role")
     public ResponseEntity<RoleDto> addRole(@RequestBody AddRoleDto dto) {
 
         Role entity = new Role();
@@ -59,11 +62,8 @@ public class RoleController {
             @PathVariable UUID userId,
             @PathVariable UUID roleId){
 
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("user not found"));
-
-        Role role = roleRepository.findById(roleId)
-                .orElseThrow(() -> new RuntimeException("Training Module not found"));
+        User user = entityFinderService.findUser(userId);
+        Role role = entityFinderService.findRole(roleId);
 
         if (!user.getRoles().contains(role)) {
             user.getRoles().add(role);
@@ -83,13 +83,13 @@ public class RoleController {
 
         return ResponseEntity.ok(response);
     }
+
     @PutMapping("/role/{roleId}")
     public ResponseEntity<RoleDto> updateRole(
             @PathVariable UUID roleId,
             @RequestBody UpdateRoleDto dto) {
 
-        Role role = roleRepository.findById(roleId)
-                .orElseThrow(() -> new RuntimeException("Role not found"));
+        Role role = entityFinderService.findRole(roleId);
 
         role.setRoleName(dto.name());
 
@@ -107,8 +107,7 @@ public class RoleController {
     public ResponseEntity<Void> deleteRole(
             @PathVariable UUID roleId) {
 
-        Role role = roleRepository.findById(roleId)
-                .orElseThrow(() -> new RuntimeException("Role not found"));
+        Role role = entityFinderService.findRole(roleId);
 
         List<User> userWithRole = userRepository.findAll().stream()
                 .filter(p -> p.getRoles().contains(role))
