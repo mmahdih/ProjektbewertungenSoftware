@@ -1,5 +1,23 @@
-# Projektbewertungen-Software
+# Assessify
 
+# 🧾 Project Description
+Project Evaluation and Management System
+
+This system provides a digital platform for managing and evaluating student performance.
+Teachers can view, edit, and calculate student grades, while students can access their own grades and evaluate other students’ projects.
+
+The goal of this project is to simplify the grading process, enhance transparency, and encourage peer evaluation in academic environments.
+It combines administrative efficiency for teachers with interactive functionality for students.
+
+## 📚 Table of Contents
+- [About the Project](#about-the-project)
+- [API](#api)
+
+# 🧾 About the Project
+
+
+# API
+For detailed information about API endpoints, request/response format, see [API Documentation](API.md).
 
 ## Frameworks:
 
