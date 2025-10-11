@@ -1,6 +1,7 @@
 package de.assessify.app.assessifyapi.api.controller.role;
 
 import de.assessify.app.assessifyapi.api.dtos.request.AddRoleDto;
+import de.assessify.app.assessifyapi.api.dtos.request.UpdateRoleDto;
 import de.assessify.app.assessifyapi.api.dtos.response.RoleDto;
 import de.assessify.app.assessifyapi.api.dtos.response.UserWithRolesDto;
 import de.assessify.app.assessifyapi.api.userrepository.RoleRepository;
@@ -78,6 +79,25 @@ public class RoleController {
                 updatedUser.getRoles().stream()
                         .map(r -> new RoleDto(r.getId(), r.getRoleName()))
                         .toList()
+        );
+
+        return ResponseEntity.ok(response);
+    }
+    @PutMapping("/role/{roleId}")
+    public ResponseEntity<RoleDto> updateRole(
+            @PathVariable UUID roleId,
+            @RequestBody UpdateRoleDto dto) {
+
+        Role role = roleRepository.findById(roleId)
+                .orElseThrow(() -> new RuntimeException("Role not found"));
+
+        role.setRoleName(dto.name());
+
+        Role updated = roleRepository.save(role);
+
+        RoleDto response = new RoleDto(
+                updated.getId(),
+                updated.getRoleName()
         );
 
         return ResponseEntity.ok(response);
