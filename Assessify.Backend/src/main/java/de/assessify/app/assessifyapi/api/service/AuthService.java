@@ -1,6 +1,6 @@
 package de.assessify.app.assessifyapi.api.service;
 
-import de.assessify.app.assessifyapi.api.userrepository.UserRepository;
+import de.assessify.app.assessifyapi.api.repository.UserRepository;
 import de.assessify.app.assessifyapi.api.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

@@ -1,4 +1,4 @@
-package de.assessify.app.assessifyapi.api.userrepository;
+package de.assessify.app.assessifyapi.api.repository;
 
 import de.assessify.app.assessifyapi.api.entity.TrainingModule;
 import org.springframework.data.jpa.repository.JpaRepository;
