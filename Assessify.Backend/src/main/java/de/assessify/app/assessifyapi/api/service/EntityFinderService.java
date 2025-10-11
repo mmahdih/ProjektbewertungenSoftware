@@ -4,7 +4,6 @@ import de.assessify.app.assessifyapi.api.entity.*;
 import de.assessify.app.assessifyapi.api.repository.*;
 import org.springframework.stereotype.Service;
 
-import javax.management.relation.InvalidRelationIdException;
 import java.util.UUID;
 
 @Service
@@ -41,7 +40,7 @@ public class EntityFinderService {
     }
     public User findUser(UUID userId) {
         return userRepository.findById(userId)
-                .orElseThrow(() -> new EntityNotFoundException("User with not found"));
+                .orElseThrow(() -> new EntityNotFoundException("User not found"));
     }
     public TrainingModule findTrainingModule(UUID trainingModuleId) {
         return trainingModuleRepository.findById(trainingModuleId)

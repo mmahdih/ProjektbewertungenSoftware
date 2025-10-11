@@ -1,3 +1,5 @@
 package de.assessify.app.assessifyapi.api.dtos.request;
 
-public record AddReviewAnswerDto (float rating){}
+import java.util.UUID;
+
+public record AddReviewAnswerDto (UUID id, float rating){}

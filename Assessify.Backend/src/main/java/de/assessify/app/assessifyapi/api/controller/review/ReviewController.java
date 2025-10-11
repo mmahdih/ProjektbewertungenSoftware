@@ -66,8 +66,8 @@ public class ReviewController {
         review.setProject(project);
 
         List<ReviewAnswer> answers = answerDto.stream().map(dto -> {
-            Question q = entityFinderService.findQuestion(dto.questionId());
-            User reviewed = entityFinderService.findUser(dto.reviewedUserId());
+            Question q = entityFinderService.findQuestion(dto.id());
+            User reviewed = entityFinderService.findUser(dto.id());
 
             ReviewAnswer a = new ReviewAnswer();
             a.setQuestion(q);
