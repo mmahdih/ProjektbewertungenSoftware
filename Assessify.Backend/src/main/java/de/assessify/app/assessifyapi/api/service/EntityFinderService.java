@@ -74,7 +74,7 @@ public class EntityFinderService {
         return schoolClassRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("School Class not found"));
     }
-    public Grade validateUserTrainingModuleAndGrade(UUID userId, UUID trainingModuleId, UUID gradeId) {
+    public void validateUserTrainingModuleAndGrade(UUID userId, UUID trainingModuleId, UUID gradeId) {
         User user = findUser(userId);
         TrainingModule trainingModule = findTrainingModule(trainingModuleId);
         Grade grade = findGrade(gradeId);
@@ -86,7 +86,5 @@ public class EntityFinderService {
         if (!user.getTrainingModules().contains(trainingModule)) {
             throw new InvalidRelationException("User is not enrolled in this Training Module");
         }
-
-        return grade;
     }
 }
