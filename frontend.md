@@ -15,3 +15,23 @@
 | 11  | Notenvergabe für Lehrer                                |
 | 12  | Export nach Excel oder PDF                             |
 | 13  | Passwort vergessen (E-Mail)                            |
+
+
+
+Resourses
+
+## icon search
+<https://fonts.google.com/icons>
+
+import MatIconModule
+`import {MatIconModule} from '@angular/material/icon';`
+
+use it: 
+`<mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="school"></mat-icon>`
+
+more info:
+<https://material.angular.dev/components/>
+
+
+## stylings
+more info: <https://tailwindcss.com/docs/functions-and-directives>
