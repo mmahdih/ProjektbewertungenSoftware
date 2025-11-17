@@ -6,16 +6,17 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {FormsModule} from '@angular/forms';
-import { Sidebar } from "../sidebar/sidebar";
-import { DashboardNavbar } from "../dashboard-navbar/dashboard-navbar";
+import { Sidebar } from "../../../Shared/Components/sidebar/sidebar";
+import { DashboardNavbar } from "../../../Shared/Components/dashboard-navbar/dashboard-navbar";
 import { RouterOutlet } from "@angular/router";
 
 
 @Component({
-  selector: 'app-dashboard',
-  imports: [MatIconModule, MatToolbarModule, MatButtonModule, MatMenuModule, MatInputModule, Sidebar, DashboardNavbar, RouterOutlet],
-  templateUrl: './dashboard.html',
-  styleUrl: './dashboard.css'
+  selector: 'app-admin-dashboard',
+  standalone: true,
+  imports: [RouterOutlet, MatIconModule, MatToolbarModule, MatButtonModule, MatMenuModule, MatInputModule, Sidebar, DashboardNavbar],
+  templateUrl: './admin-dashboard.html',
+  styleUrl: './admin-dashboard.css'
 })
-export class Dashboard {
+export class AdminDashboard {
 }
