@@ -5,7 +5,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { provideHttpClient } from '@angular/common/http';
 import { StudentDashboard } from './student-dashboard/student-dashboard';
 import { MyProfile } from './my-profile/my-profile';
-import { MyScores } from './my-scores/my-scores';
+import { MyResults } from './my-results/my-results';
+import { MyClasses } from './my-classes/my-classes';
 
 
 export const StudentRoutes: Routes = [
@@ -18,7 +19,11 @@ export const StudentRoutes: Routes = [
     component: MyProfile
   },
   {
-    path: 'my-scores',
-    component: MyScores
+    path: 'my-results',
+    component: MyResults
+  },
+  {
+    path: 'my-classes',
+    component: MyClasses
   }
 ];
