@@ -1,10 +1,5 @@
-import { Component, input } from '@angular/core';
-import {User} from './user'
-import { Login } from './Features/Auth/login/login';
-import { ReactiveFormsModule } from '@angular/forms'; // Make sure this is imported
-import { adminDashboard } from './Features/Admin/admin-dashboard/AdminDashboard';
-import { RouterOutlet } from '@angular/router';
-import { Navbar } from "./navbar/navbar";
+import { Component } from '@angular/core';
+import { RouterModule, RouterOutlet } from '@angular/router';
 
 
 @Component({
@@ -12,17 +7,8 @@ import { Navbar } from "./navbar/navbar";
   standalone: true,
   templateUrl: "./app.html",
   styleUrl: './app.css',
-  // template: `
-  //   <!-- <app-login/> -->
-  //    <app-navbar></app-navbar>
-  //   <router-outlet></router-outlet>
-  // `,
-  // styles: [
-  //   `
-  //   `,
-  // ],
-  imports: [RouterOutlet, Navbar],
+  imports: [RouterOutlet, RouterModule],
 })
 export class App {
-
+  title = 'Friedrich Ebert Schule'
 }
