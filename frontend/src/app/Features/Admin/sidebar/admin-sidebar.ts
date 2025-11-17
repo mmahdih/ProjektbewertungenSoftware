@@ -4,11 +4,11 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatButtonModule} from '@angular/material/button';
 
 @Component({
-  selector: 'app-sidebar',
+  selector: 'app-admin-sidebar',
   imports: [MatIconModule, MatDividerModule, MatButtonModule ],
-  templateUrl: './sidebar.html',
-  styleUrl: './sidebar.css'
+  templateUrl: './admin-sidebar.html',
+  styleUrl: './admin-sidebar.css'
 })
-export class Sidebar {
+export class AdminSidebar {
 
 }

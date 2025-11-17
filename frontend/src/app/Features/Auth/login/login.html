@@ -1,42 +1,12 @@
-<div class="flex-col min-h-screen bg-gradient-to-br from-gray-900 to-gray-800">
-  <!-- Header/Navigation -->
-  <nav class="bg-gray-900 text-white p-4 flex items-center justify-between shadow-lg">
-    <div class="flex items-center space-x-2">
-      <div class="flex-none w-10 h-10 bg-indigo-600 rounded-lg flex items-center justify-center hover:bg-indigo-700 transition-colors cursor-pointer">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5" />
-        </svg>
-      </div>
-      <span class="text-xl font-bold">Assessify</span>
-    </div>
-    
-    <div class="nav-items hidden md:flex items-center space-x-1">
-      <ul class="flex space-x-1">
-        <li class="p-2 hover:bg-gray-800 rounded-lg cursor-pointer transition-colors">School</li>
-        <li class="p-2 hover:bg-gray-800 rounded-lg cursor-pointer transition-colors">Departments</li>
-        <li class="p-2 hover:bg-gray-800 rounded-lg cursor-pointer transition-colors">Info Center</li>
-        <li class="p-2 hover:bg-gray-800 rounded-lg cursor-pointer transition-colors">Help</li>
-      </ul>
-    </div>
-    
-    <div class="flex items-center space-x-4">
-      <button class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 rounded-lg transition-colors font-medium" (click)="forgotPassword()">
-        Support
-      </button>
-      <div class="md:hidden">
-        <button class="p-2 hover:bg-gray-800 rounded-lg transition-colors">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-        </button>
-      </div>
-    </div>
-  </nav>
+<section class="flex flex-col bg-gray-900 h-screen w-screen">
+
+  <!-- navbar -->
+  <app-navbar></app-navbar>
 
   <!-- Main Content -->
-  <div class="flex-1 flex flex-col md:flex-row p-4 md:p-8 gap-6 md:gap-8 bg-gradient-to-br from-gray-900 to-gray-800">
+  <div class="flex-1 flex flex-col md:flex-row p-4 md:p-8 gap-6 md:gap-8 bg-linear-to-br from-gray-900 to-gray-800">
     <!-- Login Card -->
-    <div class="flex-1 max-w-md mx-auto">
+    <div class="flex-1 max-w-lg mx-auto">
       <div class="bg-white/10 backdrop-blur-lg rounded-2xl shadow-xl p-8 border border-white/20">
         <div class="text-center mb-8">
           <h1 class="text-3xl font-bold text-white mb-2">Welcome Back</h1>
@@ -47,10 +17,8 @@
           <div>
             <label for="username" class="block text-sm font-medium text-gray-200 mb-2">Username</label>
             <div class="relative">
-              <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
-                  <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
-                </svg>
+              <div class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-200 pointer-events-none">
+                <mat-icon>person</mat-icon>
               </div>
               <input 
                 formControlName="username"
@@ -64,10 +32,8 @@
           <div>
             <label for="password" class="block text-sm font-medium text-gray-200 mb-2">Password</label>
             <div class="relative">
-              <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
-                  <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
-                </svg>
+              <div class="absolute inset-y-0 left-0 pl-3 flex text-gray-200 items-center pointer-events-none">
+                <mat-icon>lock</mat-icon>
               </div>
               <input 
                 formControlName="password"
@@ -84,13 +50,13 @@
               <label for="remember-me" class="ml-2 block text-sm text-gray-300">Remember me</label>
             </div>
             <div class="text-sm">
-              <a href="#" class="font-medium text-indigo-400 hover:text-indigo-300">Forgot password?</a>
+              <button><span class="font-medium text-indigo-400 hover:text-indigo-300 cursor-pointer">Forgot password?</span></button>
             </div>
           </div>
           
           <button 
             type="submit" 
-            class="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-200 transform hover:scale-[1.02] shadow-lg">
+            class="w-full bg-linear-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-200 transform hover:scale-[1.02] shadow-lg">
             Sign In
           </button>
         </form>
@@ -105,7 +71,7 @@
 
     <!-- Illustration -->
     <div class="flex-1 hidden md:flex items-center justify-center">
-      <div class="bg-gradient-to-br from-indigo-500/20 to-purple-500/20 rounded-2xl shadow-xl p-8 w-full h-full flex flex-col items-center justify-center border border-white/10">
+      <div class="bg-linear-to-br from-indigo-500/20 to-purple-500/20 rounded-2xl shadow-xl p-8 w-full h-full flex flex-col items-center justify-center border border-white/10">
         <div class="mb-6">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-24 w-24 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
@@ -118,4 +84,5 @@
       </div>
     </div>
   </div>
-</div>
+  <div><router-outlet></router-outlet></div>
+</section>

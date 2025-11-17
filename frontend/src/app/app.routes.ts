@@ -1,6 +1,4 @@
 import { Routes } from '@angular/router';
-import { Login } from './Features/Auth/login/login';
-import { Title } from '@angular/platform-browser';
 
 export const routes: Routes = [
 
@@ -13,12 +11,12 @@ export const routes: Routes = [
     .then(m => m.AuthRoutes), title: 'Auth'  },
 
   { path: 'student', loadChildren: () => 
-    import('./Features/Auth/auth-routing.module')
-    .then(m => m.AuthRoutes), title: 'Auth'  },
+    import('./Features/Student/student-routing.module')
+    .then(m => m.StudentRoutes), title: 'Student'  },
     
   { path: 'teacher', loadChildren: () => 
-    import('./Features/Auth/auth-routing.module')
-    .then(m => m.AuthRoutes), title: 'Auth'  },
+    import('./Features/Teacher/teacher-routing.module')
+    .then(m => m.TeacherRoutes), title: 'Teacher'  },
     
   { path: '', redirectTo: 'admin/dashboard', pathMatch: 'full' } // default
 ];
