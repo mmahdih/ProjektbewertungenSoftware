@@ -3,7 +3,7 @@ import { DashboardNavbar } from '../../../Shared/Components/dashboard-navbar/das
 import { MatIcon } from "@angular/material/icon";
 import { RouterOutlet } from "@angular/router";
 import { StudentSidebar } from "../../Student/student-sidebar/student-sidebar";
-import { AdminSidebar } from "../sidebar/admin-sidebar";
+import { AdminSidebar } from "../admin-sidebar/admin-sidebar";
 
 @Component({
   selector: 'app-manage-students',

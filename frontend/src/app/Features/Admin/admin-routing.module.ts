@@ -6,6 +6,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { provideHttpClient } from '@angular/common/http';
 import { ManageStudents } from './manage-students/manage-students';
 import { ManageTeachers } from './manage-teachers/manage-teachers';
+import { Settings } from '../../settings/settings';
 
 
 export const AdminRoutes: Routes = [
@@ -20,5 +21,9 @@ export const AdminRoutes: Routes = [
   {
     path: 'manage-teachers',
     component: ManageTeachers
+  },
+  {
+    path: 'settings',
+    component: Settings
   }
 ];

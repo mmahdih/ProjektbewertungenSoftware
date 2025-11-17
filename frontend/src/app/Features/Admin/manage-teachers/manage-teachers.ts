@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from "@angular/router";
 import { MatIcon } from "@angular/material/icon";
-import { AdminSidebar } from "../sidebar/admin-sidebar";
+import { AdminSidebar } from "../admin-sidebar/admin-sidebar";
 import { DashboardNavbar } from "../../../Shared/Components/dashboard-navbar/dashboard-navbar";
 
 @Component({

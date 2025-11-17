@@ -6,7 +6,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {FormsModule} from '@angular/forms';
-import { AdminSidebar } from "../sidebar/admin-sidebar";
+import { AdminSidebar } from "../admin-sidebar/admin-sidebar";
 import { DashboardNavbar } from "../../../Shared/Components/dashboard-navbar/dashboard-navbar";
 import { RouterOutlet } from "@angular/router";
 
