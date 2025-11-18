@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { MatIcon } from "@angular/material/icon";
 
 @Component({
-  selector: 'app-student-sidebar',
+  selector: 'app-sidebar',
   imports: [MatIcon],
   templateUrl: './student-sidebar.html',
   styleUrl: './student-sidebar.css'
