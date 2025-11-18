@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { adminExport } from './adminExport';
+import { Export } from './admin-export';
 
-describe('adminExport', () => {
-  let component: adminExport;
-  let fixture: ComponentFixture<adminExport>;
+describe('Export', () => {
+  let component: Export;
+  let fixture: ComponentFixture<Export>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [adminExport]
+      imports: [Export]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(adminExport);
+    fixture = TestBed.createComponent(Export);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
