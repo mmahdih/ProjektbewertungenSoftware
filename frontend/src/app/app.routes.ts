@@ -1,13 +1,23 @@
 import { Routes } from '@angular/router';
-import { Login } from './Features/Auth/login/login';
-import { adminDashboard } from './Features/Admin/admin-dashboard/AdminDashboard';
-import { adminExport } from './Features/Admin/admin-export/adminExport';
-import { Dashboard } from './dashboard/dashboard';
 
 export const routes: Routes = [
-  { path: 'login', component: Login },
-  { path: 'dashboard', component: adminDashboard },
-  { path: 'export', component: adminExport },
-  { path: "admindashboard", component: Dashboard},
-  { path: '', redirectTo: 'login', pathMatch: 'full' } // default
+
+  
+  { path: 'admin', loadChildren: () => 
+    import('./Features/Admin/admin-routing.module')
+    .then(m => m.AdminRoutes), title: 'Admin' },
+
+  { path: 'auth', loadChildren: () => 
+    import('./Features/Auth/auth-routing.module')
+    .then(m => m.AuthRoutes), title: 'Auth'  },
+
+  { path: 'student', loadChildren: () => 
+    import('./Features/Student/student-routing.module')
+    .then(m => m.StudentRoutes), title: 'Student'  },
+    
+  { path: 'teacher', loadChildren: () => 
+    import('./Features/Teacher/teacher-routing.module')
+    .then(m => m.TeacherRoutes), title: 'Teacher'  },
+    
+  { path: '', redirectTo: 'admin/dashboard', pathMatch: 'full' } // default
 ];
