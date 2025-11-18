@@ -7,6 +7,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { ManageStudents } from './manage-students/manage-students';
 import { ManageTeachers } from './manage-teachers/manage-teachers';
 import { Settings } from '../../settings/settings';
+import { Export } from "./admin-export/admin-export";
 
 
 export const AdminRoutes: Routes = [
@@ -25,5 +26,9 @@ export const AdminRoutes: Routes = [
   {
     path: 'settings',
     component: Settings
+  },
+  {
+    path: 'export',
+    component: Export
   }
 ];
