@@ -1,36 +1,47 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from "@angular/router";
-import { MatIcon } from "@angular/material/icon";
-import { DashboardNavbar } from "../../../Shared/Components/dashboard-navbar/dashboard-navbar";
-import { Navbar } from "../../../Shared/Components/navbar/navbar";
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router, RouterOutlet } from '@angular/router';
+import { AuthService } from '../../../core/auth/auth.service';
+import { MatIconModule } from '@angular/material/icon';
+import { Navbar } from "../../../Shared/Components/navbar/navbar";
 
 @Component({
   selector: 'app-login',
-  imports: [RouterOutlet, MatIcon, Navbar, ReactiveFormsModule],
+  standalone: true,
+  imports: [ReactiveFormsModule, MatIconModule, Navbar, RouterOutlet],
   templateUrl: './login.html',
-  styleUrl: './login.css'
+  styleUrls: ['./login.css']
 })
 export class Login {
-  loginForm: FormGroup
+  loginForm: FormGroup;
 
-  constructor(private fb: FormBuilder){
+  constructor(
+    private fb: FormBuilder,
+    private auth: AuthService,
+    private router: Router
+  ) {
     this.loginForm = this.fb.group({
-      username: ['', [Validators.required]],
+      username: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
 
-  onSubmit() {
-    if (this.loginForm.valid) {
-      console.log('Login form submitted:', this.loginForm.value);
-      // alert(this.loginForm.value.username + "|" + this.loginForm.value.password)
-    } else {
-      console.log('Form is invalid');
+  async onSubmit() {
+    if (this.loginForm.invalid) return;
+
+    const { username, password } = this.loginForm.value;
+
+    const success = await this.auth.login(username, password);
+
+    if (!success) {
+      alert('Invalid username or password');
+      return;
     }
-  }
-  
-  forgotPassword() {
-    console.log('Forgot password clicked');
+
+    const role = this.auth.getRole();
+
+    if (role === 'admin') this.router.navigate(['/admin/dashboard']);
+    else if (role === 'teacher') this.router.navigate(['/teacher/dashboard']);
+    else if (role === 'student') this.router.navigate(['/student/dashboard']);
   }
 }

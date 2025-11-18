@@ -4,7 +4,7 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatButtonModule} from '@angular/material/button';
 
 @Component({
-  selector: 'app-admin-sidebar',
+  selector: 'app-sidebar',
   imports: [MatIconModule, MatDividerModule, MatButtonModule ],
   templateUrl: './admin-sidebar.html',
   styleUrl: './admin-sidebar.css'
