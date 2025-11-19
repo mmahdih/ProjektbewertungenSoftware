@@ -23,7 +23,7 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router) {}
 
   async login(username: string, password: string): Promise<boolean>  {
-    const user = this.users.find(u => u.username === username && u.password === password);
+    const user = this.users.find(u => u.username === username.toLowerCase() && u.password === password);
 
 
     if (user) {
