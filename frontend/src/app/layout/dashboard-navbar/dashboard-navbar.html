@@ -3,20 +3,11 @@
         <!-- navbar contents -->
         <div class="flex flex-row gap-3">
             <div class="text-white p-3 hover:bg-gray-700 cursor-pointer transition-colors rounded-lg flex gap-4">
+                <mat-icon>{{sidebarStatus === 'open' ? 'menu' : 'close'}}</mat-icon>
+            </div>
+            <div class="text-white p-3 hover:bg-gray-700 cursor-pointer transition-colors rounded-lg flex gap-4">
                 <mat-icon>home</mat-icon>
-                <span>Home</span>
-            </div>
-            <div class="text-white p-3 hover:bg-gray-700 cursor-pointer transition-colors rounded-lg flex gap-4">
-                <mat-icon>toc</mat-icon>
-                <span>Contents</span>
-            </div>
-            <div class="text-white p-3 hover:bg-gray-700 cursor-pointer transition-colors rounded-lg flex gap-4">
-                <mat-icon>category</mat-icon>
-                <span>Categories</span>
-            </div>
-            <div class="text-white p-3 hover:bg-gray-700 cursor-pointer transition-colors rounded-lg flex gap-4">
-                <mat-icon>settings</mat-icon>
-                <span>Settings</span>
+                <span>Friedrich Ebert Schule</span>
             </div>
         </div>
         <div class="flex flex-row gap-2">

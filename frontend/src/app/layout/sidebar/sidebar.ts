@@ -20,9 +20,7 @@ export class Sidebar implements OnInit {
   constructor(private auth: AuthService, private router: Router) {}
 
   ngOnInit() {
-    // const role = this.auth.getRole();
-    const role = 'student';
-
+    const role = this.auth.getRole();
     this.menuItems = this.getMenuForRole(role);
   }
 

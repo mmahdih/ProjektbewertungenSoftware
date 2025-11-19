@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, input, OnInit } from '@angular/core';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatMenuModule} from '@angular/material/menu';
 import { AuthService } from '../../core/auth/auth.service';
+import { Sidebar } from '../sidebar/sidebar';
 
 
 @Component({
@@ -15,11 +16,13 @@ import { AuthService } from '../../core/auth/auth.service';
 export class DashboardNavbar implements OnInit {
   theme : string = "dark"
   username: string = '';
+  sidebarStatus: string = '';
 
   constructor(private auth: AuthService){}
 
   ngOnInit(){
     this.username = this.auth.getUsername();
+    // this.sidebarStatus = this.sidebar.sidebarStatus;
   }
 
 
