@@ -5,7 +5,7 @@ import { MatTableModule } from "@angular/material/table"
 
 @Component({
   selector: 'app-manage-students',
-  imports: [MatIconModule, MatTableModule],
+   imports: [MatIconModule, MatTableModule],
   templateUrl: './manage-students.html',
   styleUrl: './manage-students.css'
 })
