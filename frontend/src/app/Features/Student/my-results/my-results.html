@@ -1,1 +1,36 @@
-<p>my-results works!</p>
+<mat-card class="rating-card max-w-[500px] mx-auto text-center flex ">
+  <mat-card-header>
+    <mat-card-title>{{questions[frage]}}</mat-card-title>
+    <mat-card-subtitle>Bitte wähle eine Bewertung</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+     @for (member of members; track $index) {
+      <h2>{{ member.name }}</h2>
+      <div class="rating">
+        @for (val of [1,2,3,4,5,6]; track $index) {
+          <button mat-icon-button (click)="setRating(member.id, val)">
+            <mat-icon 
+            [class.active1]="ratings[member.id] === 1 && val === 1"
+            [class.active2]="ratings[member.id] === 2 && val === 2"
+            [class.active3]="ratings[member.id] === 3 && val === 3"
+            [class.active4]="ratings[member.id] === 4 && val === 4"
+            [class.active5]="ratings[member.id] === 5 && val === 5"
+            [class.active6]="ratings[member.id] === 6 && val === 6">
+                filter_{{val}} 
+            </mat-icon>
+          </button>
+        }
+      </div>
+    }
+  </mat-card-content>
+
+  <mat-card-actions class="mat-card-actions">
+    <button class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" (click)="deleteAll()">
+      Zurücksetzen
+    </button>
+    <button class="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" (click)="submitRating()">
+      Bewertung speichern
+    </button>
+  </mat-card-actions>
+</mat-card>

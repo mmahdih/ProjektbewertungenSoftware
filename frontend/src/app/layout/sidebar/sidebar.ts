@@ -48,9 +48,9 @@ export class Sidebar implements OnInit {
       ],
       student: [
         { icon: 'dashboard', label:'Dashboard', route:'/student/dashboard' },
-        { icon: 'dashboard', label:'Meine Lehrer', route:'/student/my-teachers' },
-        { icon: 'dashboard', label:'Meine Klassen', route:'/student/my-classes' },
-        { icon: 'dashboard', label:'Meine Noten', route:'/student/my-grades' },
+        { icon: 'person', label:'Meine Lehrer', route:'/student/my-teachers' },
+        { icon: 'group', label:'Meine Klassen', route:'/student/my-classes' },
+        { icon: 'numbers', label:'Meine Noten', route:'/student/my-results' },
       ]
     };
 

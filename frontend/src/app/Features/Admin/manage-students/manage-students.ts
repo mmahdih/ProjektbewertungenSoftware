@@ -7,7 +7,7 @@ import { AdminSidebar } from "../admin-sidebar/admin-sidebar";
 
 @Component({
   selector: 'app-manage-students',
-  imports: [DashboardNavbar, MatIcon, RouterOutlet, StudentSidebar, AdminSidebar],
+  imports: [DashboardNavbar, MatIcon, RouterOutlet,StudentSidebar, AdminSidebar],
   templateUrl: './manage-students.html',
   styleUrl: './manage-students.css'
 })
