@@ -5,10 +5,15 @@ import { StudentGuard } from './core/guards/student.guard';
 import { TeacherGuard } from './core/guards/teacher.guard';
 import { LoginGuard } from './core/guards/login.guard';
 import { Login } from './Features/Auth/login/login';
+import { MainLayout } from './layout/main-layout/main-layout';
 
 export const routes: Routes = [
 
-  { path: '', redirectTo: 'auth/login', pathMatch: 'full' },
+  // { path: '', redirectTo: 'auth/login', pathMatch: 'full' },
+
+  {
+    path: '', component: MainLayout
+  },
 
   {
     path: 'admin',
