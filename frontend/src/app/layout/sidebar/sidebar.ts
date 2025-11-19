@@ -9,7 +9,7 @@ import { Router, RouterModule, RouterOutlet } from '@angular/router';
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [MatIconModule, ɵInternalFormsSharedModule, CommonModule, RouterOutlet, RouterModule],
+  imports: [MatIconModule, ɵInternalFormsSharedModule, CommonModule, RouterModule],
   templateUrl: './sidebar.html',
   styleUrl: './sidebar.css'
 })
@@ -28,6 +28,12 @@ export class Sidebar implements OnInit {
 
   logout(){
     this.auth.logout();
+  }
+
+  sidebarStatus: string = 'open';
+
+  openCloseSidebar(){
+    this.sidebarStatus = this.sidebarStatus === 'open' ? 'close' : 'open';
   }
 
 

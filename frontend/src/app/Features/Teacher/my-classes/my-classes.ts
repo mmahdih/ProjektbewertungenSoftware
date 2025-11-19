@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from "@angular/router";
 import { MatIcon } from "@angular/material/icon";
-import { TeacherSidebar } from "../teacher-sidebar/teacher-sidebar";
-import { DashboardNavbar } from "../../../Shared/Components/dashboard-navbar/dashboard-navbar";
+import { DashboardNavbar } from "../../../layout/dashboard-navbar/dashboard-navbar";
+import { Sidebar } from "../../../layout/sidebar/sidebar";
 
 @Component({
   selector: 'app-my-classes',
-  imports: [RouterOutlet, MatIcon, TeacherSidebar, DashboardNavbar],
+  imports: [RouterOutlet, MatIcon, DashboardNavbar, Sidebar],
   templateUrl: './my-classes.html',
   styleUrl: './my-classes.css'
 })
