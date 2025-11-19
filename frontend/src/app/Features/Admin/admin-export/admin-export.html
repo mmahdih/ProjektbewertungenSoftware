@@ -8,31 +8,36 @@
 
     <div class="flex-1 p-6">
 
-      <!-- TOP ROW -->
-      <div class="flex flex-row justify-between items-center mb-6">
+     <!-- TOP ROW -->
+<div class="flex flex-row justify-between items-center mb-6">
 
-        <!-- LEFT: Title -->
-        <div class="flex items-center gap-2 cursor-pointer hover:text-indigo-500 transition-colors">
-          <span class="font-bold text-3xl">Export</span>
-        </div>
+  <!-- LEFT: Title -->
+  <div class="flex items-center gap-2 cursor-pointer hover:text-indigo-500 transition-colors">
+    <span class="font-bold text-3xl">Export</span>
+  </div>
 
-        <!-- RIGHT: Searchbox -->
-        <div class="flex items-center">
-          <div class="max-w-sm w-full">
-            <div
-              class="flex items-center rounded-md bg-white/5 pl-3 outline-1 outline-gray-600 
-                     focus-within:outline-2 focus-within:outline-indigo-500">
-              <input
-                id="searchbox"
-                type="text"
-                name="searchbox"
-                placeholder="Search Content..."
-                class="block w-full py-2 pr-3 pl-1 text-2xl text-black placeholder-gray-700 
-                       focus:outline-none sm:text-sm" />
-              <mat-icon class="m-2 text-black">search</mat-icon>
-            </div>
-          </div>
-        </div>
+  <!-- RIGHT: Searchbox + Ergebnisse -->
+  <div class="flex items-center gap-6">
+    <div class="text-gray-700">
+      <span class="font-semibold">1,Ergebnisse</span>
+    </div>
+    <!-- Searchbox -->
+    <div class="max-w-sm w-full">
+      <div
+        class="flex items-center rounded-md bg-white/5 pl-3 outline-1 outline-gray-600 
+               focus-within:outline-2 focus-within:outline-indigo-500">
+        <input
+          id="searchbox"
+          type="text"
+          name="searchbox"
+          placeholder="Search Content..."
+          class="block w-full py-2 pr-3 pl-1 text-2xl text-black placeholder-gray-700 
+                 focus:outline-none sm:text-sm" />
+        <mat-icon class="m-2 text-black">search</mat-icon>
+      </div>
+    </div>
+  </div>
+
 
       </div>
 
