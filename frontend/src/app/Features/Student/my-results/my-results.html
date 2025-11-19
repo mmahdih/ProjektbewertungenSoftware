@@ -1,3 +1,18 @@
+<section class="flex flex-col">
+
+  <!-- navbar -->
+  <app-dashboard-navbar></app-dashboard-navbar>
+
+  <!-- main contents -->
+  <div class="flex flex-row">
+
+    <!-- side bar -->
+    <app-sidebar></app-sidebar>
+
+    <!-- contents -->
+    <div class="flex-1 p-6">
+      
+
 <mat-card class="rating-card max-w-[500px] mx-auto text-center flex ">
   <mat-card-header>
     <mat-card-title>{{questions[frage]}}</mat-card-title>
@@ -34,3 +49,7 @@
     </button>
   </mat-card-actions>
 </mat-card>
+
+    </div>
+  </div>
+</section>

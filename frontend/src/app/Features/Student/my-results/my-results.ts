@@ -4,6 +4,9 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
+import { DashboardNavbar } from "../../../Shared/Components/dashboard-navbar/dashboard-navbar";
+import { RouterOutlet } from "@angular/router";
+import { Sidebar } from "../../../layout/sidebar/sidebar";
 @Component({
   selector: 'app-my-results',
    imports: [
@@ -11,7 +14,11 @@ import { CommonModule } from '@angular/common';
     MatCardModule,
     MatButtonModule,
     MatIconModule,
-  CommonModule],
+    CommonModule,
+    DashboardNavbar,
+    RouterOutlet,
+    Sidebar
+],
   templateUrl: './my-results.html',
   styleUrl: './my-results.css'
 })
