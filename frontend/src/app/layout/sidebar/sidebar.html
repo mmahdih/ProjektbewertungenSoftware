@@ -1,141 +1,29 @@
-<!-- General Sidebar -->
-<section class="admin">
-  <div class="w-80 h-screen text-xl bg-gray-800 min-h-full p-4 hidden md:block">
-
+<aside 
+  class="bg-gray-800 text-xl h-screen p-4 transition-[width] duration-300 ease-in-out overflow-hidden" 
+  [ngClass]="isCollapsed ? 'w-20' : 'w-80'">
+  
+  <div class="flex flex-col justify-between h-full">
     <div class="flex flex-col gap-3">
       @for (item of menuItems; track $index) {
-      <a [routerLink]="item.route">
-        <div
-          class="text-white p-3 hover:bg-gray-700 cursor-pointer transition-colors rounded-lg flex gap-4 items-center">
-          <mat-icon>{{ item.icon }}</mat-icon>
-          <span>{{ item.label }}</span>
-        </div>
-      </a>
+        <a [routerLink]="item.route">
+          <div
+            class="text-white p-3 hover:bg-gray-700 cursor-pointer transition-colors rounded-lg flex gap-4 items-center">
+            <mat-icon class="min-w-[24px]">{{ item.icon }}</mat-icon>
+            @if (!isCollapsed) {
+              <span class="animate-fadeIn">{{ item.label }}</span>
+            }
+          </div>
+        </a>
       }
-      <button (click)="logout()"
-        class="text-white p-3 hover:bg-gray-700 cursor-pointer transition-colors rounded-lg flex gap-4 items-center">
-        <mat-icon>logout</mat-icon>
-        <span>Ausloggen</span>
-      </button>
     </div>
+    
+    <button 
+      (click)="logout()"
+      class="text-white p-3 hover:bg-gray-700 cursor-pointer transition-colors rounded-lg flex gap-4 items-center">
+      <mat-icon class="min-w-[24px]">logout</mat-icon>
+      @if (!isCollapsed) {
+        <span class="animate-fadeIn">Ausloggen</span>
+      }
+    </button>
   </div>
-</section>
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- admin side bar -->
-<!-- <section class="admin">
-    <div class="w-80 h-screen text-xl bg-gray-800 min-h-full p-4 hidden md:block">
-      <div class="flex flex-col gap-3">
-        <a class="" href="/admin/dashboard">
-          <div class="text-white p-3 hover:bg-gray-700 cursor-pointer transition-colors rounded-lg flex gap-4 items-center">
-          <mat-icon>dashboard</mat-icon>
-          <span>Dashboard</span>
-        </div>
-        </a>
-        <a class="" href="/admin/manage-teachers">
-          <div class="text-white p-3 hover:bg-gray-700 cursor-pointer transition-colors rounded-lg flex gap-4 items-center">
-          <mat-icon>co_present</mat-icon>
-          <span>Lehrer</span>
-        </div>
-        </a>
-        <a class="" href="/admin/manage-students">
-          <div class="text-white p-3 hover:bg-gray-700 cursor-pointer transition-colors rounded-lg flex gap-4 items-center">
-          <mat-icon>dashboard</mat-icon>
-          <span>Schüler</span>
-        </div>
-        </a>
-        <a class="" href="/">
-          <div class="text-white p-3 hover:bg-gray-700 cursor-pointer transition-colors rounded-lg flex gap-4 items-center">
-          <mat-icon>dashboard</mat-icon>
-          <span>Klassen</span>
-        </div>
-        </a>
-        <a class="" href="/">
-          <div class="text-white p-3 hover:bg-gray-700 cursor-pointer transition-colors rounded-lg flex gap-4 items-center">
-          <mat-icon>book</mat-icon>
-          <span>Kurse</span>
-        </div>
-        </a>
-        <a class="" href="">
-          <div class="text-white p-3 hover:bg-gray-700 cursor-pointer transition-colors rounded-lg flex gap-4 items-center">
-          <mat-icon>assignment</mat-icon>
-          <span>Anfragen</span>
-        </div>
-        </a>
-        <a class="" href="/admin/settings">
-          <div class="text-white p-3 hover:bg-gray-700 cursor-pointer transition-colors rounded-lg flex gap-4 items-center">
-          <mat-icon>settings</mat-icon>
-          <span>Einstellungen</span>
-        </div>
-        </a>
-      </div>
-    </div>
-</section> -->
-
-<!-- teacher sidebar -->
-<!-- <section class="teacher">
-    <div class="w-80 h-screen text-xl bg-gray-800 min-h-full p-4 hidden md:block">
-      <div class="flex flex-col gap-3">
-        <a class="" href="/teacher/dashboard">
-          <div class="text-white p-3 hover:bg-gray-700 cursor-pointer transition-colors rounded-lg flex gap-4 items-center">
-          <mat-icon>dashboard</mat-icon>
-          <span>Dashboard</span>
-        </div>
-        </a>
-        <a class="" href="/teacher/my-profile">
-          <div class="text-white p-3 hover:bg-gray-700 cursor-pointer transition-colors rounded-lg flex gap-4 items-center">
-          <mat-icon>account_circle</mat-icon>
-          <span>My Profile</span>
-        </div>
-        </a>
-        <a class="" href="/teacher/my-classes">
-          <div class="text-white p-3 hover:bg-gray-700 cursor-pointer transition-colors rounded-lg flex gap-4 items-center">
-          <mat-icon>dashboard</mat-icon>
-          <span>My Classes</span>
-        </div>
-        </a>
-        <a class="" href="/teacher/my-students">
-          <div class="text-white p-3 hover:bg-gray-700 cursor-pointer transition-colors rounded-lg flex gap-4 items-center">
-          <mat-icon>dashboard</mat-icon>
-          <span>My Students</span>
-        </div>
-        </a>
-      </div>
-    </div>
-</section> -->
-
-<!-- student side bar -->
-<!-- <section>
-    <div class="w-80 h-screen text-xl bg-gray-800 min-h-full p-4 hidden md:block">
-      <div class="flex flex-col gap-3">
-        <a class="" href="/student/dashboard">
-          <div class="text-white p-3 hover:bg-gray-700 cursor-pointer transition-colors rounded-lg flex gap-4 items-center">
-          <mat-icon>dashboard</mat-icon>
-          <span>Dashboard</span>
-        </div>
-        </a>
-        <a class="" href="/student/my-profile">
-          <div class="text-white p-3 hover:bg-gray-700 cursor-pointer transition-colors rounded-lg flex gap-4 items-center">
-          <mat-icon>account_circle</mat-icon>
-          <span>My Profile</span>
-        </div>
-        </a>
-        <a class="" href="/student/my-scores">
-          <div class="text-white p-3 hover:bg-gray-700 cursor-pointer transition-colors rounded-lg flex gap-4 items-center">
-          <mat-icon>dashboard</mat-icon>
-          <span>My Scores</span>
-        </div>
-        </a>
-      </div>
-    </div>
-</section> -->
+</aside>

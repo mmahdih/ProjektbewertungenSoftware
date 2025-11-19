@@ -15,6 +15,9 @@ import { Navbar } from "../../../Shared/Components/navbar/navbar";
 export class Login {
   loginForm: FormGroup;
 
+  loginError: string = '';
+  hasError = false;
+
   constructor(
     private fb: FormBuilder,
     private auth: AuthService,
@@ -26,6 +29,14 @@ export class Login {
     });
   }
 
+  hideError(){
+    this.hasError = false;
+  }
+
+  showError(){
+    this.hasError = true;
+  }
+
   async onSubmit() {
     if (this.loginForm.invalid) return;
 
@@ -34,7 +45,8 @@ export class Login {
     const success = await this.auth.login(username, password);
 
     if (!success) {
-      alert('Invalid username or password');
+      this.loginError = "Invalid username or password";
+      this.showError()
       return;
     }
 
