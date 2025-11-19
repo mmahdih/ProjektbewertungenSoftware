@@ -28,7 +28,6 @@ export class MyResults {
   form: FormGroup;
   
   bewertung = new Map<string,number[]>();
-
   questions: string[] = [
     '1: Wie schätzen sie das Engagment im Projekt ein?',
     '2: Wie zielgerichtet wurde an der Aufgabenstellung gearbeitet?',
@@ -41,7 +40,6 @@ export class MyResults {
     '9: Beurteilen Sie das Engagment bei der Realisierung der Funktionalität (Java-Backend/Vernetzung)?',
     '10: Beurteilen Sie die Mitarbeit bei der Erstellung des Werbeflyers?',
     '11: Welche Gesamtnote würen Sie der jeweiligen Person für Ihren beitrag zum Gelingen des Projektes geben?'
-
   ];
 
   frage =  0;
@@ -92,7 +90,6 @@ submitRating() {
     this.form.markAllAsTouched();
   } else { 
     this.bewertung.set(this.questions[this.frage],this.ratings);
-    console.log(this.bewertung);
     this.ratings = [0, 0, 0, 0, 0]; 
     this.frage++;
     /**
