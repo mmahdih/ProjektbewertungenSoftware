@@ -29,6 +29,17 @@ import MatIconModule
 use it: 
 `<mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="school"></mat-icon>`
 
+
+alternatives to icons: 
+<https://github.com/gridatek/semantic-icons?tab=readme-ov-file>
+
+usage:
+* importing
+`import { SiUserCircleIcon } from '@semantic-icons/heroicons/24/solid';`
+
+in html:
+`<svg class="size-9" si-user-circle-icon></svg>`
+
 more info:
 <https://material.angular.dev/components/>
 

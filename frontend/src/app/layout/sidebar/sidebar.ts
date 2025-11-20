@@ -45,10 +45,11 @@ export class Sidebar implements OnInit {
     const menus: { [key: string]: SidebarItem[] } = {
       admin: [
         { icon: 'dashboard', label: 'Dashboard', route: '/admin/dashboard' },
-        { icon: 'dashboard', label: 'Lehrer', route: '/admin/teachers' },
-        { icon: 'dashboard', label: 'Schüler', route: '/admin/students' },
-        { icon: 'dashboard', label: 'Klassen', route: '/admin/klassen' },
-        { icon: 'dashboard', label: 'Anfragen', route: '/admin/anfragen' },
+        { icon: 'dashboard', label: 'Lehrer', route: '/admin/manage-teachers' },
+        { icon: 'dashboard', label: 'Schüler', route: '/admin/manage-students' },
+        { icon: 'dashboard', label: 'Klassen', route: '/admin/manage-classes' },
+        { icon: 'dashboard', label: 'Anfragen', route: '/admin/requests' },
+        { icon: 'dashboard', label: 'Export', route: '/admin/export' },
       ],
       teacher: [
         { icon: 'dashboard', label: 'Dashboard', route: '/teacher/dashboard' },

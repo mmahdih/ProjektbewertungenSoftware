@@ -8,6 +8,8 @@ import { ManageStudents } from './manage-students/manage-students';
 import { ManageTeachers } from './manage-teachers/manage-teachers';
 import { Settings } from '../../settings/settings';
 import { Export } from "./admin-export/admin-export";
+import { ManageClasses } from './manage-classes/manage-classes';
+import { Requests } from './requests/requests';
 
 
 export const AdminRoutes: Routes = [
@@ -24,8 +26,12 @@ export const AdminRoutes: Routes = [
     component: ManageTeachers
   },
   {
-    path: 'settings',
-    component: Settings
+    path: 'manage-classes',
+    component: ManageClasses
+  },
+  {
+    path: 'requests',
+    component: Requests
   },
   {
     path: 'export',
