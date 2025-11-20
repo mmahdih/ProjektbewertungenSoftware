@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { MatIconModule } from '@angular/material/icon';
+import { Sidebar } from "../../../layout/sidebar/sidebar";
+
 
 @Component({
   selector: 'app-my-classes',
-  imports: [MatIconModule],
+  imports: [Sidebar],
   templateUrl: './my-classes.html',
   styleUrl: './my-classes.css'
 })
