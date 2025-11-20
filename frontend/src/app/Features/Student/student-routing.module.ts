@@ -1,8 +1,4 @@
-import { Component, NgModule, provideBrowserGlobalErrorListeners } from '@angular/core';
-import { RouterModule, Routes } from "@angular/router";
-import { FormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
-import { provideHttpClient } from '@angular/common/http';
+import { Routes } from "@angular/router";
 import { StudentDashboard } from './student-dashboard/student-dashboard';
 import { MyProfile } from './my-profile/my-profile';
 import { MyResults } from './my-results/my-results';
@@ -15,14 +11,17 @@ export const StudentRoutes: Routes = [
     component: StudentDashboard,
   },
   {
+    //noten
     path: 'my-profile',
     component: MyProfile
   },
   {
+    //selbstfremd
     path: 'my-results',
     component: MyResults
   },
   {
+    //Gruppen
     path: 'my-classes',
     component: MyClasses
   }

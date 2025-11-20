@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatIcon, MatIconModule } from "@angular/material/icon";
+import { MatIconModule } from "@angular/material/icon";
 import { AuthService } from '../../core/auth/auth.service';
 import { SidebarItem } from '../../Shared/interfaces/sidebar-item.interface';
 import { ɵInternalFormsSharedModule } from "@angular/forms";
@@ -48,9 +48,9 @@ export class Sidebar implements OnInit {
       ],
       student: [
         { icon: 'dashboard', label:'Dashboard', route:'/student/dashboard' },
-        { icon: 'person', label:'Meine Lehrer', route:'/student/my-teachers' },
-        { icon: 'group', label:'Meine Klassen', route:'/student/my-classes' },
-        { icon: 'numbers', label:'Meine Noten', route:'/student/my-results' },
+        { icon: 'group', label:'Meine Gruppe', route:'/student/my-classes' },
+        { icon: 'assignment_ind', label:'Meine Noten', route:'/student/my-profile' },
+        { icon: 'assignment', label:'Selbst-/Fremdbewertung', route:'/student/my-results' },
       ]
     };
 
