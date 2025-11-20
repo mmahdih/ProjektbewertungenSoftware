@@ -49,13 +49,14 @@ export class Sidebar implements OnInit {
         { icon: 'dashboard', label: 'Schüler', route: '/admin/manage-students' },
         { icon: 'dashboard', label: 'Klassen', route: '/admin/manage-classes' },
         { icon: 'dashboard', label: 'Anfragen', route: '/admin/requests' },
-        { icon: 'dashboard', label: 'Export', route: '/admin/export' },
+        { icon: 'download', label: 'Export', route: '/admin/export' },
       ],
       teacher: [
         { icon: 'dashboard', label: 'Dashboard', route: '/teacher/dashboard' },
         { icon: 'dashboard', label: 'Meine Schüler', route: '/teacher/my-students' },
         { icon: 'dashboard', label: 'Meine Klassen', route: '/teacher/my-classes' },
         { icon: 'dashboard', label: 'Meine Kurse', route: '/teacher/my-courses' },
+        { icon: 'download', label: 'Export', route: '/teacher/export' },
       ],
       student: [
         { icon: 'dashboard', label: 'Dashboard', route: '/student/dashboard' },

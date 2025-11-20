@@ -8,7 +8,7 @@ import { Navbar } from "../../../Shared/Components/navbar/navbar";
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule, MatIconModule, Navbar, RouterOutlet],
+  imports: [ReactiveFormsModule, MatIconModule],
   templateUrl: './login.html',
   styleUrls: ['./login.css']
 })

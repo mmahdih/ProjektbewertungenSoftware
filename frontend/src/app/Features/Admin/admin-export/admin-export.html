@@ -1,4 +1,5 @@
-<div class="m-6">
+<div class=" p-6">
+
   <!-- TOP ROW -->
   <div class="flex flex-row justify-between items-center mb-6">
 
@@ -9,20 +10,15 @@
 
     <!-- RIGHT: Searchbox + Ergebnisse -->
     <div class="flex items-center gap-6">
-      <div class="text-gray-700">
-        <span class="font-semibold">1,Ergebnisse</span>
-      </div>
-      <!-- Searchbox -->
       <div class="max-w-sm w-full">
         <div class="flex items-center rounded-md bg-white/5 pl-3 outline-1 outline-gray-600 
-               focus-within:outline-2 focus-within:outline-indigo-500">
+                     focus-within:outline-2 focus-within:outline-indigo-500">
           <input id="searchbox" type="text" name="searchbox" placeholder="Search Content..." class="block w-full py-2 pr-3 pl-1 text-2xl text-black placeholder-gray-700 
-                 focus:outline-none sm:text-sm" />
+                       focus:outline-none sm:text-sm" />
           <mat-icon class="m-2 text-black">search</mat-icon>
         </div>
       </div>
     </div>
-
 
   </div>
 
@@ -47,8 +43,8 @@
               <input type="checkbox" class="peer sr-only" />
               <div class="w-full px-3 py-2 text-black
                            hover:bg-black/10 transition
-                           peer-checked:bg-black peer-checked:text-white peer-checked:border-black" role="button">
-                Element 1
+                           peer-checked:bg-black peer-checked:text-white peer-checked:border-black">
+                L1
               </div>
             </label>
           </tbody>
@@ -70,8 +66,8 @@
               <input type="checkbox" class="peer sr-only" />
               <div class="w-full px-3 py-2 text-black
                            hover:bg-black/10 transition
-                           peer-checked:bg-black peer-checked:text-white peer-checked:border-black" role="button">
-                Option A
+                           peer-checked:bg-black peer-checked:text-white peer-checked:border-black">
+                S1
               </div>
             </label>
           </tbody>
@@ -80,99 +76,79 @@
 
     </div>
 
-    <!-- FILTERPANEL (rechts, 75% Höhe der Tabellen) -->
-    <aside class="w-full xl:w-80 bg-white rounded-lg shadow-md p-4 h-[75%] self-start space-y-6">
+    <!-- FILTERPANEL rechts + EXPORT BUTTON -->
+    <div class="w-full xl:w-80 flex flex-col items-center gap-4 self-start">
 
-      <!-- Titel -->
-      <div>
-        <h2 class="text-lg font-semibold text-gray-900 mb-1">Filter</h2>
-        <p class="text-sm text-gray-600">Optionen eingrenzen</p>
-      </div>
+      <aside class="w-full bg-white rounded-lg shadow-md p-4 h-[75%] space-y-6">
 
-      <!-- Schüler Filter -->
-      <div class="border-t border-gray-200 pt-4">
-        <h3 class="text-sm font-semibold text-gray-900 mb-3 uppercase tracking-wide">
-          Schüler-Optionen
-        </h3>
+        <!-- Titel -->
+        <div>
+          <h2 class="text-lg font-semibold text-gray-900 mb-1">Filter</h2>
+        </div>
 
-        <div class="space-y-2 text-sm text-gray-800">
-          <label class="flex items-center gap-2 cursor-pointer">
-            <input type="checkbox" class="h-4 w-4 rounded border-gray-300" />
-            <span>Nur aktive Schüler</span>
-          </label>
+        <!-- Schüler Filter -->
+        <div class="border-t border-gray-200 pt-4">
+          <h3 class="text-sm font-semibold text-gray-900 mb-3 uppercase tracking-wide">
+            Schüler-Optionen
+          </h3>
 
-          <label class="flex items-center gap-2 cursor-pointer">
-            <input type="checkbox" class="h-4 w-4 rounded border-gray-300" />
-            <span>Nur mit E-Mail-Adresse</span>
-          </label>
-
-          <label class="flex items-center gap-2 cursor-pointer">
-            <input type="checkbox" class="h-4 w-4 rounded border-gray-300" />
-            <span>Nur bestimmte Klassenstufen</span>
-          </label>
-
-          <div class="mt-2">
-            <label class="block text-xs text-gray-600 mb-1">Klassenstufe</label>
-            <select
-              class="w-full rounded-md border border-gray-300 text-sm px-2 py-1 focus:outline-none focus:ring-1 focus:ring-indigo-500">
-              <option value="">Alle</option>
-              <option>5–7</option>
-              <option>8–10</option>
-              <option>11–13</option>
-            </select>
+          <div class="space-y-2 text-sm text-gray-800">
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="checkbox" class="h-4 w-4 rounded border-gray-300" />
+              <span>Nur aktive Schüler</span>
+            </label>
+            <div class="mt-2">
+              <label class="block text-xs text-gray-600 mb-1">Klassenstufe</label>
+              <select
+                class="w-full rounded-md border border-gray-300 text-sm px-2 py-1 focus:outline-none focus:ring-1 focus:ring-indigo-500">
+                <option value="">Alle</option>
+                <option>5–7</option>
+              </select>
+            </div>
           </div>
         </div>
-      </div>
 
-      <!-- Lehrer Filter -->
-      <div class="border-t border-gray-200 pt-4">
-        <h3 class="text-sm font-semibold text-gray-900 mb-3 uppercase tracking-wide">
-          Lehrer-Optionen
-        </h3>
+        <!-- Lehrer Filter -->
+        <div class="border-t border-gray-200 pt-4">
+          <h3 class="text-sm font-semibold text-gray-900 mb-3 uppercase tracking-wide">
+            Lehrer-Optionen
+          </h3>
 
-        <div class="space-y-2 text-sm text-gray-800">
-          <label class="flex items-center gap-2 cursor-pointer">
-            <input type="checkbox" class="h-4 w-4 rounded border-gray-300" />
-            <span>Nur Klassenlehrer</span>
-          </label>
+          <div class="space-y-2 text-sm text-gray-800">
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="checkbox" class="h-4 w-4 rounded border-gray-300" />
+              <span>Nur Klassenlehrer</span>
+            </label>
 
-          <label class="flex items-center gap-2 cursor-pointer">
-            <input type="checkbox" class="h-4 w-4 rounded border-gray-300" />
-            <span>Nur Fachlehrer</span>
-          </label>
-
-          <label class="flex items-center gap-2 cursor-pointer">
-            <input type="checkbox" class="h-4 w-4 rounded border-gray-300" />
-            <span>Nur aktive Lehrer</span>
-          </label>
-
-          <div class="mt-2">
-            <label class="block text-xs text-gray-600 mb-1">Fachbereich</label>
-            <select
-              class="w-full rounded-md border border-gray-300 text-sm px-2 py-1 focus:outline-none focus:ring-1 focus:ring-indigo-500">
-              <option value="">Alle</option>
-              <option>Sprachen</option>
-              <option>Mathematik / Naturwissenschaften</option>
-              <option>Gesellschaft</option>
-              <option>Kunst / Musik / Sport</option>
-            </select>
+            <div class="mt-2">
+              <label class="block text-xs text-gray-600 mb-1">Fachbereich</label>
+              <select
+                class="w-full rounded-md border border-gray-300 text-sm px-2 py-1 focus:outline-none focus:ring-1 focus:ring-indigo-500">
+                <option value="">Alle</option>
+                <option>Sprachen</option>
+              </select>
+            </div>
           </div>
         </div>
-      </div>
 
-      <!-- Buttons -->
-      <div class="border-t border-gray-200 pt-4 flex gap-2">
-        <button
-          class="flex-1 inline-flex justify-center items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white hover:bg-indigo-700 transition">
-          Filter anwenden
-        </button>
-        <button
-          class="inline-flex justify-center items-center rounded-md border border-gray-300 px-3 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-50 transition">
-          Zurücksetzen
-        </button>
-      </div>
+        <!-- Buttons -->
+        <div class="border-t border-gray-200 pt-4 w-full flex">
+          <button class="w-full inline-flex justify-center items-center rounded-md border border-gray-300 px-3 py-2 
+           text-sm font-semibold text-gray-700 bg-white hover:bg-gray-50 transition">
+            Zurücksetzen
+          </button>
+        </div>
 
-    </aside>
+      </aside>
+
+      <!-- EXPORT BUTTON unter der Filterbox -->
+      <button
+        class="w-3/4 flex items-center justify-center gap-2 bg-indigo-600 text-white px-6 py-2 rounded-md shadow-md hover:bg-indigo-700 transition">
+        <mat-icon class="text-white">download</mat-icon>
+        <span class="text-base font-medium">Export</span>
+      </button>
+
+    </div>
 
   </div>
 
@@ -181,4 +157,6 @@
     <mat-icon>error</mat-icon>
     <p>Senectus malesuada suspendisse bibendum elit amet vitae.</p>
   </div>
+
+
 </div>

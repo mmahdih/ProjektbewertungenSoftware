@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-requests',
-  imports: [],
+  imports: [MatIconModule],
   templateUrl: './requests.html',
   styleUrl: './requests.css'
 })

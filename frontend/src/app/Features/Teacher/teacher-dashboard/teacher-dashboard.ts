@@ -1,12 +1,9 @@
 import { Component } from '@angular/core';
-import { MatIcon } from "@angular/material/icon";
-import { RouterOutlet } from "@angular/router";
-import { DashboardNavbar } from "../../../layout/dashboard-navbar/dashboard-navbar";
-import { Sidebar } from '../../../layout/sidebar/sidebar';
+import { MatIconModule } from "@angular/material/icon";
 
 @Component({
   selector: 'app-teacher-dashboard',
-  imports: [MatIcon, RouterOutlet, DashboardNavbar, Sidebar],
+  imports: [MatIconModule],
   templateUrl: './teacher-dashboard.html',
   styleUrl: './teacher-dashboard.css'
 })
