@@ -34,6 +34,7 @@
     "@fortawesome/free-brands-svg-icons": "^7.0.0",
     "@fortawesome/free-regular-svg-icons": "^7.0.0",
     "@fortawesome/free-solid-svg-icons": "^7.0.0",
+    "@semantic-icons/heroicons": "^0.52.0",
     "@tailwindcss/postcss": "^4.1.17",
     "postcss": "^8.5.6",
     "rxjs": "~7.8.0",

@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from "@angular/router";
 import { MatIcon } from "@angular/material/icon";
-import { AdminSidebar } from "../admin-sidebar/admin-sidebar";
-import { DashboardNavbar } from "../../../Shared/Components/dashboard-navbar/dashboard-navbar";
+import { DashboardNavbar } from "../../../layout/dashboard-navbar/dashboard-navbar";
+import { Sidebar } from "../../../layout/sidebar/sidebar";
 
 @Component({
   selector: 'app-manage-teachers',
-  imports: [RouterOutlet, MatIcon, DashboardNavbar, AdminSidebar],
+  imports: [RouterOutlet, MatIcon, DashboardNavbar, Sidebar],
   templateUrl: './manage-teachers.html',
   styleUrl: './manage-teachers.css'
 })

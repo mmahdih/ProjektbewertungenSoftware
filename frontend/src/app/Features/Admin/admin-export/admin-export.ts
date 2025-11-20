@@ -7,6 +7,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {FormsModule} from '@angular/forms';
 import { DashboardNavbar } from "../../../Shared/Components/dashboard-navbar/dashboard-navbar";
+import { DashboardNavbar } from "../../../layout/dashboard-navbar/dashboard-navbar";
 import { RouterOutlet } from "@angular/router";
 import { Sidebar } from '../../../layout/sidebar/sidebar';
 

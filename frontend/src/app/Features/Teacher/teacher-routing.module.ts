@@ -1,8 +1,4 @@
-import { Component, NgModule, provideBrowserGlobalErrorListeners } from '@angular/core';
-import { RouterModule, Routes } from "@angular/router";
-import { FormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
-import { provideHttpClient } from '@angular/common/http';
+import { Routes } from "@angular/router";
 import { TeacherDashboard } from './teacher-dashboard/teacher-dashboard';
 import { MyStudents } from './my-students/my-students';
 import { MyClasses } from './my-classes/my-classes';
