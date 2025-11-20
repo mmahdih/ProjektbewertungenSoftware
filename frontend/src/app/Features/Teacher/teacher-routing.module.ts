@@ -7,6 +7,7 @@ import { TeacherDashboard } from './teacher-dashboard/teacher-dashboard';
 import { MyStudents } from './my-students/my-students';
 import { MyClasses } from './my-classes/my-classes';
 import { MyProfile } from './my-profile/my-profile';
+import { StudentExport } from './student-export/student-export';
 
 
 export const TeacherRoutes: Routes = [
@@ -25,5 +26,9 @@ export const TeacherRoutes: Routes = [
   {
     path: 'my-classes',
     component: MyClasses
+  },
+  {
+    path: 'export',
+    component: StudentExport
   }
 ];

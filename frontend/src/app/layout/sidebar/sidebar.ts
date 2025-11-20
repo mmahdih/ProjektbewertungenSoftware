@@ -20,8 +20,8 @@ export class Sidebar implements OnInit {
   constructor(private auth: AuthService, private router: Router) {}
 
   ngOnInit() {
-    // const role = this.auth.getRole();
-    const role = 'student';
+    const role = this.auth.getRole();
+
 
     this.menuItems = this.getMenuForRole(role);
   }
@@ -38,13 +38,14 @@ export class Sidebar implements OnInit {
         { icon: 'dashboard', label:'Lehrer', route:'/admin/teachers' },
         { icon: 'dashboard', label:'Schüler', route:'/admin/students' },
         { icon: 'dashboard', label:'Klassen', route:'/admin/klassen' },
-        { icon: 'dashboard', label:'Anfragen', route:'/admin/anfragen' },
+        { icon: 'download', label:'Export', route:'/admin/export' },
       ],
       teacher: [
         { icon: 'dashboard', label:'Dashboard', route:'/teacher/dashboard' },
         { icon: 'dashboard', label:'Meine Schüler', route:'/teacher/my-students' },
         { icon: 'dashboard', label:'Meine Klassen', route:'/teacher/my-classes' },
         { icon: 'dashboard', label:'Meine Kurse', route:'/teacher/my-courses' },
+        { icon: 'download', label:'Export', route:'/teacher/export' },
       ],
       student: [
         { icon: 'dashboard', label:'Dashboard', route:'/student/dashboard' },
