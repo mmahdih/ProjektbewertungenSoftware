@@ -16,13 +16,12 @@ import { Sidebar } from "../../../layout/sidebar/sidebar";
     MatIconModule,
     CommonModule,
     DashboardNavbar,
-    RouterOutlet,
     Sidebar
 ],
-  templateUrl: './my-results.html',
-  styleUrl: './my-results.css'
+  templateUrl: './my-assessment.html',
+  styleUrl: './my-assessment.css'
 })
-export class MyResults {
+export class MyAssessment {
   
 
   form: FormGroup;

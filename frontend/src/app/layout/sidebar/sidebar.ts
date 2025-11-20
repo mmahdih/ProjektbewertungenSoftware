@@ -50,7 +50,7 @@ export class Sidebar implements OnInit {
         { icon: 'dashboard', label:'Dashboard', route:'/student/dashboard' },
         { icon: 'group', label:'Meine Gruppe', route:'/student/my-classes' },
         { icon: 'assignment_ind', label:'Meine Noten', route:'/student/my-profile' },
-        { icon: 'assignment', label:'Selbst-/Fremdbewertung', route:'/student/my-results' },
+        { icon: 'assignment', label:'Selbst-/Fremdbewertung', route:'/student/my-assessment' },
       ]
     };
 
