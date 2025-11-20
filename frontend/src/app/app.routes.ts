@@ -1,50 +1,69 @@
 import { Routes } from '@angular/router';
-import { AuthGuard } from './core/auth/auth.guard';
-import { AdminGuard } from './core/guards/admin.guard';
-import { StudentGuard } from './core/guards/student.guard';
-import { TeacherGuard } from './core/guards/teacher.guard';
-import { LoginGuard } from './core/guards/login.guard';
-import { Login } from './Features/Auth/login/login';
 import { MainLayout } from './layout/main-layout/main-layout';
+import { AuthLayout } from './layout/auth-layout/auth-layout';
 
 export const routes: Routes = [
-
-  // { path: '', redirectTo: 'auth/login', pathMatch: 'full' },
-
   {
-    path: '', component: MainLayout
+    path: '',
+    component: MainLayout,
+    children: [
+      {
+        path: '',
+        redirectTo: 'admin/dashboard',
+        pathMatch: 'full',
+      },
+      {
+        path: 'admin',
+        loadChildren: () =>
+          import('./Features/Admin/admin-routing.module').then((c) => c.AdminRoutes),
+      },
+    ],
   },
-
   {
-    path: 'admin',
-    loadChildren: () =>
-      import('./Features/Admin/admin-routing.module')
-        .then(m => m.AdminRoutes),
-    canMatch: [AuthGuard, AdminGuard]
+    path: '',
+    component: MainLayout,
+    children: [
+      {
+        path: '',
+        redirectTo: 'teacher/dashboard',
+        pathMatch: 'full',
+      },
+      {
+        path: 'teacher',
+        loadChildren: () =>
+          import('./Features/Teacher/teacher-routing.module').then((c) => c.TeacherRoutes),
+      },
+    ],
   },
-
   {
-    path: 'auth',
-    loadChildren: () =>
-      import('./Features/Auth/auth-routing.module')
-        .then(m => m.AuthRoutes),
-        canMatch: [LoginGuard]
+    path: '',
+    component: MainLayout,
+    children: [
+      {
+        path: '',
+        redirectTo: 'student/dashboard',
+        pathMatch: 'full',
+      },
+      {
+        path: 'student',
+        loadChildren: () =>
+          import('./Features/Student/student-routing.module').then((c) => c.StudentRoutes),
+      },
+    ],
   },
-
   {
-    path: 'student',
-    loadChildren: () =>
-      import('./Features/Student/student-routing.module')
-        .then(m => m.StudentRoutes),
-    canMatch: [AuthGuard, StudentGuard]
+    path: '',
+    component: AuthLayout,
+    children: [
+      {
+        path: '',
+        redirectTo: 'auth',
+        pathMatch: 'full',
+      },
+      {
+        path: 'auth',
+        loadChildren: () => import('./Features/Auth/auth-routing.module').then((c) => c.AuthRoutes),
+      },
+    ],
   },
-
-  {
-    path: 'teacher',
-    loadChildren: () =>
-      import('./Features/Teacher/teacher-routing.module')
-        .then(m => m.TeacherRoutes),
-    canMatch: [AuthGuard, TeacherGuard]
-  },
-
 ];

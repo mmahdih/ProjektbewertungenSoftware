@@ -1,12 +1,9 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from "@angular/router";
-import { MatIcon } from "@angular/material/icon";
-import { DashboardNavbar } from "../../../layout/dashboard-navbar/dashboard-navbar";
-import { Sidebar } from "../../../layout/sidebar/sidebar";
+import { MatIconModule } from "@angular/material/icon";
 
 @Component({
   selector: 'app-my-classes',
-  imports: [RouterOutlet, MatIcon, DashboardNavbar, Sidebar],
+  imports: [MatIconModule],
   templateUrl: './my-classes.html',
   styleUrl: './my-classes.css'
 })
