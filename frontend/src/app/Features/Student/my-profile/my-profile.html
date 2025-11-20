@@ -1,53 +1,50 @@
 
     <!-- contents -->
     <div class="flex-1 p-6">
-      <div class="flex flex-row justify-between items-center mb-6">
-
-        <!-- title and buttons -->
-        <div class="flex items-center gap-10">
-          <span class="font-bold text-3xl">My Profile</span>
-
-          <!-- buttons -->
-          <div class="flex items-center gap-2 cursor-pointer hover:text-indigo-500 transition-colors">
-            <mat-icon>add_alert</mat-icon>
-            <a href="/" class="text-2xl font-normal">Benachrichtigungen</a>
+      <mat-card class="grades-card max-w-[500px] mx-auto text-center flex">
+        <mat-card-header class="mx-auto text-center flex">
+          <mat-card-title> Projekt.X </mat-card-title>
+          <mat-card-subtitle> Vorname Nachname </mat-card-subtitle>
+          <mat-card-subtitle> Gruppe.X </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content class="mat-card-content">
+          <p>LF 1 Das Unternehmen und die eigene Rolle im Betrieb beschreiben</p>
+          <div class="contentList">
+            <div class="teacherList">
+              <mat-list>
+                <span matListItemTitle>titleTeachers</span>
+                <mat-list-item>Pepper</mat-list-item>
+                <mat-list-item>Salt</mat-list-item>
+                <mat-list-item>Paprika</mat-list-item>
+              </mat-list>
+            </div>
+            <div class="gradesList">
+              <mat-list>
+                <span matListItemTitle>titleGrades</span>
+                <mat-list-item>Pepper</mat-list-item>
+                <mat-list-item>Salt</mat-list-item>
+                <mat-list-item>Paprika</mat-list-item>
+              </mat-list>
+            </div>
+            <div class="OverallGrade">
+              <mat-list>
+                <span matListItemTitle>titleOvrGrade</span>
+                <mat-list-item>Number</mat-list-item>
+              </mat-list>
+            </div>
           </div>
-
-          <div class="flex items-center gap-2 cursor-pointer hover:text-indigo-500 transition-colors">
-            <mat-icon>settings</mat-icon>
-            <span class="text-2xl font-normal">Theme</span>
-          </div>
-        </div>
-
-        <!-- search box -->
-        <div class="max-w-sm w-full">
-          <div
-            class="flex items-center rounded-md bg-white/5 pl-3 outline-1 outline-gray-600 focus-within:outline-2 focus-within:outline-indigo-500">
-            <input id="searchbox" type="text" name="searchbox" placeholder="Search Content..."
-              class="block w-full py-2 pr-3 pl-1 text-2xl text-black placeholder-gray-500 focus:outline-none sm:text-sm" />
-            <mat-icon class="m-2">search</mat-icon>
-          </div>
-        </div>
-      </div>
-
-      <!-- Summary Cards Section -->
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
-
-        
-      </div>
-
-      <!-- anfrage liste -->
-      <div>
-        <span class=" mx-3 font-semibold text-3xl">Anfragen</span>
-        <p class="mx-3">Sed tortor, sed velit ridiculus ipsum pharetra lacus odio gravida augue enim.</p>
-
-
-        <!-- error box -->
-        <div class="flex flex-row gap-3 p-3 my-5 m-3 border-2 bg-red-50 text-red-900 border-red-400 rounded-sm">
-          <mat-icon>error</mat-icon>
-          <p>Senectus malesuada suspendisse bibendum elit amet vitae.</p>
-        </div>
-
-        
-      </div>
+        </mat-card-content>
+        <mat-card-actions class="mat-card-actions">
+          <button
+            class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+          >
+            <mat-icon> keyboard_arrow_left </mat-icon>
+          </button>
+          <button
+            class="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+          >
+            <mat-icon> keyboard_arrow_right </mat-icon>
+          </button>
+        </mat-card-actions>
+      </mat-card>
     </div>
