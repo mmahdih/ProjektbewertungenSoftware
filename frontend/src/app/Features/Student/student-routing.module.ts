@@ -12,14 +12,17 @@ export const StudentRoutes: Routes = [
     component: StudentDashboard,
   },
   {
+    //noten
     path: 'my-profile',
     component: MyProfile
   },
   {
+    //selbstfremd
     path: 'my-results',
     component: MyResults
   },
   {
+    //Gruppen
     path: 'my-classes',
     component: MyClasses
   },

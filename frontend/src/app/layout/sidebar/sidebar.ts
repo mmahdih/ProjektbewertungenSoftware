@@ -71,11 +71,10 @@ export class Sidebar implements OnInit {
         { icon: 'download', label: 'Export', route: '/teacher/export' },
       ],
       student: [
-        { icon: 'dashboard', label:'Dashboard', route:'/student/dashboard' },
-        { icon: 'person', label:'Meine Lehrer', route:'/student/my-teachers' },
-        { icon: 'group', label:'Meine Klassen', route:'/student/my-classes' },
-        { icon: 'numbers', label:'Meine Noten', route:'/student/my-results' },
-      ]
+        { icon: 'dashboard', label: 'Dashboard', route: '/student/dashboard' },
+        { icon: 'dashboard', label: 'Meine Klassen', route: '/student/my-classes' },
+        { icon: 'dashboard', label: 'Meine Noten', route: '/student/my-results' },
+      ],
     };
 
     return menus[role] || [];
