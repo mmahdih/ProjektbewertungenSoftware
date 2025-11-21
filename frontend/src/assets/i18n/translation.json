@@ -1,0 +1,35 @@
+{
+  "export.title": {
+    "de": "Export",
+    "en": "Export"
+  },
+  "students.title": {
+    "de": "Schüler",
+    "en": "Students"
+  },
+    "teacher.title": {
+    "de": "Lehrer",
+    "en": "Teacher"
+  },
+  "selectAll.title": {
+    "de": "Alle auswählen",
+    "en": "select All"
+  },
+  "search.title": {
+    "de": "Suche...",
+    "en": "Search..."
+  },
+  "optionsSt.title": {
+    "de": "Schüler-optionen",
+    "en": "Student-Options"
+  },
+  "optionsTe.title": {
+    "de": "Lehrer-optionen",
+    "en": "Teacher-Options"
+  },
+
+  "filter.title": {
+    "de": "Filter",
+    "en": "Filter"
+  }
+}

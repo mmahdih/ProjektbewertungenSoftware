@@ -13,8 +13,27 @@
 
         <!-- LEFT: Title -->
         <div class="flex items-center gap-2 cursor-pointer hover:text-indigo-500 transition-colors">
-          <span class="font-bold text-3xl">Export</span>
+          <span class="font-bold text-3xl">{{ t('export.title') }}</span>
+
         </div>
+        <div class="flex items-center gap-3">
+  <button
+    class="lang-circle"
+    [class.lang-active]="currentLang === 'de'"
+    (click)="switchLang('de')"
+  >
+    <span class="lang-text-de">DE</span>
+  </button>
+
+  <button
+    class="lang-circle"
+    [class.lang-active]="currentLang === 'en'"
+    (click)="switchLang('en')"
+  >
+    <span class="lang-text-en">EN</span>
+  </button>
+</div>
+
 
         <!-- RIGHT: Searchbox + Ergebnisse -->
         <div class="flex items-center gap-6">
@@ -26,7 +45,7 @@
                 id="searchbox"
                 type="text"
                 name="searchbox"
-                placeholder="Search Content..."
+                placeholder="{{ t('search.title') }}"
                 class="block w-full py-2 pr-3 pl-1 text-2xl text-black placeholder-gray-700 
                        focus:outline-none sm:text-sm" />
               <mat-icon class="m-2 text-black">search</mat-icon>
@@ -45,9 +64,9 @@
           <!-- TABLE 1: Lehrer -->
           <div class="bg-white rounded-lg shadow-md overflow-hidden">
             <div class="px-4 py-3 border-b border-black flex items-center justify-between">
-              <span class="font-semibold text-lg text-black">Lehrer</span>
+              <span class="font-semibold text-lg text-black">{{ t('teacher.title') }}</span>
               <div class="flex items-center gap-2 cursor-pointer hover:text-indigo-500 transition-colors">
-                <span class="text-xs text-black uppercase tracking-wide">alle auswählen</span>
+                <span class="text-xs text-black uppercase tracking-wide">{{ t('selectAll.title') }}</span>
               </div>
             </div>
 
@@ -69,9 +88,9 @@
           <!-- TABLE 2: Schüler -->
           <div class="bg-white rounded-lg shadow-md overflow-hidden">
             <div class="px-4 py-3 border-b border-black flex items-center justify-between">
-              <span class="font-semibold text-lg text-black">Schüler</span>
+              <span class="font-semibold text-lg text-black">{{ t('students.title') }}</span>
               <div class="flex items-center gap-2 cursor-pointer hover:text-indigo-500 transition-colors">
-                <span class="text-xs text-black uppercase tracking-wide">alle auswählen</span>
+                <span class="text-xs text-black uppercase tracking-wide">{{ t('selectAll.title') }}</span>
               </div>
             </div>
 
@@ -105,8 +124,7 @@
             <!-- Schüler Filter -->
             <div class="border-t border-gray-200 pt-4">
               <h3 class="text-sm font-semibold text-gray-900 mb-3 uppercase tracking-wide">
-                Schüler-Optionen
-              </h3>
+                {{ t('optionsSt.title') }}</h3>
 
               <div class="space-y-2 text-sm text-gray-800">
                 <label class="flex items-center gap-2 cursor-pointer">
@@ -127,7 +145,7 @@
             <!-- Lehrer Filter -->
             <div class="border-t border-gray-200 pt-4">
               <h3 class="text-sm font-semibold text-gray-900 mb-3 uppercase tracking-wide">
-                Lehrer-Optionen
+                {{ t('optionsTe.title') }}
               </h3>
 
               <div class="space-y-2 text-sm text-gray-800">
