@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-  selector: 'app-my-results',
+  selector: 'app-manage-classes',
   imports: [MatIconModule],
-  templateUrl: './my-results.html',
-  styleUrl: './my-results.css'
+  templateUrl: './manage-classes.html',
+  styleUrl: './manage-classes.css'
 })
-export class MyResults {
+export class ManageClasses {
 
 }
