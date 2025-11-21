@@ -11,33 +11,36 @@
     <div class="flex-1 p-6">
       <mat-card class="grades-card max-w-[500px] mx-auto text-center flex">
         <mat-card-header class="mx-auto text-center flex">
-          <mat-card-title> Projekt.X </mat-card-title>
-          <mat-card-subtitle> Vorname Nachname </mat-card-subtitle>
-          <mat-card-subtitle> Gruppe.X </mat-card-subtitle>
+          <mat-card-title> {{ project }} </mat-card-title>
+          <mat-card-subtitle> {{ user }} </mat-card-subtitle>
+          <mat-card-subtitle> {{ group }} </mat-card-subtitle>
         </mat-card-header>
         <mat-card-content class="mat-card-content">
-          <p>LF 1 Das Unternehmen und die eigene Rolle im Betrieb beschreiben</p>
+          <p>{{ learningFields[frage] }}</p>
+
           <div class="contentList">
             <div class="teacherList">
               <mat-list>
-                <span matListItemTitle>titleTeachers</span>
-                <mat-list-item>Pepper</mat-list-item>
-                <mat-list-item>Salt</mat-list-item>
-                <mat-list-item>Paprika</mat-list-item>
+                <span matListItemTitle>Teachers</span>
+                @for (item of teachers; track $index) {
+                <mat-list-item>{{ item.name }}</mat-list-item>
+                }
               </mat-list>
             </div>
             <div class="gradesList">
               <mat-list>
-                <span matListItemTitle>titleGrades</span>
-                <mat-list-item>Pepper</mat-list-item>
-                <mat-list-item>Salt</mat-list-item>
-                <mat-list-item>Paprika</mat-list-item>
+                <span matListItemTitle>Grades</span>
+                @for (item of grades; track $index) {
+                <mat-list-item>{{ item.grade }}</mat-list-item>
+                }
               </mat-list>
             </div>
             <div class="OverallGrade">
               <mat-list>
-                <span matListItemTitle>titleOvrGrade</span>
-                <mat-list-item>Number</mat-list-item>
+                <span matListItemTitle>Overall Grade</span>
+                <div style="background-color: chartreuse;">
+                  <mat-list-item>{{overallGrade}}</mat-list-item>
+                </div>
               </mat-list>
             </div>
           </div>
