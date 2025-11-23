@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { MatIcon, MatIconModule } from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 import { AuthService } from '../../core/auth/auth.service';
 import { SidebarItem } from '../../Shared/interfaces/sidebar-item.interface';
 import { ɵInternalFormsSharedModule } from '@angular/forms';
@@ -15,9 +15,8 @@ import { SidebarService } from '../../core/services/sidebar.service';
   styleUrl: './sidebar.css',
 })
 export class Sidebar implements OnInit {
-  isCollapsed = false;
-  // @Input() isCollapsed = true;
-  // @Output() sidebarClose = new EventEmitter<void>();
+  @Input() isCollapsed = false;
+  @Output() sidebarClose = new EventEmitter<void>();
 
   sidebarStatus: string = 'open';
   menuItems: SidebarItem[] = [];
@@ -46,6 +45,7 @@ export class Sidebar implements OnInit {
       admin: [
         { icon: 'dashboard', label: 'Dashboard', route: '/admin/dashboard' },
         { icon: 'dashboard', label: 'Lehrer', route: '/admin/manage-teachers' },
+        { icon: 'groups', label: 'Users', route: '/admin/users' },
         { icon: 'dashboard', label: 'Schüler', route: '/admin/manage-students' },
         { icon: 'dashboard', label: 'Klassen', route: '/admin/manage-classes' },
         { icon: 'dashboard', label: 'Anfragen', route: '/admin/requests' },
@@ -55,14 +55,13 @@ export class Sidebar implements OnInit {
         { icon: 'dashboard', label: 'Dashboard', route: '/teacher/dashboard' },
         { icon: 'dashboard', label: 'Meine Schüler', route: '/teacher/my-students' },
         { icon: 'dashboard', label: 'Meine Klassen', route: '/teacher/my-classes' },
-        { icon: 'dashboard', label: 'Meine Kurse', route: '/teacher/my-courses' },
         { icon: 'download', label: 'Export', route: '/teacher/export' },
       ],
       student: [
         { icon: 'dashboard', label: 'Dashboard', route: '/student/dashboard' },
-        { icon: 'dashboard', label: 'Meine Lehrer', route: '/student/my-teachers' },
         { icon: 'dashboard', label: 'Meine Klassen', route: '/student/my-classes' },
-        { icon: 'dashboard', label: 'Meine Noten', route: '/student/my-grades' },
+        { icon: 'dashboard', label: 'Meine Noten', route: '/student/my-results' },
+        { icon: 'download', label: 'Export', route: '/student/export' },
       ],
     };
 

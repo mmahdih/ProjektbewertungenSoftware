@@ -1,48 +1,107 @@
 <div class="p-6 ">
   <!-- contents -->
-      <div class="flex flex-row justify-between items-center mb-6">
+  <div class="flex flex-row justify-between items-center mb-6">
 
-        <!-- title and buttons -->
-        <div class="flex items-center gap-10">
-          <span class="font-bold text-3xl">Manage Schüler</span>
+    <!-- title and buttons -->
+    <div class="flex items-center gap-10">
+      <span class="font-bold text-3xl">Manage Schüler</span>
 
-          <!-- buttons -->
-          <div class="flex items-center gap-2 cursor-pointer hover:text-indigo-500 transition-colors">
-            <mat-icon>add_alert</mat-icon>
-            <a href="/" class="text-2xl font-normal">Benachrichtigungen</a>
-          </div>
-
-          <div class="flex items-center gap-2 cursor-pointer hover:text-indigo-500 transition-colors">
-            <mat-icon>settings</mat-icon>
-            <span class="text-2xl font-normal">Theme</span>
-          </div>
-        </div>
-
-        <!-- search box -->
-        <div class="max-w-sm w-full">
-          <div
-            class="flex items-center rounded-md bg-white/5 pl-3 outline-1 outline-gray-600 focus-within:outline-2 focus-within:outline-indigo-500">
-            <input id="searchbox" type="text" name="searchbox" placeholder="Search Content..."
-              class="block w-full py-2 pr-3 pl-1 text-2xl text-black placeholder-gray-500 focus:outline-none sm:text-sm" />
-            <mat-icon class="m-2">search</mat-icon>
-          </div>
-        </div>
+      <!-- buttons -->
+      <div class="flex items-center gap-2 cursor-pointer hover:text-indigo-500 transition-colors">
+        <mat-icon>add_alert</mat-icon>
+        <a href="/" class="text-2xl font-normal">Benachrichtigungen</a>
       </div>
 
-      <!-- anfrage liste -->
-      <div>
-        <span class=" mx-3 font-semibold text-3xl">Schüler liste</span>
-        <p class="mx-3">Sed tortor, sed velit ridiculus ipsum pharetra lacus odio gravida augue enim.</p>
-
-
-        <!-- error box -->
-        <div class="flex flex-row gap-3 p-3 my-5 m-3 border-2 bg-red-50 text-red-900 border-red-400 rounded-sm">
-          <mat-icon>error</mat-icon>
-          <p>Senectus malesuada suspendisse bibendum elit amet vitae.</p>
-        </div>
-
-        
+      <div class="flex items-center gap-2 cursor-pointer hover:text-indigo-500 transition-colors">
+        <mat-icon>settings</mat-icon>
+        <span class="text-2xl font-normal">Theme</span>
       </div>
+    </div>
+
+    <!-- search box -->
+    <div class="max-w-sm w-full">
+      <div
+        class="flex items-center rounded-md bg-white/5 pl-3 outline-1 outline-gray-600 focus-within:outline-2 focus-within:outline-indigo-500">
+        <input id="searchbox" type="text" name="searchbox" placeholder="Search Content..."
+          class="block w-full py-2 pr-3 pl-1 text-2xl text-black placeholder-gray-500 focus:outline-none sm:text-sm" />
+        <mat-icon class="m-2">search</mat-icon>
+      </div>
+    </div>
+  </div>
+
+  <!-- anfrage liste -->
+  <div>
+    <span class=" mx-3 font-semibold text-3xl">Schüler liste</span>
+    <p class="mx-3">Sed tortor, sed velit ridiculus ipsum pharetra lacus odio gravida augue enim.</p>
+
+
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 scroll-auto">
+
+      <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+      <!-- Position Column -->
+      <ng-container matColumnDef="position">
+        <th mat-header-cell *matHeaderCellDef> No. </th>
+        <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="weight">
+        <th mat-header-cell *matHeaderCellDef> Weight </th>
+        <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="symbol">
+        <th mat-header-cell *matHeaderCellDef> Symbol </th>
+        <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <table class="table-auto border-collapse border border-gray-400">
+  <thead>
+    <tr>
+      <th class="border border-gray-300">State</th>
+      <th class="border border-gray-300">City</th>
+      <th class="border border-gray-300">Country</th>
+      <th class="border border-gray-300">phone</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="border border-gray-300">Indiana</td>
+      <td class="border border-gray-300">Indianapolis</td>
+      <td class="border border-gray-300">Indianapolis</td>
+      <td class="border border-gray-300">Indianapolis</td>
+    </tr>
+    <tr>
+      <td class="border border-gray-300">Ohio</td>
+      <td class="border border-gray-300">Indianapolis</td>
+      <td class="border border-gray-300">Indianapolis</td>
+      <td class="border border-gray-300">Columbus</td>
+    </tr>
+    <tr>
+      <td class="border border-gray-300">Michigan</td>
+      <td class="border border-gray-300">Indianapolis</td>
+      <td class="border border-gray-300">Indianapolis</td>
+      <td class="border border-gray-300">Detroit</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+  </div>
 
 
 </div>

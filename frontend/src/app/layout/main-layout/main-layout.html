@@ -1,10 +1,11 @@
-<main class="flex flex-col h-screen">
+<main class="flex flex-col h-screen bg-gray-50 dark:bg-gray-900">
   <app-dashboard-navbar></app-dashboard-navbar>
-
-  <div class="flex flex-row flex-1 min-h-0">
+  <div class="flex pt-16 overflow-hidden">
     <app-sidebar></app-sidebar>
-    <div class="w-screen p-4">
-      <router-outlet></router-outlet>
+    <div class="relative w-full h-full overflow-y-auto bg-gray-50 lg:ml-70 dark:bg-gray-900">  
+      <div class="px-4 pt-6 text-white">
+        <router-outlet></router-outlet>
+      </div>
     </div>
   </div>
 </main>
