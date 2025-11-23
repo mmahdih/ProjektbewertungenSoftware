@@ -1,28 +1,40 @@
-<aside 
-  class="bg-gray-800 text-xl h-screen p-4 transition-[width] duration-300 ease-in-out overflow-hidden" 
-  [ngClass]="isCollapsed ? 'w-20' : 'w-80'">
-  
+<aside class="bg-gray-800 text-xl h-screen p-4 transition-[width] duration-300 ease-in-out overflow-hidden sm:block"
+  [ngClass]="isCollapsed ? 'w-20' : 'w-90'">
+
   <div class="flex flex-col justify-between h-full">
+
     <div class="flex flex-col gap-3">
+
+
+      <div class="text-white flex flex-row items-center gap-2">
+        <div class="p-1 m-3 h-14 w-14 rounded-full border border-white overflow-hidden">
+          <img src="assets/pic.jpg" alt="" class="h-full w-full object-cover">
+        </div>
+
+        <div class="flex flex-col gap-0">
+          <span class="text-xl font-medium">Mahdi Haidary</span>
+          <span class="text-lg font-light">ADMIN</span>
+        </div>
+      </div>
+
       @for (item of menuItems; track $index) {
-        <a [routerLink]="item.route">
-          <div
-            class="text-white p-3 hover:bg-gray-700 cursor-pointer transition-colors rounded-lg flex gap-4 items-center">
-            <mat-icon class="min-w-[24px]">{{ item.icon }}</mat-icon>
-            @if (!isCollapsed) {
-              <span class="animate-fadeIn">{{ item.label }}</span>
-            }
-          </div>
-        </a>
+      <a [routerLink]="item.route">
+        <div
+          class="text-white p-3 hover:bg-gray-700 cursor-pointer transition-colors rounded-lg flex gap-4 items-center">
+          <mat-icon class="min-w-[24px]">{{ item.icon }}</mat-icon>
+          @if (!isCollapsed) {
+          <span class="animate-fadeIn">{{ item.label }}</span>
+          }
+        </div>
+      </a>
       }
     </div>
-    
-    <button 
-      (click)="logout()"
+
+    <button (click)="logout()"
       class="text-white p-3 hover:bg-gray-700 cursor-pointer transition-colors rounded-lg flex gap-4 items-center">
       <mat-icon class="min-w-[24px]">logout</mat-icon>
       @if (!isCollapsed) {
-        <span class="animate-fadeIn">Ausloggen</span>
+      <span class="animate-fadeIn">Ausloggen</span>
       }
     </button>
   </div>

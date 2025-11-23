@@ -46,3 +46,32 @@ more info:
 
 ## stylings
 more info: <https://tailwindcss.com/docs/functions-and-directives>
+
+
+
+
+
+
+
+
+
+
+
+### Admin
+* lehre
+* schuler
+* klassen
+* export 
+
+
+### lerher
+* klassen ubersicht
+* noten eintragen
+* selbst und fremdbewertung ansehen
+* project groupen erstellen und schuler eintragen
+* export ergebniss
+  
+### schuler
+* seine ergebnisse sehen und exporten
+* seine groupen mitglieder ansehen
+* selbs und bewertung eintragen
