@@ -3,6 +3,7 @@ import { StudentDashboard } from './student-dashboard/student-dashboard';
 import { MyProfile } from './my-profile/my-profile';
 import { MyResults } from './my-results/my-results';
 import { MyClasses } from './my-classes/my-classes';
+import { StudentExport } from "./student-export/student-export";
 
 
 export const StudentRoutes: Routes = [
@@ -21,5 +22,9 @@ export const StudentRoutes: Routes = [
   {
     path: 'my-classes',
     component: MyClasses
+  },
+  {
+    path: 'export',
+    component: StudentExport
   }
 ];
