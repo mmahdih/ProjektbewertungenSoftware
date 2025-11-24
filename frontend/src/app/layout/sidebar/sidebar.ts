@@ -55,6 +55,7 @@ export class Sidebar implements OnInit {
         { icon: 'dashboard', label: 'Dashboard', route: '/teacher/dashboard' },
         { icon: 'dashboard', label: 'Meine Schüler', route: '/teacher/my-students' },
         { icon: 'dashboard', label: 'Meine Klassen', route: '/teacher/my-classes' },
+        { icon: 'mode_heat', label: 'Notenverwaltung', route: '/teacher/manage-grades' },
         { icon: 'download', label: 'Export', route: '/teacher/export' },
       ],
       student: [
