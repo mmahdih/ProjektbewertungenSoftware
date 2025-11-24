@@ -16,7 +16,7 @@ export class MyProfile {
   user = 'Vorname Nachname';
   group = 'Gruppe 1';
 
-  frage = 0;
+  learningFieldsCount = 0;
 
   learningFields: string[] = [
     'Präsentation',
@@ -45,4 +45,27 @@ export class MyProfile {
     { id: 3, grade: 1 },
   ];
   overallGrade = 2;
-}
+
+  changeLf(msg: string) {
+    console.log(msg);
+    console.log(this.learningFieldsCount);
+    if (msg === 'up') {
+        if (this.learningFieldsCount + 1 < 9) {
+        this.learningFieldsCount += 1;
+        }
+        else{
+          this.learningFieldsCount = 0;
+        }
+      } else if (msg == 'down') {
+        if(this.learningFieldsCount - 1 >= 0){
+          this.learningFieldsCount -= 1;
+        }
+        else{
+          this.learningFieldsCount = 9;
+        }
+      }
+      else{
+        console.log('fehler');
+      }
+    }
+  }
