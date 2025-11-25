@@ -45,7 +45,7 @@ export class MyProfile {
   ];
   overallGrade = 2;
 
-  changeLf(msg: string) {
+  changeLearningField(msg: string) {
     console.log(msg);
     console.log(this.learningFieldsCount);
     if (msg === 'up') {
