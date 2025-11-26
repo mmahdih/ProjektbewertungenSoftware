@@ -66,51 +66,30 @@
                   </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-100">
+                  @for (item of students; track $index) {
                   <!-- Beispielzeile 1 -->
                   <tr class="hover:bg-gray-50">
                     <td class="px-4 md:px-6 py-3 whitespace-nowrap">
                       <div class="flex flex-col">
                         <!-- Vorname -->
-                        <span class="font-medium text-gray-900">Max</span>
+                        <span class="font-medium text-gray-900">{{ item.firstName }}</span>
                       </div>
                     </td>
                     <!-- Nachname -->
                     <td
                       class="font-medium text-gray-900 px-4 md:px-6 py-3 whitespace-nowrap text-gray-700"
                     >
-                      Mustermann
+                      {{ item.lastName }}
                     </td>
 
                     <!-- Email -->
                     <td class="px-4 py-3 text-center">
                       <span class="inline-flex items-center justify-center w-10 h-8 font-semibold">
-                        test@email.com
+                        {{ item.email }}
                       </span>
                     </td>
                   </tr>
-
-                  <!-- Beispielzeile 2 -->
-                  <tr class="hover:bg-gray-50">
-                    <td class="px-4 md:px-6 py-3 whitespace-nowrap">
-                      <div class="flex flex-col">
-                        <span class="font-medium text-gray-900">Reiner</span>
-                        <!-- <span class="text-xs text-gray-500">ID: 67890</span> -->
-                      </div>
-                    </td>
-                    <td
-                      class="font-medium text-gray-900 px-4 md:px-6 py-3 whitespace-nowrap text-gray-700"
-                    >
-                      Zufall
-                    </td>
-
-                    <td class="px-4 py-3 text-center">
-                      <span class="inline-flex items-center justify-center w-10 h-8 font-semibold">
-                        test@email.com
-                      </span>
-                    </td>
-                  </tr>
-
-                  <!-- Weitere Zeilen hier dynamisch generieren -->
+                  }
                 </tbody>
               </table>
             </div>
