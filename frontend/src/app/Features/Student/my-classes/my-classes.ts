@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Sidebar } from "../../../layout/sidebar/sidebar";
 import { MatIcon } from "@angular/material/icon";
+import { DashboardNavbar } from "../../../layout/dashboard-navbar/dashboard-navbar";
 
 export interface Student {
 id: number;
@@ -10,7 +11,7 @@ email: string;
 } 
 @Component({
   selector: 'app-my-classes',
-  imports: [Sidebar, MatIcon],
+  imports: [Sidebar, MatIcon, DashboardNavbar],
   templateUrl: './my-classes.html',
   styleUrl: './my-classes.css'
 })
