@@ -21,15 +21,17 @@ export class Sidebar implements OnInit {
   sidebarStatus: string = 'open';
   menuItems: SidebarItem[] = [];
 
-  constructor(private auth: AuthService, private router: Router, private sidebarService: SidebarService) {}
+  constructor(
+    private auth: AuthService,
+    private router: Router,
+    private sidebarService: SidebarService
+  ) {}
 
   ngOnInit() {
     const role = this.auth.getRole();
     this.menuItems = this.getMenuForRole(role);
 
-    this.sidebarService.isCollapsed$.subscribe(
-      collapsed => this.isCollapsed = collapsed
-    )
+    this.sidebarService.isCollapsed$.subscribe((collapsed) => (this.isCollapsed = collapsed));
   }
 
   logout() {
@@ -44,8 +46,8 @@ export class Sidebar implements OnInit {
     const menus: { [key: string]: SidebarItem[] } = {
       admin: [
         { icon: 'dashboard', label: 'Dashboard', route: '/admin/dashboard' },
+        { icon: 'group', label: 'Users', route: '/admin/users' },
         { icon: 'dashboard', label: 'Lehrer', route: '/admin/manage-teachers' },
-        { icon: 'groups', label: 'Users', route: '/admin/users' },
         { icon: 'dashboard', label: 'Schüler', route: '/admin/manage-students' },
         { icon: 'dashboard', label: 'Klassen', route: '/admin/manage-classes' },
         { icon: 'dashboard', label: 'Anfragen', route: '/admin/requests' },
@@ -53,8 +55,17 @@ export class Sidebar implements OnInit {
       ],
       teacher: [
         { icon: 'dashboard', label: 'Dashboard', route: '/teacher/dashboard' },
-        { icon: 'dashboard', label: 'Meine Schüler', route: '/teacher/my-students' },
-        { icon: 'dashboard', label: 'Meine Klassen', route: '/teacher/my-classes' },
+        {
+          icon: 'manage_accounts',
+          label: 'Verwaltung',
+          route: '',
+          subMenu: [
+            { icon: 'person', label: 'Schüler', route: '/teacher/my-students' },
+            { icon: 'groups', label: 'Groups', route: '/teacher/groups' },
+            { icon: 'assignment', label: 'Projekte', route: '/teacher/projects' },
+          ],
+        },
+        { icon: 'video_label', label: 'Meine Klassen', route: '/teacher/my-classes' },
         { icon: 'mode_heat', label: 'Notenverwaltung', route: '/teacher/manage-grades' },
         { icon: 'download', label: 'Export', route: '/teacher/export' },
       ],

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatIcon } from "@angular/material/icon";
+import { SiAcademicCapIcon } from "@semantic-icons/heroicons/24/solid";
+import { SiExclamationCircleIcon } from '@semantic-icons/heroicons/24/solid';
 
 export interface User {
   id: number;
@@ -24,7 +26,7 @@ export interface BreadcrumbItem {
 @Component({
   selector: 'app-user-list',
   standalone: true,
-  imports: [CommonModule, FormsModule, MatIcon],
+  imports: [CommonModule, FormsModule, MatIcon, SiExclamationCircleIcon],
   templateUrl: './user-list.html',
   styleUrls: ['./user-list.css']
 })
