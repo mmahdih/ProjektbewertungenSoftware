@@ -1,5 +1,13 @@
+
+interface sideItem {
+label: string;
+      route: string;
+      icon?: string;
+}
+
 export interface SidebarItem {
   label: string;
   route: string;
-  icon?: string; // optional, some items may not have icons
+  icon?: string;
+  subMenu?: sideItem[];
 }
