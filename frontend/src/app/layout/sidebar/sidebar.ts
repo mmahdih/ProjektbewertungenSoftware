@@ -49,6 +49,7 @@ export class Sidebar implements OnInit {
         { icon: 'dashboard', label: 'Schüler', route: '/admin/manage-students' },
         { icon: 'dashboard', label: 'Klassen', route: '/admin/manage-classes' },
         { icon: 'dashboard', label: 'Anfragen', route: '/admin/requests' },
+        { icon: 'upload', label: 'Import', route: '/admin/import' },
         { icon: 'download', label: 'Export', route: '/admin/export' },
       ],
       teacher: [
@@ -62,7 +63,6 @@ export class Sidebar implements OnInit {
         { icon: 'dashboard', label: 'Dashboard', route: '/student/dashboard' },
         { icon: 'dashboard', label: 'Meine Klassen', route: '/student/my-classes' },
         { icon: 'dashboard', label: 'Meine Noten', route: '/student/my-results' },
-        { icon: 'download', label: 'Export', route: '/student/export' },
       ],
     };
 

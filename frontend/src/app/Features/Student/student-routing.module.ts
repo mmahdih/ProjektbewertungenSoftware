@@ -23,8 +23,4 @@ export const StudentRoutes: Routes = [
     path: 'my-classes',
     component: MyClasses
   },
-  {
-    path: 'export',
-    component: StudentExport
-  }
 ];

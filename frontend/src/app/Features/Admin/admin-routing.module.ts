@@ -3,6 +3,7 @@ import { AdminDashboard } from "./admin-dashboard/admin-dashboard";
 import { ManageStudents } from './manage-students/manage-students';
 import { ManageTeachers } from './manage-teachers/manage-teachers';
 import { Export } from "./admin-export/admin-export";
+import { Import } from "./admin-import/admin-import";
 import { ManageClasses } from './manage-classes/manage-classes';
 import { Requests } from './requests/requests';
 import { Test } from './test/test';
@@ -37,6 +38,10 @@ export const AdminRoutes: Routes = [
   {
     path: 'export',
     component: Export
+  },
+  {
+    path: 'import',
+    component: Import
   },
   {
     path: 'test',
