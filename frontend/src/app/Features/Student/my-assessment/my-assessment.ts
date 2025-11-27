@@ -4,9 +4,9 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
-import { DashboardNavbar } from "../../../Shared/Components/dashboard-navbar/dashboard-navbar";
 import { RouterOutlet } from "@angular/router";
 import { Sidebar } from "../../../layout/sidebar/sidebar";
+import { DashboardNavbar } from "../../../layout/dashboard-navbar/dashboard-navbar";
 @Component({
   selector: 'app-my-results',
    imports: [
@@ -15,8 +15,8 @@ import { Sidebar } from "../../../layout/sidebar/sidebar";
     MatButtonModule,
     MatIconModule,
     CommonModule,
-    DashboardNavbar,
-    Sidebar
+    Sidebar,
+    DashboardNavbar
 ],
   templateUrl: './my-assessment.html',
   styleUrl: './my-assessment.css'
