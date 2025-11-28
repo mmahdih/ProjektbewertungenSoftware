@@ -25,6 +25,7 @@ public class UserController {
     }
 
     @GetMapping("/users")
+    @CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<List<UserDto>> getAllUsers() {
         var modules = userRepository.findAll()
                 .stream()
