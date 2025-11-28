@@ -1,6 +1,5 @@
-
-    <!-- contents -->
-    <div class="flex-1 p-6">
+<!-- contents -->
+<!-- <div class="flex-1 p-6">
       <mat-card class="grades-card max-w-[500px] mx-auto text-center flex">
         <mat-card-header class="mx-auto text-center flex">
           <mat-card-title> {{ project }} </mat-card-title>
@@ -49,4 +48,79 @@
           </button>
         </mat-card-actions>
       </mat-card>
+    </div> -->
+
+<div class="flex-1 p-6">
+  <div
+    class="grades-card max-w-[500px] mx-auto text-center flex flex-col bg-white dark:bg-gray-900 shadow-lg rounded-xl p-6"
+  >
+    <!-- Header -->
+    <div class="mb-4 text-center">
+      <h2 class="text-xl font-bold">{{ project }}</h2>
+      <p class="text-gray-600 dark:text-gray-300">{{ user }}</p>
+      <p class="text-gray-600 dark:text-gray-300">{{ group }}</p>
     </div>
+
+    <!-- Content -->
+    <div class="mat-card-content mb-4">
+      <p class="text-lg font-medium">{{ learningFields[learningFieldsCount] }}</p>
+
+      <div class="contentList grid grid-cols-3 gap-4 mt-4">
+        <!-- Teachers -->
+        <div class="teacherList">
+          <h3 class="font-semibold mb-2 border-b pb-1">Teachers</h3>
+          <ul class="space-y-1">
+            @for (item of teachers; track $index) {
+            <li
+              class="px-2 py-1 text-gray-700 dark:text-gray-300 rounded bg-gray-100 dark:bg-gray-800"
+            >
+              {{ item.name }}
+            </li>
+            }
+          </ul>
+        </div>
+
+        <!-- Grades -->
+        <div class="gradesList">
+          <h3 class="font-semibold mb-2 border-b pb-1">Grades</h3>
+          <ul class="space-y-1">
+            @for (item of grades; track $index) {
+            <li
+              class="px-2 py-1 text-gray-700 dark:text-gray-300 rounded bg-gray-100 dark:bg-gray-800"
+            >
+              {{ item.grade }}
+            </li>
+            }
+          </ul>
+        </div>
+
+        <!-- Overall Grade -->
+        <div class="OverallGrade">
+          <h3 class="font-semibold mb-2 border-b pb-1">Overall</h3>
+          <div class="px-2 py-2 rounded font-bold text-black bg-lime-400">
+            {{ overallGrade }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="flex justify-center space-x-3 mt-4">
+      <!-- Left button -->
+      <button
+        (click)="changeLearningField('down')"
+        class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 flex items-center"
+      >
+        <span class="material-icons">keyboard_arrow_left</span>
+      </button>
+
+      <!-- Right button -->
+      <button
+        (click)="changeLearningField('up')"
+        class="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 shadow-lg rounded-lg text-sm px-5 py-2.5 flex items-center"
+      >
+        <span class="material-icons">keyboard_arrow_right</span>
+      </button>
+    </div>
+  </div>
+</div>
