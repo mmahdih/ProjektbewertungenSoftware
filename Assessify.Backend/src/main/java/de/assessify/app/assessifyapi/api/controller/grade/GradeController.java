@@ -5,6 +5,7 @@ import de.assessify.app.assessifyapi.api.dtos.request.UpdateGradeDto;
 import de.assessify.app.assessifyapi.api.dtos.response.GradeDto;
 import de.assessify.app.assessifyapi.api.dtos.response.TrainingModuleWithGradesDto;
 import de.assessify.app.assessifyapi.api.service.EntityFinderService;
+import de.assessify.app.assessifyapi.api.service.GradeCalculationService;
 import de.assessify.app.assessifyapi.api.repository.GradeRepository;
 import de.assessify.app.assessifyapi.api.entity.Grade;
 import de.assessify.app.assessifyapi.api.entity.TrainingModule;
@@ -20,10 +21,14 @@ import java.util.UUID;
 public class GradeController {
     private final GradeRepository gradeRepository;
     private final EntityFinderService entityFinderService;
+    private final GradeCalculationService gradeCalculationService;
 
-    public GradeController(GradeRepository gradeRepository, EntityFinderService entityFinderService) {
+    public GradeController(GradeRepository gradeRepository,
+                           EntityFinderService entityFinderService,
+                           GradeCalculationService gradeCalculationService) {
         this.gradeRepository = gradeRepository;
         this.entityFinderService = entityFinderService;
+        this.gradeCalculationService = gradeCalculationService;
     }
 
     @GetMapping("/user/{userId}/training-modules/{trainingModulesId}/grades")
@@ -158,5 +163,12 @@ public class GradeController {
 
         gradeRepository.delete(grade);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/user/{userId}/overall-grade")
+    public ResponseEntity<Double> getOverallGrade(@PathVariable UUID userId) {
+        User user = entityFinderService.findUser(userId);
+        double overallGrade = gradeCalculationService.calculateUserOverallGrade(user);
+        return ResponseEntity.ok(overallGrade);
     }
 }
