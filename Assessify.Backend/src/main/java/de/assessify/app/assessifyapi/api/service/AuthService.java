@@ -1,8 +1,7 @@
 package de.assessify.app.assessifyapi.api.service;
 
-import de.assessify.app.assessifyapi.api.repository.UserRepository;
 import de.assessify.app.assessifyapi.api.entity.User;
-import org.springframework.beans.factory.annotation.Autowired;
+import de.assessify.app.assessifyapi.api.repository.UserRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -13,31 +12,47 @@ public class AuthService {
 
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder passwordEncoder;
+    private final JwtService jwtService;
 
-    @Autowired
-    public AuthService(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder) {
+    public AuthService(UserRepository userRepository,
+                       BCryptPasswordEncoder passwordEncoder,
+                       JwtService jwtService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.jwtService = jwtService;
     }
 
-    public boolean authenticateUser(String username, String password) {
-        String[] names = username.split("\\."); // Trennt den Benutzernamen am Punkt
-        if (names.length != 2) {
-            return false; // Ungültiges Format
+    public String loginAndGetJwt(String username, String rawPassword) {
+        if (username == null || rawPassword == null) {
+            return null;
         }
-        String firstName = names[0];
-        String lastName = names[1];
 
-        // Sucht den Benutzer anhand der aufgeteilten Namen
-        Optional<User> userOptional = userRepository.findByFirstNameIgnoreCaseAndLastNameIgnoreCase(firstName, lastName);
-
-        if (userOptional.isPresent()) {
-            User user = userOptional.get();
-            // Überprüft das Passwort
-            if (passwordEncoder.matches(password, user.getPassword())) {
-                return true;
-            }
+        String[] parts = username.trim().split("\\.", 2);
+        if (parts.length < 2) {
+            return null;
         }
-        return false;
+
+        String firstName = parts[0].trim();
+        String lastName = parts[1].trim();
+
+        Optional<User> optionalUser =
+                userRepository.findByFirstNameIgnoreCaseAndLastNameIgnoreCase(firstName, lastName);
+
+        if (optionalUser.isEmpty()) {
+            return null;
+        }
+
+        User user = optionalUser.get();
+
+        boolean matches = passwordEncoder.matches(rawPassword, user.getPassword());
+        if (!matches) {
+            return null;
+        }
+
+        return jwtService.generateToken(user);
+    }
+
+    public boolean authenticateUser(String username, String rawPassword) {
+        return loginAndGetJwt(username, rawPassword) != null;
     }
 }
