@@ -6,9 +6,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { AuthService } from '../../core/auth/auth.service';
 import { SidebarService } from '../../core/services/sidebar.service';
 import { CommonModule } from '@angular/common';
-
 import { SiXMarkIcon, SiBars3Icon } from '@semantic-icons/heroicons/24/solid';
-
 @Component({
   selector: 'app-dashboard-navbar',
   standalone: true,

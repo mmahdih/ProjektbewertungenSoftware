@@ -4,24 +4,24 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
-
 @Component({
-  selector: 'app-selbstfremd',
-  templateUrl: './selbstfremd.html',
-  styleUrls: ['./selbstfremd.css'],
-  imports: [
+  selector: 'app-my-results',
+   imports: [
     ReactiveFormsModule,
     MatCardModule,
     MatButtonModule,
     MatIconModule,
-  CommonModule]
+    CommonModule,
+],
+  templateUrl: './my-assessment.html',
+  styleUrl: './my-assessment.css'
 })
-export class selbstfremd {
+export class MyAssessment {
+  
 
   form: FormGroup;
   
   bewertung = new Map<string,number[]>();
-
   questions: string[] = [
     '1: Wie schätzen sie das Engagment im Projekt ein?',
     '2: Wie zielgerichtet wurde an der Aufgabenstellung gearbeitet?',
@@ -34,7 +34,6 @@ export class selbstfremd {
     '9: Beurteilen Sie das Engagment bei der Realisierung der Funktionalität (Java-Backend/Vernetzung)?',
     '10: Beurteilen Sie die Mitarbeit bei der Erstellung des Werbeflyers?',
     '11: Welche Gesamtnote würen Sie der jeweiligen Person für Ihren beitrag zum Gelingen des Projektes geben?'
-
   ];
 
   frage =  0;
@@ -85,7 +84,6 @@ submitRating() {
     this.form.markAllAsTouched();
   } else { 
     this.bewertung.set(this.questions[this.frage],this.ratings);
-    console.log(this.bewertung);
     this.ratings = [0, 0, 0, 0, 0]; 
     this.frage++;
     /**
@@ -94,3 +92,5 @@ submitRating() {
   }
   }
 }
+
+
