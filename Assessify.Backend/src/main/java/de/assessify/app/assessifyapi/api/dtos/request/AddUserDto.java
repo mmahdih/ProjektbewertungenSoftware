@@ -1,5 +1,6 @@
 package de.assessify.app.assessifyapi.api.dtos.request;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
-public record AddUserDto (String firstName, String lastName, String email, String password, LocalDateTime date){}
+public record AddUserDto (UUID id, String firstName, String lastName, String username, String password, LocalDateTime date, Integer roleId){}
