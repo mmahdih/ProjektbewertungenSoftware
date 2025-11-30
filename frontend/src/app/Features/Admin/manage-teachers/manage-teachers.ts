@@ -3,9 +3,10 @@ import { RouterOutlet } from "@angular/router";
 import { MatIcon, MatIconModule } from "@angular/material/icon";
 import { DashboardNavbar } from "../../../layout/dashboard-navbar/dashboard-navbar";
 import { Sidebar } from "../../../layout/sidebar/sidebar";
-import { TeacherService, Teacher } from './teacher.service';
+import { TeacherService } from './teacher.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { User } from '../../../Interfaces/user.interface';
 
 @Component({
   selector: 'app-manage-teachers',
@@ -15,7 +16,7 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './manage-teachers.css'
 })
 export class ManageTeachers implements OnInit{
-  teachers: Teacher[] = [];
+  teachers: User[] = [];
   loading = true;
 
   showAddModel: boolean = false;
@@ -79,4 +80,3 @@ export class ManageTeachers implements OnInit{
   }
 
 }
-
