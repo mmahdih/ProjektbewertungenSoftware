@@ -24,8 +24,11 @@ public class User {
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
+    @Column(name = "role_id")
+    private Integer roleId;
+
     @Column(nullable = false, unique = true)
-    private String email;
+    private String username;
 
     @Column(nullable = false)
     private String password;
@@ -40,14 +43,6 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "training-module_id")
     )
     private List<TrainingModule> trainingModules = new ArrayList<>();
-
-    @ManyToMany
-    @JoinTable(
-            name = "user_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
-    )
-    private List<Role> roles = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(

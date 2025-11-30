@@ -74,7 +74,7 @@ public class SchoolClassController {
                 updatedUser.getId(),
                 updatedUser.getFirstName(),
                 updatedUser.getFirstName(),
-                updatedUser.getEmail(),
+                updatedUser.getUsername(),
                 updatedUser.getSchoolClasses().stream()
                         .map(r -> new SchoolClassDto(r.getId(), r.getSchoolClassName()))
                         .toList()
