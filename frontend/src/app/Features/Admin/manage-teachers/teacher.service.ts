@@ -1,37 +1,21 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
-export interface Teacher {
-  id: number;
-  firstName: string;
-  lastName: string;
-  username: string;
-  avatarUrl: string;
-  roleName: string;
-}
-
-export interface AddTeacher {
-    firstName: string;
-    lastName: string;
-    username: string;
-    password: string;
-    role: number;
-}
+import { User, AddUser } from '../../../Interfaces/user.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TeacherService {
-  private apiUrl = 'http://localhost:4100/api/user/teacher';
+  private apiUrl = 'http://localhost:4100/api/users/role/1';
 
   constructor(private http: HttpClient) {}
 
-  getTeachers(): Observable<Teacher[]> {
-    return this.http.get<Teacher[]>(this.apiUrl);
+  getTeachers(): Observable<User[]> {
+    return this.http.get<User[]>(this.apiUrl);
   }
 
-  createTeacher(dto: AddTeacher): Observable<Teacher> {
-    return this.http.post<Teacher>(this.apiUrl, dto)
+  createTeacher(dto: AddUser): Observable<User> {
+    return this.http.post<User>(this.apiUrl, dto)
   }
 }

@@ -15,7 +15,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/user")
+@CrossOrigin(origins = "http://localhost:4200")
+@RequestMapping("/api/users")
 public class UserController {
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder passwordEncoder;
@@ -27,10 +28,9 @@ public class UserController {
         this.roleRepository = roleRepository;
     }
 
-    @GetMapping("/teacher")
-    @CrossOrigin(origins = "http://localhost:4200")
-    public ResponseEntity<List<UserDto>> getAllUsers() {
-        var modules = userRepository.findAll()
+    @GetMapping("/role/{roleId}")
+    public ResponseEntity<List<UserDto>> getAllUsersById(@PathVariable Integer roleId) {
+        var modules = userRepository.findByRoleId(roleId)
                 .stream()
                 .map(field -> {
 
@@ -51,15 +51,14 @@ public class UserController {
         return ResponseEntity.ok(modules);
     }
 
-    @PostMapping("/teacher")
-    @CrossOrigin(origins = "http://localhost:4200")
-    public ResponseEntity<UserDto> createUserTeacher(@RequestBody AddUserDto dto) {
+    @PostMapping("/role/{roleId}")
+    public ResponseEntity<UserDto> createUserTeacher(@RequestBody AddUserDto dto, @PathVariable Integer roleId) {
         User user = new User();
         user.setFirstName(dto.firstName());
         user.setLastName(dto.lastName());
         user.setPassword(passwordEncoder.encode(dto.password()));
         user.setUsername(dto.username());
-        user.setRoleId(1);
+        user.setRoleId(roleId);
 
         User savedUser = userRepository.save(user);
 
