@@ -66,7 +66,7 @@ public class EntityFinderService {
         return reviewRepository.findById(reviewId)
                 .orElseThrow(() -> new EntityNotFoundException("Review not found"));
     }
-    public Role findRole(UUID roleId) {
+    public Role findRole(int roleId) {
         return roleRepository.findById(roleId)
                 .orElseThrow(() -> new EntityNotFoundException("Role not found"));
     }
