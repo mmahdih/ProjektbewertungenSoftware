@@ -48,19 +48,19 @@ export class ManageClasses implements OnInit{
     });
   }
 
-  // saveClass() {
-  //   const dto = {
-  //     firstName: this.name
-  //   };
+  saveClass() {
+    const dto = {
+      name: this.name
+    };
 
-  //   this.classService.createClass(dto).subscribe({
-  //     next: (schoolclass) => {
-  //       this.classes.push(schoolclass); // direkt zur Liste hinzufügen
-  //       this.closeAddModel();
-  //       // Reset Form
-  //       this.name = '';
-  //     },
-  //     error: (err) => console.error('Fehler beim Erstellen:', err)
-  //   });
-  // }
+    this.classService.createClass(dto).subscribe({
+      next: (schoolclass) => {
+        this.classes.push(schoolclass); // direkt zur Liste hinzufügen
+        this.closeAddModel();
+        // Reset Form
+        this.name = '';
+      },
+      error: (err) => console.error('Fehler beim Erstellen:', err)
+    });
+  }
 }
