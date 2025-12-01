@@ -1,10 +1,9 @@
-<div
-  class="rating-card flex flex-col rounded-lg p-6 mb-4 dark:bg-gray-800"
->
+@if(commitedRating == false){
+<div class="rating-card flex flex-col rounded-lg p-6 mb-4 dark:bg-gray-800">
   <!-- Header -->
   <div class="mb-4">
     <h2 class="text-lg dark:text-white font-semibold">{{ questions[frage] }}</h2>
-    <p class="text-sm dark:text-white ">Bitte wähle eine Bewertung</p>
+    <p class="text-sm dark:text-white">Bitte wähle eine Bewertung</p>
   </div>
 
   <!-- Content -->
@@ -41,11 +40,26 @@
       Zurücksetzen
     </button>
 
-    <button
-      class="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 shadow-lg rounded-lg text-sm px-5 py-2.5 text-center"
-      (click)="submitRating()"
-    >
-      Bewertung speichern
-    </button>
+    <div>
+      @if (frage == questions.length - 1) {
+      <button
+        class="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 shadow-lg rounded-lg text-sm px-5 py-2.5 text-center"
+        (click)="sendRating()"
+      >
+        Bewertung Abschicken
+      </button>
+      } @else {
+      <button
+        class="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 shadow-lg rounded-lg text-sm px-5 py-2.5 text-center"
+        (click)="submitRating()"
+      >
+        Naechste Frage
+      </button>
+      }
+    </div>
   </div>
-  </div>
+</div>
+}@else{
+  Bewertung Abgegeben
+}
+
