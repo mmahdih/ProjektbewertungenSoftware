@@ -50,7 +50,7 @@ export class Sidebar implements OnInit {
         { icon: 'dashboard', label: 'Lehrer', route: '/admin/manage-teachers' },
         { icon: 'dashboard', label: 'Schüler', route: '/admin/manage-students' },
         { icon: 'dashboard', label: 'Klassen', route: '/admin/manage-classes' },
-        { icon: 'dashboard', label: 'Anfragen', route: '/admin/requests' },
+        { icon: 'dashboard', label: 'Questions', route: '/admin/manage-questions' },
         { icon: 'upload', label: 'Import', route: '/admin/import' },
         { icon: 'download', label: 'Export', route: '/admin/export' },
       ],
