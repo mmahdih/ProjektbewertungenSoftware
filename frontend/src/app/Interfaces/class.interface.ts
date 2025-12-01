@@ -1,7 +1,10 @@
 
+export interface AddClass {
+    name: string;
+}
+
+
 export interface Class {
-    classId: number;
-    room: string;
-    studentIds: number[];
-    teacherIds: number[];
+    id: string;
+    name: string;
 }
