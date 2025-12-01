@@ -9,7 +9,8 @@
         class="flex items-start justify-between p-5 border-b rounded-t dark:border-gray-700 border-gray-200"
       >
         <h3 class="text-xl font-semibold dark:text-white">New User</h3>
-        <button (click)="closeAddModel()"
+        <button
+          (click)="closeAddModel()"
           class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-700 dark:hover:text-white"
         >
           <mat-icon class="w-5 h-5">close</mat-icon>
@@ -136,8 +137,7 @@
               <th
                 scope="col"
                 class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400"
-              >
-              </th>
+              ></th>
               <th
                 scope="col"
                 class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400"
@@ -164,7 +164,6 @@
 
               <!-- Avatar + Name + Email -->
               <td class="flex items-center p-4 space-x-8 whitespace-nowrap">
-                
                 <div class="text-sm font-normal text-gray-500 dark:text-gray-400">
                   <div class="text-base font-semibold text-gray-900 dark:text-white">
                     {{ question.questionText }}
@@ -176,9 +175,9 @@
               </td>
 
               <!-- Role -->
-              <td class="p-4 space-x-2 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                
-              </td>
+              <td
+                class="p-4 space-x-2 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white"
+              ></td>
 
               <!-- Actions -->
               <td class="p-4 space-x-2 whitespace-nowrap">
@@ -193,7 +192,6 @@
                 </button>
                 <button
                   type="button"
-                  
                   class="inline-flex items-center px-3 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-800"
                 >
                   <mat-icon class="w-4 h-4 mr-2">delete</mat-icon> Delete student
@@ -201,7 +199,6 @@
               </td>
             </tr>
           </tbody>
-
         </table>
       </div>
     </div>
@@ -217,7 +214,9 @@
     <div class="relative bg-white rounded-lg shadow dark:bg-gray-800">
       <!-- Formular korrekt verschachtelt -->
       <form (ngSubmit)="saveEditedQuestion()">
-        <div class="flex items-start justify-between p-5 border-b rounded-t dark:border-gray-700 border-gray-200">
+        <div
+          class="flex items-start justify-between p-5 border-b rounded-t dark:border-gray-700 border-gray-200"
+        >
           <h3 class="text-xl font-semibold dark:text-white">Edit Question</h3>
           <button
             (click)="closeEditModel()"
@@ -232,7 +231,10 @@
         <div class="p-6 space-y-6">
           <div class="grid grid-cols-6 gap-6">
             <div class="col-span-6 sm:col-span-3">
-              <label for="questionText" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+              <label
+                for="questionText"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              >
                 Question
               </label>
               <input
@@ -249,7 +251,9 @@
         </div>
 
         <!-- Footer -->
-        <div class="flex items-start justify-between p-5 border-t rounded-b dark:border-gray-700 border-gray-200">
+        <div
+          class="flex items-start justify-between p-5 border-t rounded-b dark:border-gray-700 border-gray-200"
+        >
           <button
             type="submit"
             class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
