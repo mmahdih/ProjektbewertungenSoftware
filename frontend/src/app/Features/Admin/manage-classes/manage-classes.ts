@@ -19,6 +19,8 @@ export class ManageClasses implements OnInit{
   name = '';
 
   showAddModel: boolean = false;
+  showEditModel: boolean = false;
+  selectedClass: Class | null = null;
 
   constructor(private classService: ClassService) {}
 
@@ -32,6 +34,15 @@ export class ManageClasses implements OnInit{
 
   closeAddModel(): void {
     this.showAddModel = false;
+  }
+
+  openEditModel(schoolClass: Class): void {
+    this.selectedClass = schoolClass;
+    this.showEditModel = true;
+  }
+
+  closeEditModel(): void {
+    this.showEditModel = false;
   }
 
   loadClasses() {
@@ -61,6 +72,25 @@ export class ManageClasses implements OnInit{
         this.name = '';
       },
       error: (err) => console.error('Fehler beim Erstellen:', err)
+    });
+  }
+
+  saveEditedClass() {
+  if (!this.selectedClass) return;
+
+  const dto = {
+    name: this.name
+  };
+
+  this.classService.updateQuestion(this.selectedClass.id, dto)
+    .subscribe({
+      next: (updated) => {
+        const index = this.classes.findIndex(q => q.id === updated.id);
+        if (index !== -1) this.classes[index] = updated;
+
+        this.closeEditModel();
+      },
+      error: (err) => console.error('Fehler beim Aktualisieren:', err)
     });
   }
 }

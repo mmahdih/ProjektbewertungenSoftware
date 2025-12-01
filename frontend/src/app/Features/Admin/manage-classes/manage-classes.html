@@ -168,6 +168,9 @@
                   <div class="text-base font-semibold text-gray-900 dark:text-white">
                     {{ class.name }}
                   </div>
+                  <div class="text-sm font-normal text-gray-500 dark:text-gray-400">
+                    {{ class.name }}
+                  </div>
                 </div>
               </td>
 
@@ -178,9 +181,12 @@
               <td class="p-4 space-x-2 whitespace-nowrap">
                 <button
                   type="button"
-                  class="inline-flex items-center px-3 py-2 text-sm font-medium text-white rounded-lg bg-blue-700 hover:bg-blue-800"
+                  (click)="openEditModel(class)"
+                  data-modal-target="edit-user-modal"
+                  data-modal-toggle="edit-user-modal"
+                  class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 >
-                  <mat-icon class="w-4 h-4 mr-2">edit</mat-icon> Edit student
+                  <mat-icon class="w-4 h-4 mr-2">edit</mat-icon> Edit Class
                 </button>
                 <button
                   type="button"
@@ -194,6 +200,67 @@
 
         </table>
       </div>
+    </div>
+  </div>
+</div>
+
+<div
+  id="edit-user-modal"
+  [hidden]="!showEditModel"
+  class="fixed inset-0 z-50 flex items-center justify-center overflow-x-hidden overflow-y-auto bg-gray-900/50 dark:bg-gray-900/60 backdrop-blur-sm"
+>
+  <div class="relative w-full h-full max-w-2xl px-4 md:h-auto">
+    <div class="relative bg-white rounded-lg shadow dark:bg-gray-800">
+      <!-- Formular korrekt verschachtelt -->
+      <form (ngSubmit)="saveEditedClass()">
+        <div
+          class="flex items-start justify-between p-5 border-b rounded-t dark:border-gray-700 border-gray-200"
+        >
+          <h3 class="text-xl font-semibold dark:text-white">Edit Class</h3>
+          <button
+            (click)="closeEditModel()"
+            type="button"
+            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-700 dark:hover:text-white"
+          >
+            <mat-icon class="w-5 h-5">close</mat-icon>
+          </button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="p-6 space-y-6">
+          <div class="grid grid-cols-6 gap-6">
+            <div class="col-span-6 sm:col-span-3">
+              <label
+                for="c"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              >
+                Class
+              </label>
+              <input
+                type="text"
+                name="className"
+                id="className"
+                class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                placeholder="Edit..."
+                [(ngModel)]="name"
+                required
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <div
+          class="flex items-start justify-between p-5 border-t rounded-b dark:border-gray-700 border-gray-200"
+        >
+          <button
+            type="submit"
+            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          >
+            Save
+          </button>
+        </div>
+      </form>
     </div>
   </div>
 </div>

@@ -83,25 +83,25 @@ public class SchoolClassController {
 //
 //        return ResponseEntity.ok(response);
 //    }
-//
-//    @PutMapping("/school-class/{schoolClassId}")
-//    public ResponseEntity<SchoolClassDto> updateRole(
-//            @PathVariable UUID schoolClassId,
-//            @RequestBody UpdateSchoolClassDto dto) {
-//
-//        SchoolClass schoolClass = entityFinderService.findSchoolClass(schoolClassId);
-//
-//        schoolClass.setSchoolClassName(dto.name());
-//
-//        SchoolClass updated = schoolClassRepository.save(schoolClass);
-//
-//        SchoolClassDto response = new SchoolClassDto(
-//                updated.getId(),
-//                updated.getSchoolClassName()
-//        );
-//
-//        return ResponseEntity.ok(response);
-//    }
+
+    @PutMapping("/school-class/{schoolClassId}")
+    public ResponseEntity<SchoolClassDto> updateRole(
+            @PathVariable UUID schoolClassId,
+            @RequestBody UpdateSchoolClassDto dto) {
+
+        SchoolClass schoolClass = entityFinderService.findSchoolClass(schoolClassId);
+
+        schoolClass.setSchoolClassName(dto.name());
+
+        SchoolClass updated = schoolClassRepository.save(schoolClass);
+
+        SchoolClassDto response = new SchoolClassDto(
+                updated.getId(),
+                updated.getSchoolClassName()
+        );
+
+        return ResponseEntity.ok(response);
+    }
 //
 //    @DeleteMapping("/school-class/{schoolClassId}")
 //    public ResponseEntity<Void> deleteSchoolClass(

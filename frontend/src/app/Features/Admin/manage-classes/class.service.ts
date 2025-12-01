@@ -18,4 +18,8 @@ export class ClassService {
     createClass(dto: AddClass): Observable<Class> {
         return this.http.post<Class>(this.apiUrl, dto)
     }
+
+    updateQuestion(id: string, dto: AddClass): Observable<Class> {
+    return this.http.put<Class>(`${this.apiUrl}/${id}`, dto);
+    }
 }
