@@ -43,7 +43,7 @@ public class UserController {
                             field.getLastName(),
                             field.getUsername(),
                             field.getCreatedAt(),
-                            role != null ? role.getRoleName() : null
+                            role != null ? role.getName() : null
                     );
                 })
                 .toList();
@@ -72,7 +72,7 @@ public class UserController {
                         savedUser.getLastName(),
                         savedUser.getUsername(),
                         savedUser.getCreatedAt(),
-                        role != null ? role.getRoleName() : null
+                        role != null ? role.getName() : null
                 ));
     }
 }
