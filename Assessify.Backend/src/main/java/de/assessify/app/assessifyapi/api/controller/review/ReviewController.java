@@ -91,7 +91,7 @@ public class ReviewController {
                                 a.getQuestion().getId(),
                                 a.getQuestion().getQuestionText(),
                                 a.getReviewedUser().getId(),
-                                a.getReviewedUser().getFirstName() + " " + a.getReviewedUser().getLastName() + " " + a.getReviewedUser().getEmail(),
+                                a.getReviewedUser().getFirstName() + " " + a.getReviewedUser().getLastName() + " " + a.getReviewedUser().getUsername(),
                                 a.getRating()
                         )).toList()
         );

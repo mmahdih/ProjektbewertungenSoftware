@@ -95,7 +95,7 @@ public class LearningFieldController {
                 updatedUser.getId(),
                 updatedUser.getFirstName(),
                 updatedUser.getLastName(),
-                updatedUser.getEmail(),
+                updatedUser.getUsername(),
                 modules
         );
         return ResponseEntity.ok(response);

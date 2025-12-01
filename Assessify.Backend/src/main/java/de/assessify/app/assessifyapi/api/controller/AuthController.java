@@ -1,8 +1,8 @@
 package de.assessify.app.assessifyapi.api.controller;
 
+import de.assessify.app.assessifyapi.api.dtos.response.LoginResponseDto;
 import de.assessify.app.assessifyapi.api.entity.LoginDto;
 import de.assessify.app.assessifyapi.api.service.AuthService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,16 +13,23 @@ public class AuthController {
 
     private final AuthService authService;
 
-    @Autowired
     public AuthController(AuthService authService) {
         this.authService = authService;
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody LoginDto loginDto) {
-        if (authService.authenticateUser(loginDto.getUsername(), loginDto.getPassword())) {
-            return new ResponseEntity<>("Login successful!", HttpStatus.OK);
+    public ResponseEntity<?> login(@RequestBody LoginDto loginDto) {
+        String token = authService.loginAndGetJwt(loginDto.getUsername(), loginDto.getPassword());
+
+        if (token == null) {
+            return new ResponseEntity<>("Invalid username or password", HttpStatus.UNAUTHORIZED);
         }
-        return new ResponseEntity<>("Invalid username or password", HttpStatus.UNAUTHORIZED);
+
+        LoginResponseDto response = new LoginResponseDto(
+                token,
+                "Bearer"
+        );
+
+        return ResponseEntity.ok(response);
     }
 }
