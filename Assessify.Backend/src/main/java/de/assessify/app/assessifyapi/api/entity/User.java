@@ -37,7 +37,7 @@ public class User {
     private Integer roleId;
 
     @Column(name = "class_id")
-    private Integer classId;
+    private UUID classId;
 
     @ManyToMany
     @JoinTable(
