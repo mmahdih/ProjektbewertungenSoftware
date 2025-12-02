@@ -46,10 +46,15 @@ export class Sidebar implements OnInit {
     const menus: { [key: string]: SidebarItem[] } = {
       admin: [
         { icon: 'dashboard', label: 'Übersicht', route: '/admin/dashboard' },
-        { icon: 'group', label: 'Nutzer', route: '/admin/users' ,subMenu: [
-          { icon: 'assignment_ind', label: 'Lehrer', route: '/admin/manage-teachers' },
-          { icon: 'person', label: 'Schüler', route: '/admin/manage-students' },
-          ],},
+        {
+          icon: 'group',
+          label: 'Nutzer',
+          route: '/admin/users',
+          subMenu: [
+            { icon: 'assignment_ind', label: 'Lehrer', route: '/admin/manage-teachers' },
+            { icon: 'person', label: 'Schüler', route: '/admin/manage-students' },
+          ],
+        },
         { icon: 'groups', label: 'Klassen', route: '/admin/manage-classes' },
         { icon: 'help_outlined', label: 'Fragen', route: '/admin/manage-questions' },
         { icon: 'upload', label: 'Import', route: '/admin/import' },
@@ -72,11 +77,11 @@ export class Sidebar implements OnInit {
         { icon: 'download', label: 'Export', route: '/teacher/export' },
       ],
       student: [
-        { icon: 'dashboard', label:'Übersicht', route:'/student/dashboard' },
-        { icon: 'group', label:'Meine Gruppe', route:'/student/my-classes' },
-        { icon: 'assignment_ind', label:'Meine Noten', route:'/student/my-profile' },
-        { icon: 'assignment', label:'Selbst-/Fremdbewertung', route:'/student/my-assessment' },
-      ]
+        { icon: 'dashboard', label: 'Übersicht', route: '/student/dashboard' },
+        { icon: 'group', label: 'Meine Gruppe', route: '/student/my-classes' },
+        { icon: 'assignment_ind', label: 'Meine Noten', route: '/student/my-profile' },
+        { icon: 'assignment', label: 'Selbst-/Fremdbewertung', route: '/student/my-assessment' },
+      ],
     };
     return menus[role] || [];
   }
