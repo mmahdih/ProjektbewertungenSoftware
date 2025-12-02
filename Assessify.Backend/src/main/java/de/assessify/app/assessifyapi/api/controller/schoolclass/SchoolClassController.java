@@ -42,6 +42,19 @@ public class SchoolClassController {
         return ResponseEntity.ok(modules);
     }
 
+    @GetMapping("/school-class/user/{userId}")
+    public ResponseEntity<List<SchoolClassDto>> getSchoolClassesByUserId(@PathVariable UUID userId) {
+        var modules = schoolClassRepository.findByUsers_Id(userId)
+                .stream()
+                .map(field -> new SchoolClassDto(
+                        field.getId(),
+                        field.getSchoolClassName()
+                ))
+                .toList();
+
+        return ResponseEntity.ok(modules);
+    }
+
     @PostMapping("/school-class")
     public ResponseEntity<SchoolClassDto> addSchoolClass(@RequestBody AddSchoolClassDto dto) {
        SchoolClass entity = new SchoolClass();
@@ -57,32 +70,32 @@ public class SchoolClassController {
        return ResponseEntity.ok(response);
     }
 
-//    @PostMapping("/user/{userId}/connect/school-class/{schoolClassId}")
-//    public ResponseEntity<UserWithSchoolClassDto> addSchoolClassToUser(
-//            @PathVariable UUID userId,
-//            @PathVariable UUID schoolClassId){
-//
-//        User user = entityFinderService.findUser(userId);
-//        SchoolClass schoolClass = entityFinderService.findSchoolClass(schoolClassId);
-//
-//        if (!user.getSchoolClasses().contains(schoolClass)) {
-//            user.getSchoolClasses().add(schoolClass);
-//        }
-//
-//        User updatedUser = userRepository.save(user);
-//
-//        UserWithSchoolClassDto response = new UserWithSchoolClassDto(
-//                updatedUser.getId(),
-//                updatedUser.getFirstName(),
-//                updatedUser.getFirstName(),
-//                updatedUser.getUsername(),
-//                updatedUser.getSchoolClasses().stream()
-//                        .map(r -> new SchoolClassDto(r.getId(), r.getSchoolClassName()))
-//                        .toList()
-//        );
-//
-//        return ResponseEntity.ok(response);
-//    }
+    @PostMapping("/school-class/{schoolClassId}/user/{userId}")
+    public ResponseEntity<UserWithSchoolClassDto> addSchoolClassToUser(
+            @PathVariable UUID userId,
+            @PathVariable UUID schoolClassId){
+
+        User user = entityFinderService.findUser(userId);
+        SchoolClass schoolClass = entityFinderService.findSchoolClass(schoolClassId);
+
+        if (!user.getSchoolClasses().contains(schoolClass)) {
+            user.getSchoolClasses().add(schoolClass);
+        }
+
+        User updatedUser = userRepository.save(user);
+
+        UserWithSchoolClassDto response = new UserWithSchoolClassDto(
+                updatedUser.getId(),
+                updatedUser.getFirstName(),
+                updatedUser.getFirstName(),
+                updatedUser.getUsername(),
+                updatedUser.getSchoolClasses().stream()
+                        .map(r -> new SchoolClassDto(r.getId(), r.getSchoolClassName()))
+                        .toList()
+        );
+
+        return ResponseEntity.ok(response);
+    }
 
     @PutMapping("/school-class/{schoolClassId}")
     public ResponseEntity<SchoolClassDto> updateRole(
