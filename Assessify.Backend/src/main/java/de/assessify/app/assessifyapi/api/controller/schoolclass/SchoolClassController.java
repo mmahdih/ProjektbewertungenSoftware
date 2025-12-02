@@ -57,32 +57,32 @@ public class SchoolClassController {
        return ResponseEntity.ok(response);
     }
 
-//    @PostMapping("/user/{userId}/connect/school-class/{schoolClassId}")
-//    public ResponseEntity<UserWithSchoolClassDto> addSchoolClassToUser(
-//            @PathVariable UUID userId,
-//            @PathVariable UUID schoolClassId){
-//
-//        User user = entityFinderService.findUser(userId);
-//        SchoolClass schoolClass = entityFinderService.findSchoolClass(schoolClassId);
-//
-//        if (!user.getSchoolClasses().contains(schoolClass)) {
-//            user.getSchoolClasses().add(schoolClass);
-//        }
-//
-//        User updatedUser = userRepository.save(user);
-//
-//        UserWithSchoolClassDto response = new UserWithSchoolClassDto(
-//                updatedUser.getId(),
-//                updatedUser.getFirstName(),
-//                updatedUser.getFirstName(),
-//                updatedUser.getUsername(),
-//                updatedUser.getSchoolClasses().stream()
-//                        .map(r -> new SchoolClassDto(r.getId(), r.getSchoolClassName()))
-//                        .toList()
-//        );
-//
-//        return ResponseEntity.ok(response);
-//    }
+    @PostMapping("/school-class/{schoolClassId}/user/{userId}")
+    public ResponseEntity<UserWithSchoolClassDto> addSchoolClassToUser(
+            @PathVariable UUID userId,
+            @PathVariable UUID schoolClassId){
+
+        User user = entityFinderService.findUser(userId);
+        SchoolClass schoolClass = entityFinderService.findSchoolClass(schoolClassId);
+
+        if (!user.getSchoolClasses().contains(schoolClass)) {
+            user.getSchoolClasses().add(schoolClass);
+        }
+
+        User updatedUser = userRepository.save(user);
+
+        UserWithSchoolClassDto response = new UserWithSchoolClassDto(
+                updatedUser.getId(),
+                updatedUser.getFirstName(),
+                updatedUser.getFirstName(),
+                updatedUser.getUsername(),
+                updatedUser.getSchoolClasses().stream()
+                        .map(r -> new SchoolClassDto(r.getId(), r.getSchoolClassName()))
+                        .toList()
+        );
+
+        return ResponseEntity.ok(response);
+    }
 
     @PutMapping("/school-class/{schoolClassId}")
     public ResponseEntity<SchoolClassDto> updateRole(
