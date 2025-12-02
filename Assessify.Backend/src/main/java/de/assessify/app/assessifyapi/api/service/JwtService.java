@@ -26,6 +26,7 @@ public class JwtService {
                 .withSubject(user.getId().toString())
                 .withClaim("firstName", user.getFirstName())
                 .withClaim("lastName", user.getLastName())
+                .withClaim("username", user.getUsername())
                 .withIssuedAt(now)
                 .withExpiresAt(expiresAt)
                 .sign(algorithm);
