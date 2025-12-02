@@ -27,16 +27,8 @@ public class AuthService {
             return null;
         }
 
-        String[] parts = username.trim().split("\\.", 2);
-        if (parts.length < 2) {
-            return null;
-        }
-
-        String firstName = parts[0].trim();
-        String lastName = parts[1].trim();
-
         Optional<User> optionalUser =
-                userRepository.findByFirstNameIgnoreCaseAndLastNameIgnoreCase(firstName, lastName);
+                userRepository.findByUsernameIgnoreCase(username.trim());
 
         if (optionalUser.isEmpty()) {
             return null;
@@ -50,9 +42,5 @@ public class AuthService {
         }
 
         return jwtService.generateToken(user);
-    }
-
-    public boolean authenticateUser(String username, String rawPassword) {
-        return loginAndGetJwt(username, rawPassword) != null;
     }
 }
