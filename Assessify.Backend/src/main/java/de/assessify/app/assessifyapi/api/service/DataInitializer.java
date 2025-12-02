@@ -9,7 +9,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.security.SecureRandom;
-import java.util.UUID;
 
 @Component
 public class DataInitializer implements CommandLineRunner {
