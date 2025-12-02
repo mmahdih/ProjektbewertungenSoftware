@@ -1,24 +1,29 @@
-import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { Class } from "../../../Interfaces/class.interface";
-import { Observable } from "rxjs";
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Class } from '../../../Interfaces/class.interface';
+import { Observable } from 'rxjs';
+import { AuthService } from '../../../core/auth/auth.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class MyClassService {
-    private apiUrl = 'http://localhost:4100/api/school-class';
+  private apiUrl = 'http://localhost:4100/api/school-class';
 
-    constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
-    getClass(): Observable<Class[]> {
-        return this.http.get<Class[]>(this.apiUrl);
-    }
+  getClass(): Observable<Class[]> {
+    const token = this.authService.getToken(); // holt den gespeicherten JWT aus localStorage
 
-    assignTeacher(classId: number, teacherId: number): Observable<any> {
-    return this.http.put(
-        `${this.apiUrl}/${classId}/assign-teacher/${teacherId}`,
-        {}
-    );
-    }
+    console.log("token", token);
+    return this.http.get<Class[]>(this.apiUrl, {
+        headers: {
+        Authorization: `Bearer ${token}` // Token wird an Backend geschickt
+        }
+    });
+  }
+
+  assignTeacher(classId: number, teacherId: number): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${classId}/assign-teacher/${teacherId}`, {});
+  }
 }
