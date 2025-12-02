@@ -45,39 +45,44 @@ export class Sidebar implements OnInit {
   getMenuForRole(role: string): SidebarItem[] {
     const menus: { [key: string]: SidebarItem[] } = {
       admin: [
-        { icon: 'dashboard', label: 'Dashboard', route: '/admin/dashboard' },
-        { icon: 'group', label: 'Users', route: '/admin/users' },
-        { icon: 'dashboard', label: 'Lehrer', route: '/admin/manage-teachers' },
-        { icon: 'dashboard', label: 'Schüler', route: '/admin/manage-students' },
-        { icon: 'dashboard', label: 'Klassen', route: '/admin/manage-classes' },
-        { icon: 'dashboard', label: 'Questions', route: '/admin/manage-questions' },
+        { icon: 'dashboard', label: 'Übersicht', route: '/admin/dashboard' },
+        {
+          icon: 'group',
+          label: 'Nutzer',
+          route: '/admin/users',
+          subMenu: [
+            { icon: 'assignment_ind', label: 'Lehrer', route: '/admin/manage-teachers' },
+            { icon: 'person', label: 'Schüler', route: '/admin/manage-students' },
+          ],
+        },
+        { icon: 'groups', label: 'Klassen', route: '/admin/manage-classes' },
+        { icon: 'help_outlined', label: 'Fragen', route: '/admin/manage-questions' },
         { icon: 'upload', label: 'Import', route: '/admin/import' },
         { icon: 'download', label: 'Export', route: '/admin/export' },
       ],
       teacher: [
-        { icon: 'dashboard', label: 'Dashboard', route: '/teacher/dashboard' },
+        { icon: 'dashboard', label: 'Übersicht', route: '/teacher/dashboard' },
         {
           icon: 'manage_accounts',
           label: 'Verwaltung',
           route: '',
           subMenu: [
             { icon: 'person', label: 'Schüler', route: '/teacher/my-students' },
-            { icon: 'groups', label: 'Groups', route: '/teacher/groups' },
+            { icon: 'group', label: 'Projektgruppe', route: '/teacher/groups' },
             { icon: 'assignment', label: 'Projekte', route: '/teacher/projects' },
           ],
         },
-        { icon: 'video_label', label: 'Meine Klassen', route: '/teacher/my-classes' },
+        { icon: 'groups', label: 'Meine Klassen', route: '/teacher/my-classes' },
         { icon: 'mode_heat', label: 'Notenverwaltung', route: '/teacher/manage-grades' },
         { icon: 'download', label: 'Export', route: '/teacher/export' },
       ],
       student: [
-        { icon: 'dashboard', label:'Dashboard', route:'/student/dashboard' },
-        { icon: 'group', label:'Meine Gruppe', route:'/student/my-classes' },
-        { icon: 'assignment_ind', label:'Meine Noten', route:'/student/my-profile' },
-        { icon: 'assignment', label:'Selbst-/Fremdbewertung', route:'/student/my-assessment' },
-      ]
+        { icon: 'dashboard', label: 'Übersicht', route: '/student/dashboard' },
+        { icon: 'group', label: 'Meine Gruppe', route: '/student/my-classes' },
+        { icon: 'assignment_ind', label: 'Meine Noten', route: '/student/my-profile' },
+        { icon: 'assignment', label: 'Selbst-/Fremdbewertung', route: '/student/my-assessment' },
+      ],
     };
-
     return menus[role] || [];
   }
 }
