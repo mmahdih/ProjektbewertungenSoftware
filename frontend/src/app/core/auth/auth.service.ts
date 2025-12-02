@@ -1,3 +1,4 @@
+
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
@@ -14,6 +15,9 @@ interface User {
   providedIn: 'root'
 })
 export class AuthService {
+  private readonly API_URL = 'http://localhost:4100/api';
+
+
   getUsername() {
     return JSON.parse(localStorage.getItem('user') || "{}").username || '';
   }
@@ -22,16 +26,20 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  async login(username: string, password: string): Promise<boolean>  {
-    const user = this.users.find(u => u.username === username.toLowerCase() && u.password === password);
+  // async login(username: string, password: string): Promise<boolean>  {
+  //   const user = this.users.find(u => u.username === username.toLowerCase() && u.password === password);
 
 
-    if (user) {
-      localStorage.setItem('user', JSON.stringify({ username: user.username, role: user.role }));
-      return true;
-    }
+  //   if (user) {
+  //     localStorage.setItem('user', JSON.stringify({ username: user.username, role: user.role }));
+  //     return true;
+  //   }
 
-    return false;
+  //   return false;
+  // }
+
+  login(username:string, password:string){
+    return this.http.post<User>(`${this.API_URL}/user`, {username, password});
   }
 
   logout() {
