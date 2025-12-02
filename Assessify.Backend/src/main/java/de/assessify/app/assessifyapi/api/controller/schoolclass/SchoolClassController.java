@@ -1,5 +1,7 @@
 package de.assessify.app.assessifyapi.api.controller.schoolclass;
 
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.interfaces.DecodedJWT;
 import de.assessify.app.assessifyapi.api.dtos.request.AddSchoolClassDto;
 import de.assessify.app.assessifyapi.api.dtos.request.UpdateSchoolClassDto;
 import de.assessify.app.assessifyapi.api.dtos.response.SchoolClassDto;
@@ -29,7 +31,7 @@ public class SchoolClassController {
         this.entityFinderService = entityFinderService;
     }
 
-    @GetMapping("/school-class")
+    @GetMapping("/school-class/all")
     public ResponseEntity<List<SchoolClassDto>> getAllSchoolClasses() {
         var modules = schoolClassRepository.findAll()
                 .stream()
@@ -42,17 +44,28 @@ public class SchoolClassController {
         return ResponseEntity.ok(modules);
     }
 
-    @GetMapping("/school-class/user/{userId}")
-    public ResponseEntity<List<SchoolClassDto>> getSchoolClassesByUserId(@PathVariable UUID userId) {
-        var modules = schoolClassRepository.findByUsers_Id(userId)
-                .stream()
-                .map(field -> new SchoolClassDto(
-                        field.getId(),
-                        field.getSchoolClassName()
-                ))
-                .toList();
+    @GetMapping("/school-class")
+    public ResponseEntity<List<SchoolClassDto>> getSchoolClassesForCurrentUser(@RequestHeader("Authorization") String authHeader) {
+        try {
+            if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+                return ResponseEntity.status(401).build();
+            }
 
-        return ResponseEntity.ok(modules);
+            String token = authHeader.substring(7); // "Bearer " abschneiden
+            DecodedJWT jwt = JWT.decode(token);
+            UUID userId = UUID.fromString(jwt.getSubject());
+
+            var classes = schoolClassRepository.findByUsers_Id(userId)
+                    .stream()
+                    .map(c -> new SchoolClassDto(c.getId(), c.getSchoolClassName()))
+                    .toList();
+
+            return ResponseEntity.ok(classes);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).build();
+        }
     }
 
     @PostMapping("/school-class")

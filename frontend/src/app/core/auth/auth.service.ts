@@ -103,11 +103,16 @@ export class AuthService {
 
   getRole(): string {
     const stored = JSON.parse(localStorage.getItem('user') || '{}');
-  return stored.claims?.roleName?.toLowerCase() || '';
+    return stored.claims?.roleName?.toLowerCase() || '';
   }
 
   getAllClaims(): Record<string, any> {
     const stored = localStorage.getItem(this.storageKey);
     return stored ? JSON.parse(stored).claims : {};
   }
+  
+  getToken(): string {
+  const stored = localStorage.getItem(this.storageKey);
+  return stored ? JSON.parse(stored).token : '';
+}
 }

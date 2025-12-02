@@ -7,7 +7,7 @@ import { Injectable } from "@angular/core";
   providedIn: 'root'
 })
 export class ClassService {
-    private apiUrl = 'http://localhost:4100/api/school-class';
+    private apiUrl = 'http://localhost:4100/api/school-class/all';
 
     constructor(private http: HttpClient) {}
 

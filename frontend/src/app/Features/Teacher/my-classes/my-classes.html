@@ -8,7 +8,7 @@
       <div
         class="flex items-start justify-between p-5 border-b rounded-t dark:border-gray-700 border-gray-200"
       >
-        <h3 class="text-xl font-semibold dark:text-white">New User</h3>
+        <h3 class="text-xl font-semibold dark:text-white">Klasse hinzufügen</h3>
         <button
           (click)="closeAddModel()"
           class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-700 dark:hover:text-white"
@@ -23,18 +23,19 @@
             <div class="grid grid-cols-6 gap-6">
               <div class="col-span-6 sm:col-span-3">
                 <label
-                  for="questionText"
+                  for="Text"
                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >Question Text</label
+                  >Klasse:</label
                 >
-                <input
-                  type="text"
-                  name="questionText"
-                  id="questionText"
-                  class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                  placeholder="What is your Question..."
-                  required
-                />
+                <mat-form-field appearance="fill">
+                  <mat-label>Klasse auswählen</mat-label>
+                  <mat-select [(value)]="selectedClassId">
+                    <mat-option *ngFor="let cls of allClasses" [value]="cls.id">
+                      {{ cls.name }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <p>Ausgewählte Klasse: {{ selectedClassId }}</p>
               </div>
             </div>
           </form>
@@ -46,7 +47,7 @@
             class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             type="submit"
           >
-            Save All
+            Zur Klasse hinzufügen
           </button>
         </div>
       </form>
@@ -89,7 +90,7 @@
       <div class="flex items-center ml-auto space-x-2 sm:space-x-3">
         <button
           type="button"
-          
+          (click)="openAddModel()"
           data-modal-target="add-user-modal"
           data-modal-toggle="add-user-modal"
           class="inline-flex items-center justify-center w-1/2 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 sm:w-auto dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
@@ -176,7 +177,9 @@
               </td>
 
               <!-- Role -->
-              <td class="p-4 space-x-2 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
+              <td
+                class="p-4 space-x-2 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white"
+              >
                 Count Stundents
               </td>
 
@@ -197,7 +200,6 @@
               </td>
             </tr>
           </tbody>
-
         </table>
       </div>
     </div>

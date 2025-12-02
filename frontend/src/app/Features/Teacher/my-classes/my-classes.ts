@@ -4,17 +4,21 @@ import { Class } from '../../../Interfaces/class.interface';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MyClassService } from './my-classes.service';
+import {MatSelectModule} from '@angular/material/select';
 
 @Component({
   selector: 'app-my-classes',
   standalone: true,
-  imports: [CommonModule, FormsModule, MatIconModule],
+  imports: [CommonModule, FormsModule, MatIconModule, MatSelectModule],
   templateUrl: './my-classes.html',
   styleUrl: './my-classes.css'
 })
 export class MyClasses implements OnInit{
   classes: Class[] = [];
+  allClasses: Class[] = [];
   loading = true;
+
+  selectedClassId: string | null = null;
 
   name = '';
 
@@ -26,6 +30,7 @@ export class MyClasses implements OnInit{
 
   ngOnInit(): void {
     this.loadClasses();
+    this.loadAllClasses();
   }
 
   openAddModel(): void {
@@ -57,5 +62,23 @@ export class MyClasses implements OnInit{
         this.loading = false;
       }
     });
+  }
+
+  loadAllClasses() {
+    this.myClassService.getAllClasses().subscribe({
+      next: (data) => {
+        console.log('API Data:', data);
+        this.allClasses = data;
+        this.loading = false;
+      },
+      error: (err) => {
+        console.error('Fehler beim Laden der Lehrer', err);
+        this.loading = false;
+      }
+    });
+  }
+
+  connectClass() {
+    console.log("yeag");
   }
 }
