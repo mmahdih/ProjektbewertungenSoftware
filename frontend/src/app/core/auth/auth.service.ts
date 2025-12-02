@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { firstValueFrom } from 'rxjs';
+import { catchError, firstValueFrom, map, Observable, of } from 'rxjs';
 import users from './users.json'
 import { Router } from '@angular/router';
 
@@ -10,10 +10,28 @@ interface User {
   role: string;
 }
 
+interface LoginResponseDto{
+  token: string;
+  tokenType: string
+}
+
+
+interface StoreUserData {
+  username: string,
+  role?: string,
+  token: string
+}
+
 @Injectable({
   providedIn: 'root'
 })
+
+
+
+
 export class AuthService {
+  private apiUrl = 'http://localhost:4100/api/auth/login'
+  private readonly storageKey = 'user';
   getUsername() {
     return JSON.parse(localStorage.getItem('user') || "{}").username || '';
   }
@@ -22,17 +40,41 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  async login(username: string, password: string): Promise<boolean>  {
-    const user = this.users.find(u => u.username === username.toLowerCase() && u.password === password);
-
-
-    if (user) {
-      localStorage.setItem('user', JSON.stringify({ username: user.username, role: user.role }));
-      return true;
-    }
-
-    return false;
+// Add this helper method to AuthService
+private decodeToken(token: string): any {
+  try {
+    const payload = token.split('.')[1];
+    return JSON.parse(atob(payload));
+  } catch (error) {
+    console.error('Error decoding token', error);
+    return null;
   }
+}
+
+  async login(username: string, password: string): Promise<boolean>{
+    try{
+      const res = await firstValueFrom(
+        this.http.post<LoginResponseDto>(`${this.apiUrl}`, {username, password})
+      )
+
+      const fullToken = `${res.tokenType} ${res.token}`
+
+      const stored: StoreUserData = {
+        username: username.toLocaleLowerCase(),
+        token: fullToken,
+        role: 'teacher'
+      }
+
+      localStorage.setItem(this.storageKey, JSON.stringify(stored))
+    
+      return true;
+      
+    } catch (error) {
+      console.error("login fehlgeschlagen", error)
+      return false
+    }
+  }
+
 
   logout() {
     localStorage.removeItem('user');

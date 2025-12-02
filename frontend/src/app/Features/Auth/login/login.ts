@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router, RouterOutlet } from '@angular/router';
+import { Router } from '@angular/router';
 import { AuthService } from '../../../core/auth/auth.service';
 import { MatIconModule } from '@angular/material/icon';
-import { Navbar } from "../../../Shared/Components/navbar/navbar";
 
 @Component({
   selector: 'app-login',
@@ -14,10 +13,9 @@ import { Navbar } from "../../../Shared/Components/navbar/navbar";
 })
 export class Login {
   loginForm: FormGroup;
-
   loginError: string = '';
   hasError = false;
-
+  
   constructor(
     private fb: FormBuilder,
     private auth: AuthService,
@@ -25,35 +23,43 @@ export class Login {
   ) {
     this.loginForm = this.fb.group({
       username: ['', Validators.required],
-      password: ['', [Validators.required, Validators.minLength(6)]]
+      password: ['', [Validators.required]]
     });
   }
-
+  
   hideError(){
     this.hasError = false;
   }
-
+  
   showError(){
     this.hasError = true;
   }
-
+  
   async onSubmit() {
-    if (this.loginForm.invalid) return;
-
-    const { username, password } = this.loginForm.value;
-
-    const success = await this.auth.login(username, password);
-
-    if (!success) {
-      this.loginError = "Invalid username or password";
-      this.showError()
+    console.log('🔵 onSubmit called');
+    console.log('Form valid:', this.loginForm.valid);
+    console.log('Form values:', this.loginForm.value);
+    
+    if (this.loginForm.invalid) {
+      console.log('❌ Form is invalid');
       return;
     }
-
-    const role = this.auth.getRole();
-
-    if (role === 'admin') this.router.navigate(['/admin/dashboard']);
-    else if (role === 'teacher') this.router.navigate(['/teacher/dashboard']);
-    else if (role === 'student') this.router.navigate(['/student/dashboard']);
+    
+    const { username, password } = this.loginForm.value;
+    console.log('📤 Attempting login...');
+    
+    const success = await this.auth.login(username, password);
+    console.log('✅ Login result:', success);
+    
+    if (!success) {
+      console.log('❌ Login failed');
+      this.loginError = "Invalid username or password";
+      this.showError();
+      return;
+    }
+    
+    console.log('🚀 Navigating to dashboard...');
+    this.router.navigate(['/teacher/dashboard']);
+    console.log('✅ Navigation triggered');
   }
 }
