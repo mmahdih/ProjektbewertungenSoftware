@@ -8,12 +8,17 @@ import { ManageClasses } from './manage-classes/manage-classes';
 import { Test } from './test/test';
 import { UserList } from './user-list/user-list';
 import { ManageQuestions } from "./manage-questions/manage-question";
+import { ManageAdmins } from "./manage-admin/manage-admin";
 
 
 export const AdminRoutes: Routes = [
   {
     path: 'dashboard',
     component: AdminDashboard,
+  },
+  {
+    path: 'manage-admin',
+    component: ManageAdmins,
   },
   {
     path: 'users',
