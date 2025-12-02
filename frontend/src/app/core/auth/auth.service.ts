@@ -98,12 +98,12 @@ export class AuthService {
   }
 
   getUserId(): string {
-    return this.getClaim('sub') || ''; // "sub" ist üblicherweise die UserId
+    return this.getClaim('sub') || '';
   }
 
   getRole(): string {
-    console.log("aus get Role: ", this.getClaim('roleName'));
-    return this.getClaim('roleName') || '';
+    const stored = JSON.parse(localStorage.getItem('user') || '{}');
+  return stored.claims?.roleName?.toLowerCase() || '';
   }
 
   getAllClaims(): Record<string, any> {
