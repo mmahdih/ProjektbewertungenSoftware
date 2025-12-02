@@ -47,13 +47,11 @@ export class Sidebar implements OnInit {
       admin: [
         { icon: 'dashboard', label: 'Übersicht', route: '/admin/dashboard' },
         { icon: 'group', label: 'Nutzer', route: '/admin/users' ,subMenu: [
-            { icon: 'person', label: 'Schüler', route: '/admin/manage-students' },
-            { icon: 'groups', label: 'Lehrer', route: '/admin/manage-teachers' },
+          { icon: 'assignment_ind', label: 'Lehrer', route: '/admin/manage-teachers' },
+          { icon: 'person', label: 'Schüler', route: '/admin/manage-students' },
           ],},
-        { icon: 'dashboard', label: 'Lehrer', route: '/admin/manage-teachers' },
-        { icon: 'dashboard', label: 'Schüler', route: '/admin/manage-students' },
-        { icon: 'dashboard', label: 'Klassen', route: '/admin/manage-classes' },
-        { icon: 'dashboard', label: 'Fragen', route: '/admin/manage-questions' },
+        { icon: 'groups', label: 'Klassen', route: '/admin/manage-classes' },
+        { icon: 'help_outlined', label: 'Fragen', route: '/admin/manage-questions' },
         { icon: 'upload', label: 'Import', route: '/admin/import' },
         { icon: 'download', label: 'Export', route: '/admin/export' },
       ],
@@ -65,11 +63,11 @@ export class Sidebar implements OnInit {
           route: '',
           subMenu: [
             { icon: 'person', label: 'Schüler', route: '/teacher/my-students' },
-            { icon: 'groups', label: 'Projektgruppe', route: '/teacher/groups' },
+            { icon: 'group', label: 'Projektgruppe', route: '/teacher/groups' },
             { icon: 'assignment', label: 'Projekte', route: '/teacher/projects' },
           ],
         },
-        { icon: 'video_label', label: 'Meine Klassen', route: '/teacher/my-classes' },
+        { icon: 'groups', label: 'Meine Klassen', route: '/teacher/my-classes' },
         { icon: 'mode_heat', label: 'Notenverwaltung', route: '/teacher/manage-grades' },
         { icon: 'download', label: 'Export', route: '/teacher/export' },
       ],
@@ -80,7 +78,6 @@ export class Sidebar implements OnInit {
         { icon: 'assignment', label:'Selbst-/Fremdbewertung', route:'/student/my-assessment' },
       ]
     };
-
     return menus[role] || [];
   }
 }

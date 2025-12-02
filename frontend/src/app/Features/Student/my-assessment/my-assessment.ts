@@ -84,6 +84,7 @@ submitRating() {
     this.form.markAllAsTouched();
   } else { 
     this.bewertung.set(this.questions[this.frage],this.ratings);
+    console.log(this.bewertung)
     this.ratings = [0, 0, 0, 0, 0]; 
     this.frage++;
     /**
