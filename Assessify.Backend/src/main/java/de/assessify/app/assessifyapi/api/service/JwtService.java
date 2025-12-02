@@ -12,7 +12,7 @@ import java.util.Date;
 public class JwtService {
 
     private final Algorithm algorithm;
-    private static final long EXPIRATION_MS = 1000 * 60 * 60; // 1 Stunde
+    private static final long EXPIRATION_MS = 1000 * 60 * 60;
 
     public JwtService(@Value("${jwt.secret}") String secret) {
         this.algorithm = Algorithm.HMAC256(secret);
