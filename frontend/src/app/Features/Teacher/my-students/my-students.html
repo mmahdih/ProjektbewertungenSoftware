@@ -1,4 +1,4 @@
-<div
+hallo <div
   class="p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200 lg:mt-1.5 dark:bg-gray-800 dark:border-gray-700"
 >
   <div class="w-full mb-1">
@@ -92,61 +92,64 @@
             </tr>
           </thead>
           <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
-            @for (student of students; track $index) {
-              <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
-              <td class="w-4 p-4">
-                <div class="flex items-center">
-                  <input
-                    id="checkbox-1"
-                    aria-describedby="checkbox-1"
-                    type="checkbox"
-                    class="w-4 h-4 border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600"
-                  />
-                  <label for="checkbox-1" class="sr-only">checkbox</label>
-                </div>
-              </td>
-              <td class="flex items-center p-4 mr-12 space-x-8 whitespace-nowrap">
-                <img
-                  class="w-10 h-10 rounded-full"
-                  src="{{student.avatar}}"
-                  alt="avatar"
+          @for (student of students; track $index) {
+          <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
+            <td class="w-4 p-4">
+              <div class="flex items-center">
+                <input
+                  [id]="'checkbox-1-' + $index"
+                  [attr.aria-describedby]="'checkbox-1-' + $index"
+                  type="checkbox"
+                  class="w-4 h-4 border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600"
                 />
-                <div class="text-sm font-normal text-gray-500 dark:text-gray-400">
-                  <div class="text-base font-semibold text-gray-900 dark:text-white">
-                    {{student.name}}
-                  </div>
-                  <div class="text-sm font-normal text-gray-500 dark:text-gray-400">
-                    mahdi.haidary@sinc.de
-                  </div>
+                <label [for]="'checkbox-1-' + $index" class="sr-only">checkbox</label>
+              </div>
+            </td>
+
+            <td class="flex items-center p-4 mr-12 space-x-8 whitespace-nowrap">
+              <img
+                class="w-10 h-10 rounded-full"
+                src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+                alt="avatar"
+              />
+              <div class="text-sm font-normal text-gray-500 dark:text-gray-400">
+                <div class="text-base font-semibold text-gray-900 dark:text-white">
+                  {{ student.firstName }} {{ student.lastName }}
                 </div>
-              </td>
-              <td
-                class="p-4 space-x-2 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                <div class="text-sm font-normal text-gray-500 dark:text-gray-400">
+                  {{ student.username }}
+                </div>
+              </div>
+            </td>
+
+            <td
+              class="p-4 space-x-2 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white"
+            >
+              {{ student.roleName }}
+            </td>
+
+            <td class="p-4 space-x-2 whitespace-nowrap">
+              <button
+                type="button"
+                (click)="openEditModel(student)"
+                data-modal-target="edit-user-modal"
+                data-modal-toggle="edit-user-modal"
+                class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
               >
-                {{student.role}}
-              </td>
-              <td class="p-4 space-x-2 whitespace-nowrap">
-                <button
-                  type="button"
-                  (click)="openEditModel(student)"
-                  data-modal-target="edit-user-modal"
-                  data-modal-toggle="edit-user-modal"
-                  class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                >
-                  <mat-icon class="w-4 h-4 mr-2">edit</mat-icon> Edit user
-                </button>
-                <button
-                  type="button"
-                  (click)="openDeleteModel()"
-                  data-modal-target="delete-user-modal"
-                  data-modal-toggle="delete-user-modal"
-                  class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900"
-                >
-                  <mat-icon class="w-4 h-4 mr-2">delete</mat-icon> Delete user
-                </button>
-              </td>
-            </tr>
-            }
+                <mat-icon class="w-4 h-4 mr-2">edit</mat-icon> Edit user
+              </button>
+              <button
+                type="button"
+                (click)="openDeleteModel()"
+                data-modal-target="delete-user-modal"
+                data-modal-toggle="delete-user-modal"
+                class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900"
+              >
+                <mat-icon class="w-4 h-4 mr-2">delete</mat-icon> Delete user
+              </button>
+            </td>
+          </tr>
+          }
           </tbody>
         </table>
       </div>
