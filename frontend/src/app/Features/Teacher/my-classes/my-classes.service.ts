@@ -23,6 +23,15 @@ export class MyClassService {
     });
   }
 
+  getAllClasses(): Observable<Class[]> {
+    const token = this.authService.getToken(); // JWT aus localStorage
+    return this.http.get<Class[]>(`${this.apiUrl}/all`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+  }
+
   assignTeacher(classId: number, teacherId: number): Observable<any> {
     return this.http.put(`${this.apiUrl}/${classId}/assign-teacher/${teacherId}`, {});
   }
