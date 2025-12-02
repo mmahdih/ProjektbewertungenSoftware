@@ -42,6 +42,19 @@ public class SchoolClassController {
         return ResponseEntity.ok(modules);
     }
 
+    @GetMapping("/school-class/user/{userId}")
+    public ResponseEntity<List<SchoolClassDto>> getSchoolClassesByUserId(@PathVariable UUID userId) {
+        var modules = schoolClassRepository.findByUsers_Id(userId)
+                .stream()
+                .map(field -> new SchoolClassDto(
+                        field.getId(),
+                        field.getSchoolClassName()
+                ))
+                .toList();
+
+        return ResponseEntity.ok(modules);
+    }
+
     @PostMapping("/school-class")
     public ResponseEntity<SchoolClassDto> addSchoolClass(@RequestBody AddSchoolClassDto dto) {
        SchoolClass entity = new SchoolClass();
