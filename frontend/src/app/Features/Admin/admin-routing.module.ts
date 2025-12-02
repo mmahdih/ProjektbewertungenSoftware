@@ -5,7 +5,6 @@ import { ManageTeachers } from './manage-teachers/manage-teachers';
 import { Export } from "./admin-export/admin-export";
 import { Import } from "./admin-import/admin-import";
 import { ManageClasses } from './manage-classes/manage-classes';
-import { UserList } from './user-list/user-list';
 import { ManageQuestions } from "./manage-questions/manage-question";
 import { ManageAdmins } from "./manage-admin/manage-admin";
 
@@ -18,10 +17,6 @@ export const AdminRoutes: Routes = [
   {
     path: 'manage-admin',
     component: ManageAdmins,
-  },
-  {
-    path: 'users',
-    component: UserList
   },
   {
     path: 'manage-students',
