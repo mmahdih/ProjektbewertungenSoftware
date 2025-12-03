@@ -36,7 +36,7 @@ export class ManageAdmins implements OnInit{
     this.showAddModel = true;
   }
 
-  closeAddModel(): void {
+  closeAddModal(): void {
     this.showAddModel = false;
   }
 
@@ -70,7 +70,7 @@ export class ManageAdmins implements OnInit{
     this.AdminService.createAdmin(dto).subscribe({
       next: (adminUser) => {
         this.admins.push(adminUser); // direkt zur Liste hinzufügen
-        this.closeAddModel();
+        this.closeAddModal();
         // Reset Form
         this.firstName = '';
         this.lastName = '';
