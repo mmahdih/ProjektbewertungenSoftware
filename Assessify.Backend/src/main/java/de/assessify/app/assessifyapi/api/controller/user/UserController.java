@@ -1,6 +1,7 @@
 package de.assessify.app.assessifyapi.api.controller.user;
 
 import de.assessify.app.assessifyapi.api.dtos.request.AddUserDto;
+import de.assessify.app.assessifyapi.api.dtos.request.UpdateUserDto;
 import de.assessify.app.assessifyapi.api.dtos.response.UserDto;
 import de.assessify.app.assessifyapi.api.repository.RoleRepository;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -77,6 +78,29 @@ public class UserController {
                         savedUser.getCreatedAt(),
                         role != null ? role.getName() : null
                 ));
+    }
+
+    @PutMapping("/{userId}")
+    public ResponseEntity<UserDto> updateUser(@RequestBody UpdateUserDto dto, @PathVariable UUID userId) {
+        User existingUser = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found with id " + userId));
+
+        existingUser.setFirstName(dto.firstName());
+        existingUser.setLastName(dto.lastName());
+        existingUser.setUsername(dto.username());
+
+        User updatedUser = userRepository.save(existingUser);
+
+        var role = roleRepository.findById(updatedUser.getRoleId()).orElse(null);
+
+        return ResponseEntity.ok(new UserDto(
+                updatedUser.getId(),
+                updatedUser.getFirstName(),
+                updatedUser.getLastName(),
+                updatedUser.getUsername(),
+                updatedUser.getCreatedAt(),
+                role != null ? role.getName() : null
+        ));
     }
 
     @PostMapping("/{userId}/reset-password")

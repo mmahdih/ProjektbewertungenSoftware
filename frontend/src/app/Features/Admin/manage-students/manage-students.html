@@ -9,4 +9,14 @@
 
 <app-page-header title="Schüler" (addClick)="openAddModel()"></app-page-header>
 
-<app-table-column [items]="students" [columns]="columns"></app-table-column>
+<app-table-column [items]="students" [columns]="columns" (edit)="openEditModal($event)"></app-table-column>
+
+<app-form-modal
+  [showModal]="showEditModal"
+  [title]="'Schüler Editieren'"
+  [fields]="fieldsEdit"
+  [record]="editingStudent"
+  (close)="closeEditModal()"
+  (save)="saveEdit($event)"
+>
+</app-form-modal>

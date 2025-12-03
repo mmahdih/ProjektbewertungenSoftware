@@ -9,4 +9,18 @@
 
 <app-page-header title="Kurs" (addClick)="openAddModel()"></app-page-header>
 
-<app-table-column [items]="classes" [columns]="columns"></app-table-column>
+<app-table-column
+  [items]="classes"
+  [columns]="columns"
+  (edit)="openEditModal($event)"
+></app-table-column>
+
+<app-form-modal
+  [showModal]="showEditModal"
+  [title]="'Kurs Editieren'"
+  [fields]="fields"
+  [record]="editingClass"
+  (close)="closeEditModal()"
+  (save)="saveEdit($event)"
+>
+</app-form-modal>

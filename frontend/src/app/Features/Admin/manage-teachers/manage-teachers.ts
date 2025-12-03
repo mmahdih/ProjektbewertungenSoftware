@@ -38,7 +38,7 @@ export class ManageTeachers implements OnInit {
   fields: FormField[] = [
     {
       key: 'firstName',
-      label: 'First Name',
+      label: 'Vorname',
       type: 'text',
       required: true,
       colSpan: 3,
@@ -46,7 +46,7 @@ export class ManageTeachers implements OnInit {
     },
     {
       key: 'lastName',
-      label: 'Last Name',
+      label: 'Nachname',
       type: 'text',
       required: true,
       colSpan: 3,
@@ -54,7 +54,7 @@ export class ManageTeachers implements OnInit {
     },
     {
       key: 'username',
-      label: 'Username',
+      label: 'Benutzername',
       type: 'text',
       required: true,
       colSpan: 3,
@@ -62,7 +62,7 @@ export class ManageTeachers implements OnInit {
     },
     {
       key: 'position',
-      label: 'Position',
+      label: 'Rolle',
       type: 'text',
       readonly: true,
       value: 'TEACHER',
@@ -70,7 +70,7 @@ export class ManageTeachers implements OnInit {
     },
     {
       key: 'password',
-      label: 'Password',
+      label: 'Passwort',
       type: 'password',
       required: true,
       colSpan: 3,
@@ -86,7 +86,37 @@ export class ManageTeachers implements OnInit {
     },
   ];
 
+  fieldsEdit: FormField[] = [
+    {
+      key: 'firstName',
+      label: 'Vorname',
+      type: 'text',
+      required: true,
+      colSpan: 3,
+      placeholder: 'Vorname',
+    },
+    {
+      key: 'lastName',
+      label: 'Nachname',
+      type: 'text',
+      required: true,
+      colSpan: 3,
+      placeholder: 'Nachname',
+    },
+    {
+      key: 'username',
+      label: 'Benutzername',
+      type: 'text',
+      required: true,
+      colSpan: 3,
+      placeholder: 'Benutzername',
+    },
+  ];
+
   showAddModel: boolean = false;
+  showEditModal: boolean = false;
+
+  editingTeacher: User | null = null;
 
   firstName = '';
   lastName = '';
@@ -100,12 +130,40 @@ export class ManageTeachers implements OnInit {
     this.loadTeachers();
   }
 
+  openEditModal(teacher: User) {
+    this.editingTeacher = teacher;
+    this.showEditModal = true;
+  }
+
+  closeEditModal() {
+    this.showEditModal = false;
+    this.editingTeacher = null;
+  }
+
   openAddModel(): void {
     this.showAddModel = true;
   }
 
   closeAddModel(): void {
     this.showAddModel = false;
+  }
+
+  saveEdit(formData: any) {
+    if (!this.editingTeacher) return;
+
+    const updatedTeacher = { ...this.editingTeacher, ...formData };
+
+    console.log(formData);
+    console.log(updatedTeacher.id);
+
+    this.teacherService.updateTeacher(updatedTeacher).subscribe({
+      next: (res: User) => {
+        const index = this.teachers.findIndex((s) => s.id === updatedTeacher.id);
+        if (index !== -1) this.teachers[index] = res;
+        this.closeEditModal();
+      },
+      error: (err: any) => console.error('Fehler beim Aktualisieren:', err),
+    });
   }
 
   loadTeachers() {

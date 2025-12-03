@@ -19,7 +19,7 @@ export class QuestionService {
     return this.http.post<Question>(this.apiUrl, dto);
   }
 
-  updateQuestion(id: string, dto: AddQuestion): Observable<Question> {
-    return this.http.put<Question>(`${this.apiUrl}/${id}`, dto);
+  updateQuestion(dto: Question): Observable<Question> {
+    return this.http.put<Question>(`${this.apiUrl}/${dto.id}`, dto);
   }
 }
