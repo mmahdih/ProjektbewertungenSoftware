@@ -1,9 +1,12 @@
 package de.assessify.app.assessifyapi.api.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.UuidGenerator;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -17,4 +20,8 @@ public class SchoolClass {
 
     @Column(name = "class_name", nullable = false)
     private String schoolClassName;
+
+    @ManyToMany(mappedBy = "schoolClasses")
+    @JsonIgnore
+    private List<User> users = new ArrayList<>();
 }

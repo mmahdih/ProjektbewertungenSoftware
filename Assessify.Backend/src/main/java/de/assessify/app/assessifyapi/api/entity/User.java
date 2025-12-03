@@ -36,9 +36,6 @@ public class User {
     @Column(name = "role_id")
     private Integer roleId;
 
-    @Column(name = "class_id")
-    private UUID classId;
-
     @ManyToMany
     @JoinTable(
             name = "user_training-module",
@@ -46,6 +43,14 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "training-module_id")
     )
     private List<TrainingModule> trainingModules = new ArrayList<>();
+
+    @ManyToMany
+    @JoinTable(
+            name = "user_schoolclass",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "class_id")
+    )
+    private List<SchoolClass> schoolClasses = new ArrayList<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Review> reviews = new ArrayList<>();

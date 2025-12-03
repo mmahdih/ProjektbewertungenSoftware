@@ -9,57 +9,69 @@ import { MatIconModule } from '@angular/material/icon';
   standalone: true,
   imports: [ReactiveFormsModule, MatIconModule],
   templateUrl: './login.html',
-  styleUrls: ['./login.css']
+  styleUrls: ['./login.css'],
 })
 export class Login {
   loginForm: FormGroup;
   loginError: string = '';
   hasError = false;
-  
-  constructor(
-    private fb: FormBuilder,
-    private auth: AuthService,
-    private router: Router
-  ) {
+
+  constructor(private fb: FormBuilder, private auth: AuthService, private router: Router) {
     this.loginForm = this.fb.group({
       username: ['', Validators.required],
-      password: ['', [Validators.required]]
+      password: ['', [Validators.required]],
     });
   }
-  
-  hideError(){
+
+  hideError() {
     this.hasError = false;
   }
-  
-  showError(){
+
+  showError() {
     this.hasError = true;
   }
-  
+
   async onSubmit() {
     console.log('🔵 onSubmit called');
     console.log('Form valid:', this.loginForm.valid);
     console.log('Form values:', this.loginForm.value);
-    
+
     if (this.loginForm.invalid) {
       console.log('❌ Form is invalid');
       return;
     }
-    
+
     const { username, password } = this.loginForm.value;
     console.log('📤 Attempting login...');
-    
+
     const success = await this.auth.login(username, password);
     console.log('✅ Login result:', success);
-    
+
     if (!success) {
       console.log('❌ Login failed');
-      this.loginError = "Invalid username or password";
+      this.loginError = 'Invalid username or password';
       this.showError();
       return;
     }
-    
-    console.log('🚀 Navigating to dashboard...');
-    this.router.navigate(['/teacher/dashboard']);
+
+    const role = this.auth.getRole().toLowerCase();
+    console.log('User role:', role);
+
+    switch (role) {
+      case 'teacher':
+        this.router.navigate(['/teacher/dashboard']);
+        break;
+      case 'student':
+        this.router.navigate(['/student/dashboard']);
+        break;
+      case 'admin':
+        this.router.navigate(['/admin/dashboard']);
+        break;
+      default:
+        this.router.navigate(['/auth/login']);
+        break;
+    }
+
     console.log('✅ Navigation triggered');
   }
 }
