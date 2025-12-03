@@ -7,7 +7,7 @@ import { User, AddUser } from '../../../Interfaces/user.interface';
   providedIn: 'root'
 })
 export class AdminService {
-  private apiUrl = 'http://localhost:4100/api/users/role/1';
+  private apiUrl = 'http://localhost:4100/api/users/role/3';
 
   constructor(private http: HttpClient) {}
 

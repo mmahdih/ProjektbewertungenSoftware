@@ -4,6 +4,7 @@ import {MatIconModule } from "@angular/material/icon";
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { User } from '../../../Interfaces/user.interface';
+import { AuthService } from '../../../core/auth/auth.service'
 
 @Component({
   selector: 'app-manage-teachers',
@@ -24,7 +25,7 @@ export class ManageAdmins implements OnInit{
   password = '';
   role = ''
 
-  constructor(private AdminService: AdminService) {}
+  constructor(private AdminService: AdminService, private authService: AuthService) {}
 
   ngOnInit(): void {
     this.loadAdmin();
@@ -58,8 +59,9 @@ export class ManageAdmins implements OnInit{
       lastName: this.lastName,
       username: this.username,
       password: this.password,
-      role: 1
+      role: this.authService.getRoleId() 
     };
+    console.log(dto);
 
     this.AdminService.createAdmin(dto).subscribe({
       next: (adminUser) => {
