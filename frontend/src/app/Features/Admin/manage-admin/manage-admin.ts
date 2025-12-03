@@ -125,8 +125,6 @@ export class ManageAdmins implements OnInit {
   }
 
   saveAdmin(formData: any) {
-    if (this.password === this.confirmPassword) {
-    }
     const dto = {
       firstName: formData.firstName,
       lastName: formData.lastName,
