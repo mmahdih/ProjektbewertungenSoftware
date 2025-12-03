@@ -30,6 +30,7 @@ export class ManageAdmins implements OnInit {
   loading = true;
 
   showAddModel: boolean = false;
+  showEditModal: boolean = false;
 
   columns: TableColumn<User>[] = [
     { key: 'firstName', label: 'First Name' },
@@ -89,6 +90,33 @@ export class ManageAdmins implements OnInit {
     },
   ];
 
+  fieldsEdit: FormField[] = [
+    {
+      key: 'firstName',
+      label: 'Vorname',
+      type: 'text',
+      required: true,
+      colSpan: 3,
+      placeholder: 'Vorname',
+    },
+    {
+      key: 'lastName',
+      label: 'Nachname',
+      type: 'text',
+      required: true,
+      colSpan: 3,
+      placeholder: 'Nachname',
+    },
+    {
+      key: 'username',
+      label: 'Benutzername',
+      type: 'text',
+      required: true,
+      colSpan: 3,
+      placeholder: 'Benutzername',
+    },
+  ];
+
   firstName = '';
   lastName = '';
   username = '';
@@ -96,7 +124,9 @@ export class ManageAdmins implements OnInit {
   confirmPassword = '';
   role = '';
 
-  constructor(private AdminService: AdminService, private authService: AuthService) {}
+  editingAdmin: User | null = null;
+
+  constructor(private adminService: AdminService, private authService: AuthService) {}
 
   ngOnInit(): void {
     this.loadAdmin();
@@ -110,8 +140,37 @@ export class ManageAdmins implements OnInit {
     this.showAddModel = false;
   }
 
+  openEditModal(admin: User) {
+    this.editingAdmin = admin;
+    this.showEditModal = true;
+  }
+
+  closeEditModal() {
+    this.showEditModal = false;
+    this.editingAdmin = null;
+  }
+
+  saveEdit(formData: any) {
+    if (!this.editingAdmin) return;
+
+    const updatedAdmin = { ...this.editingAdmin, ...formData };
+
+    console.log(formData);
+    console.log(updatedAdmin.id);
+
+    this.adminService.updateAdmin(updatedAdmin).subscribe({
+      next: (res: User) => {
+        const index = this.admins.findIndex((s) => s.id === updatedAdmin.id);
+        if (index !== -1) this.admins[index] = res;
+        this.closeEditModal();
+      },
+      error: (err: any) => console.error('Fehler beim Aktualisieren:', err),
+    });
+  }
+
+
   loadAdmin() {
-    this.AdminService.getAdmins().subscribe({
+    this.adminService.getAdmins().subscribe({
       next: (data) => {
         console.log('API Data:', data);
         this.admins = data;
@@ -133,7 +192,7 @@ export class ManageAdmins implements OnInit {
       role: 3,
     };
 
-    this.AdminService.createAdmin(dto).subscribe({
+    this.adminService.createAdmin(dto).subscribe({
       next: (adminUser) => {
         this.admins.push(adminUser); // direkt zur Liste hinzufügen
         this.closeAddModel();

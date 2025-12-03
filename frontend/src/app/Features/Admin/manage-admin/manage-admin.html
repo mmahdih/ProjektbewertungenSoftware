@@ -9,4 +9,18 @@
 
 <app-page-header title="Administratoren" (addClick)="openAddModel()"></app-page-header>
 
-<app-table-column [items]="admins" [columns]="columns"></app-table-column>
+<app-table-column
+  [items]="admins"
+  [columns]="columns"
+  (edit)="openEditModal($event)"
+></app-table-column>
+
+<app-form-modal
+  [showModal]="showEditModal"
+  [title]="'Administrator Editieren'"
+  [fields]="fieldsEdit"
+  [record]="editingAdmin"
+  (close)="closeEditModal()"
+  (save)="saveEdit($event)"
+>
+</app-form-modal>
