@@ -87,8 +87,6 @@ export class ManageQuestions implements OnInit {
       questionText: formData.questionText,
     };
 
-    console.log(dto);
-
     this.questionService.createQuestion(dto).subscribe({
       next: (question) => {
         this.questions.push(question); // direkt zur Liste hinzufügen
