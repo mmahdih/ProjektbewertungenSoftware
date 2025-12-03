@@ -13,6 +13,7 @@
   [items]="teachers"
   [columns]="columns"
   (edit)="openEditModal($event)"
+  (delete)="deleteTeacher($event)"
 ></app-table-column>
 
 <app-form-modal
