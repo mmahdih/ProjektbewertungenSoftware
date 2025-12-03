@@ -8,16 +8,24 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { User } from '../../../Interfaces/user.interface';
 import { PageHeaderComponents } from '../../../Shared/Components/page-header/page-header';
+import { TableColumn, TableColumnComponent } from '../../../Shared/Components/table-column/table-column';
 
 @Component({
   selector: 'app-manage-teachers',
   standalone: true,
-  imports: [CommonModule, MatIconModule, FormsModule, PageHeaderComponents],
+  imports: [CommonModule, MatIconModule, FormsModule, PageHeaderComponents, TableColumnComponent],
   templateUrl: './manage-teachers.html'
 })
 export class ManageTeachers implements OnInit{
   teachers: User[] = [];
   loading = true;
+
+  columns: TableColumn<User>[] = [
+  { key: 'firstName', label: 'First Name' },
+  { key: 'lastName', label: 'Last Name' },
+  { key: 'username', label: 'Username' },
+  { key: 'roleName', label: 'Role' }
+  ];
 
   showAddModel: boolean = false;
 
