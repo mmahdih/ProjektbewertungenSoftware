@@ -25,7 +25,7 @@ export class MyAssessment {
   questions = [
     {
       id: 0,
-      question: 'Wie schätzen sie das Engagment im Projekt ein?'
+      question: 'Wie schätzen sie das Engagement im Projekt ein?'
     },
 
     {
@@ -45,27 +45,27 @@ export class MyAssessment {
 
     {
       id: 4,
-      question: 'Wie beurteilen Sie das Engagment hinsichtlich der Aufgabenbearbeitung am Arduino mit Sensoren/Aktoren?'
+      question: 'Wie beurteilen Sie das Engagement hinsichtlich der Aufgabenbearbeitung am Arduino mit Sensoren/Aktoren?'
     },
 
     {
       id: 5,
-      question: 'Beurteilen Sie das Engagment bei der Realisierung der Netzwerk-Funktionalität (MQTT/Vernetzung)?'
+      question: 'Beurteilen Sie das Engagement bei der Realisierung der Netzwerk-Funktionalität (MQTT/Vernetzung)?'
     },
 
     {
       id: 6,
-      question: 'Wie war das Engagment bei der Umsetzung der Datenbank?'
+      question: 'Wie war das Engagement bei der Umsetzung der Datenbank?'
     },
 
     {
-      id: 7, 
-      question: 'Wie war das Engagment bei der Gestaltung und Entwicklung der Benutzerschnittstellen?'
+      id: 7,
+      question: 'Wie war das Engagement bei der Gestaltung und Entwicklung der Benutzerschnittstellen?'
     },
 
     {
       id: 8,
-      question: 'Beurteilen Sie das Engagment bei der Realisierung der Funktionalität (Java-Backend/Vernetzung)?'
+      question: 'Beurteilen Sie das Engagement bei der Realisierung der Funktionalität (Java-Backend/Vernetzung)?'
     },
 
     {
@@ -75,7 +75,7 @@ export class MyAssessment {
 
     {
       id: 10,
-      question: 'Welche Gesamtnote würden Sie der jeweiligen Person für Ihren beitrag zum Gelingen des Projektes geben?'
+      question: 'Welche Gesamtnote würden Sie der jeweiligen Person für Ihren Beitrag zum Gelingen des Projektes geben?'
     }
   ];
 
@@ -130,9 +130,6 @@ export class MyAssessment {
       this.createJson(this.frage, this.questions, this.members, this.ratings);
       this.ratings = [0, 0, 0, 0, 0];
       this.frage++;
-      /**
-       * TODO: bewertung zu JSON umwandeln
-       */
     }
   }
 
@@ -143,7 +140,7 @@ export class MyAssessment {
     const students = members.map(m => ({
       studentID: m.id,
       grade: ratings[m.id]
-    }))
+    }));
 
 
     const json = {
