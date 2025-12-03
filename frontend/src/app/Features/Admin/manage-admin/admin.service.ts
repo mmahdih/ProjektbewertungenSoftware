@@ -16,6 +16,6 @@ export class AdminService {
   }
 
   createAdmin(dto: AddUser): Observable<User> {
-    return this.http.post<User>(this.apiUrl, dto)
+    return this.http.post<User>(this.apiUrl, dto);
   }
 }
