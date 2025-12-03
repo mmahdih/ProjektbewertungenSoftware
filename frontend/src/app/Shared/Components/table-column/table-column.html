@@ -1,0 +1,51 @@
+<div class="flex flex-col">
+  <div class="overflow-x-auto">
+    <div class="inline-block min-w-full align-middle">
+      <div class="overflow-hidden shadow">
+        <table class="min-w-full divide-y divide-gray-200 table-fixed dark:divide-gray-600">
+          <thead class="bg-gray-100 dark:bg-gray-700">
+            <tr>
+              <th class="p-4">
+                <input type="checkbox" class="w-4 h-4 border-gray-300 rounded bg-gray-50"/>
+              </th>
+              <th *ngFor="let col of columns" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                {{ col.label }}
+              </th>
+              <th class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                Actions
+              </th>
+            </tr>
+          </thead>
+
+          <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
+            <tr *ngFor="let item of items" class="hover:bg-gray-100 dark:hover:bg-gray-700">
+              <td class="w-4 p-4">
+                <input type="checkbox" [id]="'checkbox-' + item['id']" class="w-4 h-4 border-gray-300 rounded bg-gray-50"/>
+              </td>
+
+              <td *ngFor="let col of columns" class="p-4 text-gray-900 dark:text-white">
+                <ng-container [ngSwitch]="col.type">
+                  <img *ngSwitchCase="'image'" [src]="item[col.key] || 'https://flowbite.com/docs/images/people/profile-picture-5.jpg'" class="w-10 h-10 rounded-full"/>
+                  <span *ngSwitchDefault>{{ item[col.key] }}</span>
+                </ng-container>
+              </td>
+
+              <td class="p-4 space-x-2 whitespace-nowrap">
+                <button *ngIf="edit.observers.length"
+                        (click)="edit.emit(item)"
+                        class="inline-flex items-center px-3 py-2 text-sm font-medium text-white rounded-lg bg-blue-700 hover:bg-blue-800">
+                  <mat-icon class="w-4 h-4 mr-2">edit</mat-icon> Edit
+                </button>
+                <button *ngIf="delete.observers.length"
+                        (click)="delete.emit(item)"
+                        class="inline-flex items-center px-3 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-800">
+                  <mat-icon class="w-4 h-4 mr-2">delete</mat-icon> Delete
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
