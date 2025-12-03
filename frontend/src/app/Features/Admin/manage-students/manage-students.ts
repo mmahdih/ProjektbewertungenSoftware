@@ -125,6 +125,7 @@ export class ManageStudents implements OnInit {
   role = '';
 
   tempPassword: string | null = null;
+delete: any;
 
   constructor(private studentService: StudentService) {}
 
@@ -204,6 +205,18 @@ export class ManageStudents implements OnInit {
       },
       error: (err) => console.error('Fehler beim Erstellen:', err),
     });
+  }
+
+  deleteStudent(student : User){
+    console.log('id:',student.id)
+    for (let index = 0; index < this.students.length; index++) {
+      if (student.id === this.students[index].id ) {
+        console.log("gefunden");
+        console.log('array before',this.students);
+        this.students.splice(index,1);
+        console.log('array after',this.students);
+      }
+    }
   }
 
   onResetPassword(student: User) {
