@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class StudentService {
   private apiUrl = 'http://localhost:4100/api/users/role/2';
@@ -16,6 +16,6 @@ export class StudentService {
   }
 
   createStudent(dto: AddUser): Observable<User> {
-    return this.http.post<User>(this.apiUrl, dto)
+    return this.http.post<User>(this.apiUrl, dto);
   }
 }
