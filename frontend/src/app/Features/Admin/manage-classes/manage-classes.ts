@@ -4,17 +4,42 @@ import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { ClassService } from './class.service';
 import { Class } from '../../../Interfaces/class.interface';
+import { PageHeaderComponents } from '../../../Shared/Components/page-header/page-header';
+import {
+  TableColumn,
+  TableColumnComponent,
+} from '../../../Shared/Components/table-column/table-column';
+import { FormField, FormModalComponent } from '../../../Shared/Components/form-modal/form-modal';
 
 @Component({
   selector: 'app-manage-classes',
   standalone: true,
-  imports: [CommonModule, FormsModule, MatIconModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatIconModule,
+    PageHeaderComponents,
+    TableColumnComponent,
+    FormModalComponent,
+  ],
   templateUrl: './manage-classes.html',
-  styleUrl: './manage-classes.css'
 })
-export class ManageClasses implements OnInit{
+export class ManageClasses implements OnInit {
   classes: Class[] = [];
   loading = true;
+
+  columns: TableColumn<Class>[] = [{ key: 'name', label: 'Kursname' }];
+
+  fields: FormField[] = [
+    {
+      key: 'name',
+      label: 'Kursname',
+      type: 'text',
+      required: true,
+      colSpan: 6,
+      placeholder: 'Kursname',
+    },
+  ];
 
   name = '';
 
@@ -55,13 +80,13 @@ export class ManageClasses implements OnInit{
       error: (err) => {
         console.error('Fehler beim Laden der Lehrer', err);
         this.loading = false;
-      }
+      },
     });
   }
 
-  saveClass() {
+  saveClass(formData: any) {
     const dto = {
-      name: this.name
+      name: formData.name,
     };
 
     this.classService.createClass(dto).subscribe({
@@ -71,26 +96,25 @@ export class ManageClasses implements OnInit{
         // Reset Form
         this.name = '';
       },
-      error: (err) => console.error('Fehler beim Erstellen:', err)
+      error: (err) => console.error('Fehler beim Erstellen:', err),
     });
   }
 
   saveEditedClass() {
-  if (!this.selectedClass) return;
+    if (!this.selectedClass) return;
 
-  const dto = {
-    name: this.name
-  };
+    const dto = {
+      name: this.name,
+    };
 
-  this.classService.updateQuestion(this.selectedClass.id, dto)
-    .subscribe({
+    this.classService.updateQuestion(this.selectedClass.id, dto).subscribe({
       next: (updated) => {
-        const index = this.classes.findIndex(q => q.id === updated.id);
+        const index = this.classes.findIndex((q) => q.id === updated.id);
         if (index !== -1) this.classes[index] = updated;
 
         this.closeEditModel();
       },
-      error: (err) => console.error('Fehler beim Aktualisieren:', err)
+      error: (err) => console.error('Fehler beim Aktualisieren:', err),
     });
   }
 }
