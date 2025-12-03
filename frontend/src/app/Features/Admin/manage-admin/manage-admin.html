@@ -13,6 +13,7 @@
   [items]="admins"
   [columns]="columns"
   (edit)="openEditModal($event)"
+  (delete)="deleteAdmin($event)"
 ></app-table-column>
 
 <app-form-modal

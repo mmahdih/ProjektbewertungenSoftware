@@ -206,4 +206,17 @@ export class ManageAdmins implements OnInit {
       error: (err) => console.error('Fehler beim Erstellen:', err),
     });
   }
+  deleteAdmin(admin : User){
+    for (let index = 0; index < this.admins.length; index++) {
+      if (admin.id === this.admins[index].id ) {
+        this.adminService.deleteAdmin(admin).subscribe({
+    next: () => {
+      this.admins = this.admins.filter(s => s.id !== admin.id);
+    },
+    error: (err) => console.error('Fehler beim Löschen', err)
+  });
+
+      }
+    }
+  }
 }
