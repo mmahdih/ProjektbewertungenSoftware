@@ -22,18 +22,60 @@ export class MyAssessment {
   form: FormGroup;
   
   bewertung = new Map<string,number[]>();
-  questions: string[] = [
-    '1: Wie schätzen sie das Engagment im Projekt ein?',
-    '2: Wie zielgerichtet wurde an der Aufgabenstellung gearbeitet?',
-    '3: Wie beurteilen Sie die Zusammenarbeit mit den anderen Gruppenmitgliedern?',
-    '4: Wie beurteilen Sie das Arbeitsverhalten?',
-    '5: Wie beurteilen Sie das Engagment hinsichtlich der Aufgabenbearbeitung am Arduino mit Sensoren/Aktoren?',
-    '6: Beurteilen Sie das Engagment bei der Realisierung der Netzwerk-Funktionalität (MQTT/Vernetzung)?',
-    '7: Wie war das Engagment bie dir Umsetzung der Datenbank?',
-    '8: Wie war das Engagment bei der Gestalltung und Entwicklung der Benutzerschnittstellen?',
-    '9: Beurteilen Sie das Engagment bei der Realisierung der Funktionalität (Java-Backend/Vernetzung)?',
-    '10: Beurteilen Sie die Mitarbeit bei der Erstellung des Werbeflyers?',
-    '11: Welche Gesamtnote würen Sie der jeweiligen Person für Ihren beitrag zum Gelingen des Projektes geben?'
+  questions = [
+    {
+    id: 0, 
+    question:'Wie schätzen sie das Engagment im Projekt ein?'
+  },
+
+    {
+    id: 1, 
+    question: 'Wie zielgerichtet wurde an der Aufgabenstellung gearbeitet?'
+  },
+
+    {
+    id: 2,
+    question:  'Wie beurteilen Sie die Zusammenarbeit mit den anderen Gruppenmitgliedern?'
+  },
+
+    {
+    id: 4,
+    question: 'Wie beurteilen Sie das Arbeitsverhalten?'
+  },
+
+    {
+    id: 5, 
+    question:'Wie beurteilen Sie das Engagment hinsichtlich der Aufgabenbearbeitung am Arduino mit Sensoren/Aktoren?'
+  },
+
+    {
+    id: 6, 
+    question: 'Beurteilen Sie das Engagment bei der Realisierung der Netzwerk-Funktionalität (MQTT/Vernetzung)?'
+  },
+
+    {
+    id: 7, 
+    question: 'Wie war das Engagment bie dir Umsetzung der Datenbank?'
+  },
+
+    {
+    id: 8, question: 'Wie war das Engagment bei der Gestalltung und Entwicklung der Benutzerschnittstellen?'
+  },
+
+    {
+    id: 9, 
+    question: 'Beurteilen Sie das Engagment bei der Realisierung der Funktionalität (Java-Backend/Vernetzung)?'
+  },
+
+    {
+    id: 10, 
+    question: 'Beurteilen Sie die Mitarbeit bei der Erstellung des Werbeflyers?'
+  },
+
+  {
+    id: 11, 
+    question: 'Welche Gesamtnote würen Sie der jeweiligen Person für Ihren beitrag zum Gelingen des Projektes geben?'
+}
   ];
 
   frage =  0;
@@ -83,7 +125,8 @@ submitRating() {
     alert(`❌ Folgende Mitglieder fehlen noch: ${missing.join(', ')}`);
     this.form.markAllAsTouched();
   } else { 
-    this.bewertung.set(this.questions[this.frage],this.ratings);
+    this.bewertung.set(this.questions[this.frage].question,this.ratings);
+    this.createJson(this.frage ,this.questions, this.members, this.ratings);
     this.ratings = [0, 0, 0, 0, 0]; 
     this.frage++;
     /**
@@ -91,6 +134,24 @@ submitRating() {
      */
   }
   }
+
+
+  createJson(currentQuestion: number, wholeQuestion: {id: number, question: string}[], members: { id: number; name: string }[], ratings: number[]) {
+  const json = members.map(m => ({
+      studentID: m.id,
+      grade: ratings[m.id],
+      studendQuestion: wholeQuestion
+        .filter(q => q.id  === currentQuestion) 
+        .map(q => ({
+            questionID: q.id,
+            questionText: q.question
+      }))
+  }));
+
+  console.log(JSON.stringify(json));
+  return JSON.stringify(json);
+
+}
 }
 
 
