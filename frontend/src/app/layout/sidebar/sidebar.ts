@@ -51,6 +51,7 @@ export class Sidebar implements OnInit {
           label: 'Nutzer',
           route: '/admin/users',
           subMenu: [
+            { icon: 'shield_person', label: 'Admin', route: '/admin/manage-admin' },
             { icon: 'assignment_ind', label: 'Lehrer', route: '/admin/manage-teachers' },
             { icon: 'person', label: 'Schüler', route: '/admin/manage-students' },
           ],
