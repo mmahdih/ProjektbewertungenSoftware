@@ -208,12 +208,10 @@ delete: any;
   }
 
   deleteStudent(student : User){
-    console.log(+student.id)
     for (let index = 0; index < this.students.length; index++) {
       if (student.id === this.students[index].id ) {
         this.studentService.deleteStudent(student).subscribe({
     next: () => {
-      // Array aktualisieren
       this.students = this.students.filter(s => s.id !== student.id);
     },
     error: (err) => console.error('Fehler beim Löschen', err)
