@@ -86,7 +86,37 @@ export class ManageStudents implements OnInit {
     },
   ];
 
+  fieldsEdit: FormField[] = [
+    {
+      key: 'firstName',
+      label: 'Vorname',
+      type: 'text',
+      required: true,
+      colSpan: 3,
+      placeholder: 'Vorname',
+    },
+    {
+      key: 'lastName',
+      label: 'Nachname',
+      type: 'text',
+      required: true,
+      colSpan: 3,
+      placeholder: 'Nachname',
+    },
+    {
+      key: 'username',
+      label: 'Benutzername',
+      type: 'text',
+      required: true,
+      colSpan: 3,
+      placeholder: 'Benutzername',
+    },
+  ];
+
   showAddModel: boolean = false;
+  showEditModal: boolean = false;
+
+  editingStudent: User | null = null;
 
   firstName = '';
   lastName = '';
@@ -102,12 +132,40 @@ export class ManageStudents implements OnInit {
     this.loadStudents();
   }
 
+  openEditModal(student: User) {
+    this.editingStudent = student;
+    this.showEditModal = true;
+  }
+
+  closeEditModal() {
+    this.showEditModal = false;
+    this.editingStudent = null;
+  }
+
   openAddModel(): void {
     this.showAddModel = true;
   }
 
   closeAddModel(): void {
     this.showAddModel = false;
+  }
+
+  saveEdit(formData: any) {
+    if (!this.editingStudent) return;
+
+    const updatedTeacher = { ...this.editingStudent, ...formData };
+
+    console.log(formData);
+    console.log(updatedTeacher.id);
+
+    this.studentService.updateStudent(updatedTeacher).subscribe({
+      next: (res: User) => {
+        const index = this.students.findIndex((s) => s.id === updatedTeacher.id);
+        if (index !== -1) this.students[index] = res;
+        this.closeEditModal();
+      },
+      error: (err: any) => console.error('Fehler beim Aktualisieren:', err),
+    });
   }
 
   loadStudents() {
