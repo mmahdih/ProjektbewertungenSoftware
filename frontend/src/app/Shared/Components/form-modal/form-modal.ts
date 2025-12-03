@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 
@@ -23,7 +23,7 @@ export interface FormField {
   imports: [CommonModule, FormsModule, MatIconModule],
   templateUrl: './form-modal.html'
 })
-export class FormModalComponent {
+export class FormModalComponent implements OnChanges{
   @Input() showModal = false;
   @Input() title = 'New Item';
   @Input() fields: FormField[] = [];
