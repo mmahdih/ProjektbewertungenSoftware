@@ -7,11 +7,12 @@ import { QuestionService } from './question.service';
 import { PageHeaderComponents } from '../../../Shared/Components/page-header/page-header';
 import { TableColumn, TableColumnComponent } from '../../../Shared/Components/table-column/table-column';
 import { User } from '../../../Interfaces/user.interface';
+import { FormField, FormModalComponent } from '../../../Shared/Components/form-modal/form-modal';
 
 @Component({
   selector: 'app-question',
   standalone: true,
-  imports: [CommonModule, FormsModule, MatIconModule, PageHeaderComponents, TableColumnComponent],
+  imports: [CommonModule, FormsModule, MatIconModule, PageHeaderComponents, TableColumnComponent, FormModalComponent],
   templateUrl: './manage-question.html'
 })
 export class ManageQuestions implements OnInit{
@@ -24,6 +25,10 @@ export class ManageQuestions implements OnInit{
   columns: TableColumn<Question>[] = [
   { key: 'questionText', label: 'Frage' }
   ];
+
+  fields: FormField[] = [
+  { key: 'questionText', label: 'Frage', type: 'textarea', required: true, placeholder: "Deine Frage..." },
+];
 
   questionText = '';
 
@@ -64,10 +69,12 @@ export class ManageQuestions implements OnInit{
     });
   }
 
-  saveQuestion() {
+  saveQuestion(formData: any) {
     const dto = {
-      questionText: this.questionText,
+      questionText: formData.questionText,
     };
+
+    console.log(dto);
 
     this.questionService.createQuestion(dto).subscribe({
       next: (question) => {
