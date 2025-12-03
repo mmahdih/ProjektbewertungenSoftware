@@ -10,8 +10,7 @@ import { AuthService } from '../../../core/auth/auth.service'
   selector: 'app-manage-admin',
   standalone: true,
   imports: [CommonModule, MatIconModule, FormsModule],
-  templateUrl: './manage-admin.html',
-  styleUrl: './manage-admin.css'
+  templateUrl: './manage-admin.html'
 })
 export class ManageAdmins implements OnInit{
   admins: User[] = [];
