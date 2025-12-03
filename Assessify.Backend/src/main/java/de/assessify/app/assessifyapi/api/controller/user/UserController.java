@@ -19,7 +19,6 @@ import java.util.UUID;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api/users")
 public class UserController {
     private final UserRepository userRepository;
