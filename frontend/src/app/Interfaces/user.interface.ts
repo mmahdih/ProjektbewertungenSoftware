@@ -14,3 +14,10 @@ export interface AddUser {
     password: string;
     role: number;
 }
+
+export interface UpdateUser {
+    id: string;
+    firstName: string;
+    lastName: string;
+    username: string;
+}

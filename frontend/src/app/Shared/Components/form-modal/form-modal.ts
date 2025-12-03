@@ -27,6 +27,7 @@ export class FormModalComponent implements OnChanges{
   @Input() showModal = false;
   @Input() title = 'New Item';
   @Input() fields: FormField[] = [];
+  @Input() record: any = {};
 
   @Output() close = new EventEmitter<void>();
   @Output() save = new EventEmitter<any>();

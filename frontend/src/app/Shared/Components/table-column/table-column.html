@@ -31,7 +31,7 @@
               </td>
 
               <td class="p-4 space-x-2 whitespace-nowrap">
-                <button *ngIf="edit.observers.length"
+                <button
                         (click)="edit.emit(item)"
                         class="inline-flex items-center px-3 py-2 text-sm font-medium text-white rounded-lg bg-blue-700 hover:bg-blue-800">
                   <mat-icon class="w-4 h-4 mr-2">edit</mat-icon> Edit
