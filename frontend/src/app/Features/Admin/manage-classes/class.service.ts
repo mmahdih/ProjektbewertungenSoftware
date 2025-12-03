@@ -7,19 +7,19 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class ClassService {
-  private apiUrl = 'http://localhost:4100/api/school-class/all';
+  private apiUrl = 'http://localhost:4100/api/school-class';
 
   constructor(private http: HttpClient) {}
 
   getClass(): Observable<Class[]> {
-    return this.http.get<Class[]>(this.apiUrl);
+    return this.http.get<Class[]>(`${this.apiUrl}/all`);
   }
 
   createClass(dto: AddClass): Observable<Class> {
     return this.http.post<Class>(this.apiUrl, dto);
   }
 
-  updateQuestion(id: string, dto: AddClass): Observable<Class> {
-    return this.http.put<Class>(`${this.apiUrl}/${id}`, dto);
+  updateClass(dto: Class): Observable<Class> {
+    return this.http.put<Class>(`${this.apiUrl}/${dto.id}`, dto);
   }
 }

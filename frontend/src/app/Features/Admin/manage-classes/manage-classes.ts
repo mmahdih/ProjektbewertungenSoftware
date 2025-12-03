@@ -44,8 +44,9 @@ export class ManageClasses implements OnInit {
   name = '';
 
   showAddModel: boolean = false;
-  showEditModel: boolean = false;
-  selectedClass: Class | null = null;
+  showEditModal: boolean = false;
+
+  editingClass: Class | null = null;
 
   constructor(private classService: ClassService) {}
 
@@ -61,13 +62,32 @@ export class ManageClasses implements OnInit {
     this.showAddModel = false;
   }
 
-  openEditModel(schoolClass: Class): void {
-    this.selectedClass = schoolClass;
-    this.showEditModel = true;
+  openEditModal(schoolClass: Class) {
+    this.editingClass = schoolClass;
+    this.showEditModal = true;
   }
 
-  closeEditModel(): void {
-    this.showEditModel = false;
+  closeEditModal() {
+    this.showEditModal = false;
+    this.editingClass = null;
+  }
+
+  saveEdit(formData: any) {
+    if (!this.editingClass) return;
+
+    const updatedClass = { ...this.editingClass, ...formData };
+
+    console.log(formData);
+    console.log(updatedClass.id);
+
+    this.classService.updateClass(updatedClass).subscribe({
+      next: (res: Class) => {
+        const index = this.classes.findIndex((s) => s.id === updatedClass.id);
+        if (index !== -1) this.classes[index] = res;
+        this.closeEditModal();
+      },
+      error: (err: any) => console.error('Fehler beim Aktualisieren:', err),
+    });
   }
 
   loadClasses() {
@@ -97,24 +117,6 @@ export class ManageClasses implements OnInit {
         this.name = '';
       },
       error: (err) => console.error('Fehler beim Erstellen:', err),
-    });
-  }
-
-  saveEditedClass() {
-    if (!this.selectedClass) return;
-
-    const dto = {
-      name: this.name,
-    };
-
-    this.classService.updateQuestion(this.selectedClass.id, dto).subscribe({
-      next: (updated) => {
-        const index = this.classes.findIndex((q) => q.id === updated.id);
-        if (index !== -1) this.classes[index] = updated;
-
-        this.closeEditModel();
-      },
-      error: (err) => console.error('Fehler beim Aktualisieren:', err),
     });
   }
 }
