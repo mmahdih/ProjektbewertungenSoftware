@@ -16,7 +16,6 @@ import de.assessify.app.assessifyapi.api.dtos.response.ResetPasswordResponseDto;
 import java.security.SecureRandom;
 import java.util.UUID;
 
-
 import java.util.List;
 
 @RestController
@@ -26,7 +25,8 @@ public class UserController {
     private final BCryptPasswordEncoder passwordEncoder;
     private final RoleRepository roleRepository;
 
-    public UserController(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder, RoleRepository roleRepository) {
+    public UserController(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder,
+            RoleRepository roleRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.roleRepository = roleRepository;
@@ -47,8 +47,7 @@ public class UserController {
                             field.getLastName(),
                             field.getUsername(),
                             field.getCreatedAt(),
-                            role != null ? role.getName() : null
-                    );
+                            role != null ? role.getName() : null);
                 })
                 .toList();
 
@@ -56,7 +55,7 @@ public class UserController {
     }
 
     @PostMapping("/role/{roleId}")
-    public ResponseEntity<UserDto> createUserTeacher(@RequestBody AddUserDto dto, @PathVariable Integer roleId) {
+    public ResponseEntity<UserDto> createUserByRoleId(@RequestBody AddUserDto dto, @PathVariable Integer roleId) {
         User user = new User();
         user.setFirstName(dto.firstName());
         user.setLastName(dto.lastName());
@@ -76,8 +75,18 @@ public class UserController {
                         savedUser.getLastName(),
                         savedUser.getUsername(),
                         savedUser.getCreatedAt(),
-                        role != null ? role.getName() : null
-                ));
+                        role != null ? role.getName() : null));
+    }
+
+    @DeleteMapping("/{userId}")
+    public ResponseEntity<UserDto> deleteUserById(@PathVariable UUID userId) {
+
+        User existingUser = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found with id " + userId));
+        userRepository.delete(existingUser);
+
+        return ResponseEntity.noContent().build();
+
     }
 
     @PutMapping("/{userId}")
@@ -99,8 +108,7 @@ public class UserController {
                 updatedUser.getLastName(),
                 updatedUser.getUsername(),
                 updatedUser.getCreatedAt(),
-                role != null ? role.getName() : null
-        ));
+                role != null ? role.getName() : null));
     }
 
     @PostMapping("/{userId}/reset-password")

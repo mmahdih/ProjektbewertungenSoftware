@@ -22,15 +22,15 @@ export class StudentService {
   createStudent(dto: AddUser): Observable<User> {
     return this.http.post<User>(`${this.apiUrl}/role/2`, dto);
   }
+  deleteStudent(dto: User): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${dto.id}`);
+  }
 
   updateStudent(dto: UpdateUser): Observable<User> {
     return this.http.put<User>(`${this.apiUrl}/${dto.id}`, dto);
   }
 
   resetPassword(userId: string): Observable<ResetPasswordResponseDto> {
-    return this.http.post<ResetPasswordResponseDto>(
-      `${this.apiUrl}/${userId}/reset-password`,
-      {}
-    );
+    return this.http.post<ResetPasswordResponseDto>(`${this.apiUrl}/${userId}/reset-password`, {});
   }
 }

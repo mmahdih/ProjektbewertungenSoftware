@@ -208,13 +208,17 @@ delete: any;
   }
 
   deleteStudent(student : User){
-    console.log('id:',student.id)
+    console.log(+student.id)
     for (let index = 0; index < this.students.length; index++) {
       if (student.id === this.students[index].id ) {
-        console.log("gefunden");
-        console.log('array before',this.students);
-        this.students.splice(index,1);
-        console.log('array after',this.students);
+        this.studentService.deleteStudent(student).subscribe({
+    next: () => {
+      // Array aktualisieren
+      this.students = this.students.filter(s => s.id !== student.id);
+    },
+    error: (err) => console.error('Fehler beim Löschen', err)
+  });
+
       }
     }
   }
