@@ -12,7 +12,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import de.assessify.app.assessifyapi.api.dtos.response.ResetPasswordResponseDto;
-import org.apache.commons.lang3.RandomStringUtils;
+import java.security.SecureRandom;
+import java.util.UUID;
+
 
 import java.util.List;
 
@@ -79,7 +81,6 @@ public class UserController {
     }
 
     @PostMapping("/{userId}/reset-password")
-    // TODO: später mit Spring Security absichern
     public ResponseEntity<ResetPasswordResponseDto> resetPassword(@PathVariable UUID userId) {
         var optionalUser = userRepository.findById(userId);
         if (optionalUser.isEmpty()) {
@@ -87,10 +88,24 @@ public class UserController {
         }
 
         User user = optionalUser.get();
-        String tempPassword = RandomStringUtils.randomAlphanumeric(10);
+
+        String tempPassword = generateTempPassword(10);
+
         user.setPassword(passwordEncoder.encode(tempPassword));
         userRepository.save(user);
 
         return ResponseEntity.ok(new ResetPasswordResponseDto(tempPassword));
+    }
+
+    private static final String PASSWORD_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    private String generateTempPassword(int length) {
+        SecureRandom random = new SecureRandom();
+        StringBuilder sb = new StringBuilder(length);
+        for (int i = 0; i < length; i++) {
+            int index = random.nextInt(PASSWORD_CHARS.length());
+            sb.append(PASSWORD_CHARS.charAt(index));
+        }
+        return sb.toString();
     }
 }

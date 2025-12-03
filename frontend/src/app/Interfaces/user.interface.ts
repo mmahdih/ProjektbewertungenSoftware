@@ -1,9 +1,9 @@
 export interface User {
-  id: number;
+  id: string;
   firstName: string;
   lastName: string;
   username: string;
-  avatarUrl: string;
+  avatarUrl?: string;
   roleName: string;
 }
 
