@@ -39,42 +39,43 @@ export class MyAssessment {
     },
 
     {
-      id: 4,
+      id: 3,
       question: 'Wie beurteilen Sie das Arbeitsverhalten?'
     },
 
     {
-      id: 5,
+      id: 4,
       question: 'Wie beurteilen Sie das Engagment hinsichtlich der Aufgabenbearbeitung am Arduino mit Sensoren/Aktoren?'
     },
 
     {
-      id: 6,
+      id: 5,
       question: 'Beurteilen Sie das Engagment bei der Realisierung der Netzwerk-Funktionalität (MQTT/Vernetzung)?'
     },
 
     {
-      id: 7,
-      question: 'Wie war das Engagment bie dir Umsetzung der Datenbank?'
+      id: 6,
+      question: 'Wie war das Engagment bei der Umsetzung der Datenbank?'
     },
 
     {
-      id: 8, question: 'Wie war das Engagment bei der Gestalltung und Entwicklung der Benutzerschnittstellen?'
+      id: 7, 
+      question: 'Wie war das Engagment bei der Gestaltung und Entwicklung der Benutzerschnittstellen?'
     },
 
     {
-      id: 9,
+      id: 8,
       question: 'Beurteilen Sie das Engagment bei der Realisierung der Funktionalität (Java-Backend/Vernetzung)?'
     },
 
     {
-      id: 10,
+      id: 9,
       question: 'Beurteilen Sie die Mitarbeit bei der Erstellung des Werbeflyers?'
     },
 
     {
-      id: 11,
-      question: 'Welche Gesamtnote würen Sie der jeweiligen Person für Ihren beitrag zum Gelingen des Projektes geben?'
+      id: 10,
+      question: 'Welche Gesamtnote würden Sie der jeweiligen Person für Ihren beitrag zum Gelingen des Projektes geben?'
     }
   ];
 
@@ -106,7 +107,7 @@ export class MyAssessment {
   }
 
   deleteAll() {
-    this.bewertung.clear;
+    this.bewertung.clear();
     this.ratings = [];
     this.frage = 0;
   }
@@ -137,7 +138,7 @@ export class MyAssessment {
 
 
   createJson(currentQuestion: number, wholeQuestion: { id: number, question: string }[], members: { id: number; name: string }[], ratings: number[]) {
-    const question = wholeQuestion.find(q => q.id === currentQuestion)
+    const question = wholeQuestion[currentQuestion];
 
     const students = members.map(m => ({
       studentID: m.id,
