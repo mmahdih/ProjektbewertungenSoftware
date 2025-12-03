@@ -4,20 +4,44 @@ import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { Question } from '../../../Interfaces/question.interface';
 import { QuestionService } from './question.service';
+import { PageHeaderComponents } from '../../../Shared/Components/page-header/page-header';
+import {
+  TableColumn,
+  TableColumnComponent,
+} from '../../../Shared/Components/table-column/table-column';
+import { FormField, FormModalComponent } from '../../../Shared/Components/form-modal/form-modal';
 
 @Component({
   selector: 'app-question',
   standalone: true,
-  imports: [CommonModule, FormsModule, MatIconModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatIconModule,
+    PageHeaderComponents,
+    TableColumnComponent,
+    FormModalComponent,
+  ],
   templateUrl: './manage-question.html',
-  styleUrl: './manage-question.css'
 })
-export class ManageQuestions implements OnInit{
+export class ManageQuestions implements OnInit {
   questions: Question[] = [];
   loading = true;
   showAddModel: boolean = false;
   selectedQuestion: Question | null = null;
   showEditModel: boolean = false;
+
+  columns: TableColumn<Question>[] = [{ key: 'questionText', label: 'Frage' }];
+
+  fields: FormField[] = [
+    {
+      key: 'questionText',
+      label: 'Frage',
+      type: 'textarea',
+      required: true,
+      placeholder: 'Deine Frage...',
+    },
+  ];
 
   questionText = '';
 
@@ -54,14 +78,16 @@ export class ManageQuestions implements OnInit{
       error: (err) => {
         console.error('Fehler beim Laden der Lehrer', err);
         this.loading = false;
-      }
+      },
     });
   }
 
-  saveQuestion() {
+  saveQuestion(formData: any) {
     const dto = {
-      questionText: this.questionText,
+      questionText: formData.questionText,
     };
+
+    console.log(dto);
 
     this.questionService.createQuestion(dto).subscribe({
       next: (question) => {
@@ -70,26 +96,25 @@ export class ManageQuestions implements OnInit{
         // Reset Form
         this.questionText = '';
       },
-      error: (err) => console.error('Fehler beim Erstellen:', err)
+      error: (err) => console.error('Fehler beim Erstellen:', err),
     });
   }
 
   saveEditedQuestion() {
-  if (!this.selectedQuestion) return;
+    if (!this.selectedQuestion) return;
 
-  const dto = {
-    questionText: this.questionText
-  };
+    const dto = {
+      questionText: this.questionText,
+    };
 
-  this.questionService.updateQuestion(this.selectedQuestion.id, dto)
-    .subscribe({
+    this.questionService.updateQuestion(this.selectedQuestion.id, dto).subscribe({
       next: (updated) => {
-        const index = this.questions.findIndex(q => q.id === updated.id);
+        const index = this.questions.findIndex((q) => q.id === updated.id);
         if (index !== -1) this.questions[index] = updated;
 
         this.closeEditModel();
       },
-      error: (err) => console.error('Fehler beim Aktualisieren:', err)
+      error: (err) => console.error('Fehler beim Aktualisieren:', err),
     });
   }
 }
