@@ -5,11 +5,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { Question } from '../../../Interfaces/question.interface';
 import { QuestionService } from './question.service';
 import { PageHeaderComponents } from '../../../Shared/Components/page-header/page-header';
+import { TableColumn, TableColumnComponent } from '../../../Shared/Components/table-column/table-column';
+import { User } from '../../../Interfaces/user.interface';
 
 @Component({
   selector: 'app-question',
   standalone: true,
-  imports: [CommonModule, FormsModule, MatIconModule, PageHeaderComponents],
+  imports: [CommonModule, FormsModule, MatIconModule, PageHeaderComponents, TableColumnComponent],
   templateUrl: './manage-question.html'
 })
 export class ManageQuestions implements OnInit{
@@ -18,6 +20,10 @@ export class ManageQuestions implements OnInit{
   showAddModel: boolean = false;
   selectedQuestion: Question | null = null;
   showEditModel: boolean = false;
+
+  columns: TableColumn<Question>[] = [
+  { key: 'questionText', label: 'Frage' }
+  ];
 
   questionText = '';
 
