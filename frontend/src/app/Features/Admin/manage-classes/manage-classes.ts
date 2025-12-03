@@ -4,13 +4,13 @@ import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { ClassService } from './class.service';
 import { Class } from '../../../Interfaces/class.interface';
+import { PageHeaderComponents } from '../../../Shared/Components/page-header/page-header';
 
 @Component({
   selector: 'app-manage-classes',
   standalone: true,
-  imports: [CommonModule, FormsModule, MatIconModule],
-  templateUrl: './manage-classes.html',
-  styleUrl: './manage-classes.css'
+  imports: [CommonModule, FormsModule, MatIconModule, PageHeaderComponents],
+  templateUrl: './manage-classes.html'
 })
 export class ManageClasses implements OnInit{
   classes: Class[] = [];
