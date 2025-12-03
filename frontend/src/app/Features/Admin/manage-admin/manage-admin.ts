@@ -7,7 +7,7 @@ import { User } from '../../../Interfaces/user.interface';
 import { AuthService } from '../../../core/auth/auth.service'
 
 @Component({
-  selector: 'app-manage-teachers',
+  selector: 'app-manage-admin',
   standalone: true,
   imports: [CommonModule, MatIconModule, FormsModule],
   templateUrl: './manage-admin.html',
