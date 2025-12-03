@@ -38,10 +38,10 @@ export class FormModalComponent implements OnChanges {
   }
 
   onSave() {
-    if(this.isFieldEmpty()){
+    if (this.isFieldEmpty()) {
       this.save.emit(this.formData);
-    }else{
-      alert('Es gibt noch leere Felder!')
+    } else {
+      alert('Es gibt noch leere Felder!');
     }
   }
 
@@ -57,7 +57,7 @@ export class FormModalComponent implements OnChanges {
 
     if (allFilled) {
       return true;
-    }else{
+    } else {
       return false;
     }
   }
