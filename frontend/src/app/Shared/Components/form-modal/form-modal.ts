@@ -6,14 +6,14 @@ import { MatIconModule } from '@angular/material/icon';
 export type FormFieldType = 'text' | 'password' | 'email' | 'number' | 'select' | 'textarea';
 
 export interface FormField {
-  key: string;              
-  label: string;           
-  type: FormFieldType;      
-  placeholder?: string;     
-  required?: boolean;       
-  options?: string[];      
-  value?: any;        
-  readonly?: boolean;     
+  key: string;
+  label: string;
+  type: FormFieldType;
+  placeholder?: string;
+  required?: boolean;
+  options?: string[];
+  value?: any;
+  readonly?: boolean;
   colSpan?: number;
 }
 
@@ -21,9 +21,9 @@ export interface FormField {
   selector: 'app-form-modal',
   standalone: true,
   imports: [CommonModule, FormsModule, MatIconModule],
-  templateUrl: './form-modal.html'
+  templateUrl: './form-modal.html',
 })
-export class FormModalComponent implements OnChanges{
+export class FormModalComponent implements OnChanges {
   @Input() showModal = false;
   @Input() title = 'New Item';
   @Input() fields: FormField[] = [];
@@ -34,14 +34,25 @@ export class FormModalComponent implements OnChanges{
   formData: Record<string, any> = {};
 
   ngOnChanges() {
-    this.fields.forEach(f => this.formData[f.key] = f.value || '');
+    this.fields.forEach((f) => (this.formData[f.key] = f.value || ''));
   }
 
   onSave() {
-    this.save.emit(this.formData);
+    if (this.isFieldEmpty()) {
+      this.save.emit(this.formData);
+    } else {
+      alert('Es gibt noch leere Felder!');
+    }
   }
 
   onClose() {
     this.close.emit();
+  }
+
+  isFieldEmpty(): boolean {
+    const allFilled = Object.values(this.formData).every(
+      (v) => v !== '' && v !== null && v !== undefined
+    );
+    return allFilled;
   }
 }
