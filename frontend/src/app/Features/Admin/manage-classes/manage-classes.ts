@@ -5,16 +5,21 @@ import { MatIconModule } from '@angular/material/icon';
 import { ClassService } from './class.service';
 import { Class } from '../../../Interfaces/class.interface';
 import { PageHeaderComponents } from '../../../Shared/Components/page-header/page-header';
+import { TableColumn, TableColumnComponent } from '../../../Shared/Components/table-column/table-column';
 
 @Component({
   selector: 'app-manage-classes',
   standalone: true,
-  imports: [CommonModule, FormsModule, MatIconModule, PageHeaderComponents],
+  imports: [CommonModule, FormsModule, MatIconModule, PageHeaderComponents, TableColumnComponent],
   templateUrl: './manage-classes.html'
 })
 export class ManageClasses implements OnInit{
   classes: Class[] = [];
   loading = true;
+
+  columns: TableColumn<Class>[] = [
+  { key: 'name', label: 'Klassenname' }
+  ];
 
   name = '';
 
