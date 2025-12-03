@@ -5,11 +5,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { User } from '../../../Interfaces/user.interface';
 import { PageHeaderComponents } from '../../../Shared/Components/page-header/page-header';
-import {
-  TableColumn,
-  TableColumnComponent,
-} from '../../../Shared/Components/table-column/table-column';
-import { FormField, FormModalComponent } from '../../../Shared/Components/form-modal/form-modal';
+import { TableColumn, TableColumnComponent } from '../../../Shared/Components/table-column/table-column';
 
 @Component({
   selector: 'app-manage-teachers',
@@ -92,7 +88,7 @@ export class ManageTeachers implements OnInit {
   lastName = '';
   username = '';
   password = '';
-  role = '';
+  role = ''
 
   constructor(private teacherService: TeacherService) {}
 
