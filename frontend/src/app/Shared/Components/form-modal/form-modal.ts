@@ -53,11 +53,6 @@ export class FormModalComponent implements OnChanges {
     const allFilled = Object.values(this.formData).every(
       (v) => v !== '' && v !== null && v !== undefined
     );
-    
-    if (allFilled) {
-      return true;
-    } else {
-      return false;
-    }
+    return allFilled;
   }
 }
