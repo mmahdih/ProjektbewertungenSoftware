@@ -78,8 +78,8 @@ export class ManageStudents implements OnInit {
       placeholder: 'Passwort',
     },
     {
-      key: 'repeat-password',
-      label: 'Repeat-Password',
+      key: 'confirmPassword',
+      label: 'Passwort wiederholen',
       type: 'password',
       required: true,
       colSpan: 3,
