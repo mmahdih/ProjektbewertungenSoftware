@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
-import { DashboardNavbar } from '../../../layout/dashboard-navbar/dashboard-navbar';
-import { Sidebar } from '../../../layout/sidebar/sidebar';
 import { TeacherService } from './teacher.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -17,7 +14,14 @@ import { FormField, FormModalComponent } from '../../../Shared/Components/form-m
 @Component({
   selector: 'app-manage-teachers',
   standalone: true,
-  imports: [CommonModule, MatIconModule, FormsModule, PageHeaderComponents, TableColumnComponent, FormModalComponent],
+  imports: [
+    CommonModule,
+    MatIconModule,
+    FormsModule,
+    PageHeaderComponents,
+    TableColumnComponent,
+    FormModalComponent,
+  ],
   templateUrl: './manage-teachers.html',
 })
 export class ManageTeachers implements OnInit {
@@ -32,13 +36,55 @@ export class ManageTeachers implements OnInit {
   ];
 
   fields: FormField[] = [
-  { key: 'firstName', label: 'First Name', type: 'text', required: true, colSpan: 3, placeholder: "Vorname" },
-  { key: 'lastName', label: 'Last Name', type: 'text', required: true, colSpan: 3, placeholder: "Nachname" },
-  { key: 'username', label: 'Username', type: 'text', required: true, colSpan: 3, placeholder: "Benutzername" },
-  { key: 'position', label: 'Position', type: 'text', readonly: true, value: 'Teacher', colSpan: 3},
-  { key: 'password', label: 'Password', type: 'password', required: true, colSpan: 3, placeholder: "Passwort" },
-  { key: 'repeat-password', label: 'Repeat-Password', type: 'password', required: true, colSpan: 3, placeholder: "Passwort wiederholen" }
-];
+    {
+      key: 'firstName',
+      label: 'First Name',
+      type: 'text',
+      required: true,
+      colSpan: 3,
+      placeholder: 'Vorname',
+    },
+    {
+      key: 'lastName',
+      label: 'Last Name',
+      type: 'text',
+      required: true,
+      colSpan: 3,
+      placeholder: 'Nachname',
+    },
+    {
+      key: 'username',
+      label: 'Username',
+      type: 'text',
+      required: true,
+      colSpan: 3,
+      placeholder: 'Benutzername',
+    },
+    {
+      key: 'position',
+      label: 'Position',
+      type: 'text',
+      readonly: true,
+      value: 'Teacher',
+      colSpan: 3,
+    },
+    {
+      key: 'password',
+      label: 'Password',
+      type: 'password',
+      required: true,
+      colSpan: 3,
+      placeholder: 'Passwort',
+    },
+    {
+      key: 'repeat-password',
+      label: 'Repeat-Password',
+      type: 'password',
+      required: true,
+      colSpan: 3,
+      placeholder: 'Passwort wiederholen',
+    },
+  ];
 
   showAddModel: boolean = false;
 
