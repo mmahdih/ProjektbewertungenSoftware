@@ -1,10 +1,10 @@
-import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
-import { AddQuestion, Question } from "../../../Interfaces/question.interface";
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { AddQuestion, Question } from '../../../Interfaces/question.interface';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class QuestionService {
   private apiUrl = 'http://localhost:4100/api/question';
@@ -16,10 +16,10 @@ export class QuestionService {
   }
 
   createQuestion(dto: AddQuestion): Observable<Question> {
-    return this.http.post<Question>(this.apiUrl, dto)
+    return this.http.post<Question>(this.apiUrl, dto);
   }
 
   updateQuestion(id: string, dto: AddQuestion): Observable<Question> {
-  return this.http.put<Question>(`${this.apiUrl}/${id}`, dto);
-}
+    return this.http.put<Question>(`${this.apiUrl}/${id}`, dto);
+  }
 }

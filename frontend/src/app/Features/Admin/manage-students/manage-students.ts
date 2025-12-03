@@ -5,35 +5,87 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { PageHeaderComponents } from '../../../Shared/Components/page-header/page-header';
-import { TableColumn, TableColumnComponent } from '../../../Shared/Components/table-column/table-column';
+import {
+  TableColumn,
+  TableColumnComponent,
+} from '../../../Shared/Components/table-column/table-column';
 import { FormField, FormModalComponent } from '../../../Shared/Components/form-modal/form-modal';
 
 
 @Component({
   selector: 'app-manage-students',
   standalone: true,
-  imports: [CommonModule, FormsModule, MatIconModule, PageHeaderComponents, TableColumnComponent, FormModalComponent],
-  templateUrl: './manage-students.html'
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatIconModule,
+    PageHeaderComponents,
+    TableColumnComponent,
+    FormModalComponent,
+  ],
+  templateUrl: './manage-students.html',
 })
 export class ManageStudents implements OnInit {
   students: User[] = [];
   loading = true;
 
   columns: TableColumn<User>[] = [
-  { key: 'firstName', label: 'First Name' },
-  { key: 'lastName', label: 'Last Name' },
-  { key: 'username', label: 'Username' },
-  { key: 'roleName', label: 'Role' }
+    { key: 'firstName', label: 'First Name' },
+    { key: 'lastName', label: 'Last Name' },
+    { key: 'username', label: 'Username' },
+    { key: 'roleName', label: 'Role' },
   ];
 
   fields: FormField[] = [
-  { key: 'firstName', label: 'First Name', type: 'text', required: true, colSpan: 3, placeholder: "Vorname" },
-  { key: 'lastName', label: 'Last Name', type: 'text', required: true, colSpan: 3, placeholder: "Nachname" },
-  { key: 'username', label: 'Username', type: 'text', required: true, colSpan: 3, placeholder: "Benutzername" },
-  { key: 'position', label: 'Position', type: 'text', readonly: true, value: 'Teacher', colSpan: 3},
-  { key: 'password', label: 'Password', type: 'password', required: true, colSpan: 3, placeholder: "Passwort" },
-  { key: 'repeat-password', label: 'Repeat-Password', type: 'password', required: true, colSpan: 3, placeholder: "Passwort wiederholen" }
-];
+    {
+      key: 'firstName',
+      label: 'First Name',
+      type: 'text',
+      required: true,
+      colSpan: 3,
+      placeholder: 'Vorname',
+    },
+    {
+      key: 'lastName',
+      label: 'Last Name',
+      type: 'text',
+      required: true,
+      colSpan: 3,
+      placeholder: 'Nachname',
+    },
+    {
+      key: 'username',
+      label: 'Username',
+      type: 'text',
+      required: true,
+      colSpan: 3,
+      placeholder: 'Benutzername',
+    },
+    {
+      key: 'position',
+      label: 'Position',
+      type: 'text',
+      readonly: true,
+      value: 'Teacher',
+      colSpan: 3,
+    },
+    {
+      key: 'password',
+      label: 'Password',
+      type: 'password',
+      required: true,
+      colSpan: 3,
+      placeholder: 'Passwort',
+    },
+    {
+      key: 'repeat-password',
+      label: 'Repeat-Password',
+      type: 'password',
+      required: true,
+      colSpan: 3,
+      placeholder: 'Passwort wiederholen',
+    },
+  ];
 
   showAddModel: boolean = false;
 
@@ -69,7 +121,7 @@ export class ManageStudents implements OnInit {
       error: (err) => {
         console.error('Fehler beim Laden der Schüler', err);
         this.loading = false;
-      }
+      },
     });
   }
 
@@ -79,7 +131,7 @@ export class ManageStudents implements OnInit {
       lastName: formData.lastName,
       username: formData.username,
       password: formData.password,
-      role: 1
+      role: 1,
     };
 
     this.studentService.createStudent(dto).subscribe({
@@ -93,7 +145,7 @@ export class ManageStudents implements OnInit {
         this.password = '';
         this.role = '';
       },
-      error: (err) => console.error('Fehler beim Erstellen:', err)
+      error: (err) => console.error('Fehler beim Erstellen:', err),
     });
   }
 

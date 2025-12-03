@@ -8,7 +8,7 @@ interface ResetPasswordResponseDto {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class StudentService {
   private apiUrl = 'http://localhost:4100/api/users/role/2';
