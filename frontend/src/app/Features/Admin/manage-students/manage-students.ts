@@ -4,13 +4,13 @@ import { StudentService } from './student.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
+import { PageHeaderComponents } from '../../../Shared/Components/page-header/page-header';
 
 @Component({
   selector: 'app-manage-students',
   standalone: true,
-  imports: [CommonModule, FormsModule, MatIconModule],
-  templateUrl: './manage-students.html',
-  styleUrl: './manage-students.css'
+  imports: [CommonModule, FormsModule, MatIconModule, PageHeaderComponents],
+  templateUrl: './manage-students.html'
 })
 export class ManageStudents implements OnInit {
   students: User[] = [];
