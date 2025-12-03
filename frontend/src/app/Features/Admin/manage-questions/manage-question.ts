@@ -4,13 +4,13 @@ import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { Question } from '../../../Interfaces/question.interface';
 import { QuestionService } from './question.service';
+import { PageHeaderComponents } from '../../../Shared/Components/page-header/page-header';
 
 @Component({
   selector: 'app-question',
   standalone: true,
-  imports: [CommonModule, FormsModule, MatIconModule],
-  templateUrl: './manage-question.html',
-  styleUrl: './manage-question.css'
+  imports: [CommonModule, FormsModule, MatIconModule, PageHeaderComponents],
+  templateUrl: './manage-question.html'
 })
 export class ManageQuestions implements OnInit{
   questions: Question[] = [];
