@@ -42,7 +42,7 @@ export class MyAssessment {
       id: 3,
       question: 'Wie beurteilen Sie das Arbeitsverhalten?'
     },
-
+    /*
     {
       id: 4,
       question: 'Wie beurteilen Sie das Engagement hinsichtlich der Aufgabenbearbeitung am Arduino mit Sensoren/Aktoren?'
@@ -77,8 +77,9 @@ export class MyAssessment {
       id: 10,
       question: 'Welche Gesamtnote würden Sie der jeweiligen Person für Ihren Beitrag zum Gelingen des Projektes geben?'
     }
+      */
   ];
-  
+
   fullJson: string[] = [];
   frage = 0;
 
@@ -128,40 +129,32 @@ export class MyAssessment {
       this.form.markAllAsTouched();
     } else {
       this.bewertung.set(this.questions[this.frage].question, this.ratings);
-      this.createJson(this.frage, this.questions, this.members, this.ratings);
+      if (this.fullJson.length < this.questions.length) {
+        this.createJson(this.questions[this.frage].id, this.members, this.ratings);
+      }
       this.ratings = [0, 0, 0, 0, 0];
       this.frage++;
     }
   }
 
 
-  createJson(currentQuestion: number, wholeQuestion: { id: number, question: string }[], members: { id: number; name: string }[], ratings: number[]) {
-    const question = wholeQuestion[currentQuestion];
+  createJson(currentQuestion: number, members: { id: number; name: string }[], ratings: number[]) {
 
     const students = members.map(m => ({
       studentID: m.id,
       grade: ratings[m.id]
     }));
 
-
+    const questionText = this.questions[currentQuestion].question;
     const json = {
-      question: question
-        ? {
-          questionID: question.id,
-          questionText: question.question
-        }
-        : null,
+      questionID: currentQuestion,
+      questionText: questionText,
       students: students
     };
 
     const jsonString = JSON.stringify(json);
-    if (this.fullJson.length <= wholeQuestion.length){
-      this.fullJson.push(jsonString)
-    };
 
-    if(this.fullJson.length === wholeQuestion.length){
-      return this.fullJson;
-    };
+    this.fullJson.push(jsonString)
   }
 }
 
