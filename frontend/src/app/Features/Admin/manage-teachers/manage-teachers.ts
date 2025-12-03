@@ -65,7 +65,7 @@ export class ManageTeachers implements OnInit {
       label: 'Position',
       type: 'text',
       readonly: true,
-      value: 'Teacher',
+      value: 'TEACHER',
       colSpan: 3,
     },
     {
