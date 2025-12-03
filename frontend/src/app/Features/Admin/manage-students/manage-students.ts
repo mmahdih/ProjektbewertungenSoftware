@@ -5,10 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { PageHeaderComponents } from '../../../Shared/Components/page-header/page-header';
-import {
-  TableColumn,
-  TableColumnComponent,
-} from '../../../Shared/Components/table-column/table-column';
+import { TableColumn, TableColumnComponent } from '../../../Shared/Components/table-column/table-column';
 import { FormField, FormModalComponent } from '../../../Shared/Components/form-modal/form-modal';
 
 
