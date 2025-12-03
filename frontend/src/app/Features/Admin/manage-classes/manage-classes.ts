@@ -6,11 +6,12 @@ import { ClassService } from './class.service';
 import { Class } from '../../../Interfaces/class.interface';
 import { PageHeaderComponents } from '../../../Shared/Components/page-header/page-header';
 import { TableColumn, TableColumnComponent } from '../../../Shared/Components/table-column/table-column';
+import { FormField, FormModalComponent } from '../../../Shared/Components/form-modal/form-modal';
 
 @Component({
   selector: 'app-manage-classes',
   standalone: true,
-  imports: [CommonModule, FormsModule, MatIconModule, PageHeaderComponents, TableColumnComponent],
+  imports: [CommonModule, FormsModule, MatIconModule, PageHeaderComponents, TableColumnComponent, FormModalComponent],
   templateUrl: './manage-classes.html'
 })
 export class ManageClasses implements OnInit{
@@ -18,8 +19,12 @@ export class ManageClasses implements OnInit{
   loading = true;
 
   columns: TableColumn<Class>[] = [
-  { key: 'name', label: 'Klassenname' }
+  { key: 'name', label: 'Kursname' }
   ];
+
+  fields: FormField[] = [
+  { key: 'name', label: 'Kursname', type: 'text', required: true, colSpan: 6, placeholder: "Kursname" },
+];
 
   name = '';
 
@@ -64,9 +69,9 @@ export class ManageClasses implements OnInit{
     });
   }
 
-  saveClass() {
+  saveClass(formData: any) {
     const dto = {
-      name: this.name
+      name: formData.name
     };
 
     this.classService.createClass(dto).subscribe({
