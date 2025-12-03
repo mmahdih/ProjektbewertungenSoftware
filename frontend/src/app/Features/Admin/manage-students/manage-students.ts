@@ -7,12 +7,13 @@ import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { PageHeaderComponents } from '../../../Shared/Components/page-header/page-header';
 import { TableColumn, TableColumnComponent } from '../../../Shared/Components/table-column/table-column';
+import { FormField, FormModalComponent } from '../../../Shared/Components/form-modal/form-modal';
 
 
 @Component({
   selector: 'app-manage-students',
   standalone: true,
-  imports: [CommonModule, FormsModule, MatIconModule, PageHeaderComponents, TableColumnComponent],
+  imports: [CommonModule, FormsModule, MatIconModule, PageHeaderComponents, TableColumnComponent, FormModalComponent],
   templateUrl: './manage-students.html'
 })
 export class ManageStudents implements OnInit {
@@ -25,6 +26,15 @@ export class ManageStudents implements OnInit {
   { key: 'username', label: 'Username' },
   { key: 'roleName', label: 'Role' }
   ];
+
+  fields: FormField[] = [
+  { key: 'firstName', label: 'First Name', type: 'text', required: true, colSpan: 3, placeholder: "Vorname" },
+  { key: 'lastName', label: 'Last Name', type: 'text', required: true, colSpan: 3, placeholder: "Nachname" },
+  { key: 'username', label: 'Username', type: 'text', required: true, colSpan: 3, placeholder: "Benutzername" },
+  { key: 'position', label: 'Position', type: 'text', readonly: true, value: 'Teacher', colSpan: 3},
+  { key: 'password', label: 'Password', type: 'password', required: true, colSpan: 3, placeholder: "Passwort" },
+  { key: 'repeat-password', label: 'Repeat-Password', type: 'password', required: true, colSpan: 3, placeholder: "Passwort wiederholen" }
+];
 
   showAddModel: boolean = false;
 
@@ -62,12 +72,12 @@ export class ManageStudents implements OnInit {
     });
   }
 
-  saveStudent() {
+  saveStudent(formData: any) {
     const dto = {
-      firstName: this.firstName,
-      lastName: this.lastName,
-      username: this.username,
-      password: this.password,
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      username: formData.username,
+      password: formData.password,
       role: 1
     };
 
