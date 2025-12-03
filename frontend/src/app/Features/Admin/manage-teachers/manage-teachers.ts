@@ -7,13 +7,13 @@ import { TeacherService } from './teacher.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { User } from '../../../Interfaces/user.interface';
+import { PageHeaderComponents } from '../../../Shared/Components/page-header/page-header';
 
 @Component({
   selector: 'app-manage-teachers',
   standalone: true,
-  imports: [CommonModule, MatIconModule, FormsModule],
-  templateUrl: './manage-teachers.html',
-  styleUrl: './manage-teachers.css'
+  imports: [CommonModule, MatIconModule, FormsModule, PageHeaderComponents],
+  templateUrl: './manage-teachers.html'
 })
 export class ManageTeachers implements OnInit{
   teachers: User[] = [];
