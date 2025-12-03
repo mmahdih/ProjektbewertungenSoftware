@@ -25,7 +25,7 @@ export class MyAssessment {
   questions = [
     {
       id: 0,
-      question: 'Wie schätzen sie das Engagement im Projekt ein?'
+      question: 'Wie schätzen Sie das Engagement im Projekt ein?'
     },
 
     {
@@ -79,7 +79,11 @@ export class MyAssessment {
     }
   ];
 
-  fullJson: string[] = [];
+  fullJson: Array<{
+    questionID: number;
+    questionText: string;
+    students: Array<{ studentID: number; grade: number }>;
+  }> = [];
   frage = 0;
 
   members = [
@@ -109,7 +113,7 @@ export class MyAssessment {
 
   deleteAll() {
     this.bewertung.clear();
-    this.ratings = [];
+    this.ratings = this.members.map(_ => 0);
     this.fullJson = [];
     this.frage = 0;
   }
@@ -154,9 +158,8 @@ export class MyAssessment {
       students: students
     };
 
-    const jsonString = JSON.stringify(json);
+    this.fullJson.push(json);
 
-    this.fullJson.push(jsonString);
   }
 }
 
