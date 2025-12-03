@@ -23,6 +23,7 @@ export class ManageAdmins implements OnInit{
   lastName = '';
   username = '';
   password = '';
+  confirmPassword ='';
   role = ''
 
   constructor(private AdminService: AdminService, private authService: AuthService) {}
@@ -54,14 +55,17 @@ export class ManageAdmins implements OnInit{
   }
 
   saveAdmin() {
+    if (this.password === this.confirmPassword) {
+        
+    }
     const dto = {
-      firstName: this.firstName,
-      lastName: this.lastName,
-      username: this.username,
-      password: this.password,
-      role: this.authService.getRoleId() 
-    };
-    console.log(dto);
+  firstName: this.firstName,
+  lastName: this.lastName,
+  username: this.username,
+  password: this.password,
+  role: this.authService.getRoleId() 
+};
+    
 
     this.AdminService.createAdmin(dto).subscribe({
       next: (adminUser) => {
