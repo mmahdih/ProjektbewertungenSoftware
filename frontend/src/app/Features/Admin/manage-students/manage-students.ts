@@ -130,7 +130,7 @@ export class ManageStudents implements OnInit {
       lastName: formData.lastName,
       username: formData.username,
       password: formData.password,
-      role: 1,
+      role: 2,
     };
 
     this.studentService.createStudent(dto).subscribe({

@@ -130,7 +130,7 @@ export class ManageAdmins implements OnInit {
       lastName: formData.lastName,
       username: formData.username,
       password: formData.password,
-      role: this.authService.getRoleId(),
+      role: 3,
     };
 
     this.AdminService.createAdmin(dto).subscribe({
