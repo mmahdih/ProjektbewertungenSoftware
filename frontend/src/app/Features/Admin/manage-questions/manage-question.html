@@ -9,4 +9,18 @@
 
 <app-page-header title="Fragen" (addClick)="openAddModel()"></app-page-header>
 
-<app-table-column [items]="questions" [columns]="columns"></app-table-column>
+<app-table-column
+  [items]="questions"
+  [columns]="columns"
+  (edit)="openEditModal($event)"
+></app-table-column>
+
+<app-form-modal
+  [showModal]="showEditModal"
+  [title]="'Frage Editieren'"
+  [fields]="fields"
+  [record]="editingQuestions"
+  (close)="closeEditModal()"
+  (save)="saveEdit($event)"
+>
+</app-form-modal>

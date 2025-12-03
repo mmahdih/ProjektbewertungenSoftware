@@ -28,6 +28,7 @@ export class ManageQuestions implements OnInit {
   questions: Question[] = [];
   loading = true;
   showAddModel: boolean = false;
+  showEditModal: boolean = false;
   selectedQuestion: Question | null = null;
   showEditModel: boolean = false;
 
@@ -43,12 +44,24 @@ export class ManageQuestions implements OnInit {
     },
   ];
 
+  editingQuestions: Question | null = null;
+
   questionText = '';
 
   constructor(private questionService: QuestionService) {}
 
   ngOnInit(): void {
     this.loadQuestions();
+  }
+
+  openEditModal(question: Question) {
+    this.editingQuestions = question;
+    this.showEditModal = true;
+  }
+
+  closeEditModal() {
+    this.showEditModal = false;
+    this.editingQuestions = null;
   }
 
   openEditModel(question: Question): void {
@@ -66,6 +79,24 @@ export class ManageQuestions implements OnInit {
 
   closeAddModel(): void {
     this.showAddModel = false;
+  }
+
+  saveEdit(formData: any) {
+    if (!this.editingQuestions) return;
+
+    const updatedQuestion = { ...this.editingQuestions, ...formData };
+
+    console.log(formData);
+    console.log(updatedQuestion.id);
+
+    this.questionService.updateQuestion(updatedQuestion).subscribe({
+      next: (res: Question) => {
+        const index = this.questions.findIndex((s) => s.id === updatedQuestion.id);
+        if (index !== -1) this.questions[index] = res;
+        this.closeEditModal();
+      },
+      error: (err: any) => console.error('Fehler beim Aktualisieren:', err),
+    });
   }
 
   loadQuestions() {
@@ -97,24 +128,6 @@ export class ManageQuestions implements OnInit {
         this.questionText = '';
       },
       error: (err) => console.error('Fehler beim Erstellen:', err),
-    });
-  }
-
-  saveEditedQuestion() {
-    if (!this.selectedQuestion) return;
-
-    const dto = {
-      questionText: this.questionText,
-    };
-
-    this.questionService.updateQuestion(this.selectedQuestion.id, dto).subscribe({
-      next: (updated) => {
-        const index = this.questions.findIndex((q) => q.id === updated.id);
-        if (index !== -1) this.questions[index] = updated;
-
-        this.closeEditModel();
-      },
-      error: (err) => console.error('Fehler beim Aktualisieren:', err),
     });
   }
 }
