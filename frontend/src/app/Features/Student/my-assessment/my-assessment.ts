@@ -78,7 +78,8 @@ export class MyAssessment {
       question: 'Welche Gesamtnote würden Sie der jeweiligen Person für Ihren Beitrag zum Gelingen des Projektes geben?'
     }
   ];
-
+  
+  fullJson: string[] = [];
   frage = 0;
 
   members = [
@@ -153,9 +154,14 @@ export class MyAssessment {
       students: students
     };
 
-    console.log(JSON.stringify(json));
-    return JSON.stringify(json);
+    const jsonString = JSON.stringify(json);
+    if (this.fullJson.length <= wholeQuestion.length){
+      this.fullJson.push(jsonString)
+    };
 
+    if(this.fullJson.length === wholeQuestion.length){
+      return this.fullJson;
+    };
   }
 }
 
