@@ -4,5 +4,6 @@ import java.util.UUID;
 
 public record SchoolClassDto (
         UUID id,
-        String name
+        String courseName,
+        String className
 ) {}
