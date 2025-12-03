@@ -1,31 +1,44 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterOutlet } from "@angular/router";
-import { MatIcon, MatIconModule } from "@angular/material/icon";
-import { DashboardNavbar } from "../../../layout/dashboard-navbar/dashboard-navbar";
-import { Sidebar } from "../../../layout/sidebar/sidebar";
+import { RouterOutlet } from '@angular/router';
+import { MatIcon, MatIconModule } from '@angular/material/icon';
+import { DashboardNavbar } from '../../../layout/dashboard-navbar/dashboard-navbar';
+import { Sidebar } from '../../../layout/sidebar/sidebar';
 import { TeacherService } from './teacher.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { User } from '../../../Interfaces/user.interface';
 import { PageHeaderComponents } from '../../../Shared/Components/page-header/page-header';
-import { TableColumn, TableColumnComponent } from '../../../Shared/Components/table-column/table-column';
+import {
+  TableColumn,
+  TableColumnComponent,
+} from '../../../Shared/Components/table-column/table-column';
+import { FormField, FormModalComponent } from '../../../Shared/Components/form-modal/form-modal';
 
 @Component({
   selector: 'app-manage-teachers',
   standalone: true,
-  imports: [CommonModule, MatIconModule, FormsModule, PageHeaderComponents, TableColumnComponent],
-  templateUrl: './manage-teachers.html'
+  imports: [CommonModule, MatIconModule, FormsModule, PageHeaderComponents, TableColumnComponent, FormModalComponent],
+  templateUrl: './manage-teachers.html',
 })
-export class ManageTeachers implements OnInit{
+export class ManageTeachers implements OnInit {
   teachers: User[] = [];
   loading = true;
 
   columns: TableColumn<User>[] = [
-  { key: 'firstName', label: 'First Name' },
-  { key: 'lastName', label: 'Last Name' },
-  { key: 'username', label: 'Username' },
-  { key: 'roleName', label: 'Role' }
+    { key: 'firstName', label: 'First Name' },
+    { key: 'lastName', label: 'Last Name' },
+    { key: 'username', label: 'Username' },
+    { key: 'roleName', label: 'Role' },
   ];
+
+  fields: FormField[] = [
+  { key: 'firstName', label: 'First Name', type: 'text', required: true, colSpan: 3, placeholder: "Vorname" },
+  { key: 'lastName', label: 'Last Name', type: 'text', required: true, colSpan: 3, placeholder: "Nachname" },
+  { key: 'username', label: 'Username', type: 'text', required: true, colSpan: 3, placeholder: "Benutzername" },
+  { key: 'position', label: 'Position', type: 'text', readonly: true, value: 'Teacher', colSpan: 3},
+  { key: 'password', label: 'Password', type: 'password', required: true, colSpan: 3, placeholder: "Passwort" },
+  { key: 'repeat-password', label: 'Repeat-Password', type: 'password', required: true, colSpan: 3, placeholder: "Passwort wiederholen" }
+];
 
   showAddModel: boolean = false;
 
@@ -33,7 +46,7 @@ export class ManageTeachers implements OnInit{
   lastName = '';
   username = '';
   password = '';
-  role = ''
+  role = '';
 
   constructor(private teacherService: TeacherService) {}
 
@@ -59,17 +72,17 @@ export class ManageTeachers implements OnInit{
       error: (err) => {
         console.error('Fehler beim Laden der Lehrer', err);
         this.loading = false;
-      }
+      },
     });
   }
 
-  saveTeacher() {
+  saveTeacher(formData: any) {
     const dto = {
-      firstName: this.firstName,
-      lastName: this.lastName,
-      username: this.username,
-      password: this.password,
-      role: 1
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      username: formData.username,
+      password: formData.password,
+      role: 1,
     };
 
     this.teacherService.createTeacher(dto).subscribe({
@@ -83,8 +96,7 @@ export class ManageTeachers implements OnInit{
         this.password = '';
         this.role = '';
       },
-      error: (err) => console.error('Fehler beim Erstellen:', err)
+      error: (err) => console.error('Fehler beim Erstellen:', err),
     });
   }
-
 }
