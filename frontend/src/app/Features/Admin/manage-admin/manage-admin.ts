@@ -1,25 +1,31 @@
 import { Component, OnInit } from '@angular/core';
-import { AdminService} from './admin.service'
-import {MatIconModule } from "@angular/material/icon";
+import { AdminService } from './admin.service';
+import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { User } from '../../../Interfaces/user.interface';
-import { AuthService } from '../../../core/auth/auth.service'
-import { TableColumn, TableColumnComponent } from '../../../Shared/Components/table-column/table-column';
+import { AuthService } from '../../../core/auth/auth.service';
+import {
+  TableColumn,
+  TableColumnComponent,
+} from '../../../Shared/Components/table-column/table-column';
 import { FormField, FormModalComponent } from '../../../Shared/Components/form-modal/form-modal';
 import { PageHeaderComponents } from '../../../Shared/Components/page-header/page-header';
 
 @Component({
   selector: 'app-manage-admin',
   standalone: true,
-  imports: [CommonModule, MatIconModule, FormsModule,
+  imports: [
+    CommonModule,
+    MatIconModule,
+    FormsModule,
     PageHeaderComponents,
     TableColumnComponent,
     FormModalComponent,
   ],
-  templateUrl: './manage-admin.html'
+  templateUrl: './manage-admin.html',
 })
-export class ManageAdmins implements OnInit{
+export class ManageAdmins implements OnInit {
   admins: User[] = [];
   loading = true;
 
@@ -87,8 +93,8 @@ export class ManageAdmins implements OnInit{
   lastName = '';
   username = '';
   password = '';
-  confirmPassword ='';
-  role = ''
+  confirmPassword = '';
+  role = '';
 
   constructor(private AdminService: AdminService, private authService: AuthService) {}
 
@@ -114,22 +120,20 @@ export class ManageAdmins implements OnInit{
       error: (err) => {
         console.error('Fehler beim Laden der Admins', err);
         this.loading = false;
-      }
+      },
     });
   }
 
   saveAdmin(formData: any) {
     if (this.password === this.confirmPassword) {
-        
     }
     const dto = {
-  firstName: formData.firstName,
-  lastName: formData.lastName,
-  username: formData.username,
-  password: formData.password,
-  role: this.authService.getRoleId() 
-};
-    
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      username: formData.username,
+      password: formData.password,
+      role: this.authService.getRoleId(),
+    };
 
     this.AdminService.createAdmin(dto).subscribe({
       next: (adminUser) => {
@@ -142,8 +146,7 @@ export class ManageAdmins implements OnInit{
         this.password = '';
         this.role = '';
       },
-      error: (err) => console.error('Fehler beim Erstellen:', err)
+      error: (err) => console.error('Fehler beim Erstellen:', err),
     });
   }
-
 }

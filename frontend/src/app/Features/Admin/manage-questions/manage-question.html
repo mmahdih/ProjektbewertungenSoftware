@@ -3,15 +3,10 @@
   [title]="'Frage anlegen'"
   [fields]="fields"
   (close)="closeAddModel()"
-  (save)="saveQuestion($event)">
+  (save)="saveQuestion($event)"
+>
 </app-form-modal>
 
-<app-page-header
-  title="Fragen"
-  (addClick)="openAddModel()"
-></app-page-header>
+<app-page-header title="Fragen" (addClick)="openAddModel()"></app-page-header>
 
-<app-table-column
-  [items]="questions"
-  [columns]="columns"
-></app-table-column>
+<app-table-column [items]="questions" [columns]="columns"></app-table-column>

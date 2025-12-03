@@ -3,15 +3,10 @@
   [title]="'Lehrer anlegen'"
   [fields]="fields"
   (close)="closeAddModel()"
-  (save)="saveTeacher($event)">
+  (save)="saveTeacher($event)"
+>
 </app-form-modal>
 
-<app-page-header
-  title="Lehrer"
-  (addClick)="openAddModel()"
-></app-page-header>
+<app-page-header title="Lehrer" (addClick)="openAddModel()"></app-page-header>
 
-<app-table-column
-  [items]="teachers"
-  [columns]="columns"
-></app-table-column>
+<app-table-column [items]="teachers" [columns]="columns"></app-table-column>

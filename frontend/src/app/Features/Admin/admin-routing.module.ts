@@ -6,8 +6,7 @@ import { Export } from './admin-export/admin-export';
 import { Import } from './admin-import/admin-import';
 import { ManageClasses } from './manage-classes/manage-classes';
 import { ManageQuestions } from './manage-questions/manage-question';
-import { ManageAdmins } from "./manage-admin/manage-admin";
-
+import { ManageAdmins } from './manage-admin/manage-admin';
 
 export const AdminRoutes: Routes = [
   {

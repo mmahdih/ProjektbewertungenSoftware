@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { User, AddUser } from '../../../Interfaces/user.interface';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AdminService {
   private apiUrl = 'http://localhost:4100/api/users/role/3';

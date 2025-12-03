@@ -11,7 +11,6 @@ import {
 } from '../../../Shared/Components/table-column/table-column';
 import { FormField, FormModalComponent } from '../../../Shared/Components/form-modal/form-modal';
 
-
 @Component({
   selector: 'app-manage-students',
   standalone: true,
@@ -162,7 +161,7 @@ export class ManageStudents implements OnInit {
       error: (err) => {
         console.error('Fehler beim Zurücksetzen des Passworts', err);
         alert('Passwort konnte nicht zurückgesetzt werden.');
-      }
+      },
     });
   }
 }

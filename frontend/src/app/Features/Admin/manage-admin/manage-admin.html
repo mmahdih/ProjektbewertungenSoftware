@@ -3,15 +3,10 @@
   [title]="'Administrator anlegen'"
   [fields]="fields"
   (close)="closeAddModel()"
-  (save)="saveAdmin($event)">
+  (save)="saveAdmin($event)"
+>
 </app-form-modal>
 
-<app-page-header
-  title="Adminstratoren"
-  (addClick)="openAddModel()"
-></app-page-header>
+<app-page-header title="Adminstratoren" (addClick)="openAddModel()"></app-page-header>
 
-<app-table-column
-  [items]="admins"
-  [columns]="columns"
-></app-table-column>
+<app-table-column [items]="admins" [columns]="columns"></app-table-column>

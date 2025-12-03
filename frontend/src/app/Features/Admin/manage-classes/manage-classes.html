@@ -3,15 +3,10 @@
   [title]="'Kurs anlegen'"
   [fields]="fields"
   (close)="closeAddModel()"
-  (save)="saveClass($event)">
+  (save)="saveClass($event)"
+>
 </app-form-modal>
 
-<app-page-header
-  title="Kurs"
-  (addClick)="openAddModel()"
-></app-page-header>
+<app-page-header title="Kurs" (addClick)="openAddModel()"></app-page-header>
 
-<app-table-column
-  [items]="classes"
-  [columns]="columns"
-></app-table-column>
+<app-table-column [items]="classes" [columns]="columns"></app-table-column>

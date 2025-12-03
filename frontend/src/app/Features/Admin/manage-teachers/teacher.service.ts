@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { User, AddUser } from '../../../Interfaces/user.interface';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TeacherService {
   private apiUrl = 'http://localhost:4100/api/users/role/1';
@@ -16,6 +16,6 @@ export class TeacherService {
   }
 
   createTeacher(dto: AddUser): Observable<User> {
-    return this.http.post<User>(this.apiUrl, dto)
+    return this.http.post<User>(this.apiUrl, dto);
   }
 }
