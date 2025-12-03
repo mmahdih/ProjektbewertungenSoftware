@@ -42,7 +42,7 @@ export class MyAssessment {
       id: 3,
       question: 'Wie beurteilen Sie das Arbeitsverhalten?'
     },
-    /*
+
     {
       id: 4,
       question: 'Wie beurteilen Sie das Engagement hinsichtlich der Aufgabenbearbeitung am Arduino mit Sensoren/Aktoren?'
@@ -77,7 +77,6 @@ export class MyAssessment {
       id: 10,
       question: 'Welche Gesamtnote würden Sie der jeweiligen Person für Ihren Beitrag zum Gelingen des Projektes geben?'
     }
-      */
   ];
 
   fullJson: string[] = [];
@@ -111,6 +110,7 @@ export class MyAssessment {
   deleteAll() {
     this.bewertung.clear();
     this.ratings = [];
+    this.fullJson = [];
     this.frage = 0;
   }
 
@@ -133,7 +133,9 @@ export class MyAssessment {
         this.createJson(this.questions[this.frage].id, this.members, this.ratings);
       }
       this.ratings = [0, 0, 0, 0, 0];
-      this.frage++;
+      if (this.frage < this.questions.length - 1) {
+        this.frage++;
+      }
     }
   }
 
@@ -154,7 +156,7 @@ export class MyAssessment {
 
     const jsonString = JSON.stringify(json);
 
-    this.fullJson.push(jsonString)
+    this.fullJson.push(jsonString);
   }
 }
 
