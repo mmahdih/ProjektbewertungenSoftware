@@ -204,17 +204,15 @@ export class ManageTeachers implements OnInit {
     });
   }
 
-  deleteTeacher(teacher : User){
-    for (let index = 0; index < this.teachers.length; index++) {
-      if (teacher.id === this.teachers[index].id ) {
-        this.teacherService.deleteTeacher(teacher).subscribe({
+  deleteTeacher(teacher: User) {
+  if (!confirm(`Wirklich ${teacher.firstName} ${teacher.lastName} löschen?`)) {
+    return;
+  }
+  this.teacherService.deleteTeacher(teacher).subscribe({
     next: () => {
       this.teachers = this.teachers.filter(s => s.id !== teacher.id);
     },
     error: (err) => console.error('Fehler beim Löschen', err)
   });
-
-      }
-    }
-  }
+}
 }

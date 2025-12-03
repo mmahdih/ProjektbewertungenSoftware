@@ -126,7 +126,10 @@ export class ManageAdmins implements OnInit {
 
   editingAdmin: User | null = null;
 
-  constructor(private adminService: AdminService, private authService: AuthService) {}
+  constructor(
+    private adminService: AdminService,
+    private authService: AuthService,
+  ) {}
 
   ngOnInit(): void {
     this.loadAdmin();
@@ -168,7 +171,6 @@ export class ManageAdmins implements OnInit {
     });
   }
 
-
   loadAdmin() {
     this.adminService.getAdmins().subscribe({
       next: (data) => {
@@ -206,17 +208,15 @@ export class ManageAdmins implements OnInit {
       error: (err) => console.error('Fehler beim Erstellen:', err),
     });
   }
-  deleteAdmin(admin : User){
-    for (let index = 0; index < this.admins.length; index++) {
-      if (admin.id === this.admins[index].id ) {
-        this.adminService.deleteAdmin(admin).subscribe({
-    next: () => {
-      this.admins = this.admins.filter(s => s.id !== admin.id);
-    },
-    error: (err) => console.error('Fehler beim Löschen', err)
-  });
-
-      }
+  deleteAdmin(admin: User) {
+    if (!confirm(`Wirklich ${admin.firstName} ${admin.lastName} löschen?`)) {
+      return;
     }
+    this.adminService.deleteAdmin(admin).subscribe({
+      next: () => {
+        this.admins = this.admins.filter((s) => s.id !== admin.id);
+      },
+      error: (err) => console.error('Fehler beim Löschen', err),
+    });
   }
 }
