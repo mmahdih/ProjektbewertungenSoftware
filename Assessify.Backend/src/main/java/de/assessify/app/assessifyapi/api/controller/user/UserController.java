@@ -4,14 +4,14 @@ import de.assessify.app.assessifyapi.api.dtos.request.AddUserDto;
 import de.assessify.app.assessifyapi.api.dtos.request.UpdateUserDto;
 import de.assessify.app.assessifyapi.api.dtos.response.UserDto;
 import de.assessify.app.assessifyapi.api.repository.RoleRepository;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import de.assessify.app.assessifyapi.api.repository.UserRepository;
 import de.assessify.app.assessifyapi.api.entity.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
+
 import de.assessify.app.assessifyapi.api.dtos.response.ResetPasswordResponseDto;
 import java.security.SecureRandom;
 import java.util.UUID;
@@ -79,10 +79,11 @@ public class UserController {
     }
 
     @DeleteMapping("/{userId}")
-    public ResponseEntity<UserDto> deleteUserById(@PathVariable UUID userId) {
+    public ResponseEntity<Void> deleteUserById(@PathVariable UUID userId) {
 
         User existingUser = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("User not found with id " + userId));
+                .orElseThrow(
+                        () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found with id " + userId));
         userRepository.delete(existingUser);
 
         return ResponseEntity.noContent().build();
