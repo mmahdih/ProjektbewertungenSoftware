@@ -9,7 +9,10 @@ import {
   TableColumn,
   TableColumnComponent,
 } from '../../../Shared/Components/table-column/table-column';
-import { FormField, FormModalComponent } from '../../../Shared/Components/form-modal/form-modal';
+import {
+  FormField,
+  FormModalComponent,
+} from '../../../Shared/Components/form-modal/form-modal';
 
 @Component({
   selector: 'app-manage-classes',
@@ -28,24 +31,38 @@ export class ManageClasses implements OnInit {
   classes: Class[] = [];
   loading = true;
 
-  columns: TableColumn<Class>[] = [{ key: 'name', label: 'Kursname' }];
+  // Tabellen-Spalten: keys müssen zum Interface "Class" passen
+  columns: TableColumn<Class>[] = [
+    { key: 'courseName', label: 'Kursname' },
+    { key: 'className', label: 'Klassenname' },
+  ];
 
+  // Felder für "neu anlegen"
   fields: FormField[] = [
     {
-      key: 'name',
+      key: 'courseName',        // Name im Form-Objekt
       label: 'Kursname',
       type: 'text',
       required: true,
       colSpan: 6,
-      placeholder: 'Kursname',
+      placeholder: 'z.B. 23FIIRG1',
     },
   ];
 
-  name = '';
+  // Felder für "bearbeiten"
+  fieldsEdit: FormField[] = [
+    {
+      key: 'courseName',
+      label: 'Kursname',
+      type: 'text',
+      required: true,
+      colSpan: 6,
+      placeholder: 'z.B. 23FIIRG1',
+    },
+  ];
 
-  showAddModel: boolean = false;
-  showEditModal: boolean = false;
-
+  showAddModel = false;
+  showEditModal = false;
   editingClass: Class | null = null;
 
   constructor(private classService: ClassService) {}
@@ -72,70 +89,51 @@ export class ManageClasses implements OnInit {
     this.editingClass = null;
   }
 
-  saveEdit(formData: any) {
-    if (!this.editingClass) return;
-
-    const updatedClass = { ...this.editingClass, ...formData };
-
-    console.log(formData);
-    console.log(updatedClass.id);
-
-    this.classService.updateClass(updatedClass).subscribe({
-      next: (res: Class) => {
-        const index = this.classes.findIndex((s) => s.id === updatedClass.id);
-        if (index !== -1) this.classes[index] = res;
-        this.closeEditModal();
-      },
-      error: (err: any) => console.error('Fehler beim Aktualisieren:', err),
-    });
-  }
-
   loadClasses() {
     this.classService.getClass().subscribe({
       next: (data) => {
-        console.log('API Data:', data);
         this.classes = data;
         this.loading = false;
       },
       error: (err) => {
-        console.error('Fehler beim Laden der Lehrer', err);
+        console.error('Fehler beim Laden der Klassen', err);
         this.loading = false;
       },
     });
   }
 
+  // Neues Objekt speichern
   saveClass(formData: any) {
+    // formData.courseName kommt vom FormModal
     const dto = {
-      name: formData.name,
+      name: formData.courseName, // Backend erwartet Feld "name"
     };
 
     this.classService.createClass(dto).subscribe({
       next: (schoolclass) => {
-        this.classes.push(schoolclass); // direkt zur Liste hinzufügen
+        this.classes.push(schoolclass);
         this.closeAddModel();
-        // Reset Form
-        this.name = '';
       },
-      error: (err) => console.error('Fehler beim Erstellen:', err)
+      error: (err) => console.error('Fehler beim Erstellen:', err),
     });
   }
 
-  saveEditedClass() {
-  if (!this.selectedClass) return;
+  // Bestehende Klasse bearbeiten
+  saveEdit(formData: any) {
+    if (!this.editingClass) return;
 
-  const dto = {
-    name: this.name
-  };
+    const dto = {
+      id: this.editingClass.id,
+      name: formData.courseName, // wieder Mapping zum Backend-DTO
+    };
 
-  this.classService.updateClass(this.selectedClass.id, dto)
-    .subscribe({
-      next: (updated) => {
-        const index = this.classes.findIndex(q => q.id === updated.id);
-        if (index !== -1) this.classes[index] = updated;
-
-        this.closeEditModel();
+    this.classService.updateClass(dto).subscribe({
+      next: (res: Class) => {
+        const index = this.classes.findIndex((s) => s.id === res.id);
+        if (index !== -1) this.classes[index] = res;
+        this.closeEditModal();
       },
-      error: (err) => console.error('Fehler beim Aktualisieren:', err)
+      error: (err: any) => console.error('Fehler beim Aktualisieren:', err),
     });
   }
 }

@@ -3,28 +3,32 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Class } from '../../../Interfaces/class.interface';
 
-
 @Injectable({
   providedIn: 'root',
 })
 export class ClassService {
-
-  private baseUrl = 'http://localhost:4100/api/school-class';
+  private apiUrl = 'http://localhost:4100/api/school-class';
 
   constructor(private http: HttpClient) {}
 
   // GET /api/school-class/all
   getClass(): Observable<Class[]> {
-    return this.http.get<Class[]>(`${this.baseUrl}/all`);
+    // <--- WICHTIG: Backticks benutzen, nicht "..."
+    return this.http.get<Class[]>(`${this.apiUrl}/all`);
   }
 
-  // POST /api/school-class
+  // POST /api/school-class  (Backend erwartet { name: string })
   createClass(dto: { name: string }): Observable<Class> {
-    return this.http.post<Class>(this.baseUrl, dto);
+    return this.http.post<Class>(this.apiUrl, dto);
   }
 
-  // PUT /api/school-class/{id}
-  updateClass(id: string, dto: { name: string }): Observable<Class> {
-    return this.http.put<Class>(`${this.baseUrl}/${id}`, dto);
+  // PUT /api/school-class/{id}  (Backend erwartet { name: string })
+  updateClass(dto: { id: string; name: string }): Observable<Class> {
+    return this.http.put<Class>(`${this.apiUrl}/${dto.id}`, dto);
+  }
+
+  // optional für später:
+  deleteClass(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
