@@ -203,4 +203,16 @@ export class ManageTeachers implements OnInit {
       error: (err) => console.error('Fehler beim Erstellen:', err),
     });
   }
+
+  deleteTeacher(teacher: User) {
+  if (!confirm(`Wirklich ${teacher.firstName} ${teacher.lastName} löschen?`)) {
+    return;
+  }
+  this.teacherService.deleteTeacher(teacher).subscribe({
+    next: () => {
+      this.teachers = this.teachers.filter(s => s.id !== teacher.id);
+    },
+    error: (err) => console.error('Fehler beim Löschen', err)
+  });
+}
 }

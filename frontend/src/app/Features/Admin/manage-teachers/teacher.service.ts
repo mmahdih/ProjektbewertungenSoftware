@@ -19,6 +19,10 @@ export class TeacherService {
     return this.http.post<User>(`${this.apiUrl}/role/1`, dto);
   }
 
+  deleteTeacher(dto: User): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${dto.id}`);
+  }
+
   updateTeacher(dto: UpdateUser): Observable<User> {
     return this.http.put<User>(`${this.apiUrl}/${dto.id}`, dto);
   }

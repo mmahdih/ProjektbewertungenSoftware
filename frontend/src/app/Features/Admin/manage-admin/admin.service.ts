@@ -19,6 +19,10 @@ export class AdminService {
     return this.http.post<User>(`${this.apiUrl}/role/3`, dto);
   }
 
+  deleteAdmin(dto: User): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${dto.id}`);
+  }
+
   updateAdmin(dto: UpdateUser): Observable<User> {
     return this.http.put<User>(`${this.apiUrl}/${dto.id}`, dto);
   }
