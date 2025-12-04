@@ -1,6 +1,7 @@
 package de.assessify.app.assessifyapi.api.controller.user;
 
 import de.assessify.app.assessifyapi.api.dtos.request.AddUserDto;
+import de.assessify.app.assessifyapi.api.dtos.request.UpdateUserDto;
 import de.assessify.app.assessifyapi.api.dtos.response.UserDto;
 import de.assessify.app.assessifyapi.api.repository.RoleRepository;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,11 +12,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import de.assessify.app.assessifyapi.api.dtos.response.ResetPasswordResponseDto;
+import java.security.SecureRandom;
+import java.util.UUID;
+
 
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api/users")
 public class UserController {
     private final UserRepository userRepository;
@@ -43,7 +47,7 @@ public class UserController {
                             field.getLastName(),
                             field.getUsername(),
                             field.getCreatedAt(),
-                            role != null ? role.getRoleName() : null
+                            role != null ? role.getName() : null
                     );
                 })
                 .toList();
@@ -72,7 +76,59 @@ public class UserController {
                         savedUser.getLastName(),
                         savedUser.getUsername(),
                         savedUser.getCreatedAt(),
-                        role != null ? role.getRoleName() : null
+                        role != null ? role.getName() : null
                 ));
+    }
+
+    @PutMapping("/{userId}")
+    public ResponseEntity<UserDto> updateUser(@RequestBody UpdateUserDto dto, @PathVariable UUID userId) {
+        User existingUser = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found with id " + userId));
+
+        existingUser.setFirstName(dto.firstName());
+        existingUser.setLastName(dto.lastName());
+        existingUser.setUsername(dto.username());
+
+        User updatedUser = userRepository.save(existingUser);
+
+        var role = roleRepository.findById(updatedUser.getRoleId()).orElse(null);
+
+        return ResponseEntity.ok(new UserDto(
+                updatedUser.getId(),
+                updatedUser.getFirstName(),
+                updatedUser.getLastName(),
+                updatedUser.getUsername(),
+                updatedUser.getCreatedAt(),
+                role != null ? role.getName() : null
+        ));
+    }
+
+    @PostMapping("/{userId}/reset-password")
+    public ResponseEntity<ResetPasswordResponseDto> resetPassword(@PathVariable UUID userId) {
+        var optionalUser = userRepository.findById(userId);
+        if (optionalUser.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        User user = optionalUser.get();
+
+        String tempPassword = generateTempPassword(10);
+
+        user.setPassword(passwordEncoder.encode(tempPassword));
+        userRepository.save(user);
+
+        return ResponseEntity.ok(new ResetPasswordResponseDto(tempPassword));
+    }
+
+    private static final String PASSWORD_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    private String generateTempPassword(int length) {
+        SecureRandom random = new SecureRandom();
+        StringBuilder sb = new StringBuilder(length);
+        for (int i = 0; i < length; i++) {
+            int index = random.nextInt(PASSWORD_CHARS.length());
+            sb.append(PASSWORD_CHARS.charAt(index));
+        }
+        return sb.toString();
     }
 }

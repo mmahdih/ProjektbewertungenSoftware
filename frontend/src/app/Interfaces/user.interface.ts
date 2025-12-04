@@ -1,9 +1,9 @@
 export interface User {
-  id: number;
+  id: string;
   firstName: string;
   lastName: string;
   username: string;
-  avatarUrl: string;
+  avatarUrl?: string;
   roleName: string;
 }
 
@@ -13,4 +13,11 @@ export interface AddUser {
     username: string;
     password: string;
     role: number;
+}
+
+export interface UpdateUser {
+    id: string;
+    firstName: string;
+    lastName: string;
+    username: string;
 }

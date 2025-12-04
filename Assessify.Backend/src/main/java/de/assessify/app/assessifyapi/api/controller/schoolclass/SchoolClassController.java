@@ -1,5 +1,7 @@
 package de.assessify.app.assessifyapi.api.controller.schoolclass;
 
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.interfaces.DecodedJWT;
 import de.assessify.app.assessifyapi.api.dtos.request.AddSchoolClassDto;
 import de.assessify.app.assessifyapi.api.dtos.request.UpdateSchoolClassDto;
 import de.assessify.app.assessifyapi.api.dtos.response.SchoolClassDto;
@@ -28,7 +30,7 @@ public class SchoolClassController {
         this.entityFinderService = entityFinderService;
     }
 
-    @GetMapping("/school-class")
+    @GetMapping("/school-class/all")
     public ResponseEntity<List<SchoolClassDto>> getAllSchoolClasses() {
         var modules = schoolClassRepository.findAll()
                 .stream()
@@ -39,6 +41,30 @@ public class SchoolClassController {
                 .toList();
 
         return ResponseEntity.ok(modules);
+    }
+
+    @GetMapping("/school-class")
+    public ResponseEntity<List<SchoolClassDto>> getSchoolClassesForCurrentUser(@RequestHeader("Authorization") String authHeader) {
+        try {
+            if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+                return ResponseEntity.status(401).build();
+            }
+
+            String token = authHeader.substring(7); // "Bearer " abschneiden
+            DecodedJWT jwt = JWT.decode(token);
+            UUID userId = UUID.fromString(jwt.getSubject());
+
+            var classes = schoolClassRepository.findByUsers_Id(userId)
+                    .stream()
+                    .map(c -> new SchoolClassDto(c.getId(), c.getSchoolClassName()))
+                    .toList();
+
+            return ResponseEntity.ok(classes);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).build();
+        }
     }
 
     @PostMapping("/school-class")
@@ -56,7 +82,7 @@ public class SchoolClassController {
        return ResponseEntity.ok(response);
     }
 
-    @PostMapping("/user/{userId}/connect/school-class/{schoolClassId}")
+    @PostMapping("/school-class/{schoolClassId}/user/{userId}")
     public ResponseEntity<UserWithSchoolClassDto> addSchoolClassToUser(
             @PathVariable UUID userId,
             @PathVariable UUID schoolClassId){
@@ -101,23 +127,23 @@ public class SchoolClassController {
 
         return ResponseEntity.ok(response);
     }
-
-    @DeleteMapping("/school-class/{schoolClassId}")
-    public ResponseEntity<Void> deleteSchoolClass(
-            @PathVariable UUID schoolClassId) {
-
-        SchoolClass schoolClass = entityFinderService.findSchoolClass(schoolClassId);
-
-        List<User> userWithRole = userRepository.findAll().stream()
-                .filter(p -> p.getSchoolClasses().contains(schoolClass))
-                .toList();
-
-        for (User user : userWithRole) {
-            user.getSchoolClasses().remove(schoolClass);
-            userRepository.save(user);
-        }
-
-        schoolClassRepository.delete(schoolClass);
-        return ResponseEntity.noContent().build();
-    }
+//
+//    @DeleteMapping("/school-class/{schoolClassId}")
+//    public ResponseEntity<Void> deleteSchoolClass(
+//            @PathVariable UUID schoolClassId) {
+//
+//        SchoolClass schoolClass = entityFinderService.findSchoolClass(schoolClassId);
+//
+//        List<User> userWithRole = userRepository.findAll().stream()
+//                .filter(p -> p.getSchoolClasses().contains(schoolClass))
+//                .toList();
+//
+//        for (User user : userWithRole) {
+//            user.getSchoolClasses().remove(schoolClass);
+//            userRepository.save(user);
+//        }
+//
+//        schoolClassRepository.delete(schoolClass);
+//        return ResponseEntity.noContent().build();
+//    }
 }

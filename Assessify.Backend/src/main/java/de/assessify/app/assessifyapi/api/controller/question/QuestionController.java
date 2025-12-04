@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/question")
 public class QuestionController {
     private final QuestionRepository questionRepository;
     private final EntityFinderService entityFinderService;
@@ -23,7 +23,7 @@ public class QuestionController {
         this.entityFinderService = entityFinderService;
     }
 
-    @GetMapping("/questions")
+    @GetMapping
     public ResponseEntity<List<QuestionDto>> getAllQuestions() {
         var modules = questionRepository.findAll()
                 .stream()
@@ -36,7 +36,7 @@ public class QuestionController {
         return ResponseEntity.ok(modules);
     }
 
-    @PostMapping("/question")
+    @PostMapping
     public ResponseEntity<QuestionDto> createQuestion(
             @RequestBody AddQuestionDto dto) {
 
@@ -53,7 +53,7 @@ public class QuestionController {
         return ResponseEntity.ok(response);
     }
 
-    @PutMapping("/question/{questionId}")
+    @PutMapping("/{questionId}")
     public ResponseEntity<QuestionDto> updateQuestion(
             @PathVariable UUID questionId,
             @RequestBody UpdateQuestionDto dto) {
@@ -72,7 +72,7 @@ public class QuestionController {
         return ResponseEntity.ok(response);
     }
 
-    @DeleteMapping("/question/{questionId}")
+    @DeleteMapping("/{questionId}")
     public ResponseEntity<Void> deleteQuestion(
             @PathVariable UUID questionId) {
 

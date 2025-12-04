@@ -30,8 +30,10 @@
               aria-controls="dropdown-layouts"
               data-collapse-toggle="dropdown-layouts"
             >
-            <mat-icon                 class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
->{{ item.icon }}</mat-icon>
+              <mat-icon
+                class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
+                >{{ item.icon }}</mat-icon
+              >
               <span class="flex-1 ml-3 text-left whitespace-nowrap">{{ item.label }}</span>
               <svg
                 sidebar-toggle-item
@@ -49,14 +51,14 @@
             </button>
             <ul id="dropdown-layouts" class="py-2 space-y-2">
               @for (item of item.subMenu; track $index) {
-                <li>
-                <a [routerLink]="item.route"
+              <li>
+                <a
+                  [routerLink]="item.route"
                   class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700"
-                  >
-                  <mat-icon class="w-6 h-6">{{ item.icon }}</mat-icon>
-              <span class="ml-3">{{ item.label }}</span>
-                  </a
                 >
+                  <mat-icon class="w-6 h-6">{{ item.icon }}</mat-icon>
+                  <span class="ml-3">{{ item.label }}</span>
+                </a>
               </li>
               }
             </ul>

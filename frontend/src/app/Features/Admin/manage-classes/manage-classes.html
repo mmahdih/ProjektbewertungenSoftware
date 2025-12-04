@@ -1,1 +1,26 @@
-<p>manage-classes works!</p>
+<app-form-modal
+  [showModal]="showAddModel"
+  [title]="'Kurs anlegen'"
+  [fields]="fields"
+  (close)="closeAddModel()"
+  (save)="saveClass($event)"
+>
+</app-form-modal>
+
+<app-page-header title="Kurs" (addClick)="openAddModel()"></app-page-header>
+
+<app-table-column
+  [items]="classes"
+  [columns]="columns"
+  (edit)="openEditModal($event)"
+></app-table-column>
+
+<app-form-modal
+  [showModal]="showEditModal"
+  [title]="'Kurs Editieren'"
+  [fields]="fields"
+  [record]="editingClass"
+  (close)="closeEditModal()"
+  (save)="saveEdit($event)"
+>
+</app-form-modal>

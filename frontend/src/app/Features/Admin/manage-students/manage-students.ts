@@ -1,35 +1,146 @@
 import { Component, OnInit } from '@angular/core';
-import { MatTableModule } from "@angular/material/table"
-import { User } from '../../../Interfaces/user.interface';
+import { AddUser, User } from '../../../Interfaces/user.interface';
 import { StudentService } from './student.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
-
+import { PageHeaderComponents } from '../../../Shared/Components/page-header/page-header';
+import {
+  TableColumn,
+  TableColumnComponent,
+} from '../../../Shared/Components/table-column/table-column';
+import { FormField, FormModalComponent } from '../../../Shared/Components/form-modal/form-modal';
 
 @Component({
   selector: 'app-manage-students',
   standalone: true,
-  imports: [CommonModule, FormsModule, MatIconModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatIconModule,
+    PageHeaderComponents,
+    TableColumnComponent,
+    FormModalComponent,
+  ],
   templateUrl: './manage-students.html',
-  styleUrl: './manage-students.css'
 })
 export class ManageStudents implements OnInit {
   students: User[] = [];
   loading = true;
 
+  columns: TableColumn<User>[] = [
+    { key: 'firstName', label: 'First Name' },
+    { key: 'lastName', label: 'Last Name' },
+    { key: 'username', label: 'Username' },
+    { key: 'roleName', label: 'Role' },
+  ];
+
+  fields: FormField[] = [
+    {
+      key: 'firstName',
+      label: 'First Name',
+      type: 'text',
+      required: true,
+      colSpan: 3,
+      placeholder: 'Vorname',
+    },
+    {
+      key: 'lastName',
+      label: 'Last Name',
+      type: 'text',
+      required: true,
+      colSpan: 3,
+      placeholder: 'Nachname',
+    },
+    {
+      key: 'username',
+      label: 'Username',
+      type: 'text',
+      required: true,
+      colSpan: 3,
+      placeholder: 'Benutzername',
+    },
+    {
+      key: 'position',
+      label: 'Position',
+      type: 'text',
+      readonly: true,
+      value: 'STUDENT',
+      colSpan: 3,
+    },
+    {
+      key: 'password',
+      label: 'Password',
+      type: 'password',
+      required: true,
+      colSpan: 3,
+      placeholder: 'Passwort',
+    },
+    {
+      key: 'confirmPassword',
+      label: 'Passwort wiederholen',
+      type: 'password',
+      required: true,
+      colSpan: 3,
+      placeholder: 'Passwort wiederholen',
+    },
+  ];
+
+  fieldsEdit: FormField[] = [
+    {
+      key: 'firstName',
+      label: 'Vorname',
+      type: 'text',
+      required: true,
+      colSpan: 3,
+      placeholder: 'Vorname',
+    },
+    {
+      key: 'lastName',
+      label: 'Nachname',
+      type: 'text',
+      required: true,
+      colSpan: 3,
+      placeholder: 'Nachname',
+    },
+    {
+      key: 'username',
+      label: 'Benutzername',
+      type: 'text',
+      required: true,
+      colSpan: 3,
+      placeholder: 'Benutzername',
+    },
+  ];
+
   showAddModel: boolean = false;
+  showEditModal: boolean = false;
+
+  editingStudent: User | null = null;
 
   firstName = '';
   lastName = '';
   username = '';
   password = '';
-  role = ''
+  role = '';
+
+  tempPassword: string | null = null;
+delete: any;
 
   constructor(private studentService: StudentService) {}
 
   ngOnInit(): void {
     this.loadStudents();
+  }
+
+  openEditModal(student: User) {
+    this.editingStudent = student;
+    this.showEditModal = true;
+  }
+
+  closeEditModal() {
+    this.showEditModal = false;
+    this.editingStudent = null;
   }
 
   openAddModel(): void {
@@ -40,6 +151,24 @@ export class ManageStudents implements OnInit {
     this.showAddModel = false;
   }
 
+  saveEdit(formData: any) {
+    if (!this.editingStudent) return;
+
+    const updatedTeacher = { ...this.editingStudent, ...formData };
+
+    console.log(formData);
+    console.log(updatedTeacher.id);
+
+    this.studentService.updateStudent(updatedTeacher).subscribe({
+      next: (res: User) => {
+        const index = this.students.findIndex((s) => s.id === updatedTeacher.id);
+        if (index !== -1) this.students[index] = res;
+        this.closeEditModal();
+      },
+      error: (err: any) => console.error('Fehler beim Aktualisieren:', err),
+    });
+  }
+
   loadStudents() {
     this.studentService.getStudent().subscribe({
       next: (data) => {
@@ -48,19 +177,19 @@ export class ManageStudents implements OnInit {
         this.loading = false;
       },
       error: (err) => {
-        console.error('Fehler beim Laden der Lehrer', err);
+        console.error('Fehler beim Laden der Schüler', err);
         this.loading = false;
-      }
+      },
     });
   }
 
-  saveStudent() {
+  saveStudent(formData: any) {
     const dto = {
-      firstName: this.firstName,
-      lastName: this.lastName,
-      username: this.username,
-      password: this.password,
-      role: 1
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      username: formData.username,
+      password: formData.password,
+      role: 2,
     };
 
     this.studentService.createStudent(dto).subscribe({
@@ -74,7 +203,36 @@ export class ManageStudents implements OnInit {
         this.password = '';
         this.role = '';
       },
-      error: (err) => console.error('Fehler beim Erstellen:', err)
+      error: (err) => console.error('Fehler beim Erstellen:', err),
+    });
+  }
+
+  deleteStudent(student : User){
+    console.log('id:',student.id)
+    for (let index = 0; index < this.students.length; index++) {
+      if (student.id === this.students[index].id ) {
+        console.log("gefunden");
+        console.log('array before',this.students);
+        this.students.splice(index,1);
+        console.log('array after',this.students);
+      }
+    }
+  }
+
+  onResetPassword(student: User) {
+    if (!confirm(`Passwort für ${student.firstName} ${student.lastName} wirklich zurücksetzen?`)) {
+      return;
+    }
+
+    this.studentService.resetPassword(student.id).subscribe({
+      next: (res) => {
+        console.log('Neues temporäres Passwort:', res.temporaryPassword);
+        this.tempPassword = res.temporaryPassword;
+      },
+      error: (err) => {
+        console.error('Fehler beim Zurücksetzen des Passworts', err);
+        alert('Passwort konnte nicht zurückgesetzt werden.');
+      },
     });
   }
 }

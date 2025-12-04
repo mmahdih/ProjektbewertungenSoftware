@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Export } from './admin-export';
+import { Group } from './group';
 
-describe('Export', () => {
-  let component: Export;
-  let fixture: ComponentFixture<Export>;
+describe('Group', () => {
+  let component: Group;
+  let fixture: ComponentFixture<Group>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Export]
+      imports: [Group]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(Export);
+    fixture = TestBed.createComponent(Group);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

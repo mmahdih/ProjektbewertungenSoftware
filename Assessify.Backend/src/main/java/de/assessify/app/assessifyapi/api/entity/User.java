@@ -24,9 +24,6 @@ public class User {
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    @Column(name = "role_id")
-    private Integer roleId;
-
     @Column(nullable = false, unique = true)
     private String username;
 
@@ -35,6 +32,9 @@ public class User {
 
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
+
+    @Column(name = "role_id")
+    private Integer roleId;
 
     @ManyToMany
     @JoinTable(
@@ -46,7 +46,7 @@ public class User {
 
     @ManyToMany
     @JoinTable(
-            name = "user_class",
+            name = "user_schoolclass",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "class_id")
     )

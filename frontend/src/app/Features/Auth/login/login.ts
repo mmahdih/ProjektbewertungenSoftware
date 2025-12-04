@@ -1,59 +1,77 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router, RouterOutlet } from '@angular/router';
+import { Router } from '@angular/router';
 import { AuthService } from '../../../core/auth/auth.service';
 import { MatIconModule } from '@angular/material/icon';
-import { Navbar } from "../../../Shared/Components/navbar/navbar";
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [ReactiveFormsModule, MatIconModule],
   templateUrl: './login.html',
-  styleUrls: ['./login.css']
+  styleUrls: ['./login.css'],
 })
 export class Login {
   loginForm: FormGroup;
-
   loginError: string = '';
   hasError = false;
 
-  constructor(
-    private fb: FormBuilder,
-    private auth: AuthService,
-    private router: Router
-  ) {
+  constructor(private fb: FormBuilder, private auth: AuthService, private router: Router) {
     this.loginForm = this.fb.group({
       username: ['', Validators.required],
-      password: ['', [Validators.required, Validators.minLength(6)]]
+      password: ['', [Validators.required]],
     });
   }
 
-  hideError(){
+  hideError() {
     this.hasError = false;
   }
 
-  showError(){
+  showError() {
     this.hasError = true;
   }
 
   async onSubmit() {
-    if (this.loginForm.invalid) return;
+    console.log('🔵 onSubmit called');
+    console.log('Form valid:', this.loginForm.valid);
+    console.log('Form values:', this.loginForm.value);
 
-    const { username, password } = this.loginForm.value;
-
-    const success = await this.auth.login(username, password);
-
-    if (!success) {
-      this.loginError = "Invalid username or password";
-      this.showError()
+    if (this.loginForm.invalid) {
+      console.log('❌ Form is invalid');
       return;
     }
 
-    const role = this.auth.getRole();
+    const { username, password } = this.loginForm.value;
+    console.log('📤 Attempting login...');
 
-    if (role === 'admin') this.router.navigate(['/admin/dashboard']);
-    else if (role === 'teacher') this.router.navigate(['/teacher/dashboard']);
-    else if (role === 'student') this.router.navigate(['/student/dashboard']);
+    const success = await this.auth.login(username, password);
+    console.log('✅ Login result:', success);
+
+    if (!success) {
+      console.log('❌ Login failed');
+      this.loginError = 'Invalid username or password';
+      this.showError();
+      return;
+    }
+
+    const role = this.auth.getRole().toLowerCase();
+    console.log('User role:', role);
+
+    switch (role) {
+      case 'teacher':
+        this.router.navigate(['/teacher/dashboard']);
+        break;
+      case 'student':
+        this.router.navigate(['/student/dashboard']);
+        break;
+      case 'admin':
+        this.router.navigate(['/admin/dashboard']);
+        break;
+      default:
+        this.router.navigate(['/auth/login']);
+        break;
+    }
+
+    console.log('✅ Navigation triggered');
   }
 }
