@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatIcon } from "@angular/material/icon";
+import { IGroup, IProject } from '../project/project';
 
 export interface Student{
   id: number,
@@ -22,86 +23,19 @@ export interface Group{
 })
 export class StudentGroups implements OnInit {
   showAddGroupModal: boolean = false;
-  groups: Group[] = [];
+  groups: IGroup[] = [];
 ngOnInit(): void {
 this.loadGroups();
 }
 
 loadGroups(): void{
   this.groups = [
-    {
-      groupId: 1,
-      groupName: 'Group1',
-      students: [
-              {id: 1, name: 'Mahdi Haidary'},
-              {id: 1, name: 'Mahdi Haidary'},
-              {id: 1, name: 'Mahdi Haidary'},
-              {id: 1, name: 'Mahdi Haidary'},
-              {id: 1, name: 'Mahdi Haidary'},
-              {id: 1, name: 'Mahdi Haidary'},
+        { id: 1, name: "Group 1", members: ["Alice", "Bob", "Charlie"] },
+        { id: 2, name: "Group 2", members: ["Alice", "Bob", "Charlie"] },
+        { id: 3, name: "Group 3", members: ["Alice", "Bob", "Charlie"] },
+        { id: 4, name: "Group 4", members: ["Alice", "Bob", "Charlie"] },
+        { id: 5, name: "Group 5", members: ["Alice", "Bob", "Charlie"] },
       ]
-    },
-    {
-      groupId: 2,
-      groupName: 'Group2',
-      students: [
-              {id: 1, name: 'Mahdi Haidary'},
-              {id: 1, name: 'Mahdi Haidary'},
-              {id: 1, name: 'Mahdi Haidary'},
-              {id: 1, name: 'Mahdi Haidary'},
-              {id: 1, name: 'Mahdi Haidary'},
-              {id: 1, name: 'Mahdi Haidary'},
-      ]
-    },
-    {
-      groupId: 3,
-      groupName: 'Group3',
-      students: [
-              {id: 1, name: 'Mahdi Haidary'},
-              {id: 1, name: 'Mahdi Haidary'},
-              {id: 1, name: 'Mahdi Haidary'},
-              {id: 1, name: 'Mahdi Haidary'},
-              {id: 1, name: 'Mahdi Haidary'},
-              {id: 1, name: 'Mahdi Haidary'},
-      ]
-    },
-    {
-      groupId: 4,
-      groupName: 'Group4',
-      students: [
-              {id: 1, name: 'Mahdi Haidary'},
-              {id: 1, name: 'Mahdi Haidary'},
-              {id: 1, name: 'Mahdi Haidary'},
-              {id: 1, name: 'Mahdi Haidary'},
-              {id: 1, name: 'Mahdi Haidary'},
-              {id: 1, name: 'Mahdi Haidary'},
-      ]
-    },
-    {
-      groupId: 5,
-      groupName: 'Group5',
-      students: [
-              {id: 1, name: 'Mahdi Haidary'},
-              {id: 1, name: 'Mahdi Haidary'},
-              {id: 1, name: 'Mahdi Haidary'},
-              {id: 1, name: 'Mahdi Haidary'},
-              {id: 1, name: 'Mahdi Haidary'},
-              {id: 1, name: 'Mahdi Haidary'},
-      ]
-    },
-    {
-      groupId: 6,
-      groupName: 'Group6',
-      students: [
-              {id: 1, name: 'Mahdi Haidary'},
-              {id: 1, name: 'Mahdi Haidary'},
-              {id: 1, name: 'Mahdi Haidary'},
-              {id: 1, name: 'Mahdi Haidary'},
-              {id: 1, name: 'Mahdi Haidary'},
-              {id: 1, name: 'Mahdi Haidary'},
-      ]
-    },
-  ]
 }
 
 openAddGroupModal(): void {

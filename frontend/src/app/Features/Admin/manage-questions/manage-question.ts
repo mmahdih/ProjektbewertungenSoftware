@@ -4,20 +4,47 @@ import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { Question } from '../../../Interfaces/question.interface';
 import { QuestionService } from './question.service';
+import { PageHeaderComponents } from '../../../Shared/Components/page-header/page-header';
+import {
+  TableColumn,
+  TableColumnComponent,
+} from '../../../Shared/Components/table-column/table-column';
+import { FormField, FormModalComponent } from '../../../Shared/Components/form-modal/form-modal';
 
 @Component({
   selector: 'app-question',
   standalone: true,
-  imports: [CommonModule, FormsModule, MatIconModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatIconModule,
+    PageHeaderComponents,
+    TableColumnComponent,
+    FormModalComponent,
+  ],
   templateUrl: './manage-question.html',
-  styleUrl: './manage-question.css'
 })
-export class ManageQuestions implements OnInit{
+export class ManageQuestions implements OnInit {
   questions: Question[] = [];
   loading = true;
   showAddModel: boolean = false;
+  showEditModal: boolean = false;
   selectedQuestion: Question | null = null;
   showEditModel: boolean = false;
+
+  columns: TableColumn<Question>[] = [{ key: 'questionText', label: 'Frage' }];
+
+  fields: FormField[] = [
+    {
+      key: 'questionText',
+      label: 'Frage',
+      type: 'textarea',
+      required: true,
+      placeholder: 'Deine Frage...',
+    },
+  ];
+
+  editingQuestions: Question | null = null;
 
   questionText = '';
 
@@ -25,6 +52,16 @@ export class ManageQuestions implements OnInit{
 
   ngOnInit(): void {
     this.loadQuestions();
+  }
+
+  openEditModal(question: Question) {
+    this.editingQuestions = question;
+    this.showEditModal = true;
+  }
+
+  closeEditModal() {
+    this.showEditModal = false;
+    this.editingQuestions = null;
   }
 
   openEditModel(question: Question): void {
@@ -44,6 +81,24 @@ export class ManageQuestions implements OnInit{
     this.showAddModel = false;
   }
 
+  saveEdit(formData: any) {
+    if (!this.editingQuestions) return;
+
+    const updatedQuestion = { ...this.editingQuestions, ...formData };
+
+    console.log(formData);
+    console.log(updatedQuestion.id);
+
+    this.questionService.updateQuestion(updatedQuestion).subscribe({
+      next: (res: Question) => {
+        const index = this.questions.findIndex((s) => s.id === updatedQuestion.id);
+        if (index !== -1) this.questions[index] = res;
+        this.closeEditModal();
+      },
+      error: (err: any) => console.error('Fehler beim Aktualisieren:', err),
+    });
+  }
+
   loadQuestions() {
     this.questionService.getQuestions().subscribe({
       next: (data) => {
@@ -54,14 +109,16 @@ export class ManageQuestions implements OnInit{
       error: (err) => {
         console.error('Fehler beim Laden der Lehrer', err);
         this.loading = false;
-      }
+      },
     });
   }
 
-  saveQuestion() {
+  saveQuestion(formData: any) {
     const dto = {
-      questionText: this.questionText,
+      questionText: formData.questionText,
     };
+
+    console.log(dto);
 
     this.questionService.createQuestion(dto).subscribe({
       next: (question) => {
@@ -70,26 +127,7 @@ export class ManageQuestions implements OnInit{
         // Reset Form
         this.questionText = '';
       },
-      error: (err) => console.error('Fehler beim Erstellen:', err)
-    });
-  }
-
-  saveEditedQuestion() {
-  if (!this.selectedQuestion) return;
-
-  const dto = {
-    questionText: this.questionText
-  };
-
-  this.questionService.updateQuestion(this.selectedQuestion.id, dto)
-    .subscribe({
-      next: (updated) => {
-        const index = this.questions.findIndex(q => q.id === updated.id);
-        if (index !== -1) this.questions[index] = updated;
-
-        this.closeEditModel();
-      },
-      error: (err) => console.error('Fehler beim Aktualisieren:', err)
+      error: (err) => console.error('Fehler beim Erstellen:', err),
     });
   }
 }

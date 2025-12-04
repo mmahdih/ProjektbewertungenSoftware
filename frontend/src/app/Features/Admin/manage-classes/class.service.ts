@@ -3,10 +3,12 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Class } from '../../../Interfaces/class.interface';
 
+
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ClassService {
+
   private baseUrl = 'http://localhost:4100/api/school-class';
 
   constructor(private http: HttpClient) {}

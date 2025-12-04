@@ -1,0 +1,128 @@
+<div class="p-4">
+  <!-- Group Header -->
+  @if (currentGroup(); as group) {
+    <div class="bg-white shadow rounded-lg p-4 my-4 sm:p-6 xl:p-8 dark:bg-gray-800">
+      <div class="flex flex-col lg:flex-row lg:justify-between lg:items-start gap-4">
+        <div class="flex-1">
+          <div class="flex items-center gap-2 mb-2">
+            <a 
+              [routerLink]="['/projects', group.projectId]" 
+              class="text-sm text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 flex items-center"
+            >
+              <mat-icon class="text-base mr-1">arrow_back</mat-icon>
+              {{ group.projectName }}
+            </a>
+          </div>
+          
+          <h1 class="font-bold text-3xl dark:text-white">{{ group.name }}</h1>
+          
+          @if (group.description) {
+            <p class="text-gray-600 dark:text-gray-400 mt-2">{{ group.description }}</p>
+          }
+          
+          <!-- Group Stats -->
+          <div class="flex flex-wrap gap-4 mt-4">
+            <div class="flex items-center text-sm text-gray-600 dark:text-gray-400">
+              <mat-icon class="mr-1 text-base">person</mat-icon>
+              <span>{{ group.members.length }} member{{ group.members.length !== 1 ? 's' : '' }}</span>
+            </div>
+          </div>
+
+          <!-- Progress Bar -->
+
+        </div>
+        
+        <div class="flex flex-col items-start lg:items-end gap-2">
+
+          
+          <!-- Deadline -->
+          <div 
+            class="flex items-center px-3 py-1 rounded-lg text-sm"
+            [ngClass]="{
+              'bg-red-50 text-red-700 dark:bg-red-900/20 dark:text-red-300': isOverdue(),
+              'bg-orange-50 text-orange-700 dark:bg-orange-900/20 dark:text-orange-300': isDeadlineApproaching(),
+              'bg-blue-50 text-blue-700 dark:bg-blue-900/20 dark:text-blue-300': !isOverdue() && !isDeadlineApproaching()
+            }">
+            <mat-icon class="mr-1 text-base">event</mat-icon>
+            <div class="flex flex-col">
+              <span class="font-medium">{{ group.deadline | date:'MMM d, yyyy' }}</span>
+              <span class="text-xs">{{ getDeadlineText(daysUntilDeadline()) }}</span>
+            </div>
+          </div>
+
+          <!-- Edit Button -->
+          <button
+            (click)="editGroup()"
+            type="button"
+            class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 flex items-center"
+          >
+            <mat-icon class="mr-1 text-base">edit</mat-icon>
+            Edit Group
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Members Section -->
+    <div class="bg-white shadow rounded-lg p-4 my-4 sm:p-6 xl:p-8 dark:bg-gray-800">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-2xl font-bold dark:text-white flex items-center">
+          <mat-icon class="mr-2">people</mat-icon>
+          Team Members
+        </h2>
+        <button
+          (click)="addMember()"
+          type="button"
+          class="inline-flex items-center px-3 py-2 text-sm font-medium text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        >
+          <mat-icon class="w-5 h-5 mr-1">person_add</mat-icon>
+          Add Member
+        </button>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        @for (member of group.members; track member.id) {
+          <div class="bg-white shadow rounded-lg p-4 dark:bg-gray-700 hover:shadow-lg transition-shadow">
+            <div class="flex items-start justify-between">
+              <div class="flex items-center space-x-3">
+                <div class="flex-shrink-0">
+                  <div class="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold text-lg">
+                    {{ member.name.charAt(0) }}
+                  </div>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <p class="text-sm font-medium text-gray-900 dark:text-white truncate">
+                    {{ member.name }}
+                  </p>
+                  @if (member.username) {
+                    <p class="text-xs text-gray-500 dark:text-gray-400 truncate">
+                      {{ member.username }}
+                    </p>
+                  }
+                </div>
+              </div>
+              <button
+                type="button"
+                class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
+              >
+                <mat-icon class="text-base">more_vert</mat-icon>
+              </button>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+
+    
+  } @else {
+    <!-- Error State -->
+    <div class="bg-red-50 border border-red-200 rounded-lg p-4 my-4 dark:bg-red-900/20 dark:border-red-800">
+      <div class="flex items-center">
+        <mat-icon class="text-red-600 dark:text-red-400 mr-2">error</mat-icon>
+        <p class="text-red-800 dark:text-red-200">
+          Group with ID "{{ groupId() }}" not found
+        </p>
+      </div>
+    </div>
+  }
+</div>

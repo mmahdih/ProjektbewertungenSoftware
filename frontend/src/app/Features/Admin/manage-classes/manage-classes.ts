@@ -4,23 +4,49 @@ import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { ClassService } from './class.service';
 import { Class } from '../../../Interfaces/class.interface';
+import { PageHeaderComponents } from '../../../Shared/Components/page-header/page-header';
+import {
+  TableColumn,
+  TableColumnComponent,
+} from '../../../Shared/Components/table-column/table-column';
+import { FormField, FormModalComponent } from '../../../Shared/Components/form-modal/form-modal';
 
 @Component({
   selector: 'app-manage-classes',
   standalone: true,
-  imports: [CommonModule, FormsModule, MatIconModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatIconModule,
+    PageHeaderComponents,
+    TableColumnComponent,
+    FormModalComponent,
+  ],
   templateUrl: './manage-classes.html',
-  styleUrl: './manage-classes.css'
 })
-export class ManageClasses implements OnInit{
+export class ManageClasses implements OnInit {
   classes: Class[] = [];
   loading = true;
+
+  columns: TableColumn<Class>[] = [{ key: 'name', label: 'Kursname' }];
+
+  fields: FormField[] = [
+    {
+      key: 'name',
+      label: 'Kursname',
+      type: 'text',
+      required: true,
+      colSpan: 6,
+      placeholder: 'Kursname',
+    },
+  ];
 
   name = '';
 
   showAddModel: boolean = false;
-  showEditModel: boolean = false;
-  selectedClass: Class | null = null;
+  showEditModal: boolean = false;
+
+  editingClass: Class | null = null;
 
   constructor(private classService: ClassService) {}
 
@@ -36,13 +62,32 @@ export class ManageClasses implements OnInit{
     this.showAddModel = false;
   }
 
-  openEditModel(schoolClass: Class): void {
-    this.selectedClass = schoolClass;
-    this.showEditModel = true;
+  openEditModal(schoolClass: Class) {
+    this.editingClass = schoolClass;
+    this.showEditModal = true;
   }
 
-  closeEditModel(): void {
-    this.showEditModel = false;
+  closeEditModal() {
+    this.showEditModal = false;
+    this.editingClass = null;
+  }
+
+  saveEdit(formData: any) {
+    if (!this.editingClass) return;
+
+    const updatedClass = { ...this.editingClass, ...formData };
+
+    console.log(formData);
+    console.log(updatedClass.id);
+
+    this.classService.updateClass(updatedClass).subscribe({
+      next: (res: Class) => {
+        const index = this.classes.findIndex((s) => s.id === updatedClass.id);
+        if (index !== -1) this.classes[index] = res;
+        this.closeEditModal();
+      },
+      error: (err: any) => console.error('Fehler beim Aktualisieren:', err),
+    });
   }
 
   loadClasses() {
@@ -55,13 +100,13 @@ export class ManageClasses implements OnInit{
       error: (err) => {
         console.error('Fehler beim Laden der Lehrer', err);
         this.loading = false;
-      }
+      },
     });
   }
 
-  saveClass() {
+  saveClass(formData: any) {
     const dto = {
-      name: this.name
+      name: formData.name,
     };
 
     this.classService.createClass(dto).subscribe({

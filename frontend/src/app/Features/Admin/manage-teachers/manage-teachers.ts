@@ -1,36 +1,143 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterOutlet } from "@angular/router";
-import { MatIcon, MatIconModule } from "@angular/material/icon";
-import { DashboardNavbar } from "../../../layout/dashboard-navbar/dashboard-navbar";
-import { Sidebar } from "../../../layout/sidebar/sidebar";
+import { MatIconModule } from '@angular/material/icon';
 import { TeacherService } from './teacher.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { User } from '../../../Interfaces/user.interface';
+import { PageHeaderComponents } from '../../../Shared/Components/page-header/page-header';
+import {
+  TableColumn,
+  TableColumnComponent,
+} from '../../../Shared/Components/table-column/table-column';
+import { FormField, FormModalComponent } from '../../../Shared/Components/form-modal/form-modal';
 
 @Component({
   selector: 'app-manage-teachers',
   standalone: true,
-  imports: [CommonModule, MatIconModule, FormsModule],
+  imports: [
+    CommonModule,
+    MatIconModule,
+    FormsModule,
+    PageHeaderComponents,
+    TableColumnComponent,
+    FormModalComponent,
+  ],
   templateUrl: './manage-teachers.html',
-  styleUrl: './manage-teachers.css'
 })
-export class ManageTeachers implements OnInit{
+export class ManageTeachers implements OnInit {
   teachers: User[] = [];
   loading = true;
 
+  columns: TableColumn<User>[] = [
+    { key: 'firstName', label: 'First Name' },
+    { key: 'lastName', label: 'Last Name' },
+    { key: 'username', label: 'Username' },
+    { key: 'roleName', label: 'Role' },
+  ];
+
+  fields: FormField[] = [
+    {
+      key: 'firstName',
+      label: 'Vorname',
+      type: 'text',
+      required: true,
+      colSpan: 3,
+      placeholder: 'Vorname',
+    },
+    {
+      key: 'lastName',
+      label: 'Nachname',
+      type: 'text',
+      required: true,
+      colSpan: 3,
+      placeholder: 'Nachname',
+    },
+    {
+      key: 'username',
+      label: 'Benutzername',
+      type: 'text',
+      required: true,
+      colSpan: 3,
+      placeholder: 'Benutzername',
+    },
+    {
+      key: 'position',
+      label: 'Rolle',
+      type: 'text',
+      readonly: true,
+      value: 'TEACHER',
+      colSpan: 3,
+    },
+    {
+      key: 'password',
+      label: 'Passwort',
+      type: 'password',
+      required: true,
+      colSpan: 3,
+      placeholder: 'Passwort',
+    },
+    {
+      key: 'confirmPassword',
+      label: 'Passwort wiederholen',
+      type: 'password',
+      required: true,
+      colSpan: 3,
+      placeholder: 'Passwort wiederholen',
+    },
+  ];
+
+  fieldsEdit: FormField[] = [
+    {
+      key: 'firstName',
+      label: 'Vorname',
+      type: 'text',
+      required: true,
+      colSpan: 3,
+      placeholder: 'Vorname',
+    },
+    {
+      key: 'lastName',
+      label: 'Nachname',
+      type: 'text',
+      required: true,
+      colSpan: 3,
+      placeholder: 'Nachname',
+    },
+    {
+      key: 'username',
+      label: 'Benutzername',
+      type: 'text',
+      required: true,
+      colSpan: 3,
+      placeholder: 'Benutzername',
+    },
+  ];
+
   showAddModel: boolean = false;
+  showEditModal: boolean = false;
+
+  editingTeacher: User | null = null;
 
   firstName = '';
   lastName = '';
   username = '';
   password = '';
-  role = ''
+  role = '';
 
   constructor(private teacherService: TeacherService) {}
 
   ngOnInit(): void {
     this.loadTeachers();
+  }
+
+  openEditModal(teacher: User) {
+    this.editingTeacher = teacher;
+    this.showEditModal = true;
+  }
+
+  closeEditModal() {
+    this.showEditModal = false;
+    this.editingTeacher = null;
   }
 
   openAddModel(): void {
@@ -39,6 +146,24 @@ export class ManageTeachers implements OnInit{
 
   closeAddModel(): void {
     this.showAddModel = false;
+  }
+
+  saveEdit(formData: any) {
+    if (!this.editingTeacher) return;
+
+    const updatedTeacher = { ...this.editingTeacher, ...formData };
+
+    console.log(formData);
+    console.log(updatedTeacher.id);
+
+    this.teacherService.updateTeacher(updatedTeacher).subscribe({
+      next: (res: User) => {
+        const index = this.teachers.findIndex((s) => s.id === updatedTeacher.id);
+        if (index !== -1) this.teachers[index] = res;
+        this.closeEditModal();
+      },
+      error: (err: any) => console.error('Fehler beim Aktualisieren:', err),
+    });
   }
 
   loadTeachers() {
@@ -51,17 +176,17 @@ export class ManageTeachers implements OnInit{
       error: (err) => {
         console.error('Fehler beim Laden der Lehrer', err);
         this.loading = false;
-      }
+      },
     });
   }
 
-  saveTeacher() {
+  saveTeacher(formData: any) {
     const dto = {
-      firstName: this.firstName,
-      lastName: this.lastName,
-      username: this.username,
-      password: this.password,
-      role: 1
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      username: formData.username,
+      password: formData.password,
+      role: 1,
     };
 
     this.teacherService.createTeacher(dto).subscribe({
@@ -75,8 +200,7 @@ export class ManageTeachers implements OnInit{
         this.password = '';
         this.role = '';
       },
-      error: (err) => console.error('Fehler beim Erstellen:', err)
+      error: (err) => console.error('Fehler beim Erstellen:', err),
     });
   }
-
 }

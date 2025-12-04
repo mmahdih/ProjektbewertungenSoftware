@@ -1,21 +1,34 @@
-import { Component, signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
-import { MatIcon } from '@angular/material/icon';
-import { IProject } from '../project/project';
+import { Component, input, computed, signal, effect } from '@angular/core';
+import { MatIcon } from "@angular/material/icon";
 import { CommonModule } from '@angular/common';
 
+export interface IGroup {
+  id: number;
+  name: string;
+  members: string[];
+}
+
+export interface IProject {
+  id: number;
+  title: string;
+  description?: string;
+  status?: 'active' | 'completed' | 'pending' | 'overdue';
+  deadline: Date;
+  groups: IGroup[];
+  createdAt?: Date;
+}
 
 @Component({
-  selector: 'app-projects-list',
-  imports: [MatIcon, RouterLink, CommonModule],
-  templateUrl: './projects.html',
-  styleUrls: ['./projects.css']
+  selector: 'app-project',
+  standalone: true,
+  imports: [MatIcon, CommonModule],
+  templateUrl: './project.html',
+  styleUrls: ['./project.css']
 })
-export class Projects {
-  showNewModel = false;
-
-
-  projects = signal<IProject[]>([
+export class Project {
+  projectId = input.required<string>();
+  
+ projects = signal<IProject[]>([
     { 
       id: 1, 
       title: "Project 1", 
@@ -72,16 +85,60 @@ export class Projects {
       ]
     }
   ]);
-  openNewModel() {
-    this.showNewModel = true;
+
+  currentProject = computed(() => {
+    const id = Number(this.projectId());
+    return this.projects().find(p => p.id === id);
+  });
+
+  projectNotFound = computed(() => !this.currentProject());
+
+  // Calculate days until deadline
+  daysUntilDeadline = computed(() => {
+    const project = this.currentProject();
+    if (!project) return null;
+    
+    const today = new Date();
+    const deadline = new Date(project.deadline);
+    const diffTime = deadline.getTime() - today.getTime();
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    
+    return diffDays;
+  });
+
+  // Check if deadline is approaching (within 7 days)
+  isDeadlineApproaching = computed(() => {
+    const days = this.daysUntilDeadline();
+    return days !== null && days > 0 && days <= 7;
+  });
+
+  // Check if overdue
+  isOverdue = computed(() => {
+    const days = this.daysUntilDeadline();
+    return days !== null && days < 0;
+  });
+
+  // Total number of team members
+  totalMembers = computed(() => {
+    const project = this.currentProject();
+    if (!project) return 0;
+    return project.groups.reduce((sum, group) => sum + group.members.length, 0);
+  });
+
+  constructor() {
+    effect(() => {
+      const project = this.currentProject();
+      if (!project) {
+        console.warn(`Project with id ${this.projectId()} not found`);
+      }
+    });
   }
 
-  closeNewModel() {
-    this.showNewModel = false;
-  }
-
-  editProject(id: number) {
-    console.log('Edit project', id);
-    // Handle edit logic
+  getDeadlineText(days: number | null): string {
+    if (days === null) return '';
+    if (days < 0) return `${Math.abs(days)} days overdue`;
+    if (days === 0) return 'Due today';
+    if (days === 1) return 'Due tomorrow';
+    return `${days} days remaining`;
   }
 }
