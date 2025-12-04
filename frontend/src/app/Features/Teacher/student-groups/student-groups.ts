@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatIcon } from "@angular/material/icon";
 import { IGroup, IProject } from '../project/project';
+import { RouterLink } from "@angular/router";
 
 export interface Student{
   id: number,
@@ -17,7 +18,7 @@ export interface Group{
 
 @Component({
   selector: 'app-student-groups',
-  imports: [MatIcon],
+  imports: [MatIcon, RouterLink],
   templateUrl: './student-groups.html',
   styleUrl: './student-groups.css'
 })

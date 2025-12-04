@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatIconModule } from "@angular/material/icon";
+import { RouterLink } from '@angular/router';
 
 export interface Student {
   id: number,
@@ -11,7 +12,7 @@ export interface Student {
 
 @Component({
   selector: 'app-my-students',
-  imports: [MatIconModule],
+  imports: [MatIconModule, RouterLink],
   templateUrl: './my-students.html',
   styleUrl: './my-students.css'
 })
