@@ -1,25 +1,28 @@
-import { HttpClient } from "@angular/common/http";
-import { AddClass, Class } from "../../../Interfaces/class.interface";
-import { Observable } from "rxjs";
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Class } from '../../../Interfaces/class.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClassService {
-    private apiUrl = 'http://localhost:4100/api/school-class/all';
+  private baseUrl = 'http://localhost:4100/api/school-class';
 
-    constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {}
 
-    getClass(): Observable<Class[]> {
-        return this.http.get<Class[]>(this.apiUrl);
-    }
+  // GET /api/school-class/all
+  getClass(): Observable<Class[]> {
+    return this.http.get<Class[]>(`${this.baseUrl}/all`);
+  }
 
-    createClass(dto: AddClass): Observable<Class> {
-        return this.http.post<Class>(this.apiUrl, dto)
-    }
+  // POST /api/school-class
+  createClass(dto: { name: string }): Observable<Class> {
+    return this.http.post<Class>(this.baseUrl, dto);
+  }
 
-    updateQuestion(id: string, dto: AddClass): Observable<Class> {
-    return this.http.put<Class>(`${this.apiUrl}/${id}`, dto);
-    }
+  // PUT /api/school-class/{id}
+  updateClass(id: string, dto: { name: string }): Observable<Class> {
+    return this.http.put<Class>(`${this.baseUrl}/${id}`, dto);
+  }
 }

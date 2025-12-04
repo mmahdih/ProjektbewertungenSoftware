@@ -82,7 +82,7 @@ export class ManageClasses implements OnInit{
     name: this.name
   };
 
-  this.classService.updateQuestion(this.selectedClass.id, dto)
+  this.classService.updateClass(this.selectedClass.id, dto)
     .subscribe({
       next: (updated) => {
         const index = this.classes.findIndex(q => q.id === updated.id);

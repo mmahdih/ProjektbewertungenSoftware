@@ -31,7 +31,7 @@
                   <mat-label>Klasse auswählen</mat-label>
                   <mat-select [(value)]="selectedClassId">
                     <mat-option *ngFor="let cls of allClasses" [value]="cls.id">
-                      {{ cls.name }}
+                      {{ cls.courseName }}
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
@@ -168,10 +168,10 @@
               <td class="flex items-center p-4 space-x-8 whitespace-nowrap">
                 <div class="text-sm font-normal text-gray-500 dark:text-gray-400">
                   <div class="text-base font-semibold text-gray-900 dark:text-white">
-                    {{ class.name }}
+                    {{ class.courseName }}
                   </div>
                   <div class="text-sm font-normal text-gray-500 dark:text-gray-400">
-                    {{ class.name }}
+                    {{ class.className }}
                   </div>
                 </div>
               </td>

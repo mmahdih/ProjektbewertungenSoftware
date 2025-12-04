@@ -6,5 +6,6 @@ export interface AddClass {
 
 export interface Class {
     id: string;
-    name: string;
+    courseName: string;
+    className: string;
 }
