@@ -116,7 +116,26 @@ export class ManageClasses implements OnInit {
         // Reset Form
         this.name = '';
       },
-      error: (err) => console.error('Fehler beim Erstellen:', err),
+      error: (err) => console.error('Fehler beim Erstellen:', err)
+    });
+  }
+
+  saveEditedClass() {
+  if (!this.selectedClass) return;
+
+  const dto = {
+    name: this.name
+  };
+
+  this.classService.updateClass(this.selectedClass.id, dto)
+    .subscribe({
+      next: (updated) => {
+        const index = this.classes.findIndex(q => q.id === updated.id);
+        if (index !== -1) this.classes[index] = updated;
+
+        this.closeEditModel();
+      },
+      error: (err) => console.error('Fehler beim Aktualisieren:', err)
     });
   }
 }

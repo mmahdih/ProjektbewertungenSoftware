@@ -36,7 +36,8 @@ public class SchoolClassController {
                 .stream()
                 .map(field -> new SchoolClassDto(
                         field.getId(),
-                        field.getSchoolClassName()
+                        field.getCourseName(),
+                        field.getClassName()
                 ))
                 .toList();
 
@@ -56,7 +57,7 @@ public class SchoolClassController {
 
             var classes = schoolClassRepository.findByUsers_Id(userId)
                     .stream()
-                    .map(c -> new SchoolClassDto(c.getId(), c.getSchoolClassName()))
+                    .map(c -> new SchoolClassDto(c.getId(), c.getCourseName(), c.getClassName()))
                     .toList();
 
             return ResponseEntity.ok(classes);
@@ -70,13 +71,14 @@ public class SchoolClassController {
     @PostMapping("/school-class")
     public ResponseEntity<SchoolClassDto> addSchoolClass(@RequestBody AddSchoolClassDto dto) {
        SchoolClass entity = new SchoolClass();
-       entity.setSchoolClassName(dto.name());
+       entity.setCourseName(dto.name());
 
        SchoolClass saved = schoolClassRepository.save(entity);
 
        SchoolClassDto response = new SchoolClassDto(
                saved.getId(),
-               saved.getSchoolClassName()
+               saved.getCourseName(),
+               saved.getClassName()
        );
 
        return ResponseEntity.ok(response);
@@ -102,7 +104,7 @@ public class SchoolClassController {
                 updatedUser.getFirstName(),
                 updatedUser.getUsername(),
                 updatedUser.getSchoolClasses().stream()
-                        .map(r -> new SchoolClassDto(r.getId(), r.getSchoolClassName()))
+                        .map(r -> new SchoolClassDto(r.getId(), r.getCourseName(), r.getClassName()))
                         .toList()
         );
 
@@ -116,13 +118,14 @@ public class SchoolClassController {
 
         SchoolClass schoolClass = entityFinderService.findSchoolClass(schoolClassId);
 
-        schoolClass.setSchoolClassName(dto.name());
+        schoolClass.setCourseName(dto.name());
 
         SchoolClass updated = schoolClassRepository.save(schoolClass);
 
         SchoolClassDto response = new SchoolClassDto(
                 updated.getId(),
-                updated.getSchoolClassName()
+                updated.getCourseName(),
+                updated.getClassName()
         );
 
         return ResponseEntity.ok(response);
